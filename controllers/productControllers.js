@@ -1,5 +1,5 @@
 
-const Product = require('../models/ProductsModel');
+const Product = require('../models/ProductModel');
 
 
 const respondFrontend = (res, response, error) => {

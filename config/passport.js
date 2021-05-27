@@ -6,7 +6,7 @@ const UserModel = require('../models/UserModel')
 
 module.exports = passport.use(new jwtStrategy({
     jwtFromRequest: extractJwt.fromAuthHeaderAsBearerToken(),   
-    secretOrKey: process.env.SECRET_KEY
+    secretOrKey: process.env.SECRET_OR_KEY
     }, 
 (payload, done) => {
     UserModel.findById(payload._doc._id)
