@@ -12,7 +12,6 @@ app.use(express.json())
 
 app.use('/api', router)
 
-
 app.listen(4000, () => console.log("App listening on port 4000"))
 // if (process.env.NODE_ENV === "production") {
 //     app.use(express.static("client/build"))
