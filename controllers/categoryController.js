@@ -56,7 +56,9 @@ const categoryControllers = {
         var response;
         var err;
         try {
-            response = await Category.findOneAndDelete({_id: id})
+            await Category.findOneAndDelete({_id: id})
+            const categories = await Category.find()
+            response = categories 
         } catch(error) {
             err = 'An unexpected error has occurred with our servers'
         }
@@ -71,7 +73,9 @@ const categoryControllers = {
         var response;
         var err;
         try {
-            response = await Category.findOneAndUpdate({_id: id}, { ...req.body }, { new: true })
+            await Category.findByIdAndUpdate( id, {...req.body}, {new: true})
+            const categories  = await Category.find()
+            response = categories
         } catch(error) {
             err = 'An unexpected error has occurred with our servers'
         }

@@ -1,4 +1,5 @@
 const StoreModel = require('../models/StoreModel')
+
 const storeControllers = {
     getAllStores: async (req, res) => {
         let response;
@@ -41,12 +42,12 @@ const storeControllers = {
         let response;
         let error;
         try {
-            const store = await StoreModel.findById(id)
-            if(String(store.adminStore) === req.user.id){
-                response = await StoreModel.findOneAndUpdate({ _id: id }, { ...req.body }, { new: true })                
-            }else{
-                response = store
-            }
+            // const store = await StoreModel.findById(id)
+            // if(String(store.adminStore) === req.user.id){
+                response = await StoreModel.findOneAndUpdate({_id: id}, { ...req.body }, { new: true })                
+            // }else{
+            //     response = store
+            // }
         } catch {
             error = 'An error has occurred on the server, try later!'
             console.log(error)        
@@ -58,10 +59,10 @@ const storeControllers = {
         let response;
         let error;
         try {
-            const store = await StoreModel.findById(id)
-            if(String(store.adminStore) === req.user.id){
+            // const store = await StoreModel.findById(id)
+            // if(String(store.adminStore) === req.user.id){
                 response = await StoreModel.findByIdAndDelete(id)
-            }
+            // }
         } catch {
             error = 'An error has occurred on the server, try later!'
             console.log(error)        

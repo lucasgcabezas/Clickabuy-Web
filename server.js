@@ -1,11 +1,11 @@
 require('dotenv').config()
-const passport = require("passport")
 const express = require('express')
 const cors = require('cors')
 const router = require('./routes/index')
 require('./config/database.js')
 const app = express()
 require("./config/passport")
+const mongoose = require('mongoose')
 
 app.use(cors())
 app.use(express.json())
