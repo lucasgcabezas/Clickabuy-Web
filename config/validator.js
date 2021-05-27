@@ -26,11 +26,19 @@ const validator = (req, res, next) => {
             "string.empty":"Enter a valid URL"
         }),
         loggedWithGoogle: joi.boolean(),
+        adminGral: joi.boolean(),
     })
     const validation = schema.validate(req.body, {abortEarly:false})
+    
+    if(validation.error){
+        const errors = validation.error.details.map(error => ( {message:error.message,label: error.context.label}))
+        return res.json({success:false,error:{errors}})
+    }
+    
+    /*
     if (validation.error) {
         return res.json({success: false, validationError: validation.error})
-    }
+    }*/
     next()
 }
 module.exports = validator

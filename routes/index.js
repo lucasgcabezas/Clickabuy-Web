@@ -5,7 +5,8 @@ const passport = require("passport")
 const userControllers = require('../controllers/userControllers')
 const storeControllers = require('../controllers/storeControllers')
 const productControllers = require('../controllers/productControllers')
-const categoryControllers = require('../controllers/categoryController')
+const categoryControllers = require('../controllers/categoryControllers')
+
 const { addUser, getAllUsers, getUserById, updateUser, deleteUser, loginUser, forcedLogin} = userControllers
 const { getAllStores, addStore, getStoreFromId, editStore, deleteStore} = storeControllers
 const { getAllCategories, getSingleCategory, addCategory, deleteCategory, modifyCategory } = categoryControllers
