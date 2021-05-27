@@ -4,9 +4,29 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "node ./server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lucasgcabezas/challengeFinal.git"
+
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lucasgcabezas/challengeFinal/issues"
+  },
+  "homepage": "https://github.com/lucasgcabezas/challengeFinal#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "joi": "^17.4.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.12.11",
+    "passport": "^0.4.1",
+    "passport-jwt": "^4.0.0"
+  }
 }
