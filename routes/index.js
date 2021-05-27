@@ -33,8 +33,10 @@ router.route("/stores")
 
 router.route("/store/:id")
     .get(getStoreFromId)
-    .put(passport.authenticate('jwt', { session: false }), editStore)
-    .delete(passport.authenticate('jwt', { session: false }), deleteStore)
+    // passport.authenticate('jwt', { session: false }),
+    .put(editStore)
+    // passport.authenticate('jwt', { session: false }),
+    .delete(deleteStore)
 
 router.route("/categories")
     .get(getAllCategories)
