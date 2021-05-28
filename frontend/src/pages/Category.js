@@ -2,22 +2,33 @@ import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import Navbar from '../components/Navbar'
 import categoryActions from '../redux/actions/categoryActions'
-
+import {Link} from 'react-router-dom'
+import { useState } from 'react'
 
 const Category = (props) => {
+    const [category, setCategory] = useState([])
+    const idParams = props.match.params.id
     useEffect(() => {
-        props.getStoresbByCategory('60afec9489c4fb2b806b6fa0')
+        !props.categories.length ? props.history.push('/') : setCategory(props.categories.find(categoria => categoria._id === idParams))
+        props.getStoresbByCategory(idParams)
     }, [])
-
+    // if (categories.length === 0) {
+    //     this.props.history.push('/cities')
+    // } else{
+    //     this.setState({
+    //         city: this.props.cities.find(ciudad => ciudad._id === this.props.match.params.id),
+    //     })
+    // }
+    // this.props.cargarItinerarios(this.props.match.params.id)
     return (
         <>
             <Navbar/>
             <div className="categoryContainer">
                 <div className="categoryHero" >
-                    <span>Titulo categoria</span>
+                    <span>{category.nameCategory}</span>
                 </div>
                 <div className="categoryStoresContainer">
-                    <span>Tiendas</span>
+                    <span>STORES</span>
                     <div className="categoryStoresSection">
                         {
                             props.storesForCategory.length === 0
@@ -25,8 +36,7 @@ const Category = (props) => {
                                 : props.storesForCategory.map((store, i) => {
                                     return (
                                         <div key={i} className="categoryStoresCards">
-                                            {/* <Link>{store.nameStore}</Link> */}
-                                            <span>{store.nameStore}</span>
+                                            <Link to={`/store/${store._id}`}>{store.nameStore}</Link>
                                         </div>
                                     )
                                 })
@@ -37,9 +47,9 @@ const Category = (props) => {
         </>
     )
 }
-
 const mapStateToProps = state => {
     return {
+        categories: state.categoryReducer.categories,
         storesForCategory: state.categoryReducer.stores
     }
 }

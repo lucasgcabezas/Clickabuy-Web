@@ -57,3 +57,23 @@ body{
 .descriptionProduct{
     height: 10vh;
 }
+.containerCategories{
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.nameCategory{
+    margin-top: 2vh;
+    color: grey;
+    background-color: var(--tercercolor);
+    width: 30vw;
+    border: 1px solid grey;
+    padding: 1vh 3vw;
+    cursor: pointer;
+}
+.nameCategory:hover{
+    background-color: rgba(128, 128, 128, 0.226);
+    /* color: white; */
+}
