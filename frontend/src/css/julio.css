@@ -59,6 +59,35 @@ html *{
     justify-content: space-between;
 }
 
+.buyContainer{
+    background-color: #48D1BE;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    height: auto;
+    padding: 1em 0;
+    border-radius: 20px;
+    margin: 2em 0;
+}
+.buyContainer h3{
+    margin: 0.5em 0;
+    color: #ee4054;
+}
+.detailContainer{
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+    height: 5em; 
+    padding: 0 1em   
+}
+.quantityContainer{
+    display: flex;
+    flex-direction: column;
+}
+
 /*FOOTER*/
 .footer{
     background-color: #48D1BE;
