@@ -5,16 +5,20 @@ import * as yup from "yup";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import "bootstrap/dist/css/bootstrap.css";
+import { connect } from "react-redux";
+/* import axios from "axios"; */
+import authActions from "../redux/actions/authActions";
+import GoogleLogin from "react-google-login";
 
 const validationSchema = yup.object({
   email: yup.string("Enter your email").email("Enter a valid email").required("Email is required"),
   password: yup
     .string("Enter your password")
-    .min(8, "Password should be of minimum 8 characters length")
+    .min(6, "Password should be of minimum 6 characters length")
     .required("Password is required"),
 });
 
-const SignIn = () => {
+const SignIn = (props) => {
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -23,6 +27,7 @@ const SignIn = () => {
     validationSchema: validationSchema,
     onSubmit: (values) => {
       alert(JSON.stringify(values, null, 2));
+      props.logInUser(values);
     },
   });
 
@@ -59,13 +64,12 @@ const SignIn = () => {
     </div>
   );
 };
-
-/* const mapStateToProps = (state) => ({
-
-})
+const mapStateToProps = (state) => {
+  return {};
+};
 
 const mapDispatchToProps = {
-
-}
-export default connect(mapStateToProps, mapDispatchToProps)(LogIn) */
-export default SignIn;
+  logInUser: authActions.logInUser,
+};
+export default connect(null, mapDispatchToProps)(SignIn);
+/* export default SignIn; */

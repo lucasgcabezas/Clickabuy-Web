@@ -17,8 +17,10 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "react-shopping-cart": "^1.9.5",
+    "react-toastify": "^7.0.4",
     "redux": "^4.1.0",
     "redux-thunk": "^2.3.0",
+    "show-toast": "^1.1.4",
     "web-vitals": "^1.1.2",
     "yup": "^0.32.9"
   },
