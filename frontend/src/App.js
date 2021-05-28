@@ -3,6 +3,7 @@ import Home from './pages/Home'
 import './styles.css'
 import './css/lucas.css'
 import Category from "./pages/Category"
+import Store from './pages/Store'
 
 function App() {
   return (
