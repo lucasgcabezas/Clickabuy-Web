@@ -6,12 +6,15 @@ import Category from "./pages/Category";
 import Store from "./pages/Store";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 
 const App = () => {
   return (
     <BrowserRouter>
+      <ToastContainer />
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/category" component={Category} />
