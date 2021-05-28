@@ -3,6 +3,7 @@ import { connect } from "react-redux"
 import Product from "../components/Product"
 import productsActions from "../redux/actions/productsActions"
 import {NavLink} from 'react-router-dom'
+
 const Store = (props) => {
     const { getProductsFromStore } = props
     const idParams = props.match.params.id

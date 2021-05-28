@@ -2,6 +2,7 @@ html *{
     margin: 0;
     padding: 0;
 }
+/*PRINCIPAL*/
 .principalContainer{
     min-height: 100vh;
     display: flex;
@@ -13,70 +14,95 @@ html *{
     background-position: center;  
     flex-grow: 1; 
 }
+
+/*HERO*/
 .heroContainer{
-    background-color: blueviolet;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 100vw;
+    width: 100%;
     flex-grow: 1;
 }
+
+/*HEADER*/
 .headerContainer{
     height: 10vh;
-    width: 100vw;
+    width: 100%;
     display: flex;
-    background-color: black;
 }
 .menu-logo{
     display:flex;
     width: 50%;
-    background-color: burlywood;
     justify-content: left;
     align-items: center;
 }
 .menu-options{
-    background-color: crimson;
+    color: #ee4054;
     display: flex;
     margin-left: 5vw;
     width: 40%;
     justify-content: space-between;
 }
 .menu-login{
+    color: #ee4054;
     display: flex;
     flex-direction: row-reverse;
     width: 50%;
-    background-color: cadetblue;
     justify-content: right;
     align-items: center;
 }
 .login-options{
-    background-color: blue;
     display: flex;
     margin-right: 5vw;
     width: 40%;
     justify-content: space-between;
 }
+
+.buyContainer{
+    background-color: #48D1BE;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    height: auto;
+    padding: 1em 0;
+    border-radius: 20px;
+    margin: 2em 0;
+}
+.buyContainer h3{
+    margin: 0.5em 0;
+    color: #ee4054;
+}
+.detailContainer{
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+    height: 5em; 
+    padding: 0 1em   
+}
+.quantityContainer{
+    display: flex;
+    flex-direction: column;
+}
+
+/*FOOTER*/
 .footer{
-    background-color: chartreuse;
-    width: 100vw;
+    background-color: #48D1BE;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 .menuRedes{
-    background-color: ghostwhite;
     width: 80vw;
     display: flex;
     justify-content: space-between;
+    color: #ee4054;
 }
-.menuFooter{
-    background-color: gray;
-    display: flex;
-    flex-direction: column;
-}
-.redesSociales{
-    background-color: green;
+.menuFooter, .redesSociales{
     display: flex;
     flex-direction: column;
 }
