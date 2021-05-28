@@ -1,6 +1,13 @@
+import Home from './pages/Home'
+import './styles.css' 
+
 
 function App() {
-  return <span>hola</span>
+  return(
+    <>
+      <Home />
+    </>
+   )
 }
 
 export default App
