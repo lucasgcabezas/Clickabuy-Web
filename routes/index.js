@@ -7,10 +7,12 @@ const storeControllers = require('../controllers/storeControllers')
 const productControllers = require('../controllers/productControllers')
 const categoryControllers = require('../controllers/categoryControllers')
 
-const { addUser, getAllUsers, getUserById, updateUser, deleteUser, loginUser, forcedLogin} = userControllers
-const { getAllStores, addStore, getStoreFromId, editStore, deleteStore} = storeControllers
+
+const { addUser, getAllUsers, getUserById, updateUser, deleteUser, loginUser, forcedLogin } = userControllers
+const { getAllStores, addStore, editStore, deleteStore, getStoresByCategory } = storeControllers
 const { getAllCategories, getSingleCategory, addCategory, deleteCategory, modifyCategory } = categoryControllers
 const { addProduct, getAllProducts, getProductById, updateProduct, deleteProduct } = productControllers
+
 
 router.route("/users")
     .get(getAllUsers)
@@ -32,7 +34,7 @@ router.route("/stores")
     .post(addStore)
 
 router.route("/store/:id")
-    .get(getStoreFromId)
+    .get(getStoresByCategory)
     // passport.authenticate('jwt', { session: false }),
     .put(editStore)
     // passport.authenticate('jwt', { session: false }),

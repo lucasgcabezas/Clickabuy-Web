@@ -1,13 +1,15 @@
 import Home from './pages/Home'
-import './styles.css' 
-
+import './styles.css'
+import './css/lucas.css'
+import Category from "./pages/Category"
 
 function App() {
-  return(
+  return (
     <>
+      <Category />
       <Home />
     </>
-   )
+  )
 }
 
 export default App
