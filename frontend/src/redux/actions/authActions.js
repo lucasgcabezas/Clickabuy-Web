@@ -9,6 +9,8 @@ const authActions = {
         const { data } = await axios.post(API + "/users", objInputsValues);
         if (data.success) {
           dispatch({ type: "LOGIN_USER", payload: data.response });
+          showToast("success", `Welcome ${data.response.firstName} ${data.response.lastName}`);
+          alert(`Welcome ${data.response.firstName} ${data.response.lastName}`);
           //showToast("success", `Welcome ${response.data.response.firstName} ${response.data.response.lastName}`);
         } else {
           return data;
