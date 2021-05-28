@@ -1,6 +1,6 @@
 import './sofia.css'
 import Home from './pages/Home'
-import './styles.css'
+import './css/julio.css'
 import './css/lucas.css'
 import Category from "./pages/Category"
 import Store from './pages/Store'
