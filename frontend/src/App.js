@@ -1,6 +1,10 @@
+import React from 'react'
+import './css/lucas.css'
+
+import Category from "./pages/Category"
 
 function App() {
-  return <span>hola</span>
+  return <Category />
 }
 
 export default App
