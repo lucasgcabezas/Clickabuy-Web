@@ -1,12 +1,23 @@
-import React from 'react'
+import React from "react";
+import ReactDOM from "react-dom";
+import { useFormik } from "formik";
+import * as yup from "yup";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
 
-export const LogIn = () => {
-    return (
-        <div>
-             const formik = useFormik({
+const validationSchema = yup.object({
+  email: yup.string("Enter your email").email("Enter a valid email").required("Email is required"),
+  password: yup
+    .string("Enter your password")
+    .min(8, "Password should be of minimum 8 characters length")
+    .required("Password is required"),
+});
+
+const LogIn = () => {
+  const formik = useFormik({
     initialValues: {
-      email: 'foobar@example.com',
-      password: 'foobar',
+      email: "foobar@example.com",
+      password: "foobar",
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
@@ -45,6 +56,13 @@ export const LogIn = () => {
     </div>
   );
 };
-        </div>
-    )
+
+/* const mapStateToProps = (state) => ({
+
+})
+
+const mapDispatchToProps = {
+
 }
+export default connect(mapStateToProps, mapDispatchToProps)(LogIn) */
+export default LogIn;

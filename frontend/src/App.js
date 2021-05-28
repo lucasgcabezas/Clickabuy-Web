@@ -4,12 +4,11 @@ import "./styles.css";
 import "./css/lucas.css";
 import Category from "./pages/Category";
 import Store from "./pages/Store";
-/* import ShopCart from "./components/ShopCart"; */
+import LogIn from "./pages/LogIn";
 
 const App = () => {
   return (
     <>
-      {/*  <ShopCart /> */}
       <Category />
       <Home />
       <Store />
