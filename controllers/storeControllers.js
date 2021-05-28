@@ -69,5 +69,18 @@ const storeControllers = {
         }
         res.json({ success: !error ? true : false, response, error })
     },
+
+    getStoresByCategory: async (req, res) => {
+        const idCategory = req.params.id
+        let response;
+        let error;
+        try {
+            const groupOfStores = await StoreModel.find({categories: idCategory })
+            response = groupOfStores
+        } catch (error) {
+            error = 'An error has occurred on the server, try later!'
+        }
+        res.json({ success: !error ? true : false, response, error })
+    },
 }
 module.exports = storeControllers
