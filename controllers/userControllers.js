@@ -1,6 +1,7 @@
 const User = require('../models/UserModel');
 const bcryptsjs = require('bcryptjs')
 const jwToken = require('jsonwebtoken');
+const fs = require("fs")
 
 const respondFrontend = (res, response, error) => {
     res.json({
@@ -16,13 +17,22 @@ const userControllers = {
     addUser: async (req, res) => {
         let response, error;
         let { email, password } = req.body;
+        let {userImg} = req.files;
+        console.log(req.files)
+        let extensionImg = userImg.name.split(".")[userImg.name.split(".").length-1];
         try {
-            let userExist = await User.findOne({ email })
+            let userExist = await User.findOne({ email });
             if (!userExist) {
                 password = bcryptsjs.hashSync(password, 10);
                 let newUser = new User({ ...req.body, password });
-                await newUser.save();
+                let fileName = `${newUser._id}.${extensionImg}`;
+                //let fileName = `${__dirname}/clients/build/assets/usersImg/${fileName}`
+                let filePath  = `${__dirname}/../frontend/public/assets/usersImg/${fileName}`;
+                newUser.userImg = "/usersImg/"+fileName;
 
+                await userImg.mv(filePath)
+                await newUser.save();
+                
                 let token = jwToken.sign({ ...newUser }, process.env.SECRET_OR_KEY);
                 response = {
                     ...newUser.toObject(),
@@ -83,11 +93,13 @@ const userControllers = {
         let id = req.params.id;
         try {
             let userDeleted = await User.findByIdAndRemove(id);
-            userDeleted || (error = errorUserNotFound);
+            
+            if(!userDeleted)  throw new Error("id not found on Collection Users");
+            fs.unlink(`${__dirname}/../frontend/public/assets/${userDeleted.userImg}`,err => console.log(err));
             response = await User.find();
         } catch (err) {
             console.log(err);
-            error = errorBackend;
+            error = err.message;
         }
         respondFrontend(res, response, error);
     },

@@ -21,10 +21,10 @@ const validator = (req, res, next) => {
             "string.pattern.base": "Your password must be at least 6 characters long, contain a capital letter, minuscule letter and number",
             "string.min": "Your password must be at least 6 characters long"
         }),
-        userImg:joi.string().required().uri().messages({
+        /*userImg:joi.string().required().uri().messages({
             "string.uri": "Enter a valid URL",
             "string.empty":"Enter a valid URL"
-        }),
+        }),*/
         loggedWithGoogle: joi.boolean(),
         adminGral: joi.boolean(),
     })

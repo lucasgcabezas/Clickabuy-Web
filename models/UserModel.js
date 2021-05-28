@@ -5,7 +5,7 @@ const userSchema = new mongoose.Schema({
     firstName:{type: String, required: true},
     lastName:{type: String, required: true},
     userImg:{type: String, required: true},
-    adminGral:{type: Boolean, required: true},
+    adminGral:{type: Boolean, default:false},
     adminStore: [{type: mongoose.Types.ObjectId ,ref:'store'}],
     email:{type: String, required: true},
     loggedWithGoogle: {type: Boolean , default: false} 
