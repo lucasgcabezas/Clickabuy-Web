@@ -1,6 +1,12 @@
+import ShopCart from "./ShopCart.js";
 
 function App() {
-  return <span>hola</span>
+  return (
+    <>
+      <span>"Hola hola!!! 💪💪"</span>
+      <ShopCart />
+    </>
+  );
 }
 
-export default App
+export default App;
