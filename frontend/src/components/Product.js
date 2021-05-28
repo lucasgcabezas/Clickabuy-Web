@@ -1,6 +1,5 @@
 const Product = ({ product }) => {
     const { stock, description, nameProduct, price, productImg } = product
-    console.log(product)
     return (
         <div className="cardProduct">
             <div>{productImg}</div>
