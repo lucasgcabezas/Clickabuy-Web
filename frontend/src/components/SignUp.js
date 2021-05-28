@@ -4,6 +4,8 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
+import authActions from "../redux/actions/authActions";
+import { connect } from "react-redux";
 
 const validationSchema = yup.object({
   firstName: yup.string("Enter a valid name").required("Name is required").min(2),
@@ -15,17 +17,20 @@ const validationSchema = yup.object({
     .required("Password is required"),
 });
 
-const SignUp = () => {
+const SignUp = (props) => {
   const formik = useFormik({
     initialValues: {
       firstName: "",
       lastName: "",
+      userImg: "https://pbs.twimg.com/profile_images/930996540977631237/cAN7Oe4z_400x400.jpg",
+      adminGral: false,
       email: "",
       password: "",
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
       alert(JSON.stringify(values, null, 2));
+      props.signUpUser(values);
     },
   });
 
@@ -87,12 +92,8 @@ const SignUp = () => {
   );
 };
 
-/* const mapStateToProps = (state) => ({
-
-})
-
 const mapDispatchToProps = {
-
-}
-export default connect(mapStateToProps, mapDispatchToProps)(SignUp) */
-export default SignUp;
+  signUpUser: authActions.signUpUser,
+};
+export default connect(null, mapDispatchToProps)(SignUp);
+/* export default SignUp; */

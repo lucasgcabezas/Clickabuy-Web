@@ -21,12 +21,13 @@ const authActions = {
   },
   logInUser: (objInputsValues) => {
     return async (dispatch) => {
-      debugger;
+      /*    debugger; */
       try {
         const { data } = await axios.post(API + "/login", objInputsValues);
         if (data.success) {
           dispatch({ type: "LOGIN_USER", payload: data.response });
           showToast("success", `Welcome ${data.response.firstName} ${data.response.lastName}`);
+          alert(`Welcome ${data.response.firstName} ${data.response.lastName}`);
         } else {
           return data;
         }
