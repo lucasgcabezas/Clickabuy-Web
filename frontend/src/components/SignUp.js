@@ -1,0 +1,99 @@
+import React from "react";
+import ReactDOM from "react-dom";
+import { useFormik } from "formik";
+import * as yup from "yup";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+import authActions from "../redux/actions/authActions";
+import { connect } from "react-redux";
+
+const validationSchema = yup.object({
+  firstName: yup.string("Enter a valid name").required("Name is required").min(2),
+  lastName: yup.string("Enter a valid last name").min(2),
+  email: yup.string("Enter your email").email("Enter a valid email").required("Email is required"),
+  password: yup
+    .string("Enter your password")
+    .min(6, "Password should be of minimum 8 characters length")
+    .required("Password is required"),
+});
+
+const SignUp = (props) => {
+  const formik = useFormik({
+    initialValues: {
+      firstName: "",
+      lastName: "",
+      userImg: "https://pbs.twimg.com/profile_images/930996540977631237/cAN7Oe4z_400x400.jpg",
+      adminGral: false,
+      email: "",
+      password: "",
+    },
+    validationSchema: validationSchema,
+    onSubmit: (values) => {
+      alert(JSON.stringify(values, null, 2));
+      props.signUpUser(values);
+    },
+  });
+
+  return (
+    <div>
+      <div className="w-50 mt-5 mx-auto">
+        {" "}
+        <form onSubmit={formik.handleSubmit}>
+          <TextField
+            fullWidth
+            id="firstName"
+            name="firstName"
+            label="Your Name"
+            value={formik.values.firstName}
+            onChange={formik.handleChange}
+            error={formik.touched.firstName && Boolean(formik.errors.firstName)}
+            helperText={formik.touched.firstName && formik.errors.firstName}
+          />
+          <TextField
+            fullWidth
+            id="lastName"
+            name="lastName"
+            label="lastName"
+            value={formik.values.lastName}
+            onChange={formik.handleChange}
+            error={formik.touched.lastName && Boolean(formik.errors.lastName)}
+            helperText={formik.touched.lastName && formik.errors.lastName}
+          />
+
+          <TextField
+            fullWidth
+            id="email"
+            name="email"
+            label="Email"
+            value={formik.values.email}
+            onChange={formik.handleChange}
+            error={formik.touched.email && Boolean(formik.errors.email)}
+            helperText={formik.touched.email && formik.errors.email}
+          />
+
+          <TextField
+            fullWidth
+            id="password"
+            name="password"
+            label="Password"
+            type="password"
+            value={formik.values.password}
+            onChange={formik.handleChange}
+            error={formik.touched.password && Boolean(formik.errors.password)}
+            helperText={formik.touched.password && formik.errors.password}
+          />
+
+          <Button color="primary" variant="contained" fullWidth type="submit">
+            Submit
+          </Button>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+const mapDispatchToProps = {
+  signUpUser: authActions.signUpUser,
+};
+export default connect(null, mapDispatchToProps)(SignUp);
+/* export default SignUp; */
