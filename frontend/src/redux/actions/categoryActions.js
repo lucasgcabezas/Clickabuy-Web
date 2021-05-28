@@ -16,5 +16,16 @@ const categoryActions = {
             }
         }
     },
+    getAllCategories:() => {
+        return async (dispatch, getState) => {
+            try {
+                const response = await axios.get('http://localhost:4000/api/categories')
+                // return response.data.response
+                dispatch({type: 'FETCH_CATEGORIES', payload: response.data.response})
+            } catch (error) {
+                console.log(error)
+            }
+        }
+    }
 }
 export default categoryActions

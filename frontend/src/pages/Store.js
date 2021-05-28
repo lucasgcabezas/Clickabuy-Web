@@ -5,14 +5,21 @@ import productsActions from "../redux/actions/productsActions"
 import {NavLink} from 'react-router-dom'
 const Store = (props) => {
     const { getProductsFromStore } = props
+    const idParams = props.match.params.id
     const [products, setProducts] = useState([])
     useEffect(() => {
         fetchProductsData()
     }, [])
     const fetchProductsData = async () => {
-        const response = await getProductsFromStore("60b02937f2502c1690e05c35")
+        const response = await getProductsFromStore(idParams)
         setProducts(response)
     }
+    // if (this.props.cities.length === 0) {
+    //     this.props.history.push('/cities')
+    // } else{
+    //         setProducts(storesForCategory.find(store => store._id === idParams))
+    // }
+    // this.props.cargarItinerarios(this.props.match.params.id)
     return (
         <body>
             <NavLink to="/">Home</NavLink>
@@ -24,9 +31,7 @@ const Store = (props) => {
             <div className="containerCards">
                 {
                     products.length === 0 
-                    ? <div>
-                        <h1>no products</h1>
-                    </div>
+                    ? <div> <h1>no products</h1> </div>
                     : products.map(product => {
                         return (
                             <div>
@@ -41,8 +46,13 @@ const Store = (props) => {
         </body>
     )
 }
+const mapStateToProps = state => {
+    return {
+        storesForCategory: state.categoryReducer.stores
+    }
+}
 
 const mapDispatchToProps = {
     getProductsFromStore: productsActions.getProductsFromStore
 }
-export default connect(null, mapDispatchToProps)(Store)
+export default connect(mapStateToProps, mapDispatchToProps)(Store)

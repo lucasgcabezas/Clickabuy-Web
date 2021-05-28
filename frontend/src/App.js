@@ -1,4 +1,4 @@
-import './sofia.css'
+import './css/sofia.css'
 import Home from './pages/Home'
 import './styles.css'
 import './css/lucas.css'
@@ -11,8 +11,8 @@ const App = () => {
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={Home}/>
-        <Route path="/category" component={Category}/>
-        <Route path="/store" component={Store}/>
+        <Route path="/category/:id" component={Category}/>
+        <Route path="/store/:id" component={Store}/>
         <Redirect to="/"/>
       </Switch>
     </BrowserRouter>
