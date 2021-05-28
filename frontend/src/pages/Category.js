@@ -1,14 +1,10 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import Navbar from '../components/Navbar'
-
 import categoryActions from '../redux/actions/categoryActions'
 
 
 const Category = (props) => {
-
-
-
     useEffect(() => {
         props.getStoresbByCategory('60afec9489c4fb2b806b6fa0')
     }, [])
@@ -29,6 +25,7 @@ const Category = (props) => {
                                 : props.storesForCategory.map((store, i) => {
                                     return (
                                         <div key={i} className="categoryStoresCards">
+                                            {/* <Link>{store.nameStore}</Link> */}
                                             <span>{store.nameStore}</span>
                                         </div>
                                     )

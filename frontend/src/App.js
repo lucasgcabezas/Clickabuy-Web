@@ -4,14 +4,18 @@ import './css/julio.css'
 import './css/lucas.css'
 import Category from "./pages/Category"
 import Store from './pages/Store'
+import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom'
 
-function App() {
+const App = () => {
   return (
-    <>
-      <Category />
-      <Home />
-      <Store/>
-    </>
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/" component={Home}/>
+        <Route path="/category" component={Category}/>
+        <Route path="/store" component={Store}/>
+        <Redirect to="/"/>
+      </Switch>
+    </BrowserRouter>
   )
 }
 

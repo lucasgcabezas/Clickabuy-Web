@@ -5,14 +5,11 @@ import rootReducer from './redux/reducers/rootReducer'
 import App from './App';
 import { Provider } from "react-redux";
 import { applyMiddleware, createStore } from "redux";
-
 const myStore = createStore(rootReducer , applyMiddleware(thunk))
 
 ReactDOM.render(
   <Provider store={myStore}>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
+    <App />
   </Provider>,
 
   document.getElementById('root')

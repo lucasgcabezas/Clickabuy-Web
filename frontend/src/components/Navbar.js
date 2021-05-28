@@ -1,4 +1,4 @@
-
+import {NavLink} from 'react-router-dom'
 const Navbar = () => {
     return (
         <div className="navbarContainer">
@@ -10,6 +10,7 @@ const Navbar = () => {
                 </input>
             </div>
             <div className="navbarLinks">
+                <NavLink to="/store">Store</NavLink>
                 <span>Inicio</span>
                 <span>Ingresar</span>
                 <span>Registrarme</span>

@@ -1,13 +1,15 @@
 import React from 'react'
-
+import { NavLink } from 'react-router-dom'
 const Header = () => {
         return(
             <header className="headerContainer">
                 <div className="menu-logo">
                     <div className="logo">Logo</div>
                     <nav className="menu-options">
-                        <h2>Home</h2>
-                        <h2>Categories</h2>
+                        <NavLink to="/">Home</NavLink>
+                        <NavLink to="/category">Category</NavLink>
+                        
+                        {/* <h2>Categories</h2> */}
                     </nav>
                 </div>
                 <div className="menu-login">
