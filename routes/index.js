@@ -11,7 +11,7 @@ const categoryControllers = require('../controllers/categoryControllers')
 const { addUser, getAllUsers, getUserById, updateUser, deleteUser, loginUser, forcedLogin } = userControllers
 const { getAllStores, addStore, editStore, deleteStore, getStoresByCategory } = storeControllers
 const { getAllCategories, getSingleCategory, addCategory, deleteCategory, modifyCategory } = categoryControllers
-const { addProduct, getAllProducts, getProductById, updateProduct, deleteProduct } = productControllers
+const { addProduct, getAllProducts, getProductById, updateProduct, deleteProduct, getProductsFromStore } = productControllers
 
 
 router.route("/users")
@@ -57,5 +57,7 @@ router.route("/product/:id")
     .get(getProductById)
     .put(updateProduct)
     .delete(deleteProduct)
+router.route("/productsFromStore/:id")
+    .get(getProductsFromStore)
 
 module.exports = router

@@ -1,3 +1,4 @@
+import './sofia.css'
 import Home from './pages/Home'
 import './styles.css'
 import './css/lucas.css'
@@ -8,6 +9,7 @@ function App() {
     <>
       <Category />
       <Home />
+      <Store/>
     </>
   )
 }

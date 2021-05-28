@@ -1,0 +1,59 @@
+html *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family:'Poppins', Arial, Helvetica, sans-serif;
+}
+:root{
+    --primarycolor: #ee4054;
+    --secondarycolor: #48D1BE;
+    --tercercolor: #ecf0f1;
+}
+body{
+    background-color: var(--tercercolor);
+}
+.containerStore{
+    background-color: var(--secondarycolor);
+    width: 100%;
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+.containerCards{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 10vh;
+}
+.cardProduct{
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 20%);
+    /* border: 1px solid black; */
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 17vw;
+    height: 40vh;
+    background-color: white;
+}
+.buttonAddProduct{
+    margin-top: 5vh;
+    background-color: var(--secondarycolor);
+    color: white;
+    padding: 1vh 3vw;
+    border-radius: 10px;
+    border: none;
+}
+.cardProductInfo{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    height: 25vh;
+}
+.descriptionProduct{
+    height: 10vh;
+}
