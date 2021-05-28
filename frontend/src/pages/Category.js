@@ -12,6 +12,7 @@ const Category = (props) => {
         !props.categories.length ? props.history.push('/') : setCategory(props.categories.find(categoria => categoria._id === idParams))
         props.getStoresbByCategory(idParams)
     }, [])
+    console.log(props.categories)
     // if (categories.length === 0) {
     //     this.props.history.push('/cities')
     // } else{
@@ -25,7 +26,7 @@ const Category = (props) => {
             <Navbar/>
             <div className="categoryContainer">
                 <div className="categoryHero" >
-                    <span>{category.nameCategory}</span>
+                    {/* <span>{category.nameCategory}</span> */}
                 </div>
                 <div className="categoryStoresContainer">
                     <span>STORES</span>
