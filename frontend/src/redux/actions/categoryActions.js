@@ -11,8 +11,8 @@ const categoryActions = {
                 } else {
                     alert( response.data.error)
                 }
-            } catch {
-                console.log('error')
+            } catch (error){
+                console.log(error)
             }
         }
     },
