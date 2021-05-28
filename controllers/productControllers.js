@@ -70,8 +70,20 @@ const productControllers = {
             error = errorBackend;
         }
         respondFrontend(res,response,error);
-    }
+    },
+    getProductsFromStore: async (req, res) => {
+        const id = req.params.id
 
+        let response;
+        let error;
+        try {
+            const productsFromStore = await Product.find({ storeId: id })
+            response = productsFromStore
+        } catch (error) {
+            error = 'An error has occurred on the server, try later!'
+        }
+        res.json({ success: !error ? true : false, response, error })
+    }
 }
 
 module.exports = productControllers;

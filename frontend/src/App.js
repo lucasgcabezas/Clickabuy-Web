@@ -1,6 +1,10 @@
+import './sofia.css'
+import Store from './pages/Store'
 
-function App() {
-  return <span>hola</span>
+const App = () => {
+  return(
+    <Store/>
+  )
 }
 
 export default App
