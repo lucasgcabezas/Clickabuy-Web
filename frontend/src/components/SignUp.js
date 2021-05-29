@@ -49,7 +49,7 @@ const SignUp = (props) => {
     initialValues: {
       firstName: "",
       lastName: "",
-      userImg: "https://pbs.twimg.com/profile_images/930996540977631237/cAN7Oe4z_400x400.jpg",
+      userImg: "",
       adminGral: false,
       email: "",
       password: "",
@@ -115,6 +115,10 @@ const SignUp = (props) => {
             error={formik.touched.password && Boolean(formik.errors.password)}
             helperText={formik.touched.password && formik.errors.password}
           />
+
+          {/* <input id="userImg" name="userImg" type="file" onChange={(event) => {
+  setFieldValue("file", event.currentTarget.files[0]);
+}} /> */}
 
           <Button color="primary" variant="contained" fullWidth type="submit">
             Submit
