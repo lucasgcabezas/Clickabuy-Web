@@ -10,6 +10,7 @@ const Category = (props) => {
     useEffect(() => {
         !props.categories.length ? props.history.push('/') : setCategory(props.categories.find(categoria => categoria._id === idParams))
         props.getStoresbByCategory(idParams)
+         // eslint-disable-next-line
     }, [])
 
     return (

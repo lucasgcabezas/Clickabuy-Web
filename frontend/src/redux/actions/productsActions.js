@@ -10,6 +10,6 @@ const productsActions = {
                 console.log(error)
             }
         }
-    }
+    },
 }
 export default productsActions

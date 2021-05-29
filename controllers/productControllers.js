@@ -82,7 +82,29 @@ const productControllers = {
             error = 'An error has occurred on the server, try later!'
         }
         res.json({ success: !error ? true : false, response, error })
+    },
+    getProductFromCartLS: async(req,res) => {
+        let error,response;
+        let {cartLS} = req.body;
+        cartLS = JSON.parse(cartLS)
+        try {
+            response = await Promise.all(cartLS.map(async (item) => {
+                let product = await Product.findById(item._id);
+                let newItem = {
+                    ...product.toObject(),
+                    quantity: parseInt(item.quantity) > product.stock ? product.stock : parseInt(item.quantity)
+                }
+                return newItem
+            }))
+            if(!response) throw new Error("response is undefined")
+
+        } catch (err) {
+            console.log(err)
+            error = `${err.name}: ${err.message}`
+        }
+        respondFrontend(res,response,error);
     }
 }
+
 
 module.exports = productControllers;

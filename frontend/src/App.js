@@ -10,8 +10,24 @@ import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
 import "react-toastify/dist/ReactToastify.css";
 import Buys from './pages/Buys'
+import {connect} from 'react-redux'
+import reloadCartLS from './redux/actions/cartActions'
+import cartActions from './redux/actions/cartActions';
 
-const App = () => {
+
+
+
+const App = ({cart,reloadCartLS}) => {
+  
+  if(cart.length === 0){
+    const cartLS = localStorage.getItem("cartLS");
+    if(cartLS !== "undefined" || cartLS !== null){
+      
+      reloadCartLS(cartLS);
+    }
+  }
+
+
   return (
     <BrowserRouter>
       <ToastContainer />
@@ -28,4 +44,13 @@ const App = () => {
   );
 };
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    cart : state.cartReducer.cart
+  }
+}
+const  mapDispatchToProps = {
+  reloadCartLS : cartActions.reloadCartLS
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(App);

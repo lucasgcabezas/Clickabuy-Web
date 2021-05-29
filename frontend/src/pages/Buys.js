@@ -3,25 +3,23 @@ import {NavLink} from 'react-router-dom'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import PurchaseDetail from '../components/PurchaseDetail'
+import {connect} from 'react-redux'
+import cartActions from '../redux/actions/cartActions'
 
-const Buys = () => {
+const Buys = ({cart,clearCart}) => {
     return(
         <>
             <Header />
             <div className='principalContainer'>
                 <div className='buyContainer'>
                     <h3>Purchase Detail</h3>
-                    <PurchaseDetail />
-                    <PurchaseDetail />
-                    <PurchaseDetail />
-                    <PurchaseDetail />
-                    <PurchaseDetail />
-                    <PurchaseDetail />
-                    <PurchaseDetail />
-                    <PurchaseDetail /> 
-                    <h3>Total= '{}'</h3> 
+                    {cart.map(item=>{
+                        return <PurchaseDetail itemCart ={item}/>
+                    })}
+                    
+                    <h3>Total= {cart.reduce((total,item)=>total+=item.quantity*item.price ,0)} $</h3> 
                     <div>
-                        <button>Cancel Buy</button>
+                        <button onClick={()=>clearCart()}>Cancel Buy</button>
                         <button>Fin de la compra</button>
                     </div>
                      
@@ -32,4 +30,14 @@ const Buys = () => {
     )
 }
 
-export default Buys
+const mapStateToProps = (state) => {
+    return {
+        cart : state.cartReducer.cart
+    }
+}
+
+const mapDispatchToProps = {
+    clearCart : cartActions.clearCart  
+}
+//clearCart
+export default connect(mapStateToProps,mapDispatchToProps)(Buys)
