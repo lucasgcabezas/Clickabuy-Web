@@ -8,16 +8,15 @@ import Category from "./pages/Category";
 import Store from "./pages/Store";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
-import "react-toastify/dist/ReactToastify.css";
+import authActions from "./redux/actions/authActions";
+import SignUpStore from "./components/SignUpStore";
+import SignInAdmin from "./components/SignInAdmin";
 import Buys from './pages/Buys'
 import {connect} from 'react-redux'
-import reloadCartLS from './redux/actions/cartActions'
+// import reloadCartLS from './redux/actions/cartActions'
 import cartActions from './redux/actions/cartActions';
 
-
-
-
-const App = ({cart,reloadCartLS}) => {
+const App = ({cart,reloadCartLS, loginForced}) => {
   
   if(cart.length === 0){
     const cartLS = localStorage.getItem("cartLS");
@@ -27,6 +26,14 @@ const App = ({cart,reloadCartLS}) => {
     }
   }
 
+  const token = localStorage.getItem("token");
+  //veo que no haya en el store un usuario logueado y que haya un token en el localStorage
+
+  if (!props.userLogged && token && token !== "undefined") {
+    alert("foreceLogn");
+    loginForced(JSON.parse(token), props.history);
+    return null;
+  }
 
   return (
     <BrowserRouter>
@@ -38,6 +45,9 @@ const App = ({cart,reloadCartLS}) => {
         <Route path="/buys" component={Buys} />
         <Route path="/SignIn" component={SignIn} />
         <Route path="/SignUp" component={SignUp} />
+        <Route path="/SignUpStore" component={SignUpStore} />
+        <Route path="/SignInAdmin" component={SignInAdmin} />
+
         <Redirect to="/" />
       </Switch>
     </BrowserRouter>
@@ -46,11 +56,14 @@ const App = ({cart,reloadCartLS}) => {
 
 const mapStateToProps = (state) => {
   return {
-    cart : state.cartReducer.cart
+    cart : state.cartReducer.cart,
+    userLogged: state.authReducer.userLogged,
   }
 }
 const  mapDispatchToProps = {
-  reloadCartLS : cartActions.reloadCartLS
+  reloadCartLS : cartActions.reloadCartLS,
+  loginForced: authActions.loginForced
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
+
