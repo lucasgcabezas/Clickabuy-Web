@@ -20,38 +20,23 @@ const validationSchema = yup.object({
 });
 
 const SignIn = (props) => {
-  const respuestaGoogle = (response) => {
-    const { givenName, familyName, email, googleId, imageUrl } = response.profileObj;
-    /* setPreUser({name:givenName,email:email,pass:googleId,url:imageUrl}) */
-    /*   console.log(response); */
-    /*  alert("ahora"); */
-    console.log({
-      email: email,
-      password: "a" + googleId,
-    });
-    props.logInUser({
-      email: email,
-      password: "a" + googleId,
-    });
-    /*   props.history.push("/"); */
-  };
-
   const formik = useFormik({
     initialValues: {
+      adminGral: true,
       email: "",
       password: "",
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
       alert(JSON.stringify(values, null, 2));
-      props.logInUser(values);
+      /*    props.logInUser(values); */
     },
   });
 
   return (
     <div>
       <div className="w-50 mt-5 mx-auto">
-        <label className="h3 ml-0">Complete your Personal Data</label>
+        <label className="h3 ml-0">Main Administrator LogIn</label>
         <form onSubmit={formik.handleSubmit}>
           <TextField
             fullWidth
@@ -74,28 +59,12 @@ const SignIn = (props) => {
             error={formik.touched.password && Boolean(formik.errors.password)}
             helperText={formik.touched.password && formik.errors.password}
           />
-          <Button color="primary" variant="contained" fullWidth type="submit">
+          <Button color="link" variant="contained" fullWidth type="submit">
             Submit
           </Button>
         </form>
-        <GoogleLogin
-          className="mt-1 w-100 text-center text-white bg-primary"
-          clientId="453615867535-mmnqpnp68m7du525dnif9647ll1bssi5.apps.googleusercontent.com"
-          buttonText="LogIn with Google"
-          onSuccess={respuestaGoogle}
-          onFailure={respuestaGoogle}
-          cookiePolicy={"single_host_origin"}
-        />
-        {/* secreto google esu21qkgDbOgSQKwu8JWeBFb */}
-        <NavLink to="/SignUp">
-          <label className="mt-2 w-100 btn  h6">
-            Don't have an account?, <span className="text-primary">Sign Up Here</span>{" "}
-          </label>{" "}
-        </NavLink>
 
-        <NavLink to="/SignInAdmin">
-          <label className="mt-2 w-100 btn  h6">shortcut admin login </label>
-        </NavLink>
+        {/* secreto google esu21qkgDbOgSQKwu8JWeBFb */}
       </div>
     </div>
   );
