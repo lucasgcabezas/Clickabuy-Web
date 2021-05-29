@@ -11,7 +11,7 @@ import SignUp from "./components/SignUp";
 import "react-toastify/dist/ReactToastify.css";
 import Buys from './pages/Buys'
 import {connect} from 'react-redux'
-import reloadCartLS from './redux/actions/cartActions'
+
 import cartActions from './redux/actions/cartActions';
 
 
