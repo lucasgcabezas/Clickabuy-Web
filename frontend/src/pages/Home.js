@@ -3,6 +3,8 @@ import Header from '../components/Header'
 import Hero from '../components/Hero'
 import Footer from '../components/Footer'
 import Categories from '../components/Categories'
+import BannerCarousel from '../components/BannerCarousel'
+import CategoriesBanner from '../components/CategoriesBanner'
 
 class Home extends React.Component{
     componentDidMount(){
@@ -10,14 +12,14 @@ class Home extends React.Component{
     }
     render(){
         return(
-            <>  
-            <div className='principalContainer'>                              
-                <Header />
+            <div className="contenedorHome">  
+            {/* <div className='principalContainer'>                               */}
                 <Hero />
-                <Categories/>
-                <Footer />                
+                <BannerCarousel/>
+                <CategoriesBanner/>     
+                <Footer /> 
+            {/* </div> */}
             </div>
-            </>
         )        
     }
 }

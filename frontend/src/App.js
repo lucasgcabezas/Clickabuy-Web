@@ -3,6 +3,7 @@ import './css/julio.css'
 import "./css/lucas.css";
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 import { ToastContainer } from "react-toastify";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from "./pages/Home";
 import Category from "./pages/Category";
 import Store from "./pages/Store";

@@ -10,10 +10,9 @@ const Navbar = () => {
                 </input>
             </div>
             <div className="navbarLinks">
-                <NavLink to="/store">Store</NavLink>
-                <span>Inicio</span>
-                <span>Ingresar</span>
-                <span>Registrarme</span>
+                <NavLink to="/">Home</NavLink>
+                <NavLink to="/buys"><span className="material-icons-outlined">shopping_cart</span></NavLink>
+                
             </div>
         </div>
     )
