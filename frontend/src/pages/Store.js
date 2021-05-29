@@ -7,35 +7,28 @@ import {NavLink} from 'react-router-dom'
 const Store = (props) => {
     const { getProductsFromStore } = props
     const idParams = props.match.params.id
-    const [products, setProducts] = useState([])
+    const [store, setStore] = useState([])
     useEffect(() => {
-        fetchProductsData()
+        !props.storesForCategory.length ? props.history.push('/') : setStore(props.storesForCategory.find(store => store._id === idParams))
+        getProductsFromStore(idParams)
     }, [])
-    const fetchProductsData = async () => {
-        const response = await getProductsFromStore(idParams)
-        setProducts(response)
-    }
-    // if (this.props.cities.length === 0) {
-    //     this.props.history.push('/cities')
-    // } else{
-    //         setProducts(storesForCategory.find(store => store._id === idParams))
-    // }
-    // this.props.cargarItinerarios(this.props.match.params.id)
     return (
         <body>
             <NavLink to="/">Home</NavLink>
             <div className="containerStore">
                 <div className="bannerStore">
-                    <h1>NAME STORE</h1>
+                    <h1>{store.nameStore}</h1>
+                    <p>{store.storeImg}</p>
+                    <p>{store.description}</p>
                 </div>
             </div>
             <div className="containerCards">
                 {
-                    products.length === 0 
+                    props.products.length === 0 
                     ? <div> <h1>no products</h1> </div>
-                    : products.map(product => {
+                    : props.products.map(product => {
                         return (
-                            <div>
+                            <div key={product._id}>
                                 <Product product={product} />
                             </div>
 
@@ -49,7 +42,8 @@ const Store = (props) => {
 }
 const mapStateToProps = state => {
     return {
-        storesForCategory: state.categoryReducer.stores
+        storesForCategory: state.categoryReducer.stores,
+        products: state.productReducer.products
     }
 }
 

@@ -10,7 +10,7 @@ const authActions = {
         if (data.success) {
           dispatch({ type: "LOGIN_USER", payload: data.response });
           showToast("success", `Welcome ${data.response.firstName} ${data.response.lastName}`);
-          alert(`Welcome ${data.response.firstName} ${data.response.lastName}`);
+          /*     alert(`Welcome ${data.response.firstName} ${data.response.lastName}`); */
           //showToast("success", `Welcome ${response.data.response.firstName} ${response.data.response.lastName}`);
         } else {
           return data;
@@ -29,7 +29,7 @@ const authActions = {
         if (data.success) {
           dispatch({ type: "LOGIN_USER", payload: data.response });
           showToast("success", `Welcome ${data.response.firstName} ${data.response.lastName}`);
-          alert(`Welcome ${data.response.firstName} ${data.response.lastName}`);
+          /*  alert(`Welcome ${data.response.firstName} ${data.response.lastName}`); */
         } else {
           return data;
         }
@@ -42,6 +42,7 @@ const authActions = {
   loginForced: (token) => {
     return async (dispatch) => {
       try {
+        /*   debugger; */
         const { data } = await axios.get(API + "/relogin", {
           headers: { Authorization: "Bearer " + token },
         });
@@ -53,6 +54,8 @@ const authActions = {
             token,
           },
         });
+        showToast("success", `Welcome ${data.response.firstName} ${data.response.lastName}`);
+        /*  alert(`Welcome ${data.response.firstName} ${data.response.lastName}`); */
       } catch (err) {
         if (err.response && err.response.status === 401) {
           //showToast("error", "What are you trying to do ??")

@@ -1,0 +1,4 @@
+MONGO_URL="mongodb+srv://grupoFinal:grupoFinal@cluster0.t8yq7.mongodb.net/finalchallenge?retryWrites=true&w=majority"
+SECRET_OR_KEY=challengeFinal
+PORT=4000
+HOST=0.0.0.0
