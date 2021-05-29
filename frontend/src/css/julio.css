@@ -92,8 +92,10 @@ html *{
 .footer{
     background-color: #48D1BE;
     width: 100%;
+    height: 20vh;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     align-items: center;
 }
 .menuRedes{
@@ -105,4 +107,15 @@ html *{
 .menuFooter, .redesSociales{
     display: flex;
     flex-direction: column;
+}
+.playStores{
+    display: flex;
+    flex-direction: column;
+}
+.googleStore, .appleStore{
+    width: 100%;
+    height: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
 }
