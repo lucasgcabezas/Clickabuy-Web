@@ -1,32 +1,29 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
+import Categories from "./Categories";
 const Header = () => {
   return (
     <header className="headerContainer">
-      <div className="menu-logo">
-        <div className="logo">Logo</div>
-        <nav className="menu-options">
-          <NavLink to="/">Home</NavLink>
-          {/* <NavLink to="/category">Category</NavLink> */}
-          <NavLink to="/buys">buys</NavLink>
-          {/* <h2>Categories</h2> */}
-        </nav>
+      <div className="contenedorLogo">
+        <div className="clickabuyLogo" style={{ backgroundImage: "url('https://webdesing881317710.files.wordpress.com/2021/05/clickabuylogo.png')" }}></div>
+        <h1>clickabuy</h1>
       </div>
-      <div className="menu-login">
-        <div className="user-login">UserImg</div>
-        <nav className="login-options">
-          <>
-            <NavLink to="/SignIn">
-              {" "}
-              <h2>Sign In</h2>
-            </NavLink>
-
-            <NavLink to="/SignUp">
-              {" "}
-              <h2>Sign Up</h2>
-            </NavLink>
-          </>
-        </nav>
+      <div className="contenedorFiltro">
+        <input type="text" className="filtroHome" placeholder="Find your perfect product"></input>
+        <span className="material-icons-outlined iconSearchHome">search</span>
+      </div>
+      <div className="contenedorNavs">
+        <NavLink exact to="/" className="navegadores">Home</NavLink>
+        {/* {props.userLogged && <> */}
+        <div className="categoriesDropdown">Categories</div>
+        <NavLink to="/buys" className="navegadores"><span className="material-icons-outlined">shopping_cart</span></NavLink>
+        {/* <Link to="/" className="navegadores"><span >Log out</span></Link> */}
+        {/* onClick={() => props.signOut()} */}
+        {/* </>} */}
+        {/* {!props.userLogged && <> */}
+        <NavLink to="/signUp" className="navegadores">Account</NavLink>
+        {/* </>} */}
+        <Categories/>
       </div>
     </header>
   );

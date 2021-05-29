@@ -1,6 +1,6 @@
 const initialState = {
     stores: [],
-    categories: []
+    categories: [],
 }
 
 const categoryReducer = (state = initialState, action) => {
@@ -12,7 +12,7 @@ const categoryReducer = (state = initialState, action) => {
             }
             break
         case 'FETCH_CATEGORIES':
-            return{
+            return {
                 ...state,
                 categories: action.payload
             }
