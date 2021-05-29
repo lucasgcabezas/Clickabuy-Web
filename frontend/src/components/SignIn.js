@@ -9,6 +9,7 @@ import { connect } from "react-redux";
 /* import axios from "axios"; */
 import authActions from "../redux/actions/authActions";
 import GoogleLogin from "react-google-login";
+import { NavLink } from "react-router-dom";
 
 const validationSchema = yup.object({
   email: yup.string("Enter your email").email("Enter a valid email").required("Email is required"),
@@ -19,6 +20,22 @@ const validationSchema = yup.object({
 });
 
 const SignIn = (props) => {
+  const respuestaGoogle = (response) => {
+    const { givenName, familyName, email, googleId, imageUrl } = response.profileObj;
+    /* setPreUser({name:givenName,email:email,pass:googleId,url:imageUrl}) */
+    /*   console.log(response); */
+    alert("ahora");
+    console.log({
+      email: email,
+      password: "a" + googleId,
+    });
+    props.logInUser({
+      email: email,
+      password: "a" + googleId,
+    });
+    /*   props.history.push("/"); */
+  };
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -60,6 +77,20 @@ const SignIn = (props) => {
             Submit
           </Button>
         </form>
+        <GoogleLogin
+          className="mt-1 w-100 text-center text-white bg-primary"
+          clientId="453615867535-mmnqpnp68m7du525dnif9647ll1bssi5.apps.googleusercontent.com"
+          buttonText="LogIn with Google"
+          onSuccess={respuestaGoogle}
+          onFailure={respuestaGoogle}
+          cookiePolicy={"single_host_origin"}
+        />
+        {/* secreto google esu21qkgDbOgSQKwu8JWeBFb */}
+        <NavLink to="/SignUp">
+          <label className="mt-2 w-100 btn  h6">
+            Don't have an account?, <span className="text-primary">Sign Up Here</span>{" "}
+          </label>{" "}
+        </NavLink>
       </div>
     </div>
   );
