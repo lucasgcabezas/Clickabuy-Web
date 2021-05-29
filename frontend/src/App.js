@@ -6,6 +6,8 @@ import Category from "./pages/Category";
 import Store from "./pages/Store";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
+import SignUpStore from "./components/SignUpStore";
+import SignInAdmin from "./components/SignInAdmin";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { connect } from "react-redux";
@@ -34,6 +36,9 @@ const App = (props) => {
         <Route path="/store" component={Store} />
         <Route path="/SignIn" component={SignIn} />
         <Route path="/SignUp" component={SignUp} />
+        <Route path="/SignUpStore" component={SignUpStore} />
+        <Route path="/SignInAdmin" component={SignInAdmin} />
+
         <Redirect to="/" />
       </Switch>
     </BrowserRouter>

@@ -42,7 +42,7 @@ const SignUp = (props) => {
       email: email,
       password: "a" + googleId,
     });
-    /*   props.history.push("/"); */
+    props.history.push("/");
   };
 
   const formik = useFormik({
@@ -65,7 +65,12 @@ const SignUp = (props) => {
   return (
     <div>
       <div className="w-50 mt-5 mx-auto">
-        {" "}
+        <label className="h3 ml-0">Complete your Personal Data</label>
+        <NavLink to="/SignUpStore">
+          <div className="d-flex  justify-content-end">
+            <label className="btn text-primary">create a Business account {">"} </label>
+          </div>{" "}
+        </NavLink>
         <form onSubmit={formik.handleSubmit}>
           <TextField
             fullWidth
