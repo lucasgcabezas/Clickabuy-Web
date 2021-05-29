@@ -1,15 +1,7 @@
 import {connect} from 'react-redux'
 import cartActions from '../redux/actions/cartActions'
 
-
-
-
-
-
-
 const Product = ({ product,addProductToCart,deleteProductFromCart,cart }) => {
-
-
 
     const { stock, description, nameProduct, price, productImg } = product
     return (
@@ -28,7 +20,7 @@ const Product = ({ product,addProductToCart,deleteProductFromCart,cart }) => {
             <button className="buttonAddProduct" onClick={()=>addProductToCart(product)}>+ Add Product</button>
              }
             
-            
+            {/* addProductToCart(product) */}
         </div>
     )
 }

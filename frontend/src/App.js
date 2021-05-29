@@ -3,6 +3,7 @@ import './css/julio.css'
 import "./css/lucas.css";
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from "./pages/Home";
 import Category from "./pages/Category";
@@ -17,7 +18,7 @@ import {connect} from 'react-redux'
 // import reloadCartLS from './redux/actions/cartActions'
 import cartActions from './redux/actions/cartActions';
 
-const App = ({cart,reloadCartLS, loginForced}) => {
+const App = ({cart,reloadCartLS, loginForced, userLogged, history}) => {
   
   if(cart.length === 0){
     const cartLS = localStorage.getItem("cartLS");
@@ -30,9 +31,9 @@ const App = ({cart,reloadCartLS, loginForced}) => {
   const token = localStorage.getItem("token");
   //veo que no haya en el store un usuario logueado y que haya un token en el localStorage
 
-  if (!props.userLogged && token && token !== "undefined") {
+  if (!userLogged && token && token !== "undefined") {
     alert("foreceLogn");
-    loginForced(JSON.parse(token), props.history);
+    loginForced(JSON.parse(token), history);
     return null;
   }
 
