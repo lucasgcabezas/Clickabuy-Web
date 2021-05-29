@@ -20,13 +20,16 @@ import cartActions from './redux/actions/cartActions';
 const App = ({cart,reloadCartLS, loginForced, userLogged, history}) => {
   
   if(cart.length === 0){
-    const cartLS = localStorage.getItem("cartLS");
-    if(cartLS !== "undefined" || cartLS !== null){
-      
-      reloadCartLS(cartLS);
-    }
-  }
+    let cartLS = localStorage.getItem("cartLS");
 
+    if(cartLS !== "undefined" && cartLS !== null  ){
+        cartLS = JSON.parse(cartLS)
+        if(cartLS instanceof Array && cartLS.length !== 0)
+          reloadCartLS(cartLS);
+    }else
+      localStorage.removeItem("cartLS")
+  }
+  
   const token = localStorage.getItem("token");
   //veo que no haya en el store un usuario logueado y que haya un token en el localStorage
 
