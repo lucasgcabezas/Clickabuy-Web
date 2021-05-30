@@ -6,18 +6,21 @@ const authActions = {
   signUpUser: (objInputsValues) => {
     return async (dispatch) => {
       try {
-        const { data } = await axios.post(API + "/users", objInputsValues);
+        /*   debugger; */
+        console.log("el formdata en actions", objInputsValues);
+        const { data } = await axios.post(API + "/users", objInputsValues, {
+          headers: { "Content-Type": "multipart/form-data" },
+        });
         if (data.success) {
           dispatch({ type: "LOGIN_USER", payload: data.response });
           showToast("success", `Welcome ${data.response.firstName} ${data.response.lastName}`);
           /*     alert(`Welcome ${data.response.firstName} ${data.response.lastName}`); */
-          //showToast("success", `Welcome ${response.data.response.firstName} ${response.data.response.lastName}`);
         } else {
           return data;
         }
       } catch (err) {
         console.log(err);
-        //showTostError500();
+        showTostError500();
       }
     };
   },
@@ -58,7 +61,7 @@ const authActions = {
         /*  alert(`Welcome ${data.response.firstName} ${data.response.lastName}`); */
       } catch (err) {
         if (err.response && err.response.status === 401) {
-          //showToast("error", "What are you trying to do ??")
+          showToast("error", "What are you trying to do ??");
         }
         localStorage.clear();
       }

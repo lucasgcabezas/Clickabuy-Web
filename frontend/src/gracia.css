@@ -10,3 +10,9 @@
   text-align: center;
   /*  width: 180px; */
 }
+
+.userImg {
+  min-width: 100px;
+  width: 10vw;
+  height: 10vw;
+}

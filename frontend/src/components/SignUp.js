@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { useFormik } from "formik";
+import { useFormik, Form } from "formik";
 import * as yup from "yup";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -9,6 +9,7 @@ import { connect } from "react-redux";
 import GoogleLogin from "react-google-login";
 import { NavLink } from "react-router-dom";
 import "../gracia.css";
+import { useEffect, useState } from "react";
 
 const validationSchema = yup.object({
   firstName: yup.string("Enter a valid name").required("Name is required").min(2),
@@ -21,12 +22,14 @@ const validationSchema = yup.object({
 });
 
 const SignUp = (props) => {
+  const [photo, setPhoto] = useState({ userImg: "" });
   const respuestaGoogle = (response) => {
     const { givenName, familyName, email, googleId, imageUrl } = response.profileObj;
     /* setPreUser({name:givenName,email:email,pass:googleId,url:imageUrl}) */
-    /*   console.log(response); */
+    console.log(response);
     alert("ahora");
     console.log({
+      loggedWithGoogle: true,
       firstName: givenName,
       lastName: familyName,
       userImg: imageUrl,
@@ -47,6 +50,7 @@ const SignUp = (props) => {
 
   const formik = useFormik({
     initialValues: {
+      loggedWithGoogle: false,
       firstName: "",
       lastName: "",
       userImg: "",
@@ -56,11 +60,28 @@ const SignUp = (props) => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-      console.log("el values", values);
-      props.signUpUser(values);
+      /*   alert("entrando"); */
+      let formData = new FormData();
+      /*  formData.append("firstName", "csm"); */
+      /*  console.log("el values", values); */
+      formData.append("loggedWithGoogle", values.loggedWithGoogle);
+      formData.append("firstName", values.firstName);
+      formData.append("lastName", values.lastName);
+      formData.append("adminGral", false);
+      formData.append("email", values.email);
+      formData.append("password", values.password);
+      formData.append("userImg", photo.userImg);
+      /*   console.log("x", formData); */
+
+      alert(JSON.stringify(formData, null, 2));
+      /*    console.log("el values", formData); */
+      props.signUpUser(formData);
     },
   });
+
+  const cargarFoto = (e) => {
+    setPhoto({ userImg: e.target.files[0] });
+  };
 
   return (
     <div>
@@ -116,9 +137,14 @@ const SignUp = (props) => {
             helperText={formik.touched.password && formik.errors.password}
           />
 
-          {/* <input id="userImg" name="userImg" type="file" onChange={(event) => {
-  setFieldValue("file", event.currentTarget.files[0]);
-}} /> */}
+          <input
+            id="userImg"
+            name="userImg"
+            type="file"
+            /*  onChange={(event) => formik.setFieldValue("userImg", event.target)} */
+            /* onChange={(e) => formik.handleChange(e)} */
+            onChange={cargarFoto}
+          />
 
           <Button color="primary" variant="contained" fullWidth type="submit">
             Submit
