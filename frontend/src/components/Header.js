@@ -1,8 +1,10 @@
 import React from "react";
 import { NavLink, Link } from "react-router-dom";
 import Categories from "./Categories";
+import { connect } from "react-redux";
+import authActions from "../redux/actions/authActions";
 import "../../src/gracia.css";
-const Header = () => {
+const Header = (props) => {
   return (
     <header className="headerContainer">
       <div className="contenedorLogo">
@@ -35,9 +37,16 @@ const Header = () => {
         {/* /*ESTEESTE*/}
         <div
           className="clickabuyLogo userImg"
-          style={{
-            backgroundImage: "url('https://imagizer.imageshack.com/img923/3460/7gImHW.png')",
-          }}
+          style={
+            props.userLogged
+              ? {
+                  backgroundImage:
+                    "url('https://webdesing881317710.files.wordpress.com/2021/05/clickabuylogo.png')",
+                }
+              : {
+                  backgroundImage: "url('https://imagizer.imageshack.com/img923/3460/7gImHW.png')",
+                }
+          }
         >
           {" "}
         </div>
@@ -48,6 +57,11 @@ const Header = () => {
         <NavLink to="/SignUp" className="navegadores">
           Sign Up
         </NavLink>
+        <NavLink to="/" className="navegadores">
+          <div className="mr-3" onClick={() => props.logOut(alert("thanks for visiting us"))}>
+            Log Out
+          </div>
+        </NavLink>
         {/* <NavLink to="/signOut" className="navegadores">Account</NavLink> */}
         {/* </>} */}
         <Categories />
@@ -56,4 +70,16 @@ const Header = () => {
   );
 };
 
-export default Header;
+const mapStateToProps = (state) => {
+  return {
+    userLogged: state.authReducer.userLogged,
+  };
+};
+
+const mapDispatchToProps = {
+  logOut: authActions.logOutUser,
+  /* forceLogIn: usersActions.actionForceLogIn, */
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
+/* export default Header; */
