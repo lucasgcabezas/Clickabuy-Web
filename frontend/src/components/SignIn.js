@@ -33,7 +33,7 @@ const SignIn = (props) => {
       email: email,
       password: "a" + googleId,
     });
-    /*   props.history.push("/"); */
+    props.history.push("/");
   };
 
   const formik = useFormik({
@@ -45,6 +45,7 @@ const SignIn = (props) => {
     onSubmit: (values) => {
       alert(JSON.stringify(values, null, 2));
       props.logInUser(values);
+      props.history.push("/");
     },
   });
 

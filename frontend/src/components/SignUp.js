@@ -27,7 +27,7 @@ const SignUp = (props) => {
     const { givenName, familyName, email, googleId, imageUrl } = response.profileObj;
     /* setPreUser({name:givenName,email:email,pass:googleId,url:imageUrl}) */
     console.log(response);
-    alert("ahora");
+    /* alert("ahora"); */
     console.log({
       loggedWithGoogle: true,
       firstName: givenName,
@@ -38,6 +38,7 @@ const SignUp = (props) => {
       password: "a" + googleId,
     });
     props.signUpUser({
+      loggedWithGoogle: true,
       firstName: givenName,
       lastName: familyName,
       userImg: imageUrl,
@@ -73,9 +74,9 @@ const SignUp = (props) => {
       formData.append("userImg", photo.userImg);
       /*   console.log("x", formData); */
 
-      alert(JSON.stringify(formData, null, 2));
-      /*    console.log("el values", formData); */
-      props.signUpUser(formData);
+      /*   alert(JSON.stringify(values, null, 2)); */
+      console.log("el formData", formData);
+      /*   props.signUpUser(formData); */
     },
   });
 
@@ -137,14 +138,7 @@ const SignUp = (props) => {
             helperText={formik.touched.password && formik.errors.password}
           />
 
-          <input
-            id="userImg"
-            name="userImg"
-            type="file"
-            /*  onChange={(event) => formik.setFieldValue("userImg", event.target)} */
-            /* onChange={(e) => formik.handleChange(e)} */
-            onChange={cargarFoto}
-          />
+          <input id="userImg" name="userImg" type="file" onChange={cargarFoto} />
 
           <Button color="primary" variant="contained" fullWidth type="submit">
             Submit
