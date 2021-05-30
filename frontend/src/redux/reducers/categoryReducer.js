@@ -1,6 +1,7 @@
 const initialState = {
     stores: [],
     categories: [],
+    currentCategory: null
 }
 
 const categoryReducer = (state = initialState, action) => {
@@ -15,6 +16,11 @@ const categoryReducer = (state = initialState, action) => {
             return {
                 ...state,
                 categories: action.payload
+            }
+        case 'CURRENT_CATEGORY':
+            return {
+                ...state,
+                currentCategory: state.categories.find(category => category._id === action.payload)
             }
         default:
             return state
