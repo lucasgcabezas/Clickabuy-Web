@@ -30,13 +30,7 @@ const Header = (props) => {
         <NavLink to="/buys" className="navegadores">
           <span className="material-icons-outlined">shopping_cart</span>
         </NavLink>
-        {/* <Link to="/" className="navegadores"><span >Log out</span></Link> */}
-        {/* onClick={() => props.signOut()} */}
-        {/* </>} */}
-        {/* {!props.userLogged && <> */}
-        {/* /*ESTEESTE*/}
-        {/*   <img source="./assets/usersImg/60b2e0c3d70db033381f697e.png"></img> */}
-        {console.log("soy el userlooged", props.userLogged)}
+        {/*   {console.log("soy el userlooged", props.userLogged)} */}
         <div
           className="clickabuyLogo userImg"
           style={

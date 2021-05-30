@@ -20,7 +20,7 @@ const validationSchema = yup.object({
 });
 
 const SignUpStore = (props) => {
-  console.log(props.categories);
+  /*  console.log(props.categories); */
   const [photo, setPhoto] = useState({ userImg: "" });
   const formik = useFormik({
     initialValues: {
@@ -38,6 +38,7 @@ const SignUpStore = (props) => {
       formData.append("CID", values.CID);
       formData.append("ownerName", values.ownerName);
       formData.append("bName", values.bName);
+      formData.append("category", values.category);
       formData.append("storeLogo", values.storeLogo);
       formData.append("password", values.password);
       formData.append("userImg", photo.userImg);
@@ -101,9 +102,9 @@ const SignUpStore = (props) => {
             style={{ display: "block" }}
           >
             <option value="" label="Select a category" />
-            <option value="red" label="red" />
-            <option value="blue" label="blue" />
-            <option value="green" label="green" />
+            {props.categories.map((category) => {
+              return <option value={category.nameCategory} label={category.nameCategory} />;
+            })}
           </select>
 
           <input id="userImg" name="userImg" type="file" onChange={cargarFoto} />
