@@ -16,6 +16,9 @@ import SignInAdmin from "./components/SignInAdmin";
 import Buys from './pages/Buys'
 import {connect} from 'react-redux'
 import cartActions from './redux/actions/cartActions';
+import Header from './components/Header'
+import MyStores from  './pages/MyStores'
+import MyStoreView from  './pages/MyStoreView'
 
 const App = ({cart,reloadCartLS, loginForced, userLogged, history}) => {
   
@@ -42,6 +45,7 @@ const App = ({cart,reloadCartLS, loginForced, userLogged, history}) => {
   return (
     <BrowserRouter>
       <ToastContainer />
+      <Header />
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/category/:id" component={Category} />
@@ -51,7 +55,8 @@ const App = ({cart,reloadCartLS, loginForced, userLogged, history}) => {
         <Route path="/SignUp" component={SignUp} />
         <Route path="/SignUpStore" component={SignUpStore} />
         <Route path="/SignInAdmin" component={SignInAdmin} />
-
+        <Route path="/myStores" component={MyStores} />
+        <Route path="/myStoreView" component={MyStoreView} />
         <Redirect to="/" />
       </Switch>
     </BrowserRouter>

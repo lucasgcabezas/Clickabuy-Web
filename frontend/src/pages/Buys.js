@@ -9,7 +9,6 @@ import cartActions from '../redux/actions/cartActions'
 const Buys = ({cart,clearCart}) => {
     return(
         <>
-            <Header />
             <div className='principalContainer'>
                 <div className='buyContainer'>
                     <h3>Purchase Detail</h3>

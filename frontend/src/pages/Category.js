@@ -15,7 +15,7 @@ const Category = (props) => {
 
     return (
         <>
-            <Navbar/>
+            {/*<Navbar/>*/}
             <div className="categoryContainer">
                 <div className="categoryHero" >
                     <span>{category.nameCategory}</span>

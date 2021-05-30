@@ -1,4 +1,5 @@
 const StoreModel = require('../models/StoreModel')
+const UserModel = require('../models/UserModel')
 
 const storeControllers = {
     getAllStores: async (req, res) => {
@@ -13,14 +14,17 @@ const storeControllers = {
         res.json({ success: !error ? true : false, response, error })
     },
     addStore: async (req, res) => {
-        let response;
-        let error;
+        let response,error
+        let {emailUser} = req.body
         try {
-            const addNewStore = new StoreModel({ ...req.body})
-            await addNewStore.save()
-            response = addNewStore
-        } catch {
-            error = 'An error has occurred on the server, try later!'
+            let userOwner = await UserModel.findOne({email:emailUser}) 
+            if(!userOwner) throw new Error("user doesn't exist")
+            let newStore = new StoreModel({ ...req.body})
+            newStore.owners = [emailUser]
+            await newStore.save()
+            response = newStore
+        } catch(err) {
+            error = `${err.name} : ${err.message}`
             console.log(error)
         }
         res.json({ success: !error ? true : false, response, error })
