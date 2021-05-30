@@ -22,43 +22,29 @@ const Header = (props) => {
         <span className="material-icons-outlined iconSearchHome">search</span>
       </div>
       <div className="contenedorNavs">
-        <NavLink exact to="/" className="navegadores">
-          Home
-        </NavLink>
-        {/* {props.userLogged && <> */}
-        <div className="categoriesDropdown">Categories</div>
-        <NavLink to="/buys" className="navegadores">
-          <span className="material-icons-outlined">shopping_cart</span>
-        </NavLink>
-        {/*   {console.log("soy el userlooged", props.userLogged)} */}
         <div
           className="clickabuyLogo userImg"
           style={
             props.userLogged
               ? {
-                  backgroundImage: "url('./assets" + props.userLogged.userImg + "')",
-                }
+                backgroundImage: "url('./assets" + props.userLogged.userImg + "')",
+              }
               : {
-                  backgroundImage: "url('https://imagizer.imageshack.com/img923/3460/7gImHW.png')",
-                }
+                backgroundImage: "url('https://imagizer.imageshack.com/img923/3460/7gImHW.png')",
+              }
           }
         >
           {" "}
         </div>
-        <NavLink to="/SignIn" className="navegadores">
-          Sign In
-        </NavLink>
-        <NavLink to="/SignUp" className="navegadores">
-          Sign Up
-        </NavLink>
-        <NavLink to="/" className="navegadores">
-          <div className="mr-3" onClick={() => props.logOut(alert("thanks for visiting us"))}>
-            Log Out
-          </div>
-        </NavLink>
-        {/* <NavLink to="/signOut" className="navegadores">Account</NavLink> */}
-        {/* </>} */}
+        <NavLink exact to="/" className="navegadores">Home</NavLink>
         <Categories />
+        <NavLink to="/buys" className="navegadores"><span className="material-icons-outlined iconCart">shopping_cart</span></NavLink>
+        {/* <Link to="/" className="navegadores"><span >Log out</span></Link> */}
+        {/* onClick={() => props.signOut()} */}
+        {/* </>} */}
+        {/* {!props.userLogged && <> */}
+        <NavLink to="/signUp" className="navegadores"><span className="material-icons-outlined iconUser">account_circle</span></NavLink>
+        {/* </>} */}
       </div>
     </header>
   );

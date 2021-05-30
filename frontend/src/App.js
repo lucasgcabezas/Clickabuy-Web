@@ -45,7 +45,7 @@ const App = ({cart,reloadCartLS, loginForced, userLogged, history}) => {
   return (
     <BrowserRouter>
       <ToastContainer />
-      <Header />
+      {/* <Header /> */}
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/category/:id" component={Category} />
