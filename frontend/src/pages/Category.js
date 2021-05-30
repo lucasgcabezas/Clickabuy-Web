@@ -1,24 +1,28 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import Navbar from '../components/Navbar'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import categoryActions from '../redux/actions/categoryActions'
+import Header from '../components/Header'
 const Category = (props) => {
     const [category, setCategory] = useState([])
     const idParams = props.match.params.id
     useEffect(() => {
         !props.categories.length ? props.history.push('/') : setCategory(props.categories.find(categoria => categoria._id === idParams))
         props.getStoresbByCategory(idParams)
-         // eslint-disable-next-line
     }, [])
 
     return (
         <>
-            <Navbar/>
+            <Header/>
             <div className="categoryContainer">
-                <div className="categoryHero" >
-                    <span>{category.nameCategory}</span>
+                <div className="categoryHeroImage" style={{ backgroundImage: `url('${category.bannerCategory}')` }}>
+                    <div className="contenedorNameCategoryHero">
+                        <div>
+                            <span className="nameCategoryHero1">category</span>
+                            <span className="nameCategoryHero2">{category.nameCategory}</span>
+                        </div>
+                    </div>
                 </div>
                 <div className="categoryStoresContainer">
                     <span>STORES</span>

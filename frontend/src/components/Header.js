@@ -14,16 +14,30 @@ const Header = () => {
       </div>
       <div className="contenedorNavs">
         <NavLink exact to="/" className="navegadores">Home</NavLink>
+        <Categories />
         {/* {props.userLogged && <> */}
-        <div className="categoriesDropdown">Categories</div>
-        <NavLink to="/buys" className="navegadores"><span className="material-icons-outlined">shopping_cart</span></NavLink>
+        {/* <div className="categoriesDropdown">Categories</div> */}
+        {/* <Dropdown>
+          <Dropdown.Toggle variant="success" id="dropdown-basic">
+            Dropdown Button
+          </Dropdown.Toggle>
+
+          <Dropdown.Menu>
+            <Dropdown.Item href="#/action-1">
+              <Categories/>
+
+            </Dropdown.Item>
+            {/* <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+            <Dropdown.Item href="#/action-3">Something else</Dropdown.Item> */}
+          {/* </Dropdown.Menu>
+        </Dropdown> */}
+        <NavLink to="/buys" className="navegadores"><span className="material-icons-outlined iconCart">shopping_cart</span></NavLink>
         {/* <Link to="/" className="navegadores"><span >Log out</span></Link> */}
         {/* onClick={() => props.signOut()} */}
         {/* </>} */}
         {/* {!props.userLogged && <> */}
-        <NavLink to="/signUp" className="navegadores">Account</NavLink>
+        <NavLink to="/signUp" className="navegadores"><span className="material-icons-outlined iconUser">account_circle</span></NavLink>
         {/* </>} */}
-        <Categories/>
       </div>
     </header>
   );

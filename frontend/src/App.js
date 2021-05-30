@@ -49,7 +49,6 @@ const App = ({cart,reloadCartLS, loginForced, userLogged, history}) => {
         <Route path="/SignUp" component={SignUp} />
         <Route path="/SignUpStore" component={SignUpStore} />
         <Route path="/SignInAdmin" component={SignInAdmin} />
-
         <Redirect to="/" />
       </Switch>
     </BrowserRouter>

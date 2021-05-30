@@ -19,8 +19,6 @@ const Product = ({ product,addProductToCart,deleteProductFromCart,cart }) => {
             :
             <button className="buttonAddProduct" onClick={()=>addProductToCart(product)}>+ Add Product</button>
              }
-            
-            {/* addProductToCart(product) */}
         </div>
     )
 }
