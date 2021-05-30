@@ -6,6 +6,7 @@ import TextField from "@material-ui/core/TextField";
 import "bootstrap/dist/css/bootstrap.css";
 import { NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { connect } from "react-redux";
 
 const validationSchema = yup.object({
   CID: yup.string("company identification number (CID)").required("CID is Required"),
@@ -15,21 +16,24 @@ const validationSchema = yup.object({
     .string("Enter your password")
     .min(6, "Password should be of minimum 6 characters length")
     .required("Password is required"),
+  category: yup.string().required("category is required!"),
 });
 
-const SignUpStore = () => {
+const SignUpStore = (props) => {
+  console.log(props.categories);
   const [photo, setPhoto] = useState({ userImg: "" });
   const formik = useFormik({
     initialValues: {
       CID: "",
       ownerName: "",
       bName: "",
+      category: "",
       storeLogo: "",
       password: "",
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      /*   alert(JSON.stringify(values, null, 2)); */
+      alert(JSON.stringify(values, null, 2));
       let formData = new FormData();
       formData.append("CID", values.CID);
       formData.append("ownerName", values.ownerName);
@@ -89,6 +93,19 @@ const SignUpStore = () => {
             helperText={formik.touched.bName && formik.errors.bName}
           />
 
+          <select
+            name="category"
+            value={formik.values.category}
+            onChange={formik.handleChange}
+            /* onBlur={handleBlur} */
+            style={{ display: "block" }}
+          >
+            <option value="" label="Select a category" />
+            <option value="red" label="red" />
+            <option value="blue" label="blue" />
+            <option value="green" label="green" />
+          </select>
+
           <input id="userImg" name="userImg" type="file" onChange={cargarFoto} />
           {/*     <TextField
             fullWidth
@@ -119,4 +136,18 @@ const SignUpStore = () => {
     </div>
   );
 };
-export default SignUpStore;
+
+const mapStateToProps = (state) => {
+  return {
+    categories: state.categoryReducer.categories,
+    /*  userLogged: state.authReducer.userLogged, */
+  };
+};
+
+/* const mapDispatchToProps = {
+  reloadCartLS: cartActions.reloadCartLS,
+  loginForced: authActions.loginForced,
+}; */
+
+export default connect(mapStateToProps, null)(SignUpStore);
+/* export default SignUpStore; */

@@ -1,29 +1,27 @@
-import './css/sofia.css'
-import './css/julio.css'
+import "./css/sofia.css";
+import "./css/julio.css";
 import "./css/lucas.css";
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 import Home from "./pages/Home";
 import Category from "./pages/Category";
 import Store from "./pages/Store";
-import SignIn from "./components/SignIn";
-import SignUp from "./components/SignUp";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
 import authActions from "./redux/actions/authActions";
-import SignUpStore from "./components/SignUpStore";
-import SignInAdmin from "./components/SignInAdmin";
-import Buys from './pages/Buys'
-import {connect} from 'react-redux'
+import SignUpStore from "./pages/SignUpStore";
+import SignInAdmin from "./pages/SignInAdmin";
+import Buys from "./pages/Buys";
+import { connect } from "react-redux";
 // import reloadCartLS from './redux/actions/cartActions'
-import cartActions from './redux/actions/cartActions';
+import cartActions from "./redux/actions/cartActions";
 
-const App = ({cart,reloadCartLS, loginForced, userLogged, history}) => {
-  
-  if(cart.length === 0){
+const App = ({ cart, reloadCartLS, loginForced, userLogged, history }) => {
+  if (cart.length === 0) {
     const cartLS = localStorage.getItem("cartLS");
-    if(cartLS !== "undefined" || cartLS !== null){
-      
+    if (cartLS !== "undefined" || cartLS !== null) {
       reloadCartLS(cartLS);
     }
   }
@@ -58,14 +56,13 @@ const App = ({cart,reloadCartLS, loginForced, userLogged, history}) => {
 
 const mapStateToProps = (state) => {
   return {
-    cart : state.cartReducer.cart,
+    cart: state.cartReducer.cart,
     userLogged: state.authReducer.userLogged,
-  }
-}
-const  mapDispatchToProps = {
-  reloadCartLS : cartActions.reloadCartLS,
-  loginForced: authActions.loginForced
-}
+  };
+};
+const mapDispatchToProps = {
+  reloadCartLS: cartActions.reloadCartLS,
+  loginForced: authActions.loginForced,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
-

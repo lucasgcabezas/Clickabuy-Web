@@ -26,13 +26,20 @@ const authActions = {
   },
   logInUser: (objInputsValues) => {
     return async (dispatch) => {
-      /*    debugger; */
       try {
         const { data } = await axios.post(API + "/login", objInputsValues);
         if (data.success) {
           dispatch({ type: "LOGIN_USER", payload: data.response });
-          showToast("success", `Welcome ${data.response.firstName} ${data.response.lastName}`);
-          /*  alert(`Welcome ${data.response.firstName} ${data.response.lastName}`); */
+          console.log("hola", data.response.userImg);
+          showToast(
+            "success",
+            `Welcome ${data.response.firstName} ${data.response.lastName}`
+          ); /*  alert(`Welcome ${data.response.firstName} ${data.response.lastName}`); */
+          /* debugger;  */
+          /*  console.log(
+            "soy el daa response",
+            data.response
+          ); */
         } else {
           return data;
         }

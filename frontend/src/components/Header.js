@@ -35,13 +35,14 @@ const Header = (props) => {
         {/* </>} */}
         {/* {!props.userLogged && <> */}
         {/* /*ESTEESTE*/}
+        {/*   <img source="./assets/usersImg/60b2e0c3d70db033381f697e.png"></img> */}
+        {console.log("soy el userlooged", props.userLogged)}
         <div
           className="clickabuyLogo userImg"
           style={
             props.userLogged
               ? {
-                  backgroundImage:
-                    "url('https://webdesing881317710.files.wordpress.com/2021/05/clickabuylogo.png')",
+                  backgroundImage: "url('./assets" + props.userLogged.userImg + "')",
                 }
               : {
                   backgroundImage: "url('https://imagizer.imageshack.com/img923/3460/7gImHW.png')",
@@ -50,7 +51,6 @@ const Header = (props) => {
         >
           {" "}
         </div>
-
         <NavLink to="/SignIn" className="navegadores">
           Sign In
         </NavLink>

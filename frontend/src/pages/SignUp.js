@@ -74,9 +74,10 @@ const SignUp = (props) => {
       formData.append("userImg", photo.userImg);
       /*   console.log("x", formData); */
 
-      /*   alert(JSON.stringify(values, null, 2)); */
+      alert(JSON.stringify(values, null, 2));
       console.log("el formData", formData);
-      /*   props.signUpUser(formData); */
+      props.signUpUser(formData);
+      props.history.push("/");
     },
   });
 
