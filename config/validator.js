@@ -1,4 +1,4 @@
-const joi = require('joi')
+const joi = require("joi");
 const validator = (req, res, next) => {
     const schema = joi.object({
         firstName:joi.string().trim().min(2).max(20).required().pattern(new RegExp('[a-zA-Z]$')).messages({
@@ -35,11 +35,6 @@ const validator = (req, res, next) => {
         const errors = validation.error.details.map(error => ( {message:error.message,label: error.context.label}))
         return res.json({success:false,error:{errors}})
     }
-    
-    /*
-    if (validation.error) {
-        return res.json({success: false, validationError: validation.error})
-    }*/
-    next()
-}
-module.exports = validator
+  next();
+};
+module.exports = validator;

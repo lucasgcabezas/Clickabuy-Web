@@ -1,15 +1,15 @@
-import './css/sofia.css'
-import './css/julio.css'
+import "./css/sofia.css";
+import "./css/julio.css";
 import "./css/lucas.css";
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 import Home from "./pages/Home";
 import Category from "./pages/Category";
 import Store from "./pages/Store";
-import SignIn from "./components/SignIn";
-import SignUp from "./components/SignUp";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
 import authActions from "./redux/actions/authActions";
 import SignUpStore from "./components/SignUpStore";
 import SignInAdmin from "./components/SignInAdmin";
@@ -37,7 +37,7 @@ const App = ({cart,reloadCartLS, loginForced, userLogged, history}) => {
   //veo que no haya en el store un usuario logueado y que haya un token en el localStorage
 
   if (!userLogged && token && token !== "undefined") {
-    alert("foreceLogn");
+    /*  alert("foreceLogn"); */
     loginForced(JSON.parse(token), history);
     return null;
   }
@@ -65,14 +65,13 @@ const App = ({cart,reloadCartLS, loginForced, userLogged, history}) => {
 
 const mapStateToProps = (state) => {
   return {
-    cart : state.cartReducer.cart,
+    cart: state.cartReducer.cart,
     userLogged: state.authReducer.userLogged,
-  }
-}
-const  mapDispatchToProps = {
-  reloadCartLS : cartActions.reloadCartLS,
-  loginForced: authActions.loginForced
-}
+  };
+};
+const mapDispatchToProps = {
+  reloadCartLS: cartActions.reloadCartLS,
+  loginForced: authActions.loginForced,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
-
