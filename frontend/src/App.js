@@ -30,7 +30,7 @@ const App = ({ cart, reloadCartLS, loginForced, userLogged, history }) => {
   //veo que no haya en el store un usuario logueado y que haya un token en el localStorage
 
   if (!userLogged && token && token !== "undefined") {
-    alert("foreceLogn");
+    /*  alert("foreceLogn"); */
     loginForced(JSON.parse(token), history);
     return null;
   }

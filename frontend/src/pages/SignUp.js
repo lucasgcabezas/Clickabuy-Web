@@ -63,8 +63,6 @@ const SignUp = (props) => {
     onSubmit: (values) => {
       /*   alert("entrando"); */
       let formData = new FormData();
-      /*  formData.append("firstName", "csm"); */
-      /*  console.log("el values", values); */
       formData.append("loggedWithGoogle", values.loggedWithGoogle);
       formData.append("firstName", values.firstName);
       formData.append("lastName", values.lastName);
@@ -74,7 +72,7 @@ const SignUp = (props) => {
       formData.append("userImg", photo.userImg);
       /*   console.log("x", formData); */
 
-      alert(JSON.stringify(values, null, 2));
+      /*  alert(JSON.stringify(values, null, 2)); */
       console.log("el formData", formData);
       props.signUpUser(formData);
       props.history.push("/");

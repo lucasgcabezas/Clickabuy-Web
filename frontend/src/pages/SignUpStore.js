@@ -33,7 +33,7 @@ const SignUpStore = (props) => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      /*   alert(JSON.stringify(values, null, 2)); */
       let formData = new FormData();
       formData.append("CID", values.CID);
       formData.append("ownerName", values.ownerName);
