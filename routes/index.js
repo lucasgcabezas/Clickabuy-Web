@@ -51,12 +51,12 @@ router.route("/category/:id")
 
 router.route("/products")
     .get(getAllProducts)
-    .post(addProduct)
+    .post(passport.authenticate('jwt', { session: false }),addProduct)
 
 router.route("/product/:id")
     .get(getProductById)
-    .put(updateProduct)
-    .delete(deleteProduct)
+    .put(passport.authenticate('jwt', { session: false }),updateProduct)
+    .delete(passport.authenticate('jwt', { session: false }),deleteProduct)
 router.route("/productsFromStore/:id")
     .get(getProductsFromStore)
 

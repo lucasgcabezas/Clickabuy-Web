@@ -1,6 +1,6 @@
 const StoreModel = require('../models/StoreModel')
-const UserModel = require('../models/UserModel')
 const CategoryModel = require('../models/CategoryModel')
+const ProductModel = require('../models/ProductModel')
 const fs = require("fs")
 
 const getPathAndNameFile = (store, file, folderName) => {
@@ -17,7 +17,7 @@ const validationStore = async  (idStore,user) => {
     if (!store) throw new Error("this Store doesn't exist")
 
     userExist = store.owners.find(idUser => idUser.toString() === user._id.toString())
-    if (!userExist) throw new Error("this Store doesn't has Authorization")
+    if (!userExist) throw new Error("this user is not Authorizated to modify the Store "+ store.nameStore)
 
     return store
 }
@@ -131,13 +131,22 @@ const storeControllers = {
         try {
             
             let store = await validationStore(idStore,user);
-
+            let productOfStore = await ProductModel.find({storeId:idStore});
+            console.log(productOfStore)
+            await Promise.all(productOfStore.map(async (product) => {
+                await ProductModel.findByIdAndDelete(product._id);
+            }))
+            
             fs.unlink(`${__dirname}/../frontend/public/assets/${store.logoStore}`, err => console.log(err));
-            response = await StoreModel.findByIdAndDelete(idStore)
-
             if (store.storeHero != "/storeHeros/defaultHero.jpg") {
                 fs.unlink(`${__dirname}/../frontend/public/assets/${store.storeHero}`, err => console.log(err));
             }
+            fs.unlink(`${__dirname}/../frontend/public/assets/${store.logoStore}`, err => console.log(err));
+            if (store.storeHero != "/storeHeros/defaultHero.jpg") {
+                fs.unlink(`${__dirname}/../frontend/public/assets/${store.storeHero}`, err => console.log(err));
+            }
+            
+            response = await StoreModel.findByIdAndDelete(idStore)
         } catch (err) {
             error = `${err.name} : ${err.message}`
             console.log(err)
