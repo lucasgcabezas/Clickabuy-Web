@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 // import { useState } from 'react'
 import categoryActions from '../redux/actions/categoryActions'
 import Header from '../components/Header'
-import ProductFilter from '../components/ProductFilter'
+
 
 const Category = (props) => {
     if (!props.currentCategory) {
