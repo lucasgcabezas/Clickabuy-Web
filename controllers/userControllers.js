@@ -17,13 +17,13 @@ const userControllers = {
     addUser: async (req, res) => {
         let response, error;
         let { email, password, loggedWithGoogle } = req.body;
-
+        loggedWithGoogle = JSON.parse(loggedWithGoogle) ;
         let  userImg,extensionImg ; 
-        if(!loggedWithGoogle){
-            userImg  = req.files;
-            serImg.name.split(".")[userImg.name.split(".").length - 1];
-        }
-            
+        
+        if(!loggedWithGoogle ){
+            userImg  = req.files.userImg;
+            extensionImg = userImg.name.split(".")[userImg.name.split(".").length - 1];
+        }   
         
         
         try {
@@ -38,10 +38,7 @@ const userControllers = {
                     newUser.userImg = "/usersImg/" + fileName;
                     await userImg.mv(filePath)
                 }
-
-
                 await newUser.save();
-
                 let token = jwToken.sign({ ...newUser }, process.env.SECRET_OR_KEY);
                 response = {
                     ...newUser.toObject(),
@@ -104,7 +101,10 @@ const userControllers = {
             let userDeleted = await User.findByIdAndRemove(id);
 
             if (!userDeleted) throw new Error("id not found on Collection Users");
-            fs.unlink(`${__dirname}/../frontend/public/assets/${userDeleted.userImg}`, err => console.log(err));
+            if(userDeleted.loggedWithGoogle){
+                fs.unlink(`${__dirname}/../frontend/public/assets/${userDeleted.userImg}`, err => console.log(err));
+            }
+            
             response = await User.find();
         } catch (err) {
             console.log(err);

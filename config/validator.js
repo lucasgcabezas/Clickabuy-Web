@@ -27,7 +27,7 @@ const validator = (req, res, next) => {
             "string.empty":"Enter a valid URL"
         }),*/
         loggedWithGoogle: joi.boolean(),
-        adminGral: joi.boolean(),
+        
     })
     const validation = schema.validate(req.body, {abortEarly:false})
     
