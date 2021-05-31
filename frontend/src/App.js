@@ -13,33 +13,36 @@ import SignUp from "./pages/SignUp";
 import authActions from "./redux/actions/authActions";
 import SignUpStore from "./pages/SignUpStore";
 import SignInAdmin from "./pages/SignInAdmin";
-import Buys from './pages/Buys'
-import {connect} from 'react-redux'
-import cartActions from './redux/actions/cartActions';
-import Header from './components/Header'
-import MyStores from  './pages/MyStores'
-import MyStoreView from  './pages/MyStoreView'
+import Buys from "./pages/Buys";
+import { connect } from "react-redux";
+import cartActions from "./redux/actions/cartActions";
+import Header from "./components/Header";
+import MyStores from "./pages/MyStores";
+import MyStoreView from "./pages/MyStoreView";
+import MyFilters from "./components/MyFilters";
 
-const App = ({cart,reloadCartLS, loginForced, userLogged, history}) => {
-  
-  if(cart.length === 0){
+const App = ({ cart, reloadCartLS, loginForced, userLogged, history }) => {
+  if (cart.length === 0) {
     let cartLS = localStorage.getItem("cartLS");
 
-    if(cartLS !== "undefined" && cartLS !== null  ){
-        cartLS = JSON.parse(cartLS)
-        if(cartLS instanceof Array && cartLS.length !== 0)
-          reloadCartLS(cartLS);
-    }else
-      localStorage.removeItem("cartLS")
+    if (cartLS !== "undefined" && cartLS !== null) {
+      cartLS = JSON.parse(cartLS);
+      if (cartLS instanceof Array && cartLS.length !== 0) reloadCartLS(cartLS);
+    } else localStorage.removeItem("cartLS");
   }
-  
+
   const token = localStorage.getItem("token");
+  const email = localStorage.getItem("email");
+
   //veo que no haya en el store un usuario logueado y que haya un token en el localStorage
 
+  console.log("userLogged", userLogged);
+  console.log("token", token);
+
   if (!userLogged && token && token !== "undefined") {
-    /*  alert("foreceLogn"); */
-    loginForced(JSON.parse(token), history);
-    return null;
+    alert("foreceLogn");
+    loginForced(JSON.parse(token), email, history);
+    return alert("volvi");
   }
 
   return (
@@ -57,6 +60,7 @@ const App = ({cart,reloadCartLS, loginForced, userLogged, history}) => {
         <Route path="/SignInAdmin" component={SignInAdmin} />
         <Route path="/myStores" component={MyStores} />
         <Route path="/myStoreView" component={MyStoreView} />
+        <Route path="/myFilters" component={MyFilters} />
         <Redirect to="/" />
       </Switch>
     </BrowserRouter>
