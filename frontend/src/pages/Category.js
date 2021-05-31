@@ -1,27 +1,30 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import Navbar from '../components/Navbar'
-import {Link} from 'react-router-dom'
-import { useState } from 'react'
+import { Link } from 'react-router-dom'
+// import { useState } from 'react'
 import categoryActions from '../redux/actions/categoryActions'
-const Category = (props) => {
-    const [category, setCategory] = useState([])
-    const idParams = props.match.params.id
-    useEffect(() => {
-        !props.categories.length ? props.history.push('/') : setCategory(props.categories.find(categoria => categoria._id === idParams))
-        props.getStoresbByCategory(idParams)
-         // eslint-disable-next-line
-    }, [])
+import Header from '../components/Header'
+import ProductFilter from '../components/ProductFilter'
 
+const Category = (props) => {
+    if (!props.currentCategory) {
+        return <h1>cargando...</h1>
+    }
     return (
         <>
-            <Navbar/>
+            <Header/>
             <div className="categoryContainer">
-                <div className="categoryHero" >
-                    <span>{category.nameCategory}</span>
+                <div className="categoryHeroImage" style={{ backgroundImage: `url('${props.currentCategory.bannerCategory}')` }}>
+                    <div className="contenedorNameCategoryHero">
+                        <div>
+                            <span className="nameCategoryHero1">category</span>
+                            <span className="nameCategoryHero2">{props.currentCategory.nameCategory}</span>
+                        </div>
+                    </div>
                 </div>
                 <div className="categoryStoresContainer">
                     <span>STORES</span>
+                    <ProductFilter />
                     <div className="categoryStoresSection">
                         {
                             props.storesForCategory.length === 0
@@ -43,12 +46,14 @@ const Category = (props) => {
 const mapStateToProps = state => {
     return {
         categories: state.categoryReducer.categories,
-        storesForCategory: state.categoryReducer.stores
+        storesForCategory: state.categoryReducer.stores,
+        currentCategory: state.categoryReducer.currentCategory
     }
 }
 
 const mapDispatchToProps = {
     getStoresbByCategory: categoryActions.getStoresbByCategory,
+    getCurrentCategory: categoryActions.getCurrentCategory
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Category)

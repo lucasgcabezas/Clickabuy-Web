@@ -1,4 +1,4 @@
-const joi = require('joi')
+const joi = require("joi");
 const validator = (req, res, next) => {
     const schema = joi.object({
         firstName:joi.string().trim().min(2).max(20).required().pattern(new RegExp('[a-zA-Z]$')).messages({
@@ -21,12 +21,13 @@ const validator = (req, res, next) => {
             "string.pattern.base": "Your password must be at least 6 characters long, contain a capital letter, minuscule letter and number",
             "string.min": "Your password must be at least 6 characters long"
         }),
+        userImg:joi.allow(""),
         /*userImg:joi.string().required().uri().messages({
             "string.uri": "Enter a valid URL",
             "string.empty":"Enter a valid URL"
         }),*/
         loggedWithGoogle: joi.boolean(),
-        adminGral: joi.boolean(),
+        
     })
     const validation = schema.validate(req.body, {abortEarly:false})
     
@@ -34,11 +35,6 @@ const validator = (req, res, next) => {
         const errors = validation.error.details.map(error => ( {message:error.message,label: error.context.label}))
         return res.json({success:false,error:{errors}})
     }
-    
-    /*
-    if (validation.error) {
-        return res.json({success: false, validationError: validation.error})
-    }*/
-    next()
-}
-module.exports = validator
+  next();
+};
+module.exports = validator;

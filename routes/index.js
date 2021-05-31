@@ -31,14 +31,14 @@ router.route("/user/:id")
 
 router.route("/stores")
     .get(getAllStores)
-    .post(addStore)
+    .post(passport.authenticate('jwt', { session: false }),addStore)
 
 router.route("/store/:id")
     .get(getStoresByCategory)
     // passport.authenticate('jwt', { session: false }),
-    .put(editStore)
-    // passport.authenticate('jwt', { session: false }),
-    .delete(deleteStore)
+    .put(passport.authenticate('jwt', { session: false }),editStore)
+    
+    .delete(passport.authenticate('jwt', { session: false }),deleteStore)
 
 router.route("/categories")
     .get(getAllCategories)

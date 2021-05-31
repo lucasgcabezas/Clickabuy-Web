@@ -86,7 +86,7 @@ const productControllers = {
     getProductFromCartLS: async(req,res) => {
         let error,response;
         let {cartLS} = req.body;
-        cartLS = JSON.parse(cartLS)
+        
         try {
             response = await Promise.all(cartLS.map(async (item) => {
                 let product = await Product.findById(item._id);

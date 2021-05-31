@@ -5,8 +5,8 @@ const userSchema = new mongoose.Schema({
     firstName:{type: String, required: true},
     lastName:{type: String, required: true},
     userImg:{type: String, required: true},
-    adminGral:{type: Boolean, default:false},
-    adminStore: [{type: mongoose.Types.ObjectId ,ref:'store'}],
+    role : {type:String,default:"commonUser"}, //roles: commonUser,adminStores,adminApp
+    
     email:{type: String, required: true},
     loggedWithGoogle: {type: Boolean , default: false} 
 })
