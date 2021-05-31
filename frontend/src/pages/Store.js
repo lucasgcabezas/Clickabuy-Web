@@ -27,7 +27,7 @@ const Store = (props) => {
                 </div>
             </div>
             <div className='buscador'>
-                <input className='txtBuscador' type="Buscar" name="" id="buscar" placeholder="Find your perfect product!" onChange={(e) => {propfilter(e.target.value)}} />
+                <input className='txtBuscador' type="Buscar" name="" id="buscar" placeholder="Find your perfect product!" onChange={(e) => {props.filter(e.target.value)}} />
                 
                 <div className="containerCards">
                     {props.products.length === 0 
