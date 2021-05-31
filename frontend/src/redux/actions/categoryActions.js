@@ -25,6 +25,12 @@ const categoryActions = {
                 console.log(error)
             }
         }
+    },
+    getCurrentCategory: (id) => {
+        console.log(id)
+        return (dispatch, getState) => {
+            dispatch({type: 'CURRENT_CATEGORY', payload: id})
+        }
     }
 }
 export default categoryActions

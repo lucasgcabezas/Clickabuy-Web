@@ -12,7 +12,9 @@ const cartReducer = (state = initialState, action) => {
     let newCart= null;
     switch (action.type) {
         case "ADD_PRODUCT_TO_CART":
+            
             let itemCart = {...action.payload,quantity:1};
+            
             newCart = [...state.cart,itemCart];
             localStorage.setItem("cartLS", JSON.stringify(getIdsProductFormCart(newCart)));
             return {

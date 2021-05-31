@@ -3,7 +3,6 @@ import Header from './Header'
 const Hero = () => {
     return (
         <div className='contenedorHero'>
-            <Header />
             <div className="infoHero">
                 <div className="bannerPoints" style={{backgroundImage: "url('https://webdesing881317710.files.wordpress.com/2021/05/clickabuy.png')"}}></div>
                 

@@ -13,7 +13,8 @@ class Home extends React.Component{
     render(){
         return(
             <div className="contenedorHome">  
-            {/* <div className='principalContainer'>                               */}
+            {/* <div className='principalContainer'>                              */}
+                <Header/>
                 <Hero />
                 <BannerCarousel/>
                 <CategoriesBanner/>     

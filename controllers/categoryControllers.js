@@ -33,13 +33,11 @@ const categoryControllers = {
         })
     },
     addCategory: async (req,res) => {
-        const { nameCategory } = req.body 
+        // const { nameCategory } = req.body 
         var response;
         var err;
         try {
-            const categoryToSave = new Category({
-                nameCategory,
-            })
+            const categoryToSave = new Category(req.body)
             await categoryToSave.save()
             response = categoryToSave
         } catch(error) {

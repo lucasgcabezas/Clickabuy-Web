@@ -5,6 +5,7 @@ import API from '../../helpers/api'
 const cartActions = {
     addProductToCart:(product) => {
         return (dispatch) => {
+            
             dispatch({type:"ADD_PRODUCT_TO_CART",payload:product})
         }
     },
@@ -16,6 +17,7 @@ const cartActions = {
 
     deleteProductFromCart:(product) => {
         return (dispatch) => {
+            
             dispatch({type:"DELETE_PRODUCT_FROM_CART",payload:product})
         }
     },

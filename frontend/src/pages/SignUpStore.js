@@ -5,32 +5,52 @@ import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import "bootstrap/dist/css/bootstrap.css";
 import { NavLink } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import storeActions from "../redux/actions/storeActions";
 
 const validationSchema = yup.object({
-  CID: yup.string("company identification number (CID)").required("CID is Required"),
+  /* CID: yup.string("company identification number (CID)").required("CID is Required"), */
   bName: yup.string("Enter business name").required("Business Name is required"),
-  email: yup.string("Enter your email").email("Enter a valid email").required("Email is required"),
+  /*  email: yup.string("Enter your email").email("Enter a valid email").required("Email is required"), */
   password: yup
     .string("Enter your password")
     .min(6, "Password should be of minimum 6 characters length")
     .required("Password is required"),
+  category: yup.string().required("category is required!"),
 });
 
-const SignUpStore = () => {
+const SignUpStore = (props) => {
+  /*  console.log(props.categories); */
+  const [photo, setPhoto] = useState({ userImg: "" });
   const formik = useFormik({
     initialValues: {
-      CID: "",
+      /*   CID: "", */
       ownerName: "",
       bName: "",
-      email: "",
+      category: "",
+      storeLogo: "",
       password: "",
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
       alert(JSON.stringify(values, null, 2));
-      /*  props.logInUser(values); */
+      let formData = new FormData();
+      /*  formData.append("CID", values.CID); */
+      formData.append("ownerName", values.ownerName);
+      formData.append("bName", values.bName);
+      formData.append("category", values.category);
+      formData.append("storeLogo", values.storeLogo);
+      formData.append("password", values.password);
+      formData.append("userImg", photo.userImg);
+      console.log("soy el Formdata", formData);
+      props.addStore(formData);
     },
   });
+
+  const cargarFoto = (e) => {
+    setPhoto({ userImg: e.target.files[0] });
+  };
 
   return (
     <div>
@@ -42,7 +62,7 @@ const SignUpStore = () => {
           </div>{" "}
         </NavLink>
         <form onSubmit={formik.handleSubmit}>
-          <TextField
+          {/*    <TextField
             fullWidth
             id="CID"
             name="CID"
@@ -51,7 +71,7 @@ const SignUpStore = () => {
             onChange={formik.handleChange}
             error={formik.touched.CID && Boolean(formik.errors.CID)}
             helperText={formik.touched.CID && formik.errors.CID}
-          />
+          /> */}
 
           <TextField
             fullWidth
@@ -74,7 +94,22 @@ const SignUpStore = () => {
             error={formik.touched.bName && Boolean(formik.errors.bName)}
             helperText={formik.touched.bName && formik.errors.bName}
           />
-          <TextField
+
+          <select
+            name="category"
+            value={formik.values.category}
+            onChange={formik.handleChange}
+            /* onBlur={handleBlur} */
+            style={{ display: "block" }}
+          >
+            <option value="" label="Select a category" />
+            {props.categories.map((category) => {
+              return <option value={category.nameCategory} label={category.nameCategory} />;
+            })}
+          </select>
+
+          <input id="userImg" name="userImg" type="file" onChange={cargarFoto} />
+          {/*     <TextField
             fullWidth
             id="email"
             name="email"
@@ -83,7 +118,7 @@ const SignUpStore = () => {
             onChange={formik.handleChange}
             error={formik.touched.email && Boolean(formik.errors.email)}
             helperText={formik.touched.email && formik.errors.email}
-          />
+          /> */}
           <TextField
             fullWidth
             id="password"
@@ -103,4 +138,20 @@ const SignUpStore = () => {
     </div>
   );
 };
-export default SignUpStore;
+
+const mapStateToProps = (state) => {
+  return {
+    categories: state.categoryReducer.categories,
+
+    /*  userLogged: state.authReducer.userLogged, */
+  };
+};
+
+const mapDispatchToProps = {
+  /* reloadCartLS: cartActions.reloadCartLS,
+  loginForced: authActions.loginForced, */
+  addStore: storeActions.addStore,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUpStore);
+/* export default SignUpStore; */
