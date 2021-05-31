@@ -2,7 +2,9 @@ import { useEffect, useState } from "react"
 import { connect } from "react-redux"
 import Product from "../components/Product"
 import productsActions from "../redux/actions/productsActions"
-import Header from '../components/Header'
+import {NavLink} from 'react-router-dom'
+import Header from "../components/Header"
+import Footer from '../components/Footer'
 
 const Store = (props) => {
     const { getProductsFromStore } = props
@@ -13,9 +15,11 @@ const Store = (props) => {
         getProductsFromStore(idParams)
     }, [])
     return (
+        <>
+        <Header />
         <body>
-            <Header/>
-            {/* <div className="containerStore"> */}
+            {/* <Header/> */}
+            <div className="containerStore">
                 {/* <div className="bannerStore"> */}
                     
 
@@ -23,11 +27,27 @@ const Store = (props) => {
 
                     <div style={{backgroundImage: `url('${store.storeHero}')`}} className="storeHero">
                     <h1>{store.nameStore}</h1>
-                    </div>
-                    {/* <p>{store.description}</p> */}
-                {/* </div> */}
-            {/* </div> */}
-            <div className="containerCards">
+                    <p>{store.storeImg}</p>
+                    <p>{store.description}</p>
+                </div>
+            </div>
+            <div className='buscador'>
+                <input className='txtBuscador' type="Buscar" name="" id="buscar" placeholder="Find your perfect product!" onChange={(e) => {propfilter(e.target.value)}} />
+                
+                <div className="containerCards">
+                    {props.products.length === 0 
+                    ? <h2 className='cartelSinProductos'>We don´t have any product that matches your search! Try another one!</h2> 
+                    : props.products.map((product, id) => {
+                        return (
+                            <div key={id}>
+                                <Product product={product} />
+                            </div>
+                            )
+                    })}
+                </div>
+            </div>
+
+            {/* <div className="containerCards">
                 {
                     props.products.length === 0 
                     ? <div> <h1>no products</h1> </div>
@@ -41,18 +61,22 @@ const Store = (props) => {
                     }
                     )
                 }
-            </div>
+            </div> */}
         </body>
+        <Footer />
+        </>
     )
 }
 const mapStateToProps = state => {
     return {
         storesForCategory: state.categoryReducer.stores,
-        products: state.productReducer.products
+        products: state.productReducer.products,
+        filterProducts: state.productReducer.filterProducts
     }
 }
 
 const mapDispatchToProps = {
-    getProductsFromStore: productsActions.getProductsFromStore
+    getProductsFromStore: productsActions.getProductsFromStore,
+    filter: productsActions.filterProducts
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Store)

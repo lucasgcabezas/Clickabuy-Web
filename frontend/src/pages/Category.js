@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom'
 // import { useState } from 'react'
 import categoryActions from '../redux/actions/categoryActions'
 import Header from '../components/Header'
+
+
 const Category = (props) => {
     if (!props.currentCategory) {
         return <h1>cargando...</h1>
@@ -21,7 +23,7 @@ const Category = (props) => {
                     </div>
                 </div>
                 <div className="categoryStoresContainer">
-                    <span>STORES</span>
+                    <span>STORES</span>                    
                     <div className="categoryStoresSection">
                         {
                             props.storesForCategory.length === 0
