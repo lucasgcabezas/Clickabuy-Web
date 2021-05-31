@@ -25,6 +25,16 @@ const MyFilters = () => {
         newArrayProducts = myProducts.slice().sort((a, b) => a.price - b.price);
         setMyProducts(newArrayProducts);
         break;
+
+      case "rPrice":
+        newArrayProducts = myProducts.map((product) => {
+          product;
+        });
+        product;
+
+        setMyProducts(newArrayProducts);
+        break;
+
       default:
         return "foo";
     }
@@ -74,10 +84,12 @@ const MyFilters = () => {
                 min={lowEnd}
                 step={5} /* onChange={cargarFoto} */
                 value={highEnd}
-                onchange={(e) => setHighEnd(e.target.value)}
+                onChange={(e) => setHighEnd(e.target.value)}
               />
             </div>
-            <div className="btn btn-primary"></div>
+            <div className="btn btn-primary" onClick={() => handleFilters("rPrice")}>
+              filter Icon
+            </div>
           </div>
         </div>
         {console.log(myProducts)}

@@ -12,8 +12,8 @@ import authActions from "../redux/actions/authActions";
 import GoogleLogin from "react-google-login";
 import { NavLink } from "react-router-dom";
 /* import ProgressStepBar from "../components/ProgressStepBar"; */
-import "react-step-progress-bar/styles.css";
-import { ProgressBar, Step } from "react-step-progress-bar";
+/* import "react-step-progress-bar/styles.css"; */
+/* import { ProgressBar, Step } from "react-step-progress-bar"; */
 
 const validationSchema = yup.object({
   email: yup.string("Enter your email").email("Enter a valid email").required("Email is required"),
@@ -114,75 +114,6 @@ const SignIn = (props) => {
         <NavLink to="/SignInAdmin">
           <label className="mt-2 w-100 btn  h6">shortcut admin login </label>
         </NavLink>
-      </div>
-
-      <div className="w-100 mx-auto d-flex justify-content-center">
-        <div
-          className="btn mr-2"
-          onClick={() => {
-            handleProgressBar(-25);
-          }}
-        >
-          {"<"}
-        </div>
-        <div className="w-50 align-self-center">
-          <ProgressBar
-            percent={pbStatus}
-            filledBackground="linear-gradient(to right, #fefb72, #f0bb31)"
-          >
-            <Step transition="scale">
-              {({ accomplished }) => (
-                <img
-                  style={{ filter: `grayscale(${accomplished ? 0 : 80}%)` }}
-                  width="30"
-                  src="https://imagizer.imageshack.com/img922/2315/U9GZmk.png"
-                />
-              )}
-            </Step>
-
-            <Step transition="scale">
-              {({ accomplished }) => (
-                <img
-                  style={{ filter: `grayscale(${accomplished ? 0 : 80}%)` }}
-                  width="30"
-                  src="https://imagizer.imageshack.com/img922/2315/U9GZmk.png"
-                />
-              )}
-            </Step>
-
-            <Step transition="scale">
-              {({ accomplished }) => (
-                <img
-                  style={{ filter: `grayscale(${accomplished ? 0 : 80}%)` }}
-                  width="30"
-                  src="https://imagizer.imageshack.com/img922/2315/U9GZmk.png"
-                />
-              )}
-            </Step>
-            <Step transition="scale">
-              {({ accomplished }) => (
-                <img
-                  style={{ filter: `grayscale(${accomplished ? 0 : 80}%)` }}
-                  width="30"
-                  src="https://imagizer.imageshack.com/img922/2315/U9GZmk.png"
-                />
-              )}
-            </Step>
-
-            <Step transition="scale">
-              {({ accomplished }) => (
-                <img
-                  style={{ filter: `grayscale(${accomplished ? 0 : 80}%)` }}
-                  width="30"
-                  src="https://imagizer.imageshack.com/img922/2315/U9GZmk.png"
-                />
-              )}
-            </Step>
-          </ProgressBar>
-        </div>
-        <div className="btn ml-2" onClick={() => handleProgressBar(+25)}>
-          {">"}
-        </div>
       </div>
     </div>
   );
