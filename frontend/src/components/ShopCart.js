@@ -103,7 +103,7 @@ class App extends PureComponent {
       />
     );
     return (
-      <div className="container">
+      <div>
         <ProductComponent
           {...product}
           checkoutButton={checkoutButtonElement}

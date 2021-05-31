@@ -12,8 +12,8 @@ import authActions from "../redux/actions/authActions";
 import GoogleLogin from "react-google-login";
 import { NavLink } from "react-router-dom";
 /* import ProgressStepBar from "../components/ProgressStepBar"; */
-import "react-step-progress-bar/styles.css";
-import { ProgressBar, Step } from "react-step-progress-bar";
+// import "react-step-progress-bar/styles.css";
+// import { ProgressBar, Step } from "react-step-progress-bar";
 
 const validationSchema = yup.object({
   email: yup.string("Enter your email").email("Enter a valid email").required("Email is required"),
@@ -126,7 +126,7 @@ const SignIn = (props) => {
           {"<"}
         </div>
         <div className="w-50 align-self-center">
-          <ProgressBar
+          {/* <ProgressBar
             percent={pbStatus}
             filledBackground="linear-gradient(to right, #fefb72, #f0bb31)"
           >
@@ -178,7 +178,7 @@ const SignIn = (props) => {
                 />
               )}
             </Step>
-          </ProgressBar>
+          </ProgressBar> */}
         </div>
         <div className="btn ml-2" onClick={() => handleProgressBar(+25)}>
           {">"}

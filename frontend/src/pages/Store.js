@@ -15,58 +15,42 @@ const Store = (props) => {
         !props.storesForCategory.length ? props.history.push('/') : setStore(props.storesForCategory.find(store => store._id === idParams))
         getProductsFromStore(idParams)
     }, [])
+    var placeholderStoreInput = `Search products in ${store.nameStore}`
     return (
-        <>
-        <Header />
-        <body>
-            {/* <Header/> */}
-            <div className="containerStore">
-                {/* <div className="bannerStore"> */}
-                    
-
-
-    console.log(store)
-
-                    <div style={{backgroundImage: `url('${store.storeHero}')`}} className="storeHero">
+        <div className="contenedorStore">
+            <Header />
+            <div style={{ backgroundImage: `url('${store.storeHero}')` }} className="storeHero">
+                <div className="contenedorInfoStorePage">
+                    <div style={{ backgroundImage: `url('../assets/${store.logoStore}')` }} className="storeLogoStore"></div>
                     <h1>{store.nameStore}</h1>
-                    <p>{store.storeImg}</p>
-                    <p>{store.description}</p>
+                    <div className="contenedorFindProductStore">
+                        <input type="text" className="inputSearchStore" placeholder={placeholderStoreInput}  name="" id="buscar" onChange={(e) => {props.filter(e.target.value)}}/>
+                        <span className="material-icons-outlined iconSearchStore">search</span>
+                    </div>
                 </div>
             </div>
-            <div className='buscador'>
-                <input className='txtBuscador' type="Buscar" name="" id="buscar" placeholder="Find your perfect product!" onChange={(e) => {propfilter(e.target.value)}} />
-                
+            <div className="contenedorInfoCards">
+                <div className="contenedorFiltrosStore">
+
+                </div>
                 <div className="containerCards">
-                    {props.products.length === 0 
-                    ? <h2 className='cartelSinProductos'>We don´t have any product that matches your search! Try another one!</h2> 
-                    : props.products.map((product, id) => {
-                        return (
-                            <div key={id}>
-                                <Product product={product} />
-                            </div>
+                    {
+                        props.products.length === 0
+                            ? <div> <h1>no products</h1> </div>
+                            : props.products.map(product => {
+                                return (
+                                    <div key={product._id}>
+                                        <Product product={product} />
+                                    </div>
+
+                                )
+                            }
                             )
-                    })}
+                    }
                 </div>
             </div>
-
-            {/* <div className="containerCards">
-                {
-                    props.products.length === 0
-                        ? <div> <h1>no products</h1> </div>
-                        : props.products.map(product => {
-                            return (
-                                <Link key={product._id} to={`/product/${product._id}`}>
-                                    <Product product={product} />
-                                </Link>
-
-                            )
-                        }
-                        )
-                }
-            </div> */}
-        </body>
-        <Footer />
-        </>
+            <Footer />
+        </div>
     )
 }
 const mapStateToProps = state => {
