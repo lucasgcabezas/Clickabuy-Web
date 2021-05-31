@@ -87,22 +87,37 @@ const storeControllers = {
         let response, error;
         try {
             let store = await validationStore(idStore,user);
-            
+            nameStore && (store.nameStore = nameStore);
+
             if (storeHero) {
+                if (store.storeHero != "/storeHeros/defaultHero.jpg") {
+                    fs.unlink(`${__dirname}/../frontend/public/assets/${store.storeHero}`, err => console.log(err));
+                }
                 const hero = getPathAndNameFile(store, storeHero, "storeHeros");
                 await storeHero.mv(hero.filePath);
                 storeHero = "/storeHeros/"+hero.fileName;
+
             }
             if (logoStore) {
+                fs.unlink(`${__dirname}/../frontend/public/assets/${store.logoStore}`, err => console.log(err));
                 const logo = getPathAndNameFile(store, logoStore, "storeLogos");
-                await storeHero.mv(logo.filePath);
+                await logoStore.mv(logo.filePath);
                 logoStore = "/storeLogos/"+logo.fileName;
             }
             if(category){
                 category = await CategoryModel.findOne({ nameCategory: category });
                 if (!category) throw new Error("this category doesn't exist");
             }
-            response = await StoreModel.findOneAndUpdate({ _id: idStore }, { nameStore, storeHero, description, category, logoStore }, { new: true })
+
+            let fieldsObj = { nameStore, storeHero, description, category, logoStore }
+            let update = {}
+            for (const field in fieldsObj) {
+                if(fieldsObj[field]){
+                    update[field] = fieldsObj[field];
+                }
+            }
+            
+            response = await StoreModel.findOneAndUpdate({ _id: idStore }, update, { new: true })
         } catch (err) {
             error = `${err.name} : ${err.message}`
             console.log(err)
@@ -121,7 +136,7 @@ const storeControllers = {
             response = await StoreModel.findByIdAndDelete(idStore)
 
             if (store.storeHero != "/storeHeros/defaultHero.jpg") {
-                fs.unlink(`${__dirname}/../frontend/public/assets/${store.store.storeHero}`, err => console.log(err));
+                fs.unlink(`${__dirname}/../frontend/public/assets/${store.storeHero}`, err => console.log(err));
             }
         } catch (err) {
             error = `${err.name} : ${err.message}`
