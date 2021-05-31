@@ -3,7 +3,7 @@ html *{
     padding: 0;
 }
 /*PRINCIPAL*/
-.principalContainer{
+/* .principalContainer{
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -13,7 +13,7 @@ html *{
     background-size: cover; 
     background-position: center;  
     flex-grow: 1; 
-}
+} */
 
 /*HERO*/
 .heroContainer{
@@ -37,7 +37,7 @@ html *{
     justify-content: left;
     align-items: center;
 }
-.menu-options{
+/* .menu-options{
     color: #ee4054;
     display: flex;
     margin-left: 5vw;
@@ -51,15 +51,15 @@ html *{
     width: 50%;
     justify-content: right;
     align-items: center;
-}
-.login-options{
-    display: flex;
+} */
+/* .login-options{
+    /* display: flex;
     margin-right: 5vw;
     width: 40%;
     justify-content: space-between;
-}
+} */
 
-.buyContainer{
+/* .buyContainer{
     background-color: #48D1BE;
     display: flex;
     flex-direction: column;
@@ -73,8 +73,8 @@ html *{
 .buyContainer h3{
     margin: 0.5em 0;
     color: #ee4054;
-}
-.detailContainer{
+} */
+/* .detailContainer{
     background-color: white;
     display: flex;
     justify-content: space-between;
@@ -86,7 +86,7 @@ html *{
 .quantityContainer{
     display: flex;
     flex-direction: column;
-}
+} */
 
 /*FOOTER*/
 .footer{

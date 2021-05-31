@@ -19,27 +19,32 @@ import cartActions from './redux/actions/cartActions';
 import Header from './components/Header'
 import MyStores from  './pages/MyStores'
 import MyStoreView from  './pages/MyStoreView'
+import ProductPage from "./pages/ProductPage";
+import MyFilters from "./components/MyFilters";
 
-const App = ({cart,reloadCartLS, loginForced, userLogged, history}) => {
-  
-  if(cart.length === 0){
+
+const App = ({ cart, reloadCartLS, loginForced, userLogged, history }) => {
+  if (cart.length === 0) {
     let cartLS = localStorage.getItem("cartLS");
 
-    if(cartLS !== "undefined" && cartLS !== null  ){
-        cartLS = JSON.parse(cartLS)
-        if(cartLS instanceof Array && cartLS.length !== 0)
-          reloadCartLS(cartLS);
-    }else
-      localStorage.removeItem("cartLS")
+    if (cartLS !== "undefined" && cartLS !== null) {
+      cartLS = JSON.parse(cartLS);
+      if (cartLS instanceof Array && cartLS.length !== 0) reloadCartLS(cartLS);
+    } else localStorage.removeItem("cartLS");
   }
-  
+
   const token = localStorage.getItem("token");
+  const email = localStorage.getItem("email");
+
   //veo que no haya en el store un usuario logueado y que haya un token en el localStorage
 
+  console.log("userLogged", userLogged);
+  console.log("token", token);
+
   if (!userLogged && token && token !== "undefined") {
-    /*  alert("foreceLogn"); */
-    loginForced(JSON.parse(token), history);
-    return null;
+    alert("foreceLogn");
+    loginForced(JSON.parse(token), email, history);
+    return alert("volvi");
   }
 
   return (
@@ -50,6 +55,7 @@ const App = ({cart,reloadCartLS, loginForced, userLogged, history}) => {
         <Route exact path="/" component={Home} />
         <Route path="/category/:id" component={Category} />
         <Route path="/store/:id" component={Store} />
+        <Route path="/product/:id" component={ProductPage} />
         <Route path="/buys" component={Buys} />
         <Route path="/SignIn" component={SignIn} />
         <Route path="/SignUp" component={SignUp} />
@@ -57,6 +63,7 @@ const App = ({cart,reloadCartLS, loginForced, userLogged, history}) => {
         <Route path="/SignInAdmin" component={SignInAdmin} />
         <Route path="/myStores" component={MyStores} />
         <Route path="/myStoreView" component={MyStoreView} />
+        <Route path="/myFilters" component={MyFilters} />
         <Redirect to="/" />
       </Switch>
     </BrowserRouter>

@@ -25,7 +25,6 @@ const userControllers = {
       extensionImg = userImg.name.split(".")[userImg.name.split(".").length - 1];
     }
 
-
     try {
       let userExist = await User.findOne({ email });
       if (!userExist) {
@@ -36,7 +35,7 @@ const userControllers = {
           //let fileName = `${__dirname}/clients/build/assets/usersImg/${fileName}`
           let filePath = `${__dirname}/../frontend/public/assets/usersImg/${fileName}`;
           newUser.userImg = "/usersImg/" + fileName;
-          await userImg.mv(filePath)
+          await userImg.mv(filePath);
         }
         await newUser.save();
         let token = jwToken.sign({ ...newUser }, process.env.SECRET_OR_KEY);
@@ -45,9 +44,8 @@ const userControllers = {
           _id: undefined,
           password: undefined,
           token,
-        }
-      }
-      else {
+        };
+      } else {
         error = "This email is already in use, choose another";
       }
     } catch (err) {
@@ -102,7 +100,9 @@ const userControllers = {
 
       if (!userDeleted) throw new Error("id not found on Collection Users");
       if (userDeleted.loggedWithGoogle) {
-        fs.unlink(`${__dirname}/../frontend/public/assets/${userDeleted.userImg}`, err => console.log(err));
+        fs.unlink(`${__dirname}/../frontend/public/assets/${userDeleted.userImg}`, (err) =>
+          console.log(err)
+        );
       }
 
       response = await User.find();
@@ -118,19 +118,17 @@ const userControllers = {
     let { email, password } = req.body;
     try {
       let userExist = await User.findOne({ email });
-      if (userExist) {//aqui va lo de google
+      if (userExist) {
+        //aqui va lo de google
         if (bcryptsjs.compareSync(password, userExist.password)) {
           let token = jwToken.sign({ ...userExist }, process.env.SECRET_OR_KEY);
           response = {
             ...userExist.toObject(),
             _id: undefined,
-            token
-          }
-        } else
-          error = "Please provide a valid email and password ";
-      } else
-        error = "Please provide a valid email and password ";
-
+            token,
+          };
+        } else error = "Please provide a valid email and password ";
+      } else error = "Please provide a valid email and password ";
     } catch (err) {
       console.log(err);
       error = errorBackend;
@@ -256,7 +254,6 @@ const userControllers = {
 
   //   respondFrontend(res, response, undefined);
   // },
-
 };
 
 module.exports = userControllers;

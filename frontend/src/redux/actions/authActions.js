@@ -32,16 +32,13 @@ const authActions = {
         const { data } = await axios.post(API + "/login", objInputsValues);
         if (data.success) {
           dispatch({ type: "LOGIN_USER", payload: data.response });
-          console.log("hola", data.response.userImg);
+          /*    console.log("hola", data.response.userImg); */
           showToast(
             "success",
             `Welcome ${data.response.firstName} ${data.response.lastName}`
           ); /*  alert(`Welcome ${data.response.firstName} ${data.response.lastName}`); */
           /* debugger;  */
-          /*  console.log(
-            "soy el daa response",
-            data.response
-          ); */
+          console.log("soy el daa response", data.response);
         } else {
           return data;
         }
@@ -51,7 +48,7 @@ const authActions = {
       }
     };
   },
-  loginForced: (token) => {
+  loginForced: (token, email) => {
     return async (dispatch) => {
       try {
         /*   debugger; */
@@ -64,6 +61,7 @@ const authActions = {
           payload: {
             ...data.response,
             token,
+            email,
           },
         });
         showToast("success", `Welcome ${data.response.firstName} ${data.response.lastName}`);
@@ -72,7 +70,7 @@ const authActions = {
         if (err.response && err.response.status === 401) {
           showToast("error", "What are you trying to do ??");
         }
-        localStorage.clear();
+        /*    localStorage.clear(); */
       }
     };
   },

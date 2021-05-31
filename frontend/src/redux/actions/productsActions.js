@@ -21,5 +21,10 @@ const productsActions = {
             }
         }
     },
+    filterProducts: (value) => {
+        return(dispatch, getstate) => {
+            dispatch({type: 'FILTER_PRODUCTS', payload: value})
+        }
+    },
 }
 export default productsActions

@@ -4,16 +4,17 @@ import {connect} from 'react-redux'
 const PurchaseDetail = ({itemCart,deleteProductFromCart,increaseQuantity})=> {
     return(
         <div className='detailContainer'>
-            <button onClick={()=>deleteProductFromCart(itemCart)} style={{backgroundColor:"red",color:"white"}}>X</button>
-            <img src={itemCart.productImg} alt="" style={{width:"10%",height:"100%"}}/>
-            <div>{itemCart.nameProduct}</div>
-            <div>{itemCart.price} $</div>
-            <div className='quantityContainer'>
-                <button onClick={()=>increaseQuantity(itemCart._id,1)} disabled={itemCart.quantity>=itemCart.stock}>+</button>
-                {itemCart.quantity}(max stock: {itemCart.stock})
-                <button onClick={()=>increaseQuantity(itemCart._id,-1)} disabled={itemCart.quantity<=1}>-</button>
+            <div style={{backgroundImage: `url('${itemCart.productImg}')`}} className="productImageCarrito"></div>
+            <div className="nameProductCarrito">
+                <span>{itemCart.nameProduct}</span>
+                <span onClick={()=>deleteProductFromCart(itemCart)} className="deleteProductCarrito">Delete</span>
             </div>
-            <div>{itemCart.quantity * itemCart.price} $</div>
+            <div className='quantityContainer'>
+                <button onClick={()=>increaseQuantity(itemCart._id,-1)} disabled={itemCart.quantity<=1} className="buttonAccionProducto">-</button>
+                {itemCart.quantity}
+                <button onClick={()=>increaseQuantity(itemCart._id,1)} disabled={itemCart.quantity>=itemCart.stock} className="buttonAccionProducto">+</button>
+            </div>
+            <p>$USD {itemCart.quantity * itemCart.price}</p>
         </div>
     )
 }

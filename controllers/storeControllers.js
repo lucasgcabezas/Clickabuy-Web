@@ -187,7 +187,7 @@ const storeControllers = {
             switch (action) {
                 case "addOwner":
                     if(store.owners.find(owner => owner._id.toString() === otherUser._id.toString()))
-                        throw new Error(`the user with the email : ${emailOtherUser} already is owner`  )
+                        throw new Error(`the user with the email : ${emailOtherUser} is already owner`  )
                     querySelector = { _id: idStore };
                     updateOperator = { $push: { owners:  otherUser._id  } };
                     break;
