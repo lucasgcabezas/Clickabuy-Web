@@ -1,23 +1,25 @@
 const initialState = { userLogged: null };
 
 const authReducer = (state = initialState, action) => {
-    switch (action.type) {
-        case "LOGIN_USER":
-            localStorage.setItem("token", JSON.stringify(action.payload.token));
-            return {
-                ...state,
-                userLogged: action.payload
-            };
+  switch (action.type) {
+    case "LOGIN_USER":
+      localStorage.setItem("token", JSON.stringify(action.payload.token));
+      localStorage.setItem("email", JSON.stringify(action.payload.email));
 
-        case "LOG_OUT":
-            localStorage.clear()
-            return {
-                ...state,
-                userLogged: null
-            }
+      return {
+        ...state,
+        userLogged: action.payload,
+      };
 
-        default:
-            return state;
-    }
+    case "LOG_OUT":
+      localStorage.clear();
+      return {
+        ...state,
+        userLogged: null,
+      };
+
+    default:
+      return state;
+  }
 };
-export default authReducer
+export default authReducer;
