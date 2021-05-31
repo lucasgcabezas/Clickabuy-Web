@@ -5,6 +5,7 @@ import Footer from '../components/Footer'
 import Categories from '../components/Categories'
 import BannerCarousel from '../components/BannerCarousel'
 import CategoriesBanner from '../components/CategoriesBanner'
+import MainHome from '../components/MainHome'
 
 class Home extends React.Component{
     componentDidMount(){
@@ -17,7 +18,8 @@ class Home extends React.Component{
                 <Header/>
                 <Hero />
                 <BannerCarousel/>
-                <CategoriesBanner/>     
+                <CategoriesBanner/>
+                <MainHome/>    
                 <Footer /> 
             {/* </div> */}
             </div>

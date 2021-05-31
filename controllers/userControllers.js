@@ -1,15 +1,15 @@
-const User = require('../models/UserModel');
-const bcryptsjs = require('bcryptjs')
-const jwToken = require('jsonwebtoken');
-const fs = require("fs")
+const User = require("../models/UserModel");
+const bcryptsjs = require("bcryptjs");
+const jwToken = require("jsonwebtoken");
+const fs = require("fs");
 
 const respondFrontend = (res, response, error) => {
-    res.json({
-        success: !error ? true : false,
-        response,
-        error
-    })
-}
+  res.json({
+    success: !error ? true : false,
+    response,
+    error,
+  });
+};
 const errorBackend = "error 500 , avisar al  team backend";
 const errorUserNotFound = "error: User not found";
 
@@ -139,13 +139,37 @@ const userControllers = {
     },
     forcedLogin: async (req, res) => {
 
-        let response = {
-            ...req.user.toObject(),
-            _id: undefined, password: undefined
+    try {
+      let userExist = await User.findOne({ email });
+      if (!userExist) {
+        password = bcryptsjs.hashSync(password, 10);
+        let newUser = new User({ ...req.body, password });
+        if (!loggedWithGoogle) {
+          let fileName = `${newUser._id}.${extensionImg}`;
+          //let fileName = `${__dirname}/clients/build/assets/usersImg/${fileName}`
+          let filePath = `${__dirname}/../frontend/public/assets/usersImg/${fileName}`;
+          newUser.userImg = "/usersImg/" + fileName;
+          await userImg.mv(filePath);
         }
 
-        respondFrontend(res, response, undefined);
+        await newUser.save();
+
+        let token = jwToken.sign({ ...newUser }, process.env.SECRET_OR_KEY);
+        response = {
+          ...newUser.toObject(),
+          _id: undefined,
+          password: undefined,
+          token,
+        };
+      } else {
+        error = "This email is already in use, choose another";
+      }
+    } catch (err) {
+      console.log(err);
+      error = errorBackend;
     }
-}
+    respondFrontend(res, response, error);
+  },
+};
 
 module.exports = userControllers;
