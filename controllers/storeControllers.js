@@ -87,13 +87,19 @@ const storeControllers = {
         let response, error;
         try {
             let store = await validationStore(idStore,user);
-            
+            nameStore && (store.nameStore = nameStore);
+
             if (storeHero) {
+                if (store.storeHero != "/storeHeros/defaultHero.jpg") {
+                    fs.unlink(`${__dirname}/../frontend/public/assets/${store.storeHero}`, err => console.log(err));
+                }
                 const hero = getPathAndNameFile(store, storeHero, "storeHeros");
                 await storeHero.mv(hero.filePath);
                 storeHero = "/storeHeros/"+hero.fileName;
+
             }
             if (logoStore) {
+                fs.unlink(`${__dirname}/../frontend/public/assets/${store.logoStore}`, err => console.log(err));
                 const logo = getPathAndNameFile(store, logoStore, "storeLogos");
                 await logoStore.mv(logo.filePath);
                 logoStore = "/storeLogos/"+logo.fileName;
@@ -110,9 +116,8 @@ const storeControllers = {
                     update[field] = fieldsObj[field];
                 }
             }
-            console.log(update)
-
-            //response = await StoreModel.findOneAndUpdate({ _id: idStore }, { nameStore, storeHero, description, category, logoStore }, { new: true })
+            
+            response = await StoreModel.findOneAndUpdate({ _id: idStore }, update, { new: true })
         } catch (err) {
             error = `${err.name} : ${err.message}`
             console.log(err)
@@ -131,7 +136,7 @@ const storeControllers = {
             response = await StoreModel.findByIdAndDelete(idStore)
 
             if (store.storeHero != "/storeHeros/defaultHero.jpg") {
-                fs.unlink(`${__dirname}/../frontend/public/assets/${store.store.storeHero}`, err => console.log(err));
+                fs.unlink(`${__dirname}/../frontend/public/assets/${store.storeHero}`, err => console.log(err));
             }
         } catch (err) {
             error = `${err.name} : ${err.message}`
