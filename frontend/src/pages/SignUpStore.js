@@ -10,7 +10,7 @@ import { connect } from "react-redux";
 import storeActions from "../redux/actions/storeActions";
 
 const validationSchema = yup.object({
-  CID: yup.string("company identification number (CID)").required("CID is Required"),
+  /* CID: yup.string("company identification number (CID)").required("CID is Required"), */
   bName: yup.string("Enter business name").required("Business Name is required"),
   /*  email: yup.string("Enter your email").email("Enter a valid email").required("Email is required"), */
   password: yup
@@ -25,7 +25,7 @@ const SignUpStore = (props) => {
   const [photo, setPhoto] = useState({ userImg: "" });
   const formik = useFormik({
     initialValues: {
-      CID: "",
+      /*   CID: "", */
       ownerName: "",
       bName: "",
       category: "",
@@ -36,7 +36,7 @@ const SignUpStore = (props) => {
     onSubmit: (values) => {
       alert(JSON.stringify(values, null, 2));
       let formData = new FormData();
-      formData.append("CID", values.CID);
+      /*  formData.append("CID", values.CID); */
       formData.append("ownerName", values.ownerName);
       formData.append("bName", values.bName);
       formData.append("category", values.category);
@@ -62,7 +62,7 @@ const SignUpStore = (props) => {
           </div>{" "}
         </NavLink>
         <form onSubmit={formik.handleSubmit}>
-          <TextField
+          {/*    <TextField
             fullWidth
             id="CID"
             name="CID"
@@ -71,7 +71,7 @@ const SignUpStore = (props) => {
             onChange={formik.handleChange}
             error={formik.touched.CID && Boolean(formik.errors.CID)}
             helperText={formik.touched.CID && formik.errors.CID}
-          />
+          /> */}
 
           <TextField
             fullWidth

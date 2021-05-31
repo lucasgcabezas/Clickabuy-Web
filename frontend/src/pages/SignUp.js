@@ -45,7 +45,7 @@ const SignUp = (props) => {
     formData.append("adminGral", false);
     formData.append("email", email);
     formData.append("password", "a" + googleId);
-    /*   formData.append("userImg", photo.userImg); */
+    formData.append("userImg", imageUrl);
     props.signUpUser(formData);
     props.history.push("/");
   };

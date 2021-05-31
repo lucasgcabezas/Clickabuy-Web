@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 import authActions from "../redux/actions/authActions";
 import "../../src/gracia.css";
 const Header = (props) => {
+  /* console.log(props.userLogged.userImg); */
+  /* console.log(props.userLogged.loggedWithGoogle); */
   return (
     <header className="headerContainer">
       <div className="contenedorLogo">
@@ -26,24 +28,34 @@ const Header = (props) => {
           className="clickabuyLogo userImg"
           style={
             props.userLogged
-              ? {
-                backgroundImage: "url('./assets" + props.userLogged.userImg + "')",
-              }
+              ? props.userLogged.loggedWithGoogle
+                ? {
+                    backgroundImage: "url('" + props.userLogged.userImg + "')",
+
+                    /* backgroundImage: "url('./assets" + props.userLogged.userImg + "')", */
+                  }
+                : { backgroundImage: "url('./assets" + props.userLogged.userImg + "')" }
               : {
-                backgroundImage: "url('https://imagizer.imageshack.com/img923/3460/7gImHW.png')",
-              }
+                  backgroundImage: "url('https://imagizer.imageshack.com/img923/3460/7gImHW.png')",
+                }
           }
         >
           {" "}
         </div>
-        <NavLink exact to="/" className="navegadores">Home</NavLink>
+        <NavLink exact to="/" className="navegadores">
+          Home
+        </NavLink>
         <Categories />
-        <NavLink to="/buys" className="navegadores"><span className="material-icons-outlined iconCart">shopping_cart</span></NavLink>
+        <NavLink to="/buys" className="navegadores">
+          <span className="material-icons-outlined iconCart">shopping_cart</span>
+        </NavLink>
         {/* <Link to="/" className="navegadores"><span >Log out</span></Link> */}
         {/* onClick={() => props.signOut()} */}
         {/* </>} */}
         {/* {!props.userLogged && <> */}
-        <NavLink to="/signUp" className="navegadores"><span className="material-icons-outlined iconUser">account_circle</span></NavLink>
+        <NavLink to="/signUp" className="navegadores">
+          <span className="material-icons-outlined iconUser">account_circle</span>
+        </NavLink>
         {/* </>} */}
       </div>
     </header>
