@@ -95,14 +95,24 @@ const storeControllers = {
             }
             if (logoStore) {
                 const logo = getPathAndNameFile(store, logoStore, "storeLogos");
-                await storeHero.mv(logo.filePath);
+                await logoStore.mv(logo.filePath);
                 logoStore = "/storeLogos/"+logo.fileName;
             }
             if(category){
                 category = await CategoryModel.findOne({ nameCategory: category });
                 if (!category) throw new Error("this category doesn't exist");
             }
-            response = await StoreModel.findOneAndUpdate({ _id: idStore }, { nameStore, storeHero, description, category, logoStore }, { new: true })
+
+            let fieldsObj = { nameStore, storeHero, description, category, logoStore }
+            let update = {}
+            for (const field in fieldsObj) {
+                if(fieldsObj[field]){
+                    update[field] = fieldsObj[field];
+                }
+            }
+            console.log(update)
+
+            //response = await StoreModel.findOneAndUpdate({ _id: idStore }, { nameStore, storeHero, description, category, logoStore }, { new: true })
         } catch (err) {
             error = `${err.name} : ${err.message}`
             console.log(err)
