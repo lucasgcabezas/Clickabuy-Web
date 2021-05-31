@@ -47,7 +47,7 @@ const storeControllers = {
             let newStore = new StoreModel({ ...req.body });
             newStore.owners = [user._id];
             newStore.category = category._id;
-            newStore.storeHero = `/storeHeros/defaultHero.jpg`
+            // newStore.storeHero = `/storeHeros/defaultHero.jpg`
             const { filePath, fileName } = getPathAndNameFile(newStore, logoStore, "storeLogos");
             console.log(filePath)
             newStore.logoStore = `/storeLogos/` + fileName;
@@ -135,7 +135,7 @@ const storeControllers = {
         let response;
         let error;
         try {
-            const groupOfStores = await StoreModel.find({ categories: idCategory })
+            const groupOfStores = await StoreModel.find({ category: idCategory })
             response = groupOfStores
         } catch (error) {
             error = 'An error has occurred on the server, try later!'
