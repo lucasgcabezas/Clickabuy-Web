@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { connect } from "react-redux"
 import Product from "../components/Product"
 import productsActions from "../redux/actions/productsActions"
-import {NavLink} from 'react-router-dom'
+import Header from '../components/Header'
 
 const Store = (props) => {
     const { getProductsFromStore } = props
@@ -14,14 +14,19 @@ const Store = (props) => {
     }, [])
     return (
         <body>
-            <NavLink to="/">Home</NavLink>
-            <div className="containerStore">
-                <div className="bannerStore">
+            <Header/>
+            {/* <div className="containerStore"> */}
+                {/* <div className="bannerStore"> */}
+                    
+
+
+
+                    <div style={{backgroundImage: `url('${store.storeHero}')`}} className="storeHero">
                     <h1>{store.nameStore}</h1>
-                    <p>{store.storeImg}</p>
-                    <p>{store.description}</p>
-                </div>
-            </div>
+                    </div>
+                    {/* <p>{store.description}</p> */}
+                {/* </div> */}
+            {/* </div> */}
             <div className="containerCards">
                 {
                     props.products.length === 0 
