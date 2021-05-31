@@ -13,13 +13,15 @@ import SignUp from "./pages/SignUp";
 import authActions from "./redux/actions/authActions";
 import SignUpStore from "./pages/SignUpStore";
 import SignInAdmin from "./pages/SignInAdmin";
-import Buys from "./pages/Buys";
-import { connect } from "react-redux";
-import cartActions from "./redux/actions/cartActions";
-import Header from "./components/Header";
-import MyStores from "./pages/MyStores";
-import MyStoreView from "./pages/MyStoreView";
+import Buys from './pages/Buys'
+import {connect} from 'react-redux'
+import cartActions from './redux/actions/cartActions';
+import Header from './components/Header'
+import MyStores from  './pages/MyStores'
+import MyStoreView from  './pages/MyStoreView'
+import ProductPage from "./pages/ProductPage";
 import MyFilters from "./components/MyFilters";
+
 
 const App = ({ cart, reloadCartLS, loginForced, userLogged, history }) => {
   if (cart.length === 0) {
@@ -53,6 +55,7 @@ const App = ({ cart, reloadCartLS, loginForced, userLogged, history }) => {
         <Route exact path="/" component={Home} />
         <Route path="/category/:id" component={Category} />
         <Route path="/store/:id" component={Store} />
+        <Route path="/product/:id" component={ProductPage} />
         <Route path="/buys" component={Buys} />
         <Route path="/SignIn" component={SignIn} />
         <Route path="/SignUp" component={SignUp} />

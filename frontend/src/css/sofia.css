@@ -60,8 +60,8 @@ html *{
     justify-content: space-between;
     background-color: white;
     border-radius: 30px;
-    padding: 4px 1vw;
-    width: 25vw;
+    padding: 4px .4vw 4px 1vw;
+    width: 32vw;
 }
 .iconSearchHome{
     background-color: var(--primarycolor);

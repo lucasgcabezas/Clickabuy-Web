@@ -10,6 +10,7 @@ const Store = (props) => {
     const { getProductsFromStore } = props
     const idParams = props.match.params.id
     const [store, setStore] = useState([])
+
     useEffect(() => {
         !props.storesForCategory.length ? props.history.push('/') : setStore(props.storesForCategory.find(store => store._id === idParams))
         getProductsFromStore(idParams)
@@ -24,6 +25,7 @@ const Store = (props) => {
                     
 
 
+    console.log(store)
 
                     <div style={{backgroundImage: `url('${store.storeHero}')`}} className="storeHero">
                     <h1>{store.nameStore}</h1>
@@ -49,17 +51,17 @@ const Store = (props) => {
 
             {/* <div className="containerCards">
                 {
-                    props.products.length === 0 
-                    ? <div> <h1>no products</h1> </div>
-                    : props.products.map(product => {
-                        return (
-                            <div key={product._id}>
-                                <Product product={product} />
-                            </div>
+                    props.products.length === 0
+                        ? <div> <h1>no products</h1> </div>
+                        : props.products.map(product => {
+                            return (
+                                <Link key={product._id} to={`/product/${product._id}`}>
+                                    <Product product={product} />
+                                </Link>
 
+                            )
+                        }
                         )
-                    }
-                    )
                 }
             </div> */}
         </body>
