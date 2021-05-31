@@ -7,6 +7,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import { NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { connect } from "react-redux";
+import storeActions from "../redux/actions/storeActions";
 
 const validationSchema = yup.object({
   CID: yup.string("company identification number (CID)").required("CID is Required"),
@@ -33,7 +34,7 @@ const SignUpStore = (props) => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      /*   alert(JSON.stringify(values, null, 2)); */
+      alert(JSON.stringify(values, null, 2));
       let formData = new FormData();
       formData.append("CID", values.CID);
       formData.append("ownerName", values.ownerName);
@@ -42,8 +43,8 @@ const SignUpStore = (props) => {
       formData.append("storeLogo", values.storeLogo);
       formData.append("password", values.password);
       formData.append("userImg", photo.userImg);
-      /*  console.log("x", formData); */
-      /*  props.signUpStore(formData); */
+      console.log("soy el Formdata", formData);
+      props.addStore(formData);
     },
   });
 
@@ -141,14 +142,16 @@ const SignUpStore = (props) => {
 const mapStateToProps = (state) => {
   return {
     categories: state.categoryReducer.categories,
+
     /*  userLogged: state.authReducer.userLogged, */
   };
 };
 
-/* const mapDispatchToProps = {
-  reloadCartLS: cartActions.reloadCartLS,
-  loginForced: authActions.loginForced,
-}; */
+const mapDispatchToProps = {
+  /* reloadCartLS: cartActions.reloadCartLS,
+  loginForced: authActions.loginForced, */
+  addStore: storeActions.addStore,
+};
 
-export default connect(mapStateToProps, null)(SignUpStore);
+export default connect(mapStateToProps, mapDispatchToProps)(SignUpStore);
 /* export default SignUpStore; */

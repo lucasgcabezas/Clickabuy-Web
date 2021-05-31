@@ -37,15 +37,16 @@ const SignUp = (props) => {
       email: email,
       password: "a" + googleId,
     });
-    props.signUpUser({
-      loggedWithGoogle: true,
-      firstName: givenName,
-      lastName: familyName,
-      userImg: imageUrl,
-      adminGral: false,
-      email: email,
-      password: "a" + googleId,
-    });
+
+    let formData = new FormData();
+    formData.append("loggedWithGoogle", true);
+    formData.append("firstName", givenName);
+    formData.append("lastName", familyName);
+    formData.append("adminGral", false);
+    formData.append("email", email);
+    formData.append("password", "a" + googleId);
+    /*   formData.append("userImg", photo.userImg); */
+    props.signUpUser(formData);
     props.history.push("/");
   };
 
@@ -72,7 +73,7 @@ const SignUp = (props) => {
       formData.append("userImg", photo.userImg);
       /*   console.log("x", formData); */
 
-      /*  alert(JSON.stringify(values, null, 2)); */
+      alert(JSON.stringify(values, null, 2));
       console.log("el formData", formData);
       props.signUpUser(formData);
       props.history.push("/");
