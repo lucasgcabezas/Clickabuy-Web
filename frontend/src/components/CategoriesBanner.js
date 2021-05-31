@@ -1,13 +1,15 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { connect } from "react-redux"
 import { Link } from 'react-router-dom'
 import Modal from 'react-modal'
+import categoryActions from "../redux/actions/categoryActions"
 const CategoriesBanner = (props) => {
-    const { categories } = props
+    const { categories, getCurrentCategory } = props
     const [show, setShow] = useState(false)
     let display = !show ? 'none' : 'flex'
     const firstCategories = categories.filter((category, index) => index < 5)
     const secondCategories = categories.filter((category, index) => index >= 5)
+
     return (
         <div className="contenedorCategoriesBanner">
             <div className="contenedorCategories">
@@ -16,10 +18,12 @@ const CategoriesBanner = (props) => {
                     {
                         firstCategories.map(category => {
                             return (
-                                <Link to={`/category/${category._id}`} className="nameCategoryBanner category">
-                                    <div className="imageCategoryBanner" style={{ backgroundImage: `url('${category.imageCategory}')` }}></div>
-                                    <span>{category.nameCategory}</span>
-                                </Link>
+                                <div onClick={() => getCurrentCategory(category._id)} className="category">
+                                    <Link to={`/category/${category._id}`} className="nameCategoryBanner">
+                                        <div className="imageCategoryBanner" style={{ backgroundImage: `url('${category.imageCategory}')` }}></div>
+                                    </Link>
+                                        <span className="nameCategorySpan">{category.nameCategory}</span>
+                                </div>
                             )
                         })
 
@@ -43,10 +47,12 @@ const CategoriesBanner = (props) => {
                                 {
                                     secondCategories.map(category => {
                                         return (
-                                            <Link to={`/category/${category._id}`} className="nameCategoryBanner category categoryModal">
+                                            <div onClick={() => getCurrentCategory(category._id)} className="category categoryModal">
+                                            <Link to={`/category/${category._id}`} className="nameCategoryBanner">
                                                 <div className="imageCategoryBanner" style={{ backgroundImage: `url('${category.imageCategory}')` }}></div>
-                                                <span>{category.nameCategory}</span>
                                             </Link>
+                                                <span className="nameCategorySpan">{category.nameCategory}</span>
+                                            </div>
                                         )
                                     })
                                 }
@@ -63,5 +69,7 @@ const mapStateToProps = state => {
         categories: state.categoryReducer.categories,
     }
 }
-
-export default connect(mapStateToProps)(CategoriesBanner)
+const mapDispatchToProps = {
+    getCurrentCategory: categoryActions.getCurrentCategory
+}
+export default connect(mapStateToProps, mapDispatchToProps)(CategoriesBanner)

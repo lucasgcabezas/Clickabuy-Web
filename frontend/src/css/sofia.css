@@ -10,13 +10,8 @@ html *{
     --thirdcolor: #ecf0f1;
 }
 .contenedorHome{
-    /* background-color: var(--thirdcolor); */
     background-color: #fafaf8;
 }
-/* .contenedorHero{
-    background: linear-gradient(180deg, #fe9b46, #f64c54);
-    height: 100vh;
-} */
 .clickabuyLogo{
     background-repeat: no-repeat;
     background-position: center;
@@ -103,7 +98,6 @@ html *{
 .navegadores, .categoriesDropdown{
     color: white;
     font-size: 17px;
-    /* font-family: 'Poppins-Regular',Helvetica,Arial,sans-serif; */
 }
 .navegadores:hover{
     text-decoration: none;
@@ -116,9 +110,6 @@ html *{
 #dropdown-basic:focus{
     box-shadow: none;
 }
-/* .dropdown-menu .show{
-
-} */
 .contenedorCategoriesBanner{
     width: 100%;
     padding: 2vh 0;
@@ -147,7 +138,6 @@ html *{
 }
 .flexCategoriesModal{
     display: flex;
-    /* justify-content: space-between; */
     flex-wrap: wrap;
 }
 .categoryModal{
@@ -159,7 +149,6 @@ html *{
     color: white;
     background-color: var(--primarycolor);
     border-radius: 50%;
-    /* font-size: 10px; */
 }
 .category{
     border-radius: 15px;
@@ -177,9 +166,10 @@ html *{
     color: #212529;
     text-decoration: none;
 }
-.nameCategoryBanner span{
-    width: 7vw;
-    text-align: center;
+.nameCategorySpan{
+    width: 8.5vw;
+    margin-bottom: 1vh;
+    text-align: center !important;
 }
 .category:nth-child(1){
     background-color: #c2c6f8;
@@ -314,7 +304,6 @@ html *{
     background-color: #7069672f !important;
     text-decoration: none;
 }
-
 .OverlayModal{
     position: fixed;
     top: 0;
@@ -354,6 +343,13 @@ html *{
 .iconCart, .iconUser{
     font-size: 2em;
 }
+.usuarioImage{
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 3vw;
+    height: 3vw;
+}
 .categoryHeroImage{
     background-position: center;
     background-size: cover;
@@ -362,8 +358,6 @@ html *{
     height: 30vh;
     display: flex;
     justify-content: flex-end;
-    /* align-items: flex-end;
-    flex-direction: column; */
 }
 .contenedorNameCategoryHero{
     width: 53%;
@@ -387,6 +381,101 @@ html *{
     color: white;
     font-size: 18px;
     margin-left: 0.5em;
+}
+.downloadApp{
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 17vw;
+    height: 20vh;
+}
+.contenedorPublicity{
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    margin: 6vh auto;
+}
+.imagePublicity{
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 45vw;
+    height: 28vh;
+    box-shadow: rgb(0 0 0 / 20%) 0px 1px 2px 0px;
+    border-radius: 5px;
+}
+.buttonPulicity1, .buttonPulicity2{
+    border: none;
+    background-color: var(--primarycolor);
+    border-radius: 10px;
+    padding: 1.5vh 2.5vw;
+    transition: all 0.4s ease;
+}
+.buttonPulicity1:hover, .buttonPulicity2:hover{
+    transform: scale(1.02);
+}
+.buttonPulicity1 p, .buttonPulicity2 p{
+    color: white;
+    margin: 0;
+}
+.buttonPulicity1{
+    margin-top: 2vh;
+    margin-left: 1.5vw; 
+}
+.imagePublicity2{
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 45vw;
+    height: 28vh;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    box-shadow: rgb(0 0 0 / 20%) 0px 1px 2px 0px;
+    border-radius: 5px;
+}
+.buttonPulicity2{
+    margin-bottom: 3vh;
+    margin-right: 1vw; 
+    /* margin-right: 5vw; */
+}
+.contenedorDownload{
+    background-color: #fff;
+    border-radius: 20px;
+    width: 90%;
+    margin: 10vh auto;
+    height: 50vh;
+    /* height: ; */
+}
+.contenedorDownload div{
+    padding: 3vh 2vw;
+    display: flex;
+    /* position: relative; */
+}
+.downloadAppInfo{
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+}
+.downloadAppInfo p{
+    font-size: 2em;
+    margin-left: 2vw;
+    margin-bottom: 1px;
+}
+.contenedorflashDealsInfo{
+    background-color: #fff;
+    width: 100%;
+    height: 30vh;
+    /* margin: 0 auto; */
+    box-shadow: 0 1px 2px #bbb;
+    border-radius: 4px;
+}
+.contenedorFlashDeals {
+    width: 90%;
+    margin: 0 auto;
+}
+.contenedorFlashDeals h3{
+    margin-bottom: 3vh;
 }
 /* .flexCategoriesModal {
     -webkit-appearance: none;
@@ -431,22 +520,74 @@ html *{
 .contenedorOptions{
     display: flex;
     justify-content: space-between;
-    width: 80vw;
+    width: 90%;
     margin: 0 auto;
 }
-.footerOptions p{
+/* .footerOptions{
+    width: 90%;
+} */
+.footerOptions p, .footerOptions1 p, .footerOptions2 p{
     color: #666;
+    margin: 0;
+}
+.contenedorLinks{
+    display: flex;
+    flex-direction: column;
+}
+.navegadoresFooter{
+    font-family: "Poppins-Regular", Helvetica, Arial, sans-serif !important;
+    color: #666;
+    text-align: justify;
+}
+.navegadoresFooter:hover{
+    color: #666;
+}
+.footerOptions1{
+    padding: 4vh 0;
+    width: 65%;
+    border-right: 1px solid #e5edef;
+}
+.footerOptions2{
+    padding: 4vh 0;
+    /* padding-right: 6vw; */
+    display: flex;
+    justify-content: center;
+    width: 35%;
+}
+.contenedorCategoriesFooter{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: 20vh;
+    width: 100%;
+}
+.navegadoresFooter span{
+    font-family: "Poppins-Regular", Helvetica, Arial, sans-serif !important;
+    font-size: 15px;
 }
 .contenedorMediosDePago{
     width: 100%;
-    height: 20vh;
-    background-color: white;
+    height: 23vh;
+    background-color:  #fff;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: space-between;
+    padding: 0 3vw;
 }
 .contenedorMediosDePago div{
     display: flex;
+}
+.contenedorMediosDePago p{
+    font-family: "Poppins-Regular", Helvetica, Arial, sans-serif !important;
+    font-size: 15px;
+    margin: 0;
+}
+.imageShipping{
+    /* margin-left: 3vw; */
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 16vw;
+    height: 20vh;
 }
 .imagePagos{
     background-position: center;
