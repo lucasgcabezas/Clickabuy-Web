@@ -15,7 +15,7 @@ const errorUserNotFound = "error: User not found";
 
 const userControllers = {
   addUser: async (req, res) => {
-    console.log("soy la req", req.body);
+    /*  console.log("soy la req", req.body); */
 
     /*   console.log("soy la req.file", req.files); */
     let response, error;
