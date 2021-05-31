@@ -9,19 +9,19 @@ import cartActions from '../redux/actions/cartActions'
 const Buys = ({cart,clearCart}) => {
     return(
         <>
-            <div className='principalContainer'>
-                <div className='buyContainer'>
-                    <h3>Purchase Detail</h3>
+            <Header/>
+            <div className='contenedorPrincipal'>
+                <div className='contenedorCarrito'>
+                    <h3>My Cart</h3>
                     {cart.map(item=>{
                         return <PurchaseDetail itemCart ={item}/>
                     })}
                     
-                    <h3>Total= {cart.reduce((total,item)=>total+=item.quantity*item.price ,0)} $</h3> 
-                    <div>
-                        <button onClick={()=>clearCart()}>Cancel Buy</button>
-                        <button>Fin de la compra</button>
+                    <h2>Total= ${cart.reduce((total,item)=>total+=item.quantity*item.price ,0)}</h2> 
+                    <div className="contenedorButtonsOrder">
+                        <button onClick={()=>clearCart()} className="buttonCancelOrder">Cancel Order</button>
+                        <button className="buttonReady">Ready</button>
                     </div>
-                     
                 </div>
             </div>
             <Footer />
