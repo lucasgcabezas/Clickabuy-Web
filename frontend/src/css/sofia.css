@@ -708,3 +708,16 @@ html *{
 .mail{
     background-color: #F03434;
 }
+.storeHero{
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.storeHero h1{
+    color: white
+}
