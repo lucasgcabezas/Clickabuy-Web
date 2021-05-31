@@ -5,17 +5,9 @@ import { Link } from 'react-router-dom'
 import categoryActions from '../redux/actions/categoryActions'
 import Header from '../components/Header'
 const Category = (props) => {
-    // const [category, setCategory] = useState([])
-    // const idParams = props.match.params.id
-    // useEffect(() => {
-    //     props.getCurrentCategory(idParams)
-    //     // !props.categories.length ? props.history.push('/') : setCategory(props.categories.find(categoria => categoria._id === idParams))
-    //     // props.getStoresbByCategory(idParams)
-    // }, [])
-    // console.log(props.currentCategory)
-    // if (!props.currentCategory) {
-    //     return <h1>cargando...</h1>
-    // }
+    if (!props.currentCategory) {
+        return <h1>cargando...</h1>
+    }
     return (
         <>
             <Header/>

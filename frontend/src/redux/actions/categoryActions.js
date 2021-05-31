@@ -1,20 +1,21 @@
 import axios from 'axios'
 
 const categoryActions = {
-    getStoresbByCategory: (categoryId) => {
-        return async (dispatch, getState) => {
-            try {
-                const response = await axios.get('http://localhost:4000/api/store/' + categoryId)
-                if (response.data.success) {
-                    dispatch({ type: 'STORES_BY_CATEGORY', payload: response.data.response})
-                } else {
-                    alert( response.data.error)
-                }
-            } catch (error){
-                console.log(error)
-            }
-        }
-    },
+    // getStoresbByCategory: (categoryId) => {
+    //     console.log(categoryId)
+    //     return async (dispatch, getState) => {
+    //         try {
+    //             const response = await axios.get('http://localhost:4000/api/store/' + categoryId)
+    //             if (response.data.success) {
+    //                 dispatch({ type: 'STORES_BY_CATEGORY', payload: response.data.response})
+    //             } else {
+    //                 alert( response.data.error)
+    //             }
+    //         } catch (error){
+    //             console.log(error)
+    //         }
+    //     }
+    // },
     getAllCategories:() => {
         return async (dispatch, getState) => {
             try {
@@ -27,9 +28,18 @@ const categoryActions = {
         }
     },
     getCurrentCategory: (id) => {
-        console.log(id)
-        return (dispatch, getState) => {
-            dispatch({type: 'CURRENT_CATEGORY', payload: id})
+        return async (dispatch, getState) => {
+            try {
+                const response = await axios.get('http://localhost:4000/api/store/' + id)
+                if (response.data.success) {
+                    // dispatch({ type: 'STORES_BY_CATEGORY', payload: response.data.response})
+                    dispatch({type: 'CURRENT_CATEGORY', payload: {id: id, stores: response.data.response}})
+                } else {
+                    alert( response.data.error)
+                }
+            } catch (error){
+                console.log(error)
+            }
         }
     }
 }

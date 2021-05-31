@@ -1,40 +1,51 @@
 import React from 'react';
 import { FaFacebookF, FaTwitter, FaGooglePlusG, FaGithub, FaPinterestP, FaLinkedin, FaInstagram } from 'react-icons/fa'
 import { MdEmail } from 'react-icons/md'
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-const Footer = () => {
+const Footer = (props) => {
+    const { categories } = props
     const pagosArray = [
-        {id: 1, imagePagos:"https://webdesing881317710.files.wordpress.com/2021/05/paypal.png"},
-        {id: 2, imagePagos:"https://webdesing881317710.files.wordpress.com/2021/05/mercadopago.png"},
-        {id: 3, imagePagos:"https://webdesing881317710.files.wordpress.com/2021/05/visa.png"},
-        {id: 4, imagePagos:"https://webdesing881317710.files.wordpress.com/2021/05/americanexpress.png"},
-        {id: 5, imagePagos:"https://webdesing881317710.files.wordpress.com/2021/05/mastercard.png"}
+        { id: 1, imagePagos: "https://webdesing881317710.files.wordpress.com/2021/05/paypal.png" },
+        { id: 2, imagePagos: "https://webdesing881317710.files.wordpress.com/2021/05/mercadopago.png" },
+        { id: 3, imagePagos: "https://webdesing881317710.files.wordpress.com/2021/05/visa.png" },
+        { id: 4, imagePagos: "https://webdesing881317710.files.wordpress.com/2021/05/americanexpress.png" },
+        { id: 5, imagePagos: "https://webdesing881317710.files.wordpress.com/2021/05/mastercard.png" }
     ]
     return (
         <footer className='contenedorFooter'>
             <div className="contenedorOptions">
-                <div className="footerOptions">
+                <div className="footerOptions1">
                     <p>CATEGORIES</p>
-                    {/* {
-                        
-                    } */}
+                    <div className="contenedorCategoriesFooter">
+                        {
+                            categories.map(category => {
+                                return (
+                                    <Link to={`/category/${category._id}`} className="navegadoresFooter"><span>{category.nameCategory}</span></Link>
+                                )
+                            })
+                        }
+                    </div>
                 </div>
-                <div className="footerOptions">
-                    <p>NAVIGATION</p>
-                    <Link></Link>
-                    <Link></Link>
-                    <Link></Link>
-                </div>
-                <div className="footerOptions">
-                    <p>MY ACCOUNT</p>
+                <div className="footerOptions2">
+                    <div className="contenedorLinks">
+                        <p>NAVIGATION</p>
+                        <Link exact to="/" className="navegadoresFooter">Home</Link>
+                        <Link to="/buys" className="navegadoresFooter">My Cart</Link>
+                        <Link to="/SignUp" className="navegadoresFooter">Account</Link>
+                    </div>
                 </div>
             </div>
             <div className="contenedorMediosDePago">
+                {/* <div> */}
+                <div style={{ backgroundImage: "url('https://webdesing881317710.files.wordpress.com/2021/05/door-to-door-delivery-2937689-2426383.png')" }} className="imageShipping"></div>
+                <p>We have our very own fleet of delivery vans. Your order will be packed with care at our warehouse and delivered right to your door by our friendly ClickaBuy team.</p>
+                {/* </div> */}
                 <div>
                     {
                         pagosArray.map(elemento => {
-                            return <div style={{backgroundImage: `url('${elemento.imagePagos}')`}} className="imagePagos"></div>
+                            return <div style={{ backgroundImage: `url('${elemento.imagePagos}')` }} className="imagePagos"></div>
                         })
                     }
                 </div>
@@ -54,25 +65,12 @@ const Footer = () => {
             <div className="copyright">
                 <p>Copyright 2021 . All rights reserved</p>
             </div>
-            {/* <div className='menuRedes'> */}
-            {/* <nav className="menuFooter">
-                        <h2>Home</h2>
-                        <h2>Cities</h2>
-                    </nav>             
-                    <div className="redesSociales">
-                        <img src="../assets/email.png" alt="E-mail" />
-                        <img src="../assets/facebook.png" alt="Facebook" />
-                        <img src="../assets/instagram.png" alt="Instagram" />
-                    </div>    
-                    </div>
-                    {/* <p>All Rights Reserved - NCHN</p> */}
-            {/* <div className='playStores'>
-                        <p>Download app</p>
-                        <div className="googleStore" style={{ backgroundImage: `url(../assets/images/google-play.jpg)` }}></div>
-                        <div className="appleStore" style={{ backgroundImage: `url(../assets/images/app-store.jpg)` }}></div>
-                    </div> */}
-            {/* </div>     */}
         </footer>
     )
 }
-export default Footer
+const mapStateToProps = state => {
+    return {
+        categories: state.categoryReducer.categories
+    }
+}
+export default connect(mapStateToProps)(Footer)
