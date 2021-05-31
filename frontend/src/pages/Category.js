@@ -23,8 +23,7 @@ const Category = (props) => {
                     </div>
                 </div>
                 <div className="categoryStoresContainer">
-                    <span>STORES</span>
-                    <ProductFilter />
+                    <span>STORES</span>                    
                     <div className="categoryStoresSection">
                         {
                             props.storesForCategory.length === 0
