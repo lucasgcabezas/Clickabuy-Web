@@ -34,9 +34,9 @@ const Store = (props) => {
                     <div className="contenedorFiltrosStore">
                     
                 </div>
-                <div className="containerCards">
+                <div className="containerCards">                    
                     {props.filterProducts.length === 0
-                            ? <div> <h1>no products</h1> </div>
+                            ? <div> <h2>No products</h2> </div> 
                             : props.filterProducts.map(product => {
                                 return (                                    
                                     <div key={product._id}>
@@ -46,7 +46,7 @@ const Store = (props) => {
                                 })
                     }                    
                 </div>
-                </div>                
+            </div>                
             </div>
             <Footer />
         </div>
