@@ -46,7 +46,7 @@ const MainHome = (props) => {
             <div className="contenedorDownload">
                 <div>
                     <div className="downloadAppInfo">
-                        <p>Upload clickabuy app</p>
+                        <p>Download clickabuy app</p>
                         <div style={{ backgroundImage: "url('https://webdesing881317710.files.wordpress.com/2021/05/download.png')" }} className="downloadApp"></div>
                         <p>for a better experience.</p>
                     </div>

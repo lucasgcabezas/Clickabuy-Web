@@ -29,24 +29,23 @@ const Store = (props) => {
                     </div>
                 </div>
             </div>
-            <div className='buscador'>
-                <input className='txtBuscador' type="Buscar" name="" id="buscar" placeholder="Find your perfect product!" onChange={(e) => {props.filter(e.target.value)}} />
-                
+            <div className='buscador'>                
                 <div className="contenedorInfoCards">
                     <div className="contenedorFiltrosStore">
-                    </div>
+                    
                 </div>
                 <div className="containerCards">
-                    {props.products.length === 0
+                    {props.filterProducts.length === 0
                             ? <div> <h1>no products</h1> </div>
-                            : props.products.map(product => {
-                                return (
+                            : props.filterProducts.map(product => {
+                                return (                                    
                                     <div key={product._id}>
                                         <Product product={product} /* user={props.userLogged.productsLiked} */ />
                                     </div>
                                     )
                                 })
                     }                    
+                </div>
                 </div>                
             </div>
             <Footer />
