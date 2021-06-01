@@ -33,7 +33,6 @@ const App = ({ cart, reloadCartLS, loginForced, userLogged, history }) => {
   }
   
   const token = localStorage.getItem("token");
-  // const email = localStorage.getItem("email");
 
   //veo que no haya en el store un usuario logueado y que haya un token en el localStorage
 
@@ -41,9 +40,9 @@ const App = ({ cart, reloadCartLS, loginForced, userLogged, history }) => {
   // console.log("token", token);
 
   if (!userLogged && token && token !== "undefined") {
-    // alert("foreceLogn");
+    
     loginForced(JSON.parse(token), history);
-    // return alert("volvi");
+    
   }
 
   return (

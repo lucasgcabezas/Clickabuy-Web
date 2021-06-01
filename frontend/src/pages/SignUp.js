@@ -33,11 +33,7 @@ const SignUp = (props) => {
       firstName: givenName,
       lastName: familyName,
       userImg: imageUrl,
-<<<<<<< HEAD
-      // adminGral: false,
-=======
       /*   adminGral: false, */
->>>>>>> gracia
       email: email,
       password: "a" + googleId,
     });
@@ -46,11 +42,7 @@ const SignUp = (props) => {
     formData.append("loggedWithGoogle", true);
     formData.append("firstName", givenName);
     formData.append("lastName", familyName);
-<<<<<<< HEAD
     // formData.append("adminGral", false);
-=======
-    /*    formData.append("adminGral", false); */
->>>>>>> gracia
     formData.append("email", email);
     formData.append("password", "a" + googleId);
     formData.append("userImg", imageUrl);
@@ -64,11 +56,7 @@ const SignUp = (props) => {
       firstName: "",
       lastName: "",
       userImg: "",
-<<<<<<< HEAD
-      // adminGral: false,
-=======
       /*   adminGral: false, */
->>>>>>> gracia
       email: "",
       password: "",
     },

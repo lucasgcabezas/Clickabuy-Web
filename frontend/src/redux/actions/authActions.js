@@ -55,7 +55,7 @@ const authActions = {
         const { data } = await axios.get(API + "/relogin", {
           headers: { Authorization: "Bearer " + token },
         });
-
+        console.log(data)
         dispatch({
           type: "LOGIN_USER",
           payload: {
