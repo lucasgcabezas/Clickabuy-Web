@@ -1,62 +1,85 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useEffect, useState } from "react";
 const productos = [
-  { name: "cocacola", price: 100, type: "food", reviews: 4.5 },
+  { name: "cocacola", price: 100, type: "food", reviews: 5 },
   { name: "bencina", price: 200, type: "fuel", reviews: 3 },
   { name: "almendras", price: 300, type: "food", reviews: 2 },
+  { name: "Pepsi", price: 500, type: "food", reviews: 4 },
+  { name: "Petroleo", price: 240, type: "fuel", reviews: 1 },
+  { name: "avellanas", price: 2300, type: "food", reviews: 3 },
 ];
 
 const MyFilters = () => {
   const [myProducts, setMyProducts] = useState(productos);
+  const [myProductsAll, setMyProductsAll] = useState(productos);
+  const [myProductsPrice, setMyProductsPrice] = useState(productos);
+
   const [lowEnd, setLowEnd] = useState(0);
-  const [highEnd, setHighEnd] = useState(10);
+  const [highEnd, setHighEnd] = useState(100000);
   const [reviews, setReviews] = useState([]);
 
+  const [check, setCheck] = useState(false);
+
   const handleFilters = (e) => {
-    console.log("e", e);
-    /*  console.log("reviews", reviews); */
+    /* console.log("e", e); */
+    setMyProducts(productos);
+
     let newArrayProducts = [];
     switch (e) {
       case "hf":
-        alert("entre hf");
         newArrayProducts = myProducts.slice().sort((a, b) => b.price - a.price);
         setMyProducts(newArrayProducts);
+
         break;
       case "lf":
-        alert("entre lf");
         newArrayProducts = myProducts.slice().sort((a, b) => a.price - b.price);
         setMyProducts(newArrayProducts);
         break;
-
       case "rPrice":
-        newArrayProducts = myProducts.filter((product) => {
+        newArrayProducts = myProductsAll.filter((product) => {
           return product.price >= lowEnd && product.price <= highEnd;
         });
         setMyProducts(newArrayProducts);
+        setMyProductsPrice(newArrayProducts);
+
+        textInput1.current.checked =
+          textInput2.current.checked =
+          textInput3.current.checked =
+          textInput4.current.checked =
+          textInput5.current.checked =
+            false;
+        setReviews([]);
         break;
 
-      case "threeStar":
-        /*    console.log("rating", reviews); */
-        if (!reviews.includes(3)) {
-          console.log("no lo incluyo a 3");
-          setReviews([...reviews, 3]);
-        }
-        /*   console.log("rating", reviews); */
-        newArrayProducts = myProducts.filter((product) => {
-          console.log("review indi", product.reviews);
-          console.log("RReviews indi", reviews);
-          return reviews.includes(product.reviews) || product.reviews == 3;
-        });
-        setMyProducts(newArrayProducts);
-        break;
-
-      default:
-        return "foo";
+      /*  default:
+        return "foo"; */
     }
-    console.log(newArrayProducts);
-  };
 
-  console.log("reviews", reviews);
+    if (typeof e == "number") {
+      let reviewsAux = reviews;
+
+      if (reviewsAux.includes(e)) {
+        reviewsAux.splice(reviewsAux.indexOf(e), 1);
+      } else {
+        reviewsAux.push(e);
+        setReviews(reviewsAux);
+      }
+      newArrayProducts = myProductsPrice.filter((product) => {
+        return reviewsAux.includes(product.reviews);
+      });
+      setMyProducts(newArrayProducts);
+
+      if (reviewsAux.length == 0) {
+        setMyProducts(myProductsPrice);
+      }
+    }
+  };
+  const textInput1 = useRef(),
+    textInput2 = useRef(),
+    textInput3 = useRef(),
+    textInput4 = useRef(),
+    textInput5 = useRef();
+
   return (
     <div className="mt-5">
       <div className="w-100 d-flex">
@@ -107,6 +130,9 @@ const MyFilters = () => {
             <div className="btn btn-primary" onClick={() => handleFilters("rPrice")}>
               filter Icon
             </div>
+            <div className="ml-1 btn btn-primary" onClick={() => handleFilters("rPrice")}>
+              unfilter Icon
+            </div>
           </div>
           {lowEnd > highEnd && <div>enter a valid price range</div>}
           <div>
@@ -117,9 +143,10 @@ const MyFilters = () => {
                 type="checkbox"
                 id={"Z"}
                 onClick={() => {
-                  alert("hola");
+                  handleFilters(5);
                 }}
                 name={"Z"}
+                ref={textInput5}
               ></input>
               <label htmlFor={"Z"}>⭐⭐⭐⭐⭐</label>
             </div>
@@ -130,9 +157,10 @@ const MyFilters = () => {
                 type="checkbox"
                 id={"Z"}
                 onClick={() => {
-                  alert("hola");
+                  handleFilters(4);
                 }}
                 name={"Z"}
+                ref={textInput4}
               ></input>
               <label htmlFor={"Z"}>⭐⭐⭐⭐</label>
             </div>
@@ -143,9 +171,10 @@ const MyFilters = () => {
                 type="checkbox"
                 id={"Z"}
                 onClick={() => {
-                  handleFilters("threeStar");
+                  handleFilters(3);
                 }}
                 name={"Z"}
+                ref={textInput3}
               ></input>
               <label htmlFor={"Z"}>⭐⭐⭐</label>
             </div>
@@ -156,9 +185,10 @@ const MyFilters = () => {
                 type="checkbox"
                 id={"Z"}
                 onClick={() => {
-                  alert("hola");
+                  handleFilters(2);
                 }}
                 name={"Z"}
+                ref={textInput2}
               ></input>
               <label htmlFor={"Z"}>⭐⭐</label>
             </div>
@@ -169,9 +199,10 @@ const MyFilters = () => {
                 type="checkbox"
                 id={"Z"}
                 onClick={() => {
-                  alert("hola");
+                  handleFilters(1);
                 }}
                 name={"Z"}
+                ref={textInput1}
               ></input>
               <label htmlFor={"Z"}>⭐</label>
             </div>

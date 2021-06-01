@@ -12,13 +12,38 @@ import "../gracia.css";
 import { useEffect, useState } from "react";
 
 const validationSchema = yup.object({
-  firstName: yup.string("Enter a valid name").required("Name is required").min(2),
-  lastName: yup.string("Enter a valid last name").min(2),
-  email: yup.string("Enter your email").email("Enter a valid email").required("Email is required"),
+  firstName: yup
+    .string("Enter a valid name")
+    .required("Name is required")
+    .min(2, "Your name must contain at least 2 letters")
+    .max(20, "Your name can’t contain more than 20 letters.")
+    .trim()
+    .required("This field is mandatory")
+    .matches(new RegExp("[a-zA-Z]$"), "This field can only contain letters"),
+
+  lastName: yup
+    .string("Enter a valid last name")
+    .required("Name is required")
+    .trim()
+    .min(3, "Your last name must contain at least 3 letters")
+    .max(20, "Your last name cannot contain more than 20 letters")
+    .matches(new RegExp("[a-zA-Z]$"), "This field can only contain letters"),
+
+  email: yup
+    .string("Enter a valid email address")
+    .trim()
+    .email("Enter a valid email")
+    .required("This field is mandatory"),
+
   password: yup
     .string("Enter your password")
-    .min(6, "Password should be of minimum 6 characters length")
-    .required("Password is required"),
+    .min(6, "Your password must be at least 6 characters long")
+    .trim()
+    .required("Password is required")
+    .matches(
+      /(?=.*\d)(?=.*[A-z])/,
+      "Your password must be at least 6 characters long, contain a capital letter, minuscule letter and number"
+    ),
 });
 
 const SignUp = (props) => {
