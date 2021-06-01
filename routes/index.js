@@ -8,7 +8,7 @@ const productControllers = require('../controllers/productControllers')
 const categoryControllers = require('../controllers/categoryControllers')
 
 
-const { addUser, getAllUsers, getUserById, updateUser, deleteUser, loginUser, forcedLogin } = userControllers
+const { addUser, getAllUsers, getUserById, updateUser, deleteUser, loginUser, forcedLogin, productsLiked } = userControllers
 const { getAllStores, addStore, editStore, deleteStore, getStoresByCategory,modifyOwnerOfStore } = storeControllers
 const { getAllCategories, getSingleCategory, addCategory, deleteCategory, modifyCategory } = categoryControllers
 const { addProduct, getAllProducts, getProductById, updateProduct, deleteProduct, getProductsFromStore,getProductFromCartLS } = productControllers
@@ -60,6 +60,9 @@ router.route("/product/:id")
     .get(getProductById)
     .put(passport.authenticate('jwt', { session: false }),updateProduct)
     .delete(passport.authenticate('jwt', { session: false }),deleteProduct)
+router.route("/likeproduct")
+    .put(passport.authenticate('jwt', {session: false}), productsLiked)
+
 router.route("/productsFromStore/:id")
     .get(getProductsFromStore)
 

@@ -15,7 +15,7 @@ const authActions = {
         if (data.success) {
           dispatch({ type: "LOGIN_USER", payload: data.response });
           showToast("success", `Welcome ${data.response.firstName} ${data.response.lastName}`);
-          console.log("data.response", data.response);
+          // console.log("data.response", data.response);
           /*     alert(`Welcome ${data.response.firstName} ${data.response.lastName}`); */
         } else {
           return data;

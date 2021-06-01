@@ -1,23 +1,41 @@
 import { connect } from 'react-redux'
 import cartActions from '../redux/actions/cartActions'
 import { FaHeart, FaRegHeart } from 'react-icons/fa'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import productsActions from '../redux/actions/productsActions'
+import { useHistory } from "react-router-dom";
 
-const Product = ({ product, addProductToCart, deleteProductFromCart, cart }) => {
-    const { stock, description, nameProduct, price, productImg } = product
+const Product = ({ product, addProductToCart, deleteProductFromCart, cart, user, likeProduct, userLogged }) => {
+    // console.log(user)
+    const { stock, description, nameProduct, price, productImg, _id } = product
     const [color, setColor] = useState(false)
-    // const likes = async () => {
-    //     if (!userLogged) {
-    //         toast.error("You must be logged in to like a post")
-    //     } else{
-    //         setLoadingHeart(false)
-    //         const response = await props.like(userLogged.token, store._id)
-    //         setItinerariesLikes(response.userLiked)
-    //         setColor(response.heart)
-    //         setLoadingHeart(true)
-    //     }
-    // }
+    const [loadingHeart, setLoadingHeart] = useState(true)
+    const [productsLiked, setProductsLiked] = useState(user)
+    let history = useHistory()
+    if (!productsLiked) {
+        history.push('/')
+    }
+    useEffect(()=>{
+
+        userLogged ? (productsLiked.includes(user) && setColor(true)) : setColor(false)
+
+    }, [productsLiked])
+
+    // console.log(productsLiked)
+    // console.log(productsLiked.includes(userLogged.productsLiked) && setColor(true))
+    const likes = async () => {
+        if (!userLogged) {
+            alert("no podes likear")
+        } else{
+            setLoadingHeart(false)
+            const response = await likeProduct(userLogged.token, _id)
+            // console.log(response)
+            setProductsLiked(response.productsLiked)
+            setColor(response.heart)
+            setLoadingHeart(true)
+        }
+    }
     return (
         <div className="cardProduct">
             {/* <img src={productImg} alt="" style={{width:"60%"}}/> */}
@@ -28,13 +46,12 @@ const Product = ({ product, addProductToCart, deleteProductFromCart, cart }) => 
                 <p>Price: ${price}</p>
                 <p>Stock: {stock}</p>
             </div>
-            <div /*onClick={(loadingHeart ? likes : null)}*/ className="contenedorIconoCorazon">
+            <div onClick={(loadingHeart ? likes : null)} className="contenedorIconoCorazon">
                 {color ? <FaHeart className="iconoCorazon" /> : <FaRegHeart className="iconoCorazon" />}
             </div>
             <Link to={`/product/${product._id}`} >
                 <button className="buttonAddProduct">View More</button>
             </Link>
-            
             {/* {cart.find(item => item._id === product._id)
                 ?
                 <button className="buttonRemoveProduct" onClick={() => deleteProductFromCart(product)}>- Remove product</button>
@@ -48,12 +65,14 @@ const Product = ({ product, addProductToCart, deleteProductFromCart, cart }) => 
 
 const mapStateToProps = (state) => {
     return {
-        cart: state.cartReducer.cart
+        cart: state.cartReducer.cart,
+        userLogged: state.authReducer.userLogged
     }
 }
 const mapDispatchToProps = {
     addProductToCart: cartActions.addProductToCart,
-    deleteProductFromCart: cartActions.deleteProductFromCart
+    deleteProductFromCart: cartActions.deleteProductFromCart,
+    likeProduct: productsActions.likeProduct,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Product)

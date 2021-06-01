@@ -26,5 +26,21 @@ const productsActions = {
             dispatch({type: 'FILTER_PRODUCTS', payload: value})
         }
     },
+    likeProduct: (token, idProduct) => {
+        return async (dispatch, getState) => {
+            try {
+                const response = await axios.put('http://localhost:4000/api/likeproduct', {idProduct},{
+                    headers:{
+                        'Authorization': 'Bearer ' +token 
+                    }
+                })
+                return response.data.response
+                // console.log(response.data.response)
+            } catch (error) {
+                console.log(error)
+                // toast.error("Oops! Something went wrong")
+            }
+        }
+    }
 }
 export default productsActions
