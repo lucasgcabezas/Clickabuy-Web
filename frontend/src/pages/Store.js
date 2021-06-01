@@ -2,7 +2,6 @@ import { useEffect, useState } from "react"
 import { connect } from "react-redux"
 import Product from "../components/Product"
 import productsActions from "../redux/actions/productsActions"
-import {NavLink} from 'react-router-dom'
 import Header from "../components/Header"
 import Footer from '../components/Footer'
 
@@ -35,36 +34,32 @@ const Store = (props) => {
                 
                 <div className="contenedorInfoCards">
                     <div className="contenedorFiltrosStore">
-
-                    </div>
-                    <div className="containerCards">
-                        {
-                            props.products.length === 0
-                                ? <div> <h1>no products</h1> </div>
-                                : props.products.map(product => {
-                                    return (
-                                        <div key={product._id}>
-                                            <Product product={product} />
-                                        </div>
-
-                                    )
-                                }
-                                )
-                        }
                     </div>
                 </div>
+                <div className="containerCards">
+                    {props.products.length === 0
+                            ? <div> <h1>no products</h1> </div>
+                            : props.products.map(product => {
+                                return (
+                                    <div key={product._id}>
+                                        <Product product={product} /* user={props.userLogged.productsLiked} */ />
+                                    </div>
+                                    )
+                                })
+                    }                    
+                </div>                
             </div>
             <Footer />
         </div>
     )
-
 }
 
 const mapStateToProps = state => {
     return {
         storesForCategory: state.categoryReducer.stores,
         products: state.productReducer.products,
-        filterProducts: state.productReducer.filterProducts
+        filterProducts: state.productReducer.filterProducts,
+        userLogged: state.authReducer.userLogged
     }
 }
 

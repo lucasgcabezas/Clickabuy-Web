@@ -26,14 +26,14 @@ const SignUp = (props) => {
   const respuestaGoogle = (response) => {
     const { givenName, familyName, email, googleId, imageUrl } = response.profileObj;
     /* setPreUser({name:givenName,email:email,pass:googleId,url:imageUrl}) */
-    console.log(response);
+    /*  console.log(response); */
     /* alert("ahora"); */
     console.log({
       loggedWithGoogle: true,
       firstName: givenName,
       lastName: familyName,
       userImg: imageUrl,
-      adminGral: false,
+      /*   adminGral: false, */
       email: email,
       password: "a" + googleId,
     });
@@ -42,7 +42,7 @@ const SignUp = (props) => {
     formData.append("loggedWithGoogle", true);
     formData.append("firstName", givenName);
     formData.append("lastName", familyName);
-    formData.append("adminGral", false);
+    // formData.append("adminGral", false);
     formData.append("email", email);
     formData.append("password", "a" + googleId);
     formData.append("userImg", imageUrl);
@@ -56,7 +56,7 @@ const SignUp = (props) => {
       firstName: "",
       lastName: "",
       userImg: "",
-      adminGral: false,
+      /*   adminGral: false, */
       email: "",
       password: "",
     },
@@ -67,14 +67,14 @@ const SignUp = (props) => {
       formData.append("loggedWithGoogle", values.loggedWithGoogle);
       formData.append("firstName", values.firstName);
       formData.append("lastName", values.lastName);
-      formData.append("adminGral", false);
+      /*   formData.append("adminGral", false); */
       formData.append("email", values.email);
       formData.append("password", values.password);
       formData.append("userImg", photo.userImg);
       /*   console.log("x", formData); */
 
-      alert(JSON.stringify(values, null, 2));
-      console.log("el formData", formData);
+      /*  alert(JSON.stringify(values, null, 2));
+      console.log("el formData", formData); */
       props.signUpUser(formData);
       props.history.push("/");
     },

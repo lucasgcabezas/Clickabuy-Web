@@ -15,10 +15,10 @@ const authActions = {
         if (data.success) {
           dispatch({ type: "LOGIN_USER", payload: data.response });
           showToast("success", `Welcome ${data.response.firstName} ${data.response.lastName}`);
-          console.log("data.response", data.response);
+          // console.log("data.response", data.response);
           /*     alert(`Welcome ${data.response.firstName} ${data.response.lastName}`); */
         } else {
-          return data;
+          return console.log(data);
         }
       } catch (err) {
         console.log(err);
@@ -55,7 +55,7 @@ const authActions = {
         const { data } = await axios.get(API + "/relogin", {
           headers: { Authorization: "Bearer " + token },
         });
-
+        console.log(data)
         dispatch({
           type: "LOGIN_USER",
           payload: {

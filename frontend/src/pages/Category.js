@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import categoryActions from '../redux/actions/categoryActions'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
+
 const Category = (props) => {
     const { currentCategory } = props
     if (!props.currentCategory) {
