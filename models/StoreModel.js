@@ -9,6 +9,7 @@ const storeSchema = new mongoose.Schema({
     rate: [{vote: {type: Number, required: true}, userId:{type: mongoose.Types.ObjectId, ref: 'user', required:true}, default: 0}],
     owners: [{type: mongoose.Types.ObjectId ,ref:'user'}],
     logoStore: {type: String, required: true},
+    usersRated: [String],
 })
 
 const Store = mongoose.model('store',storeSchema);
