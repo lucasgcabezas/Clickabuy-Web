@@ -136,37 +136,30 @@ const userControllers = {
     respondFrontend(res, response, error);
   },
   forcedLogin: async (req, res) => {
-    try {
-      let userExist = await User.findOne({ email });
-      if (!userExist) {
-        password = bcryptsjs.hashSync(password, 10);
-        let newUser = new User({ ...req.body, password });
-        if (!loggedWithGoogle) {
-          let fileName = `${newUser._id}.${extensionImg}`;
-          //let fileName = `${__dirname}/clients/build/assets/usersImg/${fileName}`
-          let filePath = `${__dirname}/../frontend/public/assets/usersImg/${fileName}`;
-          newUser.userImg = "/usersImg/" + fileName;
-          await userImg.mv(filePath);
-        }
-
-        await newUser.save();
-
-        let token = jwToken.sign({ ...newUser }, process.env.SECRET_OR_KEY);
-        response = {
-          ...newUser.toObject(),
-          _id: undefined,
-          password: undefined,
-          token,
-        };
-      } else {
-        error = "This email is already in use, choose another";
-      }
-    } catch (err) {
-      console.log(err);
-      error = errorBackend;
-    }
-    respondFrontend(res, response, error);
+    let response = {
+      ...req.user.toObject(),
+      _id: undefined,
+      password: undefined,
+    };
+    respondFrontend(res, response, undefined);
   },
+  productsLiked: async (req, res) => {
+    const id = req.body.idProduct
+    const userEmail = req.user.email
+
+    try {
+      const product = await User.findOne({ email: userEmail, "productsLiked": id })
+      if (!product) {
+        const likeProduct = await User.findOneAndUpdate({ email: userEmail }, { $push: { productsLiked: id } }, { new: true })
+        res.json({ success: true, response: { productsLiked: likeProduct.productsLiked, heart: true } })
+      } else {
+        const deslikeProduct = await User.findOneAndUpdate({ email: userEmail }, { $pull: { productsLiked: id } }, { new: true })
+        res.json({ success: true, response: { productsLiked: deslikeProduct.productsLiked, heart: false } })
+      }
+    } catch (error) {
+      res.json({ success: false, respuesta: 'Ha ocurrido un error en el servidor' })
+    }
+  }
 
   // getAllUsers: async (req, res) => {
   //   let response, error;

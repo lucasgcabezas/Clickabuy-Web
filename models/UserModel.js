@@ -6,7 +6,7 @@ const userSchema = new mongoose.Schema({
     lastName:{type: String, required: true},
     userImg:{type: String, required: true},
     role : {type:String,default:"commonUser"}, //roles: commonUser,adminStores,adminApp
-    
+    productsLiked: [{type:String}],
     email:{type: String, required: true},
     loggedWithGoogle: {type: Boolean , default: false} 
 })

@@ -22,7 +22,6 @@ import MyStoreView from  './pages/MyStoreView'
 import ProductPage from "./pages/ProductPage";
 import MyFilters from "./components/MyFilters";
 
-
 const App = ({ cart, reloadCartLS, loginForced, userLogged, history }) => {
   if (cart.length === 0) {
     let cartLS = localStorage.getItem("cartLS");
@@ -32,19 +31,19 @@ const App = ({ cart, reloadCartLS, loginForced, userLogged, history }) => {
       if (cartLS instanceof Array && cartLS.length !== 0) reloadCartLS(cartLS);
     } else localStorage.removeItem("cartLS");
   }
-
+  
   const token = localStorage.getItem("token");
-  const email = localStorage.getItem("email");
+  // const email = localStorage.getItem("email");
 
   //veo que no haya en el store un usuario logueado y que haya un token en el localStorage
 
-  console.log("userLogged", userLogged);
-  console.log("token", token);
+  // console.log("userLogged", userLogged);
+  // console.log("token", token);
 
   if (!userLogged && token && token !== "undefined") {
-    alert("foreceLogn");
-    loginForced(JSON.parse(token), email, history);
-    return alert("volvi");
+    // alert("foreceLogn");
+    loginForced(JSON.parse(token), history);
+    // return alert("volvi");
   }
 
   return (
