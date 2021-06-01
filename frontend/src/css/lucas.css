@@ -72,14 +72,15 @@ html * {
 .categoryStoresSection{
     /* background-color: white; */
     width: 95%;
-    height: 50vh;
-    margin-top: 30px;
-    padding: 5vh 2vw;
+    /* height: 50vh; */
+    /* margin-top: 30px; */
+    margin-bottom: 6vh;
+    padding: 1vh 2vw;
     display: flex;
     border-radius: 5px;
 }
 
-.categoryStoresCards{
+/* .categoryStoresCards{
     background-color: var(--fcolor);
     background-color: #ffffff;
     margin: .5vh .5vw;
@@ -91,5 +92,65 @@ html * {
     justify-content: center;
     align-items: center;
     box-shadow: 0px 4px 5px 1px #00000022;
+} */
 
+
+
+
+
+.productPageContainer{
+    background-color: #f7f7f7;
+    /* background-color: yellow; */
+    /* flex: 1; */
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.productPageImg{
+    width: 400px;
+    height: 400px;
+    background-size: cover;
+}
+
+.productPageCard{
+    background-color: #ffffff;
+    width: 95%;
+    height: 80%;
+    padding: 5vh 5vw;
+    box-shadow: 0px 2px 5px 1px #00000022;
+    border-radius: 5px;
+}
+
+.productPageCardInfo{
+    display: flex;
+    /* background-color: blue; */
+}
+
+.productPageTitlePrice{
+    /* background-color: blueviolet; */
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.productPageTitle{
+    height: 15vh;
+    display: flex;
+    align-items: center;
+    font-size: 1.9rem;
+}
+
+.productPagePrice{
+    height: 10vh;
+    display: flex;
+    align-items: center;
+}
+
+.productPageStock{
+    height: 10vh;
+    display: flex;
+    align-items: center;
 }

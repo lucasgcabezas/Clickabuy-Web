@@ -19,6 +19,7 @@ import cartActions from "./redux/actions/cartActions";
 import Header from "./components/Header";
 import MyStores from "./pages/MyStores";
 import MyStoreView from "./pages/MyStoreView";
+import ProductPage from "./pages/ProductPage";
 import MyFilters from "./components/MyFilters";
 
 const App = ({ cart, reloadCartLS, loginForced, userLogged, history }) => {
@@ -53,6 +54,7 @@ const App = ({ cart, reloadCartLS, loginForced, userLogged, history }) => {
         <Route exact path="/" component={Home} />
         <Route path="/category/:id" component={Category} />
         <Route path="/store/:id" component={Store} />
+        <Route path="/product/:id" component={ProductPage} />
         <Route path="/buys" component={Buys} />
         <Route path="/SignIn" component={SignIn} />
         <Route path="/SignUp" component={SignUp} />

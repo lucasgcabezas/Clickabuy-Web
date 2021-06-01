@@ -18,7 +18,7 @@ const authActions = {
           console.log("data.response", data.response);
           /*     alert(`Welcome ${data.response.firstName} ${data.response.lastName}`); */
         } else {
-          return data;
+          return console.log(data);
         }
       } catch (err) {
         console.log(err);

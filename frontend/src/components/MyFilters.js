@@ -1,18 +1,20 @@
 import React from "react";
 import { useEffect, useState } from "react";
 const productos = [
-  { name: "cocacola", price: 100, type: "food" },
-  { name: "bencina", price: 200, type: "fuel" },
-  { name: "almendras", price: 300, type: "food" },
+  { name: "cocacola", price: 100, type: "food", reviews: 4.5 },
+  { name: "bencina", price: 200, type: "fuel", reviews: 3 },
+  { name: "almendras", price: 300, type: "food", reviews: 2 },
 ];
 
 const MyFilters = () => {
   const [myProducts, setMyProducts] = useState(productos);
   const [lowEnd, setLowEnd] = useState(0);
   const [highEnd, setHighEnd] = useState(10);
+  const [reviews, setReviews] = useState([]);
 
   const handleFilters = (e) => {
     console.log("e", e);
+    /*  console.log("reviews", reviews); */
     let newArrayProducts = [];
     switch (e) {
       case "hf":
@@ -27,11 +29,24 @@ const MyFilters = () => {
         break;
 
       case "rPrice":
-        newArrayProducts = myProducts.map((product) => {
-          product;
+        newArrayProducts = myProducts.filter((product) => {
+          return product.price >= lowEnd && product.price <= highEnd;
         });
-        product;
+        setMyProducts(newArrayProducts);
+        break;
 
+      case "threeStar":
+        /*    console.log("rating", reviews); */
+        if (!reviews.includes(3)) {
+          console.log("no lo incluyo a 3");
+          setReviews([...reviews, 3]);
+        }
+        /*   console.log("rating", reviews); */
+        newArrayProducts = myProducts.filter((product) => {
+          console.log("review indi", product.reviews);
+          console.log("RReviews indi", reviews);
+          return reviews.includes(product.reviews) || product.reviews == 3;
+        });
         setMyProducts(newArrayProducts);
         break;
 
@@ -40,6 +55,8 @@ const MyFilters = () => {
     }
     console.log(newArrayProducts);
   };
+
+  console.log("reviews", reviews);
   return (
     <div className="mt-5">
       <div className="w-100 d-flex">
@@ -91,14 +108,82 @@ const MyFilters = () => {
               filter Icon
             </div>
           </div>
+          {lowEnd > highEnd && <div>enter a valid price range</div>}
+          <div>
+            <div>
+              <div>by opinions of Customers</div>
+              <input
+                /*  style={{ display: "none" }} */
+                type="checkbox"
+                id={"Z"}
+                onClick={() => {
+                  alert("hola");
+                }}
+                name={"Z"}
+              ></input>
+              <label htmlFor={"Z"}>⭐⭐⭐⭐⭐</label>
+            </div>
+
+            <div>
+              <input
+                /*  style={{ display: "none" }} */
+                type="checkbox"
+                id={"Z"}
+                onClick={() => {
+                  alert("hola");
+                }}
+                name={"Z"}
+              ></input>
+              <label htmlFor={"Z"}>⭐⭐⭐⭐</label>
+            </div>
+
+            <div>
+              <input
+                /*  style={{ display: "none" }} */
+                type="checkbox"
+                id={"Z"}
+                onClick={() => {
+                  handleFilters("threeStar");
+                }}
+                name={"Z"}
+              ></input>
+              <label htmlFor={"Z"}>⭐⭐⭐</label>
+            </div>
+
+            <div>
+              <input
+                /*  style={{ display: "none" }} */
+                type="checkbox"
+                id={"Z"}
+                onClick={() => {
+                  alert("hola");
+                }}
+                name={"Z"}
+              ></input>
+              <label htmlFor={"Z"}>⭐⭐</label>
+            </div>
+
+            <div>
+              <input
+                /*     style={{ display: "none" }} */
+                type="checkbox"
+                id={"Z"}
+                onClick={() => {
+                  alert("hola");
+                }}
+                name={"Z"}
+              ></input>
+              <label htmlFor={"Z"}>⭐</label>
+            </div>
+          </div>
         </div>
         {console.log(myProducts)}
         <div className="w-50">
           {myProducts.map((product) => {
             return (
-              <h2 className="text-dark">
-                {product.name}| {product.price}
-              </h2>
+              <h6 className="text-dark">
+                {product.name}| {product.price} |{product.reviews}
+              </h6>
             );
           })}
         </div>
