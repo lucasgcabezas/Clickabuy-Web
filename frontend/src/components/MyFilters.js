@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import { useEffect, useState } from "react";
+
 const productos = [
   { name: "cocacola", price: 100, type: "food", reviews: 5 },
   { name: "bencina", price: 200, type: "fuel", reviews: 3 },
@@ -9,6 +10,9 @@ const productos = [
   { name: "avellanas", price: 2300, type: "food", reviews: 3 },
 ];
 
+const min = 0;
+const max = 100000;
+
 const MyFilters = () => {
   const [myProducts, setMyProducts] = useState(productos);
   const [myProductsAll, setMyProductsAll] = useState(productos);
@@ -17,8 +21,6 @@ const MyFilters = () => {
   const [lowEnd, setLowEnd] = useState(0);
   const [highEnd, setHighEnd] = useState(100000);
   const [reviews, setReviews] = useState([]);
-
-  const [check, setCheck] = useState(false);
 
   const handleFilters = (e) => {
     /* console.log("e", e); */
@@ -36,9 +38,18 @@ const MyFilters = () => {
         setMyProducts(newArrayProducts);
         break;
       case "rPrice":
-        newArrayProducts = myProductsAll.filter((product) => {
-          return product.price >= lowEnd && product.price <= highEnd;
-        });
+        debugger;
+        if (lowEnd == "" && highEnd == "") {
+          setLowEnd(min);
+          setHighEnd(max);
+          newArrayProducts = myProductsAll.filter((product) => {
+            return product.price >= min && product.price <= max;
+          });
+        } else {
+          newArrayProducts = myProductsAll.filter((product) => {
+            return product.price >= lowEnd && product.price <= highEnd;
+          });
+        }
         setMyProducts(newArrayProducts);
         setMyProductsPrice(newArrayProducts);
 
@@ -83,9 +94,9 @@ const MyFilters = () => {
   return (
     <div className="mt-5">
       <div className="w-100 d-flex">
-        <div className="w-50 d-flex flex-column bg-info">
+        <div className="w-50 d-flex flex-column bg-light ">
           Filters
-          <div className="d-flex">
+          <div className="d-flex mb-5">
             <div
               className="btn btn-primary"
               onClick={() => {
@@ -103,7 +114,7 @@ const MyFilters = () => {
               lower price first
             </div>
           </div>
-          <div className="d-flex ">
+          <div className="d-flex mb-5 ">
             <div>
               <input
                 id="lowEnd"
@@ -209,7 +220,7 @@ const MyFilters = () => {
           </div>
         </div>
         {console.log(myProducts)}
-        <div className="w-50">
+        <div className="w-50 bg-success">
           {myProducts.map((product) => {
             return (
               <h6 className="text-dark">
