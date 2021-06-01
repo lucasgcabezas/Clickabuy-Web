@@ -9,7 +9,7 @@ const storeActions = {
         const { data } = axios.get(API + "/stores");
         console.log("data", data);
       } catch (err) {
-        console.log(err);npm
+        console.log(err);
         showTostError500();
       }
 
