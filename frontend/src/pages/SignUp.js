@@ -26,7 +26,7 @@ const SignUp = (props) => {
   const respuestaGoogle = (response) => {
     const { givenName, familyName, email, googleId, imageUrl } = response.profileObj;
     /* setPreUser({name:givenName,email:email,pass:googleId,url:imageUrl}) */
-    console.log(response);
+    /*  console.log(response); */
     /* alert("ahora"); */
     console.log({
       loggedWithGoogle: true,
@@ -73,8 +73,8 @@ const SignUp = (props) => {
       formData.append("userImg", photo.userImg);
       /*   console.log("x", formData); */
 
-      alert(JSON.stringify(values, null, 2));
-      console.log("el formData", formData);
+      /*  alert(JSON.stringify(values, null, 2));
+      console.log("el formData", formData); */
       props.signUpUser(formData);
       props.history.push("/");
     },

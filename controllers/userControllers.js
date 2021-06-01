@@ -15,6 +15,7 @@ const errorUserNotFound = "error: User not found";
 
 const userControllers = {
   addUser: async (req, res) => {
+    console.log("soy la req body", req.body);
     let response, error;
     let { email, password, loggedWithGoogle } = req.body;
     loggedWithGoogle = JSON.parse(loggedWithGoogle);
