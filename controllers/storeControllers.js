@@ -206,6 +206,18 @@ const storeControllers = {
             console.log(err)
         }
         res.json({ success: !error ? true : false, response, error })
+    },
+    getStoresUser : async (req,res) =>{
+        let response, error;
+        const user = req.user;
+
+        try {
+            response = await StoreModel.find({ owners: user._id })
+        } catch (err) {
+            error = `${err.name} : ${err.message}`
+            console.log(err)
+        }
+        res.json({ success: !error ? true : false, response, error })
     }
 
 }

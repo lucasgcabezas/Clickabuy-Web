@@ -9,7 +9,7 @@ const categoryControllers = require('../controllers/categoryControllers')
 
 
 const { addUser, getAllUsers, getUserById, updateUser, deleteUser, loginUser, forcedLogin } = userControllers
-const { getAllStores, addStore, editStore, deleteStore, getStoresByCategory,modifyOwnerOfStore } = storeControllers
+const { getAllStores, addStore, editStore, deleteStore, getStoresByCategory,modifyOwnerOfStore,getStoresUser } = storeControllers
 const { getAllCategories, getSingleCategory, addCategory, deleteCategory, modifyCategory } = categoryControllers
 const { addProduct, getAllProducts, getProductById, updateProduct, deleteProduct, getProductsFromStore,getProductFromCartLS } = productControllers
 
@@ -32,6 +32,9 @@ router.route("/user/:id")
 router.route("/stores")
     .get(getAllStores)
     .post(passport.authenticate('jwt', { session: false }),addStore)
+
+router.route("/storesByUser")
+    .get(passport.authenticate('jwt', { session: false }),getStoresUser)
 
 router.route("/store/:id")
     .get(getStoresByCategory)
