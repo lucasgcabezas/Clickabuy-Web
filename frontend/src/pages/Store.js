@@ -10,58 +10,56 @@ const Store = (props) => {
     const { getProductsFromStore } = props
     const idParams = props.match.params.id
     const [store, setStore] = useState([])
+
     useEffect(() => {
         !props.storesForCategory.length ? props.history.push('/') : setStore(props.storesForCategory.find(store => store._id === idParams))
         getProductsFromStore(idParams)
     }, [])
+
+    var placeholderStoreInput = `Search products in ${store.nameStore}`
     return (
-        <>
-        <Header />
-        <body>
-            <NavLink to="/">Home</NavLink>
-            <div className="containerStore">
-                <div className="bannerStore">
+        <div className="contenedorStore">
+            <Header />
+            <div style={{ backgroundImage: `url('${store.storeHero}')` }} className="storeHero">
+                <div className="contenedorInfoStorePage">
+                    <div style={{ backgroundImage: `url('../assets/${store.logoStore}')` }} className="storeLogoStore"></div>
                     <h1>{store.nameStore}</h1>
-                    <p>{store.storeImg}</p>
-                    <p>{store.description}</p>
+                    <div className="contenedorFindProductStore">
+                        <input type="text" className="inputSearchStore" placeholder={placeholderStoreInput}  name="" id="buscar" onChange={(e) => {props.filter(e.target.value)}}/>
+                        <span className="material-icons-outlined iconSearchStore">search</span>
+                    </div>
                 </div>
             </div>
             <div className='buscador'>
                 <input className='txtBuscador' type="Buscar" name="" id="buscar" placeholder="Find your perfect product!" onChange={(e) => {props.filter(e.target.value)}} />
                 
-                <div className="containerCards">
-                    {props.products.length === 0 
-                    ? <h2 className='cartelSinProductos'>We don´t have any product that matches your search! Try another one!</h2> 
-                    : props.products.map((product, id) => {
-                        return (
-                            <div key={id}>
-                                <Product product={product} />
-                            </div>
-                            )
-                    })}
+                <div className="contenedorInfoCards">
+                    <div className="contenedorFiltrosStore">
+
+                    </div>
+                    <div className="containerCards">
+                        {
+                            props.products.length === 0
+                                ? <div> <h1>no products</h1> </div>
+                                : props.products.map(product => {
+                                    return (
+                                        <div key={product._id}>
+                                            <Product product={product} />
+                                        </div>
+
+                                    )
+                                }
+                                )
+                        }
+                    </div>
                 </div>
             </div>
-
-            {/* <div className="containerCards">
-                {
-                    props.products.length === 0 
-                    ? <div> <h1>no products</h1> </div>
-                    : props.products.map(product => {
-                        return (
-                            <div key={product._id}>
-                                <Product product={product} />
-                            </div>
-
-                        )
-                    }
-                    )
-                }
-            </div> */}
-        </body>
-        <Footer />
-        </>
+            <Footer />
+        </div>
     )
+
 }
+
 const mapStateToProps = state => {
     return {
         storesForCategory: state.categoryReducer.stores,

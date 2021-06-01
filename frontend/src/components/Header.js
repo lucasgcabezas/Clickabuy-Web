@@ -4,8 +4,10 @@ import Categories from "./Categories";
 import { connect } from "react-redux";
 import authActions from "../redux/actions/authActions";
 import "../../src/gracia.css";
+import { useLocation } from "react-router-dom";
 const Header = (props) => {
   const usuarioImage = props.userLogged ? <div style={{backgroundImage: "url('./assets" + props.userLogged.userImg + "')"}} className="usuarioImage"></div> : <span className="material-icons-outlined iconUser">account_circle</span>
+  const { pathname } = useLocation();
   
   return (
     <header className="headerContainer">
@@ -19,8 +21,8 @@ const Header = (props) => {
         ></div>
         <h1>clickabuy</h1>
       </div>
-      <div className="contenedorFiltro">
-        <input type="text" className="filtroHome" placeholder="Find your perfect product"></input>
+      <div className={pathname === "/" ? "contenedorFiltro" : "contenedorFiltro2"}>
+        <input type="text" className="filtroHome" placeholder="Search products"></input>
         <span className="material-icons-outlined iconSearchHome">search</span>
       </div>
       <div className="contenedorNavs">

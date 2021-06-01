@@ -1,6 +1,16 @@
+import { useEffect } from "react"
+import { connect } from "react-redux"
 import { Link } from "react-router-dom"
+import productsActions from "../redux/actions/productsActions"
 
-const MainHome = () => {
+const MainHome = (props) => {
+    const { products } = props
+    useEffect(() => {
+        props.getAllProducts()
+    }, [])
+    // console.log(products)
+    const productsFiltered = products.filter((product, index) => index <= 3)
+    // console.log(productsFiltered)
     return (
         <>
             <div className="contenedorPublicity">
@@ -16,7 +26,21 @@ const MainHome = () => {
             <div className="contenedorFlashDeals">
                 <h3>Flash Deals</h3>
                 <div className="contenedorflashDealsInfo">
-
+                    {
+                        productsFiltered.map(product => {
+                            return (
+                                <div className="productHome">
+                                    <div style={{backgroundImage: `url('${product.productImg}')`}} className="imageProductHome">
+                                        <span className="descuentoHome">-20%</span>
+                                    </div>
+                                    <div className="productHomeInfo">
+                                        <span>{product.nameProduct}</span>
+                                        <span>${product.price}</span>
+                                    </div>
+                                </div>
+                            )
+                        })
+                    }
                 </div>
             </div>
             <div className="contenedorDownload">
@@ -35,4 +59,12 @@ const MainHome = () => {
         </>
     )
 }
-export default MainHome
+const mapStateToProps = state => {
+    return{
+        products: state.productReducer.products
+    }
+}
+const mapDispatchToProps = {
+    getAllProducts: productsActions.getAllProducts
+}
+export default connect(mapStateToProps, mapDispatchToProps)(MainHome)

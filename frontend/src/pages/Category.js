@@ -4,21 +4,21 @@ import { Link } from 'react-router-dom'
 // import { useState } from 'react'
 import categoryActions from '../redux/actions/categoryActions'
 import Header from '../components/Header'
-
-
+import Footer from '../components/Footer'
 const Category = (props) => {
+    const { currentCategory } = props
     if (!props.currentCategory) {
         return <h1>cargando...</h1>
     }
     return (
         <>
-            <Header/>
+            <Header />
             <div className="categoryContainer">
-                <div className="categoryHeroImage" style={{ backgroundImage: `url('${props.currentCategory.bannerCategory}')` }}>
+                <div className="categoryHeroImage" style={{ backgroundImage: `url('${currentCategory.bannerCategory}')` }}>
                     <div className="contenedorNameCategoryHero">
                         <div>
                             <span className="nameCategoryHero1">category</span>
-                            <span className="nameCategoryHero2">{props.currentCategory.nameCategory}</span>
+                            <span className="nameCategoryHero2">{currentCategory.nameCategory}</span>
                         </div>
                     </div>
                 </div>
@@ -30,15 +30,21 @@ const Category = (props) => {
                                 ? <span>No hay disponibles</span>
                                 : props.storesForCategory.map((store, i) => {
                                     return (
-                                        <div key={i} className="categoryStoresCards">
-                                            <Link to={`/store/${store._id}`}>{store.nameStore}</Link>
-                                        </div>
+                                        <Link to={`/store/${store._id}`} className="linkStore categoryStoresCards" key={i} >
+                                            <div>
+                                                <div style={{ backgroundImage: `url('../assets/${store.logoStore}')` }} className="logoStoreCategory"></div>
+                                                <span className="nameStoresCards">{store.nameStore}</span>
+                                                <span className="nameCategoryStoresCards">STARTS</span>
+                                                <span className="nameCategoryStoresCards">{currentCategory.nameCategory}</span>
+                                            </div>
+                                        </Link>
                                     )
                                 })
                         }
                     </div>
                 </div>
             </div>
+            <Footer />
         </>
     )
 }

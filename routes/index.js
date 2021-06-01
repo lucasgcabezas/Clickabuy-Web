@@ -9,7 +9,7 @@ const categoryControllers = require('../controllers/categoryControllers')
 
 
 const { addUser, getAllUsers, getUserById, updateUser, deleteUser, loginUser, forcedLogin } = userControllers
-const { getAllStores, addStore, editStore, deleteStore, getStoresByCategory } = storeControllers
+const { getAllStores, addStore, editStore, deleteStore, getStoresByCategory,modifyOwnerOfStore } = storeControllers
 const { getAllCategories, getSingleCategory, addCategory, deleteCategory, modifyCategory } = categoryControllers
 const { addProduct, getAllProducts, getProductById, updateProduct, deleteProduct, getProductsFromStore,getProductFromCartLS } = productControllers
 
@@ -37,8 +37,11 @@ router.route("/store/:id")
     .get(getStoresByCategory)
     // passport.authenticate('jwt', { session: false }),
     .put(passport.authenticate('jwt', { session: false }),editStore)
-    
     .delete(passport.authenticate('jwt', { session: false }),deleteStore)
+
+router.route("/modifyOwnerOfStore/:id")
+.put(passport.authenticate('jwt', { session: false }),modifyOwnerOfStore)
+
 
 router.route("/categories")
     .get(getAllCategories)
@@ -51,12 +54,12 @@ router.route("/category/:id")
 
 router.route("/products")
     .get(getAllProducts)
-    .post(addProduct)
+    .post(passport.authenticate('jwt', { session: false }),addProduct)
 
 router.route("/product/:id")
     .get(getProductById)
-    .put(updateProduct)
-    .delete(deleteProduct)
+    .put(passport.authenticate('jwt', { session: false }),updateProduct)
+    .delete(passport.authenticate('jwt', { session: false }),deleteProduct)
 router.route("/productsFromStore/:id")
     .get(getProductsFromStore)
 
