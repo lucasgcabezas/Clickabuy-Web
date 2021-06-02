@@ -8,7 +8,7 @@ const MainHome = (props) => {
     useEffect(() => {
         props.getAllProducts()
     }, [])
-    // console.log(products)
+    console.log(products)
     const productsFiltered = products.filter((product, index) => index <= 3)
     // console.log(productsFiltered)
     return (

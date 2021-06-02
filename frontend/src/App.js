@@ -21,6 +21,7 @@ import MyStoreView from "./pages/MyStoreView";
 import ProductPage from "./pages/ProductPage";
 import MyFilters from "./components/MyFilters";
 import Favorites from "./pages/Favorites";
+import FilterProductsStore from './components/FilterProductsStore'
 
 const App = ({ cart, reloadCartLS, loginForced, userLogged, history }) => {
   if (cart.length === 0) {
@@ -71,6 +72,7 @@ const App = ({ cart, reloadCartLS, loginForced, userLogged, history }) => {
         <Route path="/myStores" component={MyStores} />
         <Route path="/myStoreView" component={MyStoreView} />
         <Route path="/myFilters" component={MyFilters} />
+        <Route path="/products" component={FilterProductsStore} />
         <Redirect to="/" />
       </Switch>
     </BrowserRouter>

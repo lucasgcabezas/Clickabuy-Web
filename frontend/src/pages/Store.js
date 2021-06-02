@@ -3,7 +3,6 @@ import { connect } from "react-redux"
 import Product from "../components/Product"
 import productsActions from "../redux/actions/productsActions"
 import ReactStars from "react-rating-stars-component"
-
 import { NavLink } from 'react-router-dom'
 import Header from "../components/Header"
 import Footer from '../components/Footer'
@@ -68,7 +67,6 @@ const Store = (props) => {
 
 
             <div className='buscador'>
-
 
                 <div className="contenedorInfoCards">
                     <div className="contenedorFiltrosStore">

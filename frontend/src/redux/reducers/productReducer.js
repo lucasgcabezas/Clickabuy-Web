@@ -13,7 +13,8 @@ const productReducer = (state = initialState, action) => {
         case 'FETCH_ALL_PRODUCTS':
             return {
                 ...state,
-                products: action.payload
+                products: action.payload,
+                filterProducts: action.payload
             } 
         case 'FILTER_PRODUCTS':
             return{
