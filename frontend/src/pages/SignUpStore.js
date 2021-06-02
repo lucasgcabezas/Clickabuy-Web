@@ -11,7 +11,9 @@ import storeActions from "../redux/actions/storeActions";
 
 const validationSchema = yup.object({
   /* CID: yup.string("company identification number (CID)").required("CID is Required"), */
+
   bName: yup.string("Enter business name").required("Business Name is required"),
+  /* description: yup.string("Enter business name"), */
   /*  email: yup.string("Enter your email").email("Enter a valid email").required("Email is required"), */
   password: yup
     .string("Enter your password")
@@ -23,34 +25,53 @@ const validationSchema = yup.object({
 const SignUpStore = (props) => {
   /*  console.log(props.categories); */
   const [photo, setPhoto] = useState({ userImg: "" });
+  const [ta, setTA] = useState({ description: "" });
+
+
   const formik = useFormik({
     initialValues: {
       /*   CID: "", */
-      ownerName: "",
+    /*   ownerName: "", */
       bName: "",
+      description:"",
       category: "",
       storeLogo: "",
       password: "",
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+       alert(JSON.stringify(values, null, 2));
+       alert(ta.description);
+
+
       let formData = new FormData();
       /*  formData.append("CID", values.CID); */
-      formData.append("ownerName", values.ownerName);
+    /*   formData.append("ownerName", values.ownerName); */
       formData.append("bName", values.bName);
+      formData.append("description", ta.description);
       formData.append("category", values.category);
-      formData.append("storeLogo", values.storeLogo);
+     /*  formData.append("storeLogo", values.storeLogo); */
       formData.append("password", values.password);
       formData.append("userImg", photo.userImg);
+
+      console.log("soy el values", values);
       console.log("soy el Formdata", formData);
-      props.addStore(formData);
+
+    /*   props.addStore(formData); */
     },
   });
 
   const cargarFoto = (e) => {
     setPhoto({ userImg: e.target.files[0] });
   };
+
+   const cargarTA = (e) => {
+     /* console.log("TA",e.nativeEvent.data) */
+     console.log("TargetValue",e.target.value)
+
+      setTA({ description:e.target.value});
+  };
+
 
   return (
     <div>
@@ -73,7 +94,7 @@ const SignUpStore = (props) => {
             helperText={formik.touched.CID && formik.errors.CID}
           /> */}
 
-          <TextField
+       {/*    <TextField
             fullWidth
             id="ownerName"
             name="ownerName"
@@ -82,7 +103,7 @@ const SignUpStore = (props) => {
             onChange={formik.handleChange}
             error={formik.touched.ownerName && Boolean(formik.errors.ownerName)}
             helperText={formik.touched.ownerName && formik.errors.ownerName}
-          />
+          /> */}
 
           <TextField
             fullWidth
@@ -94,6 +115,8 @@ const SignUpStore = (props) => {
             error={formik.touched.bName && Boolean(formik.errors.bName)}
             helperText={formik.touched.bName && formik.errors.bName}
           />
+
+<textarea onChange={(e)=>cargarTA(e)}></textarea>
 
           <select
             name="category"
