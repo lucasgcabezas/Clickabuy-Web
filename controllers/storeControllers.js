@@ -3,6 +3,8 @@ const CategoryModel = require('../models/CategoryModel')
 const ProductModel = require('../models/ProductModel')
 const UserModel = require('../models/UserModel')
 const fs = require("fs")
+let cloudinary = require('cloudinary').v2;
+
 
 const getPathAndNameFile = (store, file, folderName) => {
     let extensionImg = file.name.split(".")[file.name.split(".").length - 1];
@@ -42,6 +44,8 @@ const storeControllers = {
 
         let user = req.user;
         try {
+            let objLogoStore = {url:"" , publicId:""};
+            
             category = await CategoryModel.findOne({ nameCategory: category });
             if (!category) throw new Error("this category doesn't exist");
 
@@ -49,11 +53,22 @@ const storeControllers = {
             newStore.owners = [user._id];
             newStore.category = category._id;
             // newStore.storeHero = `/storeHeros/defaultHero.jpg`
-            const { filePath, fileName } = getPathAndNameFile(newStore, logoStore, "storeLogos");
+            const logo = getPathAndNameFile(newStore, logoStore, "storeLogos");
 
-            newStore.logoStore = `/storeLogos/` + fileName;
-            await logoStore.mv(filePath);
-            await newStore.save()
+            
+            await logoStore.mv(logo.filePath);
+
+            let logoHost = await cloudinary.uploader.upload(logo.filePath);
+
+            //borro para que no quede una imagen
+            fs.unlink(logo.filePath, (err) => err && console.log(err));
+            
+            objLogoStore.url = logoHost.url;
+            objLogoStore.publicId = logoHost.public_id;
+            
+            newStore.logoStore = objLogoStore;
+            newStore.storeHero = {url:"" , publicId:""};
+            await newStore.save();
             response = newStore
         } catch (err) {
             error = `${err.name} : ${err.message}`
@@ -87,30 +102,41 @@ const storeControllers = {
 
         let response, error;
         try {
+            
             let store = await validationStore(idStore, user);
             nameStore && (store.nameStore = nameStore);
 
+            let objLogoStore = store.logoStore;
+            let objStoreHero = store.storeHero;
+
             if (storeHero) {
-                if (store.storeHero != "/storeHeros/defaultHero.jpg") {
-                    fs.unlink(`${__dirname}/../frontend/public/assets/${store.storeHero}`, err => console.log(err));
-                }
+                await cloudinary.api.delete_resources([store.storeHero.publicId]);
                 const hero = getPathAndNameFile(store, storeHero, "storeHeros");
                 await storeHero.mv(hero.filePath);
-                storeHero = "/storeHeros/" + hero.fileName;
+                let storeHeroHost = await cloudinary.uploader.upload(hero.filePath);
+                fs.unlink(hero.filePath, (err) => err && console.log(err));
 
+                objStoreHero.url = storeHeroHost.url;
+                objStoreHero.publicId = storeHeroHost.public_id;
             }
             if (logoStore) {
-                fs.unlink(`${__dirname}/../frontend/public/assets/${store.logoStore}`, err => console.log(err));
+                await cloudinary.api.delete_resources([store.logoStore.publicId]);
                 const logo = getPathAndNameFile(store, logoStore, "storeLogos");
                 await logoStore.mv(logo.filePath);
-                logoStore = "/storeLogos/" + logo.fileName;
+                
+                let logoStoreHost = await cloudinary.uploader.upload(logo.filePath);
+                fs.unlink(logo.filePath, (err) => err && console.log(err));
+
+                objLogoStore.url = logoStoreHost.url;
+                objLogoStore.publicId = logoStoreHost.public_id;
+
             }
             if (category) {
                 category = await CategoryModel.findOne({ nameCategory: category });
                 if (!category) throw new Error("this category doesn't exist");
             }
 
-            let fieldsObj = { nameStore, storeHero, description, category, logoStore }
+            let fieldsObj = { nameStore,  description, category, logoStore : objLogoStore,storeHero :objStoreHero}
             let update = {}
             for (const field in fieldsObj) {
                 if (fieldsObj[field]) {
@@ -133,20 +159,11 @@ const storeControllers = {
 
             let store = await validationStore(idStore, user);
             let productOfStore = await ProductModel.find({ storeId: idStore });
-            console.log(productOfStore)
             await Promise.all(productOfStore.map(async (product) => {
                 await ProductModel.findByIdAndDelete(product._id);
             }))
 
-            fs.unlink(`${__dirname}/../frontend/public/assets/${store.logoStore}`, err => console.log(err));
-            if (store.storeHero != "/storeHeros/defaultHero.jpg") {
-                fs.unlink(`${__dirname}/../frontend/public/assets/${store.storeHero}`, err => console.log(err));
-            }
-            fs.unlink(`${__dirname}/../frontend/public/assets/${store.logoStore}`, err => console.log(err));
-            if (store.storeHero != "/storeHeros/defaultHero.jpg") {
-                fs.unlink(`${__dirname}/../frontend/public/assets/${store.storeHero}`, err => console.log(err));
-            }
-
+            await cloudinary.api.delete_resources([store.logoStore.publicId,store.storeHero.publicId]);
             response = await StoreModel.findByIdAndDelete(idStore)
         } catch (err) {
             error = `${err.name} : ${err.message}`
