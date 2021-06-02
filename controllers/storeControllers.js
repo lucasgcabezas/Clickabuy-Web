@@ -159,6 +159,7 @@ const storeControllers = {
             let store = await validationStore(idStore, user);
             let productOfStore = await ProductModel.find({ storeId: idStore });
             await Promise.all(productOfStore.map(async (product) => {
+                await cloudinary.api.delete_resources([product.productImg.publicId]);
                 await ProductModel.findByIdAndDelete(product._id);
             }))
 
