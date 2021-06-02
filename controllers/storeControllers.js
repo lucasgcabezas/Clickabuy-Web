@@ -9,7 +9,6 @@ let cloudinary = require('cloudinary').v2;
 const getPathAndNameFile = (store, file, folderName) => {
     let extensionImg = file.name.split(".")[file.name.split(".").length - 1];
     let fileName = `${store.nameStore}-${store._id}.${extensionImg}`;
-    //let fileName = `${__dirname}/clients/build/assets/usersImg/${fileName}`
     let filePath = `${__dirname}/../frontend/public/assets/${folderName}/${fileName}`;
 
     return { filePath, fileName }
@@ -53,7 +52,7 @@ const storeControllers = {
             newStore.owners = [user._id];
             newStore.category = category._id;
             // newStore.storeHero = `/storeHeros/defaultHero.jpg`
-            const logo = getPathAndNameFile(newStore, logoStore, "storeLogos");
+            const logo = getPathAndNameFile(newStore, logoStore, "fotosAHostear");
 
             
             await logoStore.mv(logo.filePath);
