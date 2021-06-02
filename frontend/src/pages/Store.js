@@ -66,15 +66,12 @@ const Store = (props) => {
                 </div>
             </div>
 
-
             <div className='buscador'>
-
 
                 <div className="contenedorInfoCards">
                     <div className="contenedorFiltrosStore">
                         <div style={{ width: '100%', textAlign: 'center', marginTop: 60 }}>
                             <span> Rate us </span>
-
                         </div>
                         <div className="storeStars">
 
@@ -93,7 +90,7 @@ const Store = (props) => {
                                         fullIcon={<i className="fa fa-star"></i>}
                                         activeColor="#ffd700"
                                         // activeColor="#48d1be"
-                                        color="#444444"
+                                        color="#999999"
                                         value={stars}
                                     />
                                     : store.rate.length === 0
@@ -109,7 +106,7 @@ const Store = (props) => {
                                             fullIcon={<i className="fa fa-star"></i>}
                                             activeColor="#ffd700"
                                             // activeColor="#48d1be"
-                                            color="#444444"
+                                            color="#999999"
                                             value={0}
                                         />
                                         : <span>Loading</span>

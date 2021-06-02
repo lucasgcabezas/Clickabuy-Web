@@ -9,7 +9,8 @@ const userSchema = new mongoose.Schema({
     // productsLiked: [{type:String}],
     email:{type: String, required: true},
     loggedWithGoogle: {type: Boolean , default: false},
-    storesRated: [String] 
+    storesRated: [String], 
+    productsRated: [String], 
 })
 
 const User = mongoose.model('user',userSchema);

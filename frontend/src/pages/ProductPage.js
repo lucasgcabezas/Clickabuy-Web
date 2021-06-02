@@ -47,7 +47,8 @@ const ProductPage = (props) => {
                         </div>
                     </div>
                     <p>{productSelected.description}</p>
-                    <Reviews product={productSelected._id} reviews={reviews} setReviews={setReviews}/>
+                    
+                    <Reviews product={productSelected._id} reviews={reviews} setReviews={setReviews} productSelected={productSelected}/>
                 </div >
             </div>
             <Footer/>

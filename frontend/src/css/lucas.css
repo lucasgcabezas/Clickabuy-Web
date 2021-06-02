@@ -166,3 +166,30 @@ html * {
     display: flex;
     align-items: center;
 }
+
+.progressStarContainer{
+    width: 23vw;
+    /* background-color: red; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.progressStarContainer span {
+    width: 20%;
+    text-align: center;
+    
+}
+
+.starsReviewsContainer{
+    display: flex;
+    width: 40vw;
+    justify-content: space-between;
+    align-items: center;
+    margin: 4vh 0;
+}
+
+.starsReviews{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}

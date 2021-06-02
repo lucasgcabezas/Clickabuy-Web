@@ -5,7 +5,7 @@ import rootReducer from './redux/reducers/rootReducer'
 import App from './App';
 import { Provider } from "react-redux";
 import { applyMiddleware, createStore } from "redux";
-// import PruebaLucas from './pages/PruebaLucas';
+import PruebaLucas from './pages/PruebaLucas';
 
 const myStore = createStore(rootReducer , applyMiddleware(thunk))
 

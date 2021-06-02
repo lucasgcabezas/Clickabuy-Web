@@ -1,6 +1,7 @@
 
 const Product = require('../models/ProductModel');
 const StoreModel = require('../models/StoreModel');
+const UserModel = require('../models/UserModel');
 
 const respondFrontend = (res, response, error) => {
     res.json({
@@ -13,12 +14,12 @@ const respondFrontend = (res, response, error) => {
 const errorBackend = "error 500 , avisar al  team backend";
 const errorProductNotFound = "error: Product not found";
 
-const validationStore = async  (idStore,user) => {
+const validationStore = async (idStore, user) => {
     const store = await StoreModel.findById(idStore);
     if (!store) throw new Error("this Store doesn't exist")
 
     userExist = store.owners.find(idUser => idUser.toString() === user._id.toString())
-    if (!userExist) throw new Error("this user is not Authorizated to modify the Store "+ store.nameStore)
+    if (!userExist) throw new Error("this user is not Authorizated to modify the Store " + store.nameStore)
 
     return store
 }
@@ -28,11 +29,11 @@ const productControllers = {
     addProduct: async (req, res) => {
         let response, error;
         let user = req.user;
-        let {description,price,stock,productImg,nameProduct,storeId} = req.body;
-        
+        let { description, price, stock, productImg, nameProduct, storeId } = req.body;
+
         try {
-            await validationStore(storeId,user)
-            let newProduct = new Product({nameProduct,productImg,stock,price,description,storeId});
+            await validationStore(storeId, user)
+            let newProduct = new Product({ nameProduct, productImg, stock, price, description, storeId });
             await newProduct.save();
             //response = await Product.find();
             response = newProduct;
@@ -66,22 +67,22 @@ const productControllers = {
     },
     updateProduct: async (req, res) => {
         const idProduct = req.params.id;
-        let {description,price,stock,productImg,nameProduct,storeId} = req.body;
+        let { description, price, stock, productImg, nameProduct, storeId } = req.body;
         let user = req.user;
         let response, error;
         try {
-            await validationStore(storeId,user);
+            await validationStore(storeId, user);
             const product = await Product.findById(idProduct);
-            if(!product) throw new Error("this product doesn't exist");
-            if(product.storeId.toString() !== storeId) throw new Error("Not Authorizated, the product does not belong to the store")
-            let fieldsObj = {description,price,stock,productImg,nameProduct};
+            if (!product) throw new Error("this product doesn't exist");
+            if (product.storeId.toString() !== storeId) throw new Error("Not Authorizated, the product does not belong to the store")
+            let fieldsObj = { description, price, stock, productImg, nameProduct };
             let update = {};
-            for(const field in fieldsObj){
-                if(fieldsObj[field])
-                   update[field] = fieldsObj[field];
+            for (const field in fieldsObj) {
+                if (fieldsObj[field])
+                    update[field] = fieldsObj[field];
             }
 
-            response = await Product.findByIdAndUpdate(idProduct , update, { new: true });
+            response = await Product.findByIdAndUpdate(idProduct, update, { new: true });
         } catch (err) {
             console.log(err);
             error = err.name + " " + err.message;
@@ -90,21 +91,21 @@ const productControllers = {
     },
     deleteProduct: async (req, res) => {
         const idProduct = req.params.id;
-        let {storeId} = req.body;
+        let { storeId } = req.body;
         let user = req.user;
         let response, error;
         try {
-            await validationStore(storeId,user);
+            await validationStore(storeId, user);
             const product = await Product.findById(idProduct);
-            if(!product) throw new Error("this product doesn't exist");
-            if(product.storeId.toString() !== storeId) throw new Error("Not Authorizated, the product does not belong to the store")
+            if (!product) throw new Error("this product doesn't exist");
+            if (product.storeId.toString() !== storeId) throw new Error("Not Authorizated, the product does not belong to the store")
 
             response = await Product.findByIdAndDelete(idProduct);
         } catch (err) {
             console.log(err);
             error = errorBackend;
         }
-        respondFrontend(res,response,error);
+        respondFrontend(res, response, error);
     },
     getProductsFromStore: async (req, res) => {
         const id = req.params.id
@@ -118,10 +119,10 @@ const productControllers = {
         }
         res.json({ success: !error ? true : false, response, error })
     },
-    getProductFromCartLS: async(req,res) => {
-        let error,response;
-        let {cartLS} = req.body;
-        
+    getProductFromCartLS: async (req, res) => {
+        let error, response;
+        let { cartLS } = req.body;
+
         try {
             response = await Promise.all(cartLS.map(async (item) => {
                 let product = await Product.findById(item._id);
@@ -131,25 +132,25 @@ const productControllers = {
                 }
                 return newItem
             }))
-            if(!response) throw new Error("response is undefined")
+            if (!response) throw new Error("response is undefined")
 
         } catch (err) {
             console.log(err)
             error = `${err.name}: ${err.message}`
         }
-        respondFrontend(res,response,error);
+        respondFrontend(res, response, error);
     },
     productsLiked: async (req, res) => {
         const userEmail = req.user.email
         const idProduct = req.body.idProduct
         try {
-            const product = await Product.findOne({_id: idProduct, "userLiked": userEmail})
+            const product = await Product.findOne({ _id: idProduct, "userLiked": userEmail })
             if (!product) {
-                const likeProduct = await Product.findOneAndUpdate({_id: idProduct}, {$push: {userLiked: userEmail}}, {new:true})
-                res.json({success: true, response: {userLiked:likeProduct.userLiked, heart: true}})
-            } else{
-                const deslikeProduct = await Product.findOneAndUpdate({_id:idProduct}, {$pull: {userLiked: userEmail}}, {new:true})
-                res.json({success: true, response: {userLiked: deslikeProduct.userLiked, heart: false}})
+                const likeProduct = await Product.findOneAndUpdate({ _id: idProduct }, { $push: { userLiked: userEmail } }, { new: true })
+                res.json({ success: true, response: { userLiked: likeProduct.userLiked, heart: true } })
+            } else {
+                const deslikeProduct = await Product.findOneAndUpdate({ _id: idProduct }, { $pull: { userLiked: userEmail } }, { new: true })
+                res.json({ success: true, response: { userLiked: deslikeProduct.userLiked, heart: false } })
             }
         } catch (error) {
             res.json({ success: false, respuesta: 'An error has occurred on the server, try later!' })
@@ -158,7 +159,7 @@ const productControllers = {
     getAllReviews: async (req, res) => {
         const productId = req.params.id
         try {
-            const allReviews = await Product.findById(productId).populate({ path:"reviews", populate:{ path:"userId", select:{"email":1} } })
+            const allReviews = await Product.findById(productId).populate({ path: "reviews", populate: { path: "userId", select: { "email": 1 } } })
             res.json({ response: allReviews, success: true })
         } catch (error) {
             res.json({ response: 'An error has occurred on the server, try later!', success: false })
@@ -166,9 +167,10 @@ const productControllers = {
     },
     addReviews: async (req, res) => {
         const productId = req.params.id
+        console.log(req.body)
         try {
-            const addReview = await Product.findOneAndUpdate({ _id: productId }, 
-                { $push: { reviews: {...req.body, userId: req.user._id}}}, { new: true }).populate({ path:"reviews", populate:{ path:"userId", select:{ "firstName":1 ,"lastName":1, "email":1 } } })
+            const addReview = await Product.findOneAndUpdate({ _id: productId },
+                { $push: { reviews: { ...req.body, userId: req.user._id } } }, { new: true }).populate({ path: "reviews", populate: { path: "userId", select: { "firstName": 1, "lastName": 1, "email": 1 } } })
             res.json({ response: addReview, success: true })
         } catch (error) {
             res.json({ response: 'An error has occurred on the server, try later!', success: false })
@@ -180,7 +182,7 @@ const productControllers = {
         const idReview = req.body.idReview
         try {
             const editReviews = await Product.findOneAndUpdate({ _id: productId, "reviews._id": idReview },
-                { $set: { "reviews.$.review": review } }, { new: true }).populate({ path:"reviews", populate:{ path:"userId", select:{ "firstName":1 ,"lastName":1, "email":1 } } })
+                { $set: { "reviews.$.review": review } }, { new: true }).populate({ path: "reviews", populate: { path: "userId", select: { "firstName": 1, "lastName": 1, "email": 1 } } })
             res.json({ response: editReviews, success: true })
         } catch (error) {
             res.json({ response: 'An error has occurred on the server, try later!', success: false })
@@ -190,14 +192,36 @@ const productControllers = {
         const productId = req.params.id
         const idReview = req.body.idReview
         try {
-            const deleteReview = await Product.findOneAndUpdate({ _id: productId, "reviews._id": idReview},
-                {$pull: {reviews: {_id: idReview}}}, { new: true })
+            const deleteReview = await Product.findOneAndUpdate({ _id: productId, "reviews._id": idReview }, { $pull: { reviews: { _id: idReview } } }, { new: true })
+            
             res.json({ response: deleteReview, success: true })
         } catch (error) {
             res.json({ response: 'An error has occurred on the server, try later!', success: false })
         }
-    }
-    
+    },
+
+    rateProduct: async (req, res) => {
+        let response, error;
+        const idProduct = req.params.id;
+        const user = req.user;
+
+        try {
+            checkRatedStore = await Product.findOne({ _id: idProduct, usersRated: [user._id] })
+            response = await Product.findOneAndUpdate({ _id: idProduct }, { $push: { rateProduct: { vote: req.body.numberRate, userId: user._id } }, usersRatedProduct: user._id }, { new: true })
+            console.log(response)
+            if (!checkRatedStore) {
+                await UserModel.findOneAndUpdate({ _id: user._id }, { $push: { productsRated: idProduct } })
+            } else {
+                console.log('ya lo votaste')
+            }
+        } catch (err) {
+            error = `${err.name} : ${err.message}`
+            console.log(err)
+        }
+
+        // res.json({ success: !error ? true : false, response, error })
+    },
+
 }
 
 
