@@ -144,24 +144,9 @@ const userControllers = {
 
         respondFrontend(res, response, undefined);
     },
-
-    productsLiked: async (req, res) => {
-      const id = req.body.idProduct
-      const userEmail = req.user.email
-  
-      try {
-        const product = await User.findOne({ email: userEmail, "productsLiked": id })
-        if (!product) {
-          const likeProduct = await User.findOneAndUpdate({ email: userEmail }, { $push: { productsLiked: id } }, { new: true })
-          res.json({ success: true, response: { productsLiked: likeProduct.productsLiked, heart: true } })
-        } else {
-          const deslikeProduct = await User.findOneAndUpdate({ email: userEmail }, { $pull: { productsLiked: id } }, { new: true })
-          res.json({ success: true, response: { productsLiked: deslikeProduct.productsLiked, heart: false } })
-        }
-      } catch (error) {
-        res.json({ success: false, respuesta: 'Ha ocurrido un error en el servidor' })
-      }
-    }
+    // forcedLogin: async (req, res) => {
+    //     res.json({success: true, response: {userImg: req.user.userImg, firstName: req.user.firstName, lastName: req.user.lastName , email:req.user.email}})
+    // } 
 
 
 

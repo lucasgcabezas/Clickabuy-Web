@@ -16,11 +16,11 @@ import SignInAdmin from "./pages/SignInAdmin";
 import Buys from "./pages/Buys";
 import { connect } from "react-redux";
 import cartActions from "./redux/actions/cartActions";
-import Header from "./components/Header";
 import MyStores from "./pages/MyStores";
 import MyStoreView from "./pages/MyStoreView";
 import ProductPage from "./pages/ProductPage";
 import MyFilters from "./components/MyFilters";
+import Favorites from "./pages/Favorites";
 
 const App = ({ cart, reloadCartLS, loginForced, userLogged, history }) => {
   if (cart.length === 0) {
@@ -34,7 +34,7 @@ const App = ({ cart, reloadCartLS, loginForced, userLogged, history }) => {
   
   const token = localStorage.getItem("token");
 
-  //veo que no haya en el store un usuario logueado y que haya un token en el localStorage
+  // veo que no haya en el store un usuario logueado y que haya un token en el localStorage
 
   // console.log("userLogged", userLogged);
   // console.log("token", token);
@@ -44,6 +44,14 @@ const App = ({ cart, reloadCartLS, loginForced, userLogged, history }) => {
     loginForced(JSON.parse(token), history);
     
   }
+  // if (!userLogged && localStorage.getItem('token')) {
+  //   const objectUser = JSON.parse(localStorage.getItem('userLogged'))
+  //   const userLocalStorage = {
+  //     ...objectUser,
+  //     token: localStorage.getItem('token')
+  //   }
+  //   loginForced(userLocalStorage)
+  // }
 
   return (
     <BrowserRouter>
@@ -57,6 +65,7 @@ const App = ({ cart, reloadCartLS, loginForced, userLogged, history }) => {
         <Route path="/buys" component={Buys} />
         <Route path="/SignIn" component={SignIn} />
         <Route path="/SignUp" component={SignUp} />
+        <Route path="/favorites" component={Favorites} />
         <Route path="/SignUpStore" component={SignUpStore} />
         <Route path="/SignInAdmin" component={SignInAdmin} />
         <Route path="/myStores" component={MyStores} />

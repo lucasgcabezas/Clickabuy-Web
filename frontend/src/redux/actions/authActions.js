@@ -38,7 +38,7 @@ const authActions = {
             `Welcome ${data.response.firstName} ${data.response.lastName}`
           ); /*  alert(`Welcome ${data.response.firstName} ${data.response.lastName}`); */
           /* debugger;  */
-          console.log("soy el daa response", data.response);
+          // console.log("soy el daa response", data.response);
         } else {
           return data;
         }
@@ -48,23 +48,22 @@ const authActions = {
       }
     };
   },
-  loginForced: (token, email) => {
+  loginForced: (token) => {
     return async (dispatch) => {
       try {
         /*   debugger; */
         const { data } = await axios.get(API + "/relogin", {
           headers: { Authorization: "Bearer " + token },
         });
-        console.log(data)
         dispatch({
           type: "LOGIN_USER",
           payload: {
             ...data.response,
             token,
-            email,
+            // email,
           },
         });
-        showToast("success", `Welcome ${data.response.firstName} ${data.response.lastName}`);
+        // showToast("success", `Welcome ${data.response.firstName} ${data.response.lastName}`);
         /*  alert(`Welcome ${data.response.firstName} ${data.response.lastName}`); */
       } catch (err) {
         if (err.response && err.response.status === 401) {
@@ -74,13 +73,32 @@ const authActions = {
       }
     };
   },
-
   logOutUser: () => {
     return (dispatch) => {
       //showToast("info", "Come back later ", "top-right")
       dispatch({ type: "LOG_OUT" });
     };
   },
+  // loginForced: (userLocalStorage) => {
+  //   console.log(userLocalStorage)
+  //   return async (dispatch, getState) => {
+        // try {
+        //     const response = await axios.get(API + "/relogin", {
+        //         headers: {
+        //             'Authorization': 'Bearer ' + userLocalStorage.token
+        //         }
+        //     })
+        //     console.log(response)
+        //     // dispatch({type: 'LOGIN_USER', payload: {...response.data.response, token:userLocalStorage.token}})
+        // } catch (error) {
+        //     if (error.response.status === 401) {
+        //       showToast("error", "Oops! Something went wrong! You are not authorized to enter this page");
+        //     }
+        // }
+    // }
+// },
+
+ 
 };
 
 export default authActions;

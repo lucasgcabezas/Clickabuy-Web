@@ -138,7 +138,66 @@ const productControllers = {
             error = `${err.name}: ${err.message}`
         }
         respondFrontend(res,response,error);
+    },
+    productsLiked: async (req, res) => {
+        const userEmail = req.user.email
+        const idProduct = req.body.idProduct
+        try {
+            const product = await Product.findOne({_id: idProduct, "userLiked": userEmail})
+            if (!product) {
+                const likeProduct = await Product.findOneAndUpdate({_id: idProduct}, {$push: {userLiked: userEmail}}, {new:true})
+                res.json({success: true, response: {userLiked:likeProduct.userLiked, heart: true}})
+            } else{
+                const deslikeProduct = await Product.findOneAndUpdate({_id:idProduct}, {$pull: {userLiked: userEmail}}, {new:true})
+                res.json({success: true, response: {userLiked: deslikeProduct.userLiked, heart: false}})
+            }
+        } catch (error) {
+            res.json({ success: false, respuesta: 'An error has occurred on the server, try later!' })
+        }
+    },
+    getAllReviews: async (req, res) => {
+        const productId = req.params.id
+        try {
+            const allReviews = await Product.findById(productId).populate({ path:"reviews", populate:{ path:"userId", select:{"email":1} } })
+            res.json({ response: allReviews, success: true })
+        } catch (error) {
+            res.json({ response: 'An error has occurred on the server, try later!', success: false })
+        }
+    },
+    addReviews: async (req, res) => {
+        const productId = req.params.id
+        try {
+            const addReview = await Product.findOneAndUpdate({ _id: productId }, 
+                { $push: { reviews: {...req.body, userId: req.user._id}}}, { new: true }).populate({ path:"reviews", populate:{ path:"userId", select:{ "firstName":1 ,"lastName":1, "email":1 } } })
+            res.json({ response: addReview, success: true })
+        } catch (error) {
+            res.json({ response: 'An error has occurred on the server, try later!', success: false })
+        }
+    },
+    editReviews: async (req, res) => {
+        const productId = req.params.id
+        const review = req.body.review
+        const idReview = req.body.idReview
+        try {
+            const editReviews = await Product.findOneAndUpdate({ _id: productId, "reviews._id": idReview },
+                { $set: { "reviews.$.review": review } }, { new: true }).populate({ path:"reviews", populate:{ path:"userId", select:{ "firstName":1 ,"lastName":1, "email":1 } } })
+            res.json({ response: editReviews, success: true })
+        } catch (error) {
+            res.json({ response: 'An error has occurred on the server, try later!', success: false })
+        }
+    },
+    deleteReviews: async (req, res) => {
+        const productId = req.params.id
+        const idReview = req.body.idReview
+        try {
+            const deleteReview = await Product.findOneAndUpdate({ _id: productId, "reviews._id": idReview},
+                {$pull: {reviews: {_id: idReview}}}, { new: true })
+            res.json({ response: deleteReview, success: true })
+        } catch (error) {
+            res.json({ response: 'An error has occurred on the server, try later!', success: false })
+        }
     }
+    
 }
 
 
