@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { useFormik } from "formik";
+import { useFormik, Formik, Form, Field, ErrorMessage } from "formik";
+/* Formik, Form, Field, ErrorMessage */
 import * as yup from "yup";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -16,11 +17,26 @@ import { NavLink } from "react-router-dom";
 // import { ProgressBar, Step } from "react-step-progress-bar";
 
 const validationSchema = yup.object({
-  email: yup.string("Enter your email").email("Enter a valid email").required("Email is required"),
+  email: yup
+    .string("Enter a valid email address")
+    .trim()
+    .email("Enter a valid email")
+    .required("This field is mandatory"),
+
   password: yup
     .string("Enter your password")
-    .min(6, "Password should be of minimum 6 characters length")
-    .required("Password is required"),
+    .min(6, "Your password must be at least 6 characters long")
+    .trim()
+    .required("Password is required")
+    .matches(
+      /(?=.*\d)(?=.*[A-z])/,
+      "Your password must be at least 6 characters long, contain a capital letter, minuscule letter and number"
+    ),
+
+  /* password:joi.string().min(6).trim().required().pattern(/(?=.*\d)(?=.*[A-z])/).messages({
+      "string.empty":"This field is mandatory",
+      "string.pattern.base": "Your password must be at least 6 characters long, contain a capital letter, minuscule letter and number",
+      "string.min": "Your password must be at least 6 characters long" */
 });
 
 const SignIn = (props) => {
@@ -54,17 +70,6 @@ const SignIn = (props) => {
       props.history.push("/");
     },
   });
-
-  const handleProgressBar = (e) => {
-    console.log(e);
-    if (e === 25 && pbStatus < 100) {
-      setPBStatus(pbStatus + e);
-    }
-
-    if (e === -25 && pbStatus > 25) {
-      setPBStatus(pbStatus + e);
-    }
-  };
 
   return (
     <div>
@@ -114,75 +119,6 @@ const SignIn = (props) => {
         <NavLink to="/SignInAdmin">
           <label className="mt-2 w-100 btn  h6">shortcut admin login </label>
         </NavLink>
-      </div>
-
-      <div className="w-100 mx-auto d-flex justify-content-center">
-        <div
-          className="btn mr-2"
-          onClick={() => {
-            handleProgressBar(-25);
-          }}
-        >
-          {"<"}
-        </div>
-        <div className="w-50 align-self-center">
-          {/* <ProgressBar
-            percent={pbStatus}
-            filledBackground="linear-gradient(to right, #fefb72, #f0bb31)"
-          >
-            <Step transition="scale">
-              {({ accomplished }) => (
-                <img
-                  style={{ filter: `grayscale(${accomplished ? 0 : 80}%)` }}
-                  width="30"
-                  src="https://imagizer.imageshack.com/img922/2315/U9GZmk.png"
-                />
-              )}
-            </Step>
-
-            <Step transition="scale">
-              {({ accomplished }) => (
-                <img
-                  style={{ filter: `grayscale(${accomplished ? 0 : 80}%)` }}
-                  width="30"
-                  src="https://imagizer.imageshack.com/img922/2315/U9GZmk.png"
-                />
-              )}
-            </Step>
-
-            <Step transition="scale">
-              {({ accomplished }) => (
-                <img
-                  style={{ filter: `grayscale(${accomplished ? 0 : 80}%)` }}
-                  width="30"
-                  src="https://imagizer.imageshack.com/img922/2315/U9GZmk.png"
-                />
-              )}
-            </Step>
-            <Step transition="scale">
-              {({ accomplished }) => (
-                <img
-                  style={{ filter: `grayscale(${accomplished ? 0 : 80}%)` }}
-                  width="30"
-                  src="https://imagizer.imageshack.com/img922/2315/U9GZmk.png"
-                />
-              )}
-            </Step>
-
-            <Step transition="scale">
-              {({ accomplished }) => (
-                <img
-                  style={{ filter: `grayscale(${accomplished ? 0 : 80}%)` }}
-                  width="30"
-                  src="https://imagizer.imageshack.com/img922/2315/U9GZmk.png"
-                />
-              )}
-            </Step>
-          </ProgressBar> */}
-        </div>
-        <div className="btn ml-2" onClick={() => handleProgressBar(+25)}>
-          {">"}
-        </div>
       </div>
     </div>
   );
