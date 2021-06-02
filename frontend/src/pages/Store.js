@@ -40,7 +40,7 @@ const Store = (props) => {
                             : props.filterProducts.map(product => {
                                 return (                                    
                                     <div key={product._id}>
-                                        <Product product={product} /* user={props.userLogged.productsLiked} */ />
+                                        <Product product={product}/>
                                     </div>
                                     )
                                 })
@@ -58,7 +58,6 @@ const mapStateToProps = state => {
         storesForCategory: state.categoryReducer.stores,
         products: state.productReducer.products,
         filterProducts: state.productReducer.filterProducts,
-        userLogged: state.authReducer.userLogged
     }
 }
 

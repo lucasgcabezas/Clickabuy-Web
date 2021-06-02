@@ -5,8 +5,9 @@ import { connect } from "react-redux";
 import authActions from "../redux/actions/authActions";
 import "../../src/gracia.css";
 import { useLocation } from "react-router-dom";
+import UserDropdown from "./UserDropdown";
 const Header = (props) => {
-  const usuarioImage = props.userLogged ? <div style={{backgroundImage: "url('./assets" + props.userLogged.userImg + "')"}} className="usuarioImage"></div> : <span className="material-icons-outlined iconUser">account_circle</span>
+  // const usuarioImage = props.userLogged ? <div style={{backgroundImage: "url('./assets" + props.userLogged.userImg + "')"}} className="usuarioImage"></div> : <span className="material-icons-outlined iconUser">account_circle</span>
   const { pathname } = useLocation();
   
   return (
@@ -29,11 +30,28 @@ const Header = (props) => {
         <NavLink exact to="/" className="navegadores">Home</NavLink>
         <Categories />
         <NavLink to="/buys" className="navegadores"><span className="material-icons-outlined iconCart">shopping_cart</span></NavLink>
-        <Link to="/" className="navegadores"><span onClick={() => props.logOut()}>Log out</span></Link>
+        <UserDropdown/>
         {/* onClick={() => props.signOut()} */}
         {/* </>} */}
         {/* {!props.userLogged && <> */}
-        <NavLink to="/signUp" className="navegadores">{usuarioImage}</NavLink>
+        {/* <NavLink to="/signUp" className="navegadores">{usuarioImage}</NavLink>
+        <Dropdown>
+            <Dropdown.Toggle id="dropdown-basic">
+                Categories
+        </Dropdown.Toggle>
+            <Dropdown.Menu>
+                {props.categories.length === 0
+                    ? <span>No Categories</span>
+                    : props.categories.map((category, index) => {
+                        return (
+                            <div onClick={()=> getCurrentCategory(category._id)}>
+                                <Link to={`/category/${category._id}`} className="nameCategory" key={index}><span>{category.nameCategory}</span></Link>
+                            </div>
+                        )
+                    })
+                }
+            </Dropdown.Menu>
+        </Dropdown> */}
         {/* </>} */}
       </div>
     </header>

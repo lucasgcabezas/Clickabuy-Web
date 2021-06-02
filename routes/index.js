@@ -8,10 +8,10 @@ const productControllers = require('../controllers/productControllers')
 const categoryControllers = require('../controllers/categoryControllers')
 
 
-const { addUser, getAllUsers, getUserById, updateUser, deleteUser, loginUser, forcedLogin, productsLiked } = userControllers
+const { addUser, getAllUsers, getUserById, updateUser, deleteUser, loginUser, forcedLogin } = userControllers
 const { getAllStores, addStore, editStore, deleteStore, getStoresByCategory,modifyOwnerOfStore, getStoresUser } = storeControllers
 const { getAllCategories, getSingleCategory, addCategory, deleteCategory, modifyCategory } = categoryControllers
-const { addProduct, getAllProducts, getProductById, updateProduct, deleteProduct, getProductsFromStore,getProductFromCartLS } = productControllers
+const { addProduct, getAllProducts, getProductById, updateProduct, deleteProduct, getProductsFromStore,getProductFromCartLS,productsLiked, addReviews, editReviews, deleteReviews } = productControllers
 
 
 router.route("/users")
@@ -63,6 +63,7 @@ router.route("/product/:id")
     .get(getProductById)
     .put(passport.authenticate('jwt', { session: false }),updateProduct)
     .delete(passport.authenticate('jwt', { session: false }),deleteProduct)
+
 router.route("/likeproduct")
     .put(passport.authenticate('jwt', {session: false}), productsLiked)
 
@@ -71,5 +72,10 @@ router.route("/productsFromStore/:id")
 
 router.route("/reloadCartLS")
     .post(getProductFromCartLS)
+
+router.route('/reviews/:id')
+.post(passport.authenticate('jwt', {session: false}), addReviews)
+.put(editReviews)
+.delete(deleteReviews)
 
 module.exports = router

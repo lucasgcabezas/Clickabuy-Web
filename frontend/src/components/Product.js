@@ -6,34 +6,28 @@ import { Link } from 'react-router-dom'
 import productsActions from '../redux/actions/productsActions'
 import { useHistory } from "react-router-dom";
 
-const Product = ({ product, addProductToCart, deleteProductFromCart, cart, user, likeProduct, userLogged }) => {
-    // console.log(user)
-    const { stock, description, nameProduct, price, productImg, _id } = product
+const Product = ({ product, addProductToCart, deleteProductFromCart, cart, likeProduct, userLogged }) => {
+    const { stock, description, nameProduct, price, productImg, _id, userLiked } = product
     const [color, setColor] = useState(false)
     const [loadingHeart, setLoadingHeart] = useState(true)
-    const [productsLiked, setProductsLiked] = useState(user)
-    let history = useHistory()
-   
+    const [productsLiked, setProductsLiked] = useState(product.userLiked)
+
     useEffect(()=>{
-
-        userLogged ? (productsLiked.includes(user) && setColor(true)) : setColor(false)
-
+        userLogged ? (productsLiked.includes(userLogged.email) && setColor(true)) : setColor(false)
     }, [productsLiked])
 
-    // console.log(productsLiked)
-    // console.log(productsLiked.includes(userLogged.productsLiked) && setColor(true))
     const likes = async () => {
         if (!userLogged) {
             alert("no podes likear")
         } else{
             setLoadingHeart(false)
-            const response = await likeProduct(userLogged.token, _id)
-            // console.log(response)
-            setProductsLiked(response.productsLiked)
+            const response = await likeProduct(userLogged.token, product._id)
+            setProductsLiked(response.userLiked)
             setColor(response.heart)
             setLoadingHeart(true)
         }
     }
+
     return (
         <div className="cardProduct">
             {/* <img src={productImg} alt="" style={{width:"60%"}}/> */}

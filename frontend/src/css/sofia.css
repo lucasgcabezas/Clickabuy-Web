@@ -10,6 +10,7 @@ html *{
     --thirdcolor: #ecf0f1;
     --fourthcolor: #fafaf8;
 }
+/* background-color: rgba(0,0,0,.403921568627451); */
 .contenedorHome{
     background-color: var(--fourthcolor);
 }
@@ -959,4 +960,100 @@ html *{
 }
 .inputSearchStore:focus{
     outline: none;
+}
+.contenedorFavoritos{
+    background-color: var(--fourthcolor);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.contenedorInfoFavoritos{
+    margin: 10vh 0;
+    width: 70%;
+}
+.contenedorReviews{ 
+    margin-top: 10vh;
+
+}
+.tituloReviews{
+    margin: 0;
+    padding: 2vh 0;
+    border-bottom: 1px solid #e5edef;
+    /* box-shadow: 0 1px 0 0 rgb(0 4 17 / 7%); */
+    font-size: 2.5em;
+    display: flex;
+    align-items: center;
+}
+.tituloReviews span{
+    margin-left: 1vw;
+    font-size: 15px !important;
+    font-family: "Poppins-Regular", Helvetica, Arial, sans-serif !important;
+}
+.contenedorReview{
+    display: flex;
+}
+.contenedorButtonsOptions{
+    display: flex;
+    align-items: center;
+    /* width: 3vw; */
+    justify-content: space-between;
+    color: var(--primarycolor);
+}
+.contenedorButtonsOptions div{
+    margin-right: 0.5vw;
+    cursor: pointer;
+    font-size: 1.2em;
+}
+.nameReview p{
+    font-family: "Poppins-Regular", Helvetica, Arial, sans-serif !important;
+    margin: 0 !important;
+}
+.nameReview{
+    margin-right: 2vw;
+}
+.contenedorInputReviews{
+    width: 80%;
+    border: 1px solid  #e5edef;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2vh 3vw;
+}
+.contenedorInputEdit{
+    border: 1px solid  #e5edef;
+    width: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2vh 3vw; 
+}
+.iconSendEdit{
+    color: var(--primarycolor);
+    font-size: 1em;
+    cursor: pointer;
+}
+.contenedorInputEdit input {
+    border: none;
+    font-family: "Poppins-Regular", Helvetica, Arial, sans-serif !important;
+    width: 80%;
+}
+.contenedorInputEdit input:focus{
+    outline: none;
+}
+.inputReviews{
+    border: none;
+    font-family: "Poppins-Regular", Helvetica, Arial, sans-serif !important;
+    width: 80%;
+}
+.inputReviews:focus{
+    outline: none;
+}
+.contenedorInfo{
+    margin: 6vh 0;
+}
+.iconSend{
+    color: var(--primarycolor);
+    font-size: 1.5em;
+    cursor: pointer;
 }
