@@ -50,7 +50,7 @@ const storeControllers = {
             newStore.category = category._id;
             // newStore.storeHero = `/storeHeros/defaultHero.jpg`
             const { filePath, fileName } = getPathAndNameFile(newStore, logoStore, "storeLogos");
-            
+
             newStore.logoStore = `/storeLogos/` + fileName;
             await logoStore.mv(filePath);
             await newStore.save()
@@ -178,18 +178,18 @@ const storeControllers = {
         let querySelector;
         let updateOperator;
         try {
-            let store = await validationStore(idStore,user);
-            let otherUser = await UserModel.findOne({email:emailOtherUser});
-            if(!otherUser) throw new Error("email not registered")
-            if(user.email === emailOtherUser) throw new Error("You can't do this")
-            
+            let store = await validationStore(idStore, user);
+            let otherUser = await UserModel.findOne({ email: emailOtherUser });
+            if (!otherUser) throw new Error("email not registered")
+            if (user.email === emailOtherUser) throw new Error("You can't do this")
+
 
             switch (action) {
                 case "addOwner":
-                    if(store.owners.find(owner => owner._id.toString() === otherUser._id.toString()))
-                        throw new Error(`the user with the email : ${emailOtherUser} is already owner`  )
+                    if (store.owners.find(owner => owner._id.toString() === otherUser._id.toString()))
+                        throw new Error(`the user with the email : ${emailOtherUser} is already owner`)
                     querySelector = { _id: idStore };
-                    updateOperator = { $push: { owners:  otherUser._id  } };
+                    updateOperator = { $push: { owners: otherUser._id } };
                     break;
                 case "deleteOwner":
                     querySelector = { _id: idStore };
@@ -197,17 +197,17 @@ const storeControllers = {
                     break;
                 default:
                     error = "unknown action on modificyOwnerOfStore : " + action;
-                    return res.json({ success:  false, response, error })
+                    return res.json({ success: false, response, error })
             }
             response = await StoreModel.findOneAndUpdate(querySelector, updateOperator, { new: true })
-            
+
         } catch (err) {
             error = `${err.name} : ${err.message}`
             console.log(err)
         }
         res.json({ success: !error ? true : false, response, error })
     },
-    getStoresUser : async (req,res) =>{
+    getStoresUser: async (req, res) => {
         let response, error;
         const user = req.user;
 
@@ -218,7 +218,28 @@ const storeControllers = {
             console.log(err)
         }
         res.json({ success: !error ? true : false, response, error })
-    }
+    },
+
+    rateStore: async (req, res) => {
+        let response, error;
+        const idStore = req.params.id;
+        const user = req.user;
+
+        try {
+            checkRatedStore = await StoreModel.findOne({ _id: idStore, usersRated: [user._id] })
+            response = await StoreModel.findOneAndUpdate({ _id: idStore }, { $push: { rate: { vote: req.body.numberRate, userId: user._id } }, usersRated: user._id }, { new: true })
+            if (!checkRatedStore) {
+                await UserModel.findOneAndUpdate({ _id: user._id }, { $push: { storesRated: idStore } })
+            } else {
+                console.log('ya lo votaste')
+            }
+        } catch (err) {
+            error = `${err.name} : ${err.message}`
+            console.log(err)
+        }
+
+        res.json({ success: !error ? true : false, response, error })
+    },
 
 }
 module.exports = storeControllers

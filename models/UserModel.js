@@ -8,7 +8,8 @@ const userSchema = new mongoose.Schema({
     role : {type:String,default:"commonUser"}, //roles: commonUser,adminStores,adminApp
     // productsLiked: [{type:String}],
     email:{type: String, required: true},
-    loggedWithGoogle: {type: Boolean , default: false} 
+    loggedWithGoogle: {type: Boolean , default: false},
+    storesRated: [String] 
 })
 
 const User = mongoose.model('user',userSchema);

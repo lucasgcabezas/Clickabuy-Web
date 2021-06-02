@@ -9,7 +9,7 @@ const categoryControllers = require('../controllers/categoryControllers')
 
 
 const { addUser, getAllUsers, getUserById, updateUser, deleteUser, loginUser, forcedLogin } = userControllers
-const { getAllStores, addStore, editStore, deleteStore, getStoresByCategory,modifyOwnerOfStore, getStoresUser } = storeControllers
+const { getAllStores, addStore, editStore, deleteStore, getStoresByCategory,modifyOwnerOfStore, getStoresUser, rateStore } = storeControllers
 const { getAllCategories, getSingleCategory, addCategory, deleteCategory, modifyCategory } = categoryControllers
 const { addProduct, getAllProducts, getProductById, updateProduct, deleteProduct, getProductsFromStore,getProductFromCartLS,productsLiked, addReviews, editReviews, deleteReviews } = productControllers
 
@@ -31,19 +31,24 @@ router.route("/user/:id")
 
 router.route("/stores")
     .get(getAllStores)
-    .post(passport.authenticate('jwt', { session: false }),addStore)
+    .post(passport.authenticate('jwt', { session: false }), addStore)
 
 router.route("/storesByUser")
-    .get(passport.authenticate('jwt', { session: false }),getStoresUser)
+    .get(passport.authenticate('jwt', { session: false }), getStoresUser)
 
 router.route("/store/:id")
     .get(getStoresByCategory)
     // passport.authenticate('jwt', { session: false }),
-    .put(passport.authenticate('jwt', { session: false }),editStore)
-    .delete(passport.authenticate('jwt', { session: false }),deleteStore)
+    .put(passport.authenticate('jwt', { session: false }), editStore)
+    .delete(passport.authenticate('jwt', { session: false }), deleteStore)
+
+router.route("/storeRate/:id")
+    .put(passport.authenticate('jwt', { session: false }), rateStore)
+
+
 
 router.route("/modifyOwnerOfStore/:id")
-.put(passport.authenticate('jwt', { session: false }),modifyOwnerOfStore)
+    .put(passport.authenticate('jwt', { session: false }), modifyOwnerOfStore)
 
 
 router.route("/categories")
@@ -57,7 +62,7 @@ router.route("/category/:id")
 
 router.route("/products")
     .get(getAllProducts)
-    .post(passport.authenticate('jwt', { session: false }),addProduct)
+    .post(passport.authenticate('jwt', { session: false }), addProduct)
 
 router.route("/product/:id")
     .get(getProductById)
@@ -65,7 +70,7 @@ router.route("/product/:id")
     .delete(passport.authenticate('jwt', { session: false }),deleteProduct)
 
 router.route("/likeproduct")
-    .put(passport.authenticate('jwt', {session: false}), productsLiked)
+    .put(passport.authenticate('jwt', { session: false }), productsLiked)
 
 router.route("/productsFromStore/:id")
     .get(getProductsFromStore)
