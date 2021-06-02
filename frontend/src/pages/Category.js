@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 // import { useState } from 'react'
 import categoryActions from '../redux/actions/categoryActions'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
+
 const Category = (props) => {
     const { currentCategory } = props
     if (!props.currentCategory) {
@@ -30,14 +31,14 @@ const Category = (props) => {
                                 ? <span>No hay disponibles</span>
                                 : props.storesForCategory.map((store, i) => {
                                     return (
-                                        <Link to={`/store/${store._id}`} className="linkStore categoryStoresCards" key={i} >
+                                        <NavLink to={`/store/${store._id}`} className="linkStore categoryStoresCards" key={i} >
                                             <div>
                                                 <div style={{ backgroundImage: `url('../assets/${store.logoStore}')` }} className="logoStoreCategory"></div>
                                                 <span className="nameStoresCards">{store.nameStore}</span>
                                                 <span className="nameCategoryStoresCards">STARTS</span>
                                                 <span className="nameCategoryStoresCards">{currentCategory.nameCategory}</span>
                                             </div>
-                                        </Link>
+                                        </ NavLink>
                                     )
                                 })
                         }

@@ -2,7 +2,6 @@ import { useEffect, useState } from "react"
 import { connect } from "react-redux"
 import Product from "../components/Product"
 import productsActions from "../redux/actions/productsActions"
-import {NavLink} from 'react-router-dom'
 import Header from "../components/Header"
 import Footer from '../components/Footer'
 
@@ -15,6 +14,7 @@ const Store = (props) => {
         !props.storesForCategory.length ? props.history.push('/') : setStore(props.storesForCategory.find(store => store._id === idParams))
         getProductsFromStore(idParams)
     }, [])
+
     var placeholderStoreInput = `Search products in ${store.nameStore}`
     return (
         <div className="contenedorStore">
@@ -29,30 +29,30 @@ const Store = (props) => {
                     </div>
                 </div>
             </div>
-            <div className="contenedorInfoCards">
-                <div className="contenedorFiltrosStore">
-
+            <div className='buscador'>                
+                <div className="contenedorInfoCards">
+                    <div className="contenedorFiltrosStore">
+                    
                 </div>
-                <div className="containerCards">
-                    {
-                        props.products.length === 0
-                            ? <div> <h1>no products</h1> </div>
-                            : props.products.map(product => {
-                                return (
+                <div className="containerCards">                    
+                    {props.filterProducts.length === 0
+                            ? <div> <h2>No products</h2> </div> 
+                            : props.filterProducts.map(product => {
+                                return (                                    
                                     <div key={product._id}>
-                                        <Product product={product} user={props.userLogged.productsLiked}/>
+                                        <Product product={product} /* user={props.userLogged.productsLiked} */ />
                                     </div>
-
-                                )
-                            }
-                            )
-                    }
+                                    )
+                                })
+                    }                    
                 </div>
+            </div>                
             </div>
             <Footer />
         </div>
     )
 }
+
 const mapStateToProps = state => {
     return {
         storesForCategory: state.categoryReducer.stores,

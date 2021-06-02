@@ -1,5 +1,6 @@
 const initialState = {
-    products: []
+    products: [],
+    filterProducts: []
 }
 
 const productReducer = (state = initialState, action) => {

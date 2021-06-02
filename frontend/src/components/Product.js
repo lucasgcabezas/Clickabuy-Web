@@ -13,9 +13,7 @@ const Product = ({ product, addProductToCart, deleteProductFromCart, cart, user,
     const [loadingHeart, setLoadingHeart] = useState(true)
     const [productsLiked, setProductsLiked] = useState(user)
     let history = useHistory()
-    if (!productsLiked) {
-        history.push('/')
-    }
+   
     useEffect(()=>{
 
         userLogged ? (productsLiked.includes(user) && setColor(true)) : setColor(false)
