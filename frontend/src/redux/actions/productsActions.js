@@ -41,6 +41,50 @@ const productsActions = {
                 // toast.error("Oops! Something went wrong")
             }
         }
-    }
+    },
+    addReview: (inputreview, id) => {
+        // console.log({inputreview, id})
+        var review = inputreview.review
+        return async (dispatch, getState) => {
+            try {
+                const response = await axios.post('http://localhost:4000/api/reviews/' + id, { review }, {
+                    headers: {
+                        'Authorization': 'Bearer ' + inputreview.token
+                    }
+                })
+                return response.data.response
+            } catch (error) {
+                console.log(error)
+                // toast.error("Oops! Something went wrong")
+            }
+        }
+    },
+    editReview: (idProduct, review, idReview) => {
+        return async (dispatch, getState) => {
+            try {
+                const response = await axios.put('http://localhost:4000/api/reviews/'+idProduct, {review, idReview})
+                return response.data.response.reviews
+            } catch (error) {
+                console.log(error)
+                // toast.error("Oops! Something went wrong")
+            }
+        }
+    },
+    deleteReview: (idProduct, idReview) => {
+        return async (dispatch, getState) => {
+            try {
+                const response = await axios.delete('http://localhost:4000/api/reviews/'+idProduct, {
+                    data:{
+                        idReview: idReview
+                    }
+                })
+                // console.log(response.data.response)
+                return response.data.response
+            } catch (error) {
+                console.log(error)
+                // toast.error("Oops! Something went wrong")
+            }
+        }
+    },
 }
 export default productsActions

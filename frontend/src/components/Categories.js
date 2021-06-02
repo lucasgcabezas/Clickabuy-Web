@@ -12,7 +12,7 @@ const Categories = (props) => {
         <Dropdown>
             <Dropdown.Toggle id="dropdown-basic">
                 Categories
-        </Dropdown.Toggle>
+            </Dropdown.Toggle>
             <Dropdown.Menu>
                 {props.categories.length === 0
                     ? <span>No Categories</span>

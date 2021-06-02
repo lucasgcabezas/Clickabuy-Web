@@ -1,20 +1,20 @@
 import { useEffect, useState } from "react"
 import { connect } from "react-redux"
 import Header from '../components/Header'
+import Reviews from "../components/Reviews"
 import cartActions from "../redux/actions/cartActions"
 import productsActions from "../redux/actions/productsActions"
-
+import Footer from '../components/Footer'
 
 const ProductPage = (props) => {
-
     const { products, cart, addProductToCart, deleteProductFromCart } = props
-
     const idOfProduct = props.match.params.id
-
-
+    
     const productSelected = products.find(product => product._id === idOfProduct)
 
-    console.log(productSelected)
+    const [reviews, setReviews] = useState(productSelected.reviews)
+
+    // console.log(reviews)
 
     return (
         <>
@@ -47,9 +47,10 @@ const ProductPage = (props) => {
                         </div>
                     </div>
                     <p>{productSelected.description}</p>
+                    <Reviews product={productSelected._id} reviews={reviews} setReviews={setReviews}/>
                 </div >
             </div>
-
+            <Footer/>
         </>
     )
 }

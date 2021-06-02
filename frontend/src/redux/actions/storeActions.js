@@ -7,7 +7,7 @@ const storeActions = {
     return (dispatch) => {
       try {
         const { data } = axios.get(API + "/stores");
-        console.log("data", data);
+        // console.log("data", data);
       } catch (err) {
         console.log(err);
         showTostError500();
@@ -40,6 +40,26 @@ const storeActions = {
         else {
           showToast("error", "reload Cart fail --> " + data.error);
         }
+      } catch (err) {
+        console.log(err);
+        showTostError500();
+      }
+    };
+  },
+
+  rateStore: (storeId, numberRate, token) => {
+    return (dispatch) => {
+
+      // console.log(token)
+
+      try {
+        const response = axios.put(API + "/storeRate/" + storeId, {numberRate}, {
+          headers:{
+              'Authorization': 'Bearer ' +token 
+          }
+        }
+        )
+        console.log("respuesta de rate", response.data);
       } catch (err) {
         console.log(err);
         showTostError500();
