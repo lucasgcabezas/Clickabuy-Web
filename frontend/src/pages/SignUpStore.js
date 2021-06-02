@@ -15,10 +15,10 @@ const validationSchema = yup.object({
   bName: yup.string("Enter business name").required("Business Name is required"),
   /* description: yup.string("Enter business name"), */
   /*  email: yup.string("Enter your email").email("Enter a valid email").required("Email is required"), */
-  password: yup
+  /* password: yup
     .string("Enter your password")
     .min(6, "Password should be of minimum 6 characters length")
-    .required("Password is required"),
+    .required("Password is required"), */
   category: yup.string().required("category is required!"),
 });
 
@@ -36,7 +36,7 @@ const SignUpStore = (props) => {
       description:"",
       category: "",
       storeLogo: "",
-      password: "",
+    /*   password: "", */
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
@@ -51,7 +51,7 @@ const SignUpStore = (props) => {
       formData.append("description", ta.description);
       formData.append("category", values.category);
      /*  formData.append("storeLogo", values.storeLogo); */
-      formData.append("password", values.password);
+    /*   formData.append("password", values.password); */
       formData.append("userImg", photo.userImg);
 
       console.log("soy el values", values);
@@ -116,7 +116,7 @@ const SignUpStore = (props) => {
             helperText={formik.touched.bName && formik.errors.bName}
           />
 
-<textarea onChange={(e)=>cargarTA(e)}></textarea>
+<textarea placeHolder={"description of your business (optional)"} onChange={(e)=>cargarTA(e)}></textarea>
 
           <select
             name="category"
@@ -142,7 +142,7 @@ const SignUpStore = (props) => {
             error={formik.touched.email && Boolean(formik.errors.email)}
             helperText={formik.touched.email && formik.errors.email}
           /> */}
-          <TextField
+        {/*   <TextField
             fullWidth
             id="password"
             name="password"
@@ -152,7 +152,7 @@ const SignUpStore = (props) => {
             onChange={formik.handleChange}
             error={formik.touched.password && Boolean(formik.errors.password)}
             helperText={formik.touched.password && formik.errors.password}
-          />
+          /> */}
           <Button color="secondary" variant="contained" fullWidth type="submit">
             Submit
           </Button>
