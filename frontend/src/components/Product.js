@@ -5,6 +5,8 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import productsActions from '../redux/actions/productsActions'
 import { useHistory } from "react-router-dom";
+import ReactStars from "react-rating-stars-component"
+
 
 const Product = ({ product, addProductToCart, deleteProductFromCart, cart, user, likeProduct, userLogged }) => {
     // console.log(user)
@@ -16,7 +18,7 @@ const Product = ({ product, addProductToCart, deleteProductFromCart, cart, user,
     if (!productsLiked) {
         history.push('/')
     }
-    useEffect(()=>{
+    useEffect(() => {
 
         userLogged ? (productsLiked.includes(user) && setColor(true)) : setColor(false)
 
@@ -27,7 +29,7 @@ const Product = ({ product, addProductToCart, deleteProductFromCart, cart, user,
     const likes = async () => {
         if (!userLogged) {
             alert("no podes likear")
-        } else{
+        } else {
             setLoadingHeart(false)
             const response = await likeProduct(userLogged.token, _id)
             // console.log(response)
@@ -36,6 +38,12 @@ const Product = ({ product, addProductToCart, deleteProductFromCart, cart, user,
             setLoadingHeart(true)
         }
     }
+
+    const ratingChanged = (newRating, storeId) => {
+        // props.rateStore(storeId, newRating, props.userLogged.token)
+    }
+
+
     return (
         <div className="cardProduct">
             {/* <img src={productImg} alt="" style={{width:"60%"}}/> */}
@@ -45,6 +53,21 @@ const Product = ({ product, addProductToCart, deleteProductFromCart, cart, user,
                 {/* <p className="descriptionProduct">{description}</p> */}
                 <p>Price: ${price}</p>
                 <p>Stock: {stock}</p>
+                <ReactStars
+                    count={5}
+                    // onChange={() => ratingChanged(value, store._id)}
+                    // onChange={(e) => ratingChanged(e, store._id)}
+                    size={32}
+                    isHalf={true}
+                    edit={false}
+                    emptyIcon={<i className="far fa-star"></i>}
+                    halfIcon={<i className="fa fa-star-half-alt"></i>}
+                    fullIcon={<i className="fa fa-star"></i>}
+                    activeColor="#ffd700"
+                    // activeColor="#48d1be"
+                    color="#444444"
+                    value={5}
+                />
             </div>
             <div onClick={(loadingHeart ? likes : null)} className="contenedorIconoCorazon">
                 {color ? <FaHeart className="iconoCorazon" /> : <FaRegHeart className="iconoCorazon" />}
