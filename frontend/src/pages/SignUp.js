@@ -48,6 +48,7 @@ const validationSchema = yup.object({
 
 const SignUp = (props) => {
   const [photo, setPhoto] = useState({ userImg: "" });
+  const [photoName, setPhotoName] = useState({ userImgName: "" });
   const respuestaGoogle = (response) => {
     const { givenName, familyName, email, googleId, imageUrl } = response.profileObj;
     /* setPreUser({name:givenName,email:email,pass:googleId,url:imageUrl}) */
@@ -107,6 +108,8 @@ const SignUp = (props) => {
 
   const cargarFoto = (e) => {
     setPhoto({ userImg: e.target.files[0] });
+    console.log("soy el e", e.target.files[0].name);
+    setPhotoName({ userImgName: e.target.files[0].name });
   };
 
   return (
@@ -162,11 +165,13 @@ const SignUp = (props) => {
             error={formik.touched.password && Boolean(formik.errors.password)}
             helperText={formik.touched.password && formik.errors.password}
           />
-<label htmlFor="userImg" className="btn btn-secondary">
-  Choose Your Image
-          <input id="userImg" name="userImg"  type="file" style={{display:"none"}}  onChange={cargarFoto} />
-          </label>
-
+          <div>
+            <label htmlFor="userImg" className="btn btn-secondary">
+              Choose Your Image
+              <input id="userImg" name="userImg" type="file" style={{ display: "none" }} onChange={cargarFoto} />
+            </label>
+            <span>{photoName.userImgName}</span>
+          </div>
           <Button color="primary" variant="contained" fullWidth type="submit">
             Submit
           </Button>
