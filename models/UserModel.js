@@ -4,7 +4,7 @@ const userSchema = new mongoose.Schema({
     password:{type: String, required: true},
     firstName:{type: String, required: true},
     lastName:{type: String, required: true},
-    userImg:{type: String, required: true},
+    userImg:{url:{type: String},publicId:{type: String}},
     role : {type:String,default:"commonUser"}, //roles: commonUser,adminStores,adminApp
     // productsLiked: [{type:String}],
     email:{type: String, required: true},

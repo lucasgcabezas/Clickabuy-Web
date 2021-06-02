@@ -2,6 +2,13 @@ const User = require("../models/UserModel");
 const bcryptsjs = require("bcryptjs");
 const jwToken = require("jsonwebtoken");
 const fs = require("fs");
+let cloudinary = require('cloudinary').v2;
+
+cloudinary.config({ 
+    cloud_name: 'clickabuy', 
+    api_key: process.env.CLOUDINNARY_API_KEY, 
+    api_secret: process.env.CLOUDINNARY_API_SECRET
+});
 
 const respondFrontend = (res, response, error) => {
     res.json({
@@ -16,9 +23,10 @@ const errorUserNotFound = "error: User not found";
 const userControllers = {
     addUser: async (req, res) => {
         let response, error;
-        let { email, password, loggedWithGoogle } = req.body;
+        let { email, password, loggedWithGoogle,userImg } = req.body;
+        
         loggedWithGoogle = JSON.parse(loggedWithGoogle);
-        let userImg, extensionImg;
+        let extensionImg;
 
         if (!loggedWithGoogle) {
             userImg = req.files.userImg;
@@ -26,17 +34,31 @@ const userControllers = {
         }
 
         try {
+            let objImage = {url:"" , publicId:""}
+
             let userExist = await User.findOne({ email });
             if (!userExist) {
                 password = bcryptsjs.hashSync(password, 10);
                 let newUser = new User({ ...req.body, password });
                 if (!loggedWithGoogle) {
-                    let fileName = `${newUser._id}.${extensionImg}`;
-                    //let fileName = `${__dirname}/clients/build/assets/usersImg/${fileName}`
-                    let filePath = `${__dirname}/../frontend/public/assets/usersImg/${fileName}`;
-                    newUser.userImg = "/usersImg/" + fileName;
+                    //guardo la imagen localmente para luego hostearla
+                    //let fileName = `user-${newUser._id}.${extensionImg}`;
+                    let filePath = `${__dirname}/../frontend/public/assets/usersImg/newImageUser.${extensionImg}`;    
                     await userImg.mv(filePath);
+                    let imageHost = await cloudinary.uploader.upload(`${__dirname}/../frontend/public/assets/usersImg/newImageUser.${extensionImg}`);
+
+                    //borro para que no quede una imagen
+                    fs.unlink(filePath, (err) =>console.log(err));
+
+                    objImage.url = imageHost.secure_url;
+                    objImage.publicId = imageHost.public_id;
                 }
+                else{
+                    if(userImg === "") throw new Error('error , loggedWithGoogle = true and userImg = ""');
+                    objImage.url = userImg;
+                }
+
+                newUser.userImg = objImage;
                 await newUser.save();
                 let token = jwToken.sign({ ...newUser }, process.env.SECRET_OR_KEY);
                 response = {
@@ -95,17 +117,20 @@ const userControllers = {
     deleteUser: async (req, res) => {
         let response, error;
         let id = req.params.id;
+        
         try {
-            let userDeleted = await User.findByIdAndRemove(id);
+            let user = await User.findById(id);
 
-            if (!userDeleted) throw new Error("id not found on Collection Users");
-            if (userDeleted.loggedWithGoogle) {
-                fs.unlink(`${__dirname}/../frontend/public/assets/${userDeleted.userImg}`, (err) =>
+            if (!user) throw new Error("id not found on Collection Users");
+            if (!user.loggedWithGoogle) {
+                /*fs.unlink(`${__dirname}/../frontend/public/assets/${user.userImg}`, (err) =>
                     console.log(err)
-                );
+                );*/
+                await cloudinary.api.delete_resources([user.userImg.publicId]);
+                
             }
 
-            response = await User.find();
+            response = await User.findByIdAndRemove(id);
         } catch (err) {
             console.log(err);
             error = err.message;
@@ -144,9 +169,7 @@ const userControllers = {
 
         respondFrontend(res, response, undefined);
     },
-    // forcedLogin: async (req, res) => {
-    //     res.json({success: true, response: {userImg: req.user.userImg, firstName: req.user.firstName, lastName: req.user.lastName , email:req.user.email}})
-    // } 
+    
 
 
 
