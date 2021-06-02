@@ -118,7 +118,7 @@ const SignUp = (props) => {
             <label className="btn text-primary">create a Business account {">"} </label>
           </div>{" "}
         </NavLink>
-        <form onSubmit={formik.handleSubmit}>
+        <form id="myForm" onSubmit={formik.handleSubmit}>
           <TextField
             fullWidth
             id="firstName"
@@ -162,13 +162,16 @@ const SignUp = (props) => {
             error={formik.touched.password && Boolean(formik.errors.password)}
             helperText={formik.touched.password && formik.errors.password}
           />
-
-          <input id="userImg" name="userImg" type="file" onChange={cargarFoto} />
+<label htmlFor="userImg" className="btn btn-secondary">
+  Choose Your Image
+          <input id="userImg" name="userImg"  type="file" style={{display:"none"}}  onChange={cargarFoto} />
+          </label>
 
           <Button color="primary" variant="contained" fullWidth type="submit">
             Submit
           </Button>
         </form>
+
         <GoogleLogin
           className="mt-1 w-100 text-center text-white bg-primary"
           clientId="453615867535-mmnqpnp68m7du525dnif9647ll1bssi5.apps.googleusercontent.com"

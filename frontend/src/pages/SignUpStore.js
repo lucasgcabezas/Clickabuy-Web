@@ -10,15 +10,10 @@ import { connect } from "react-redux";
 import storeActions from "../redux/actions/storeActions";
 
 const validationSchema = yup.object({
-  /* CID: yup.string("company identification number (CID)").required("CID is Required"), */
+
 
   bName: yup.string("Enter business name").required("Business Name is required"),
-  /* description: yup.string("Enter business name"), */
-  /*  email: yup.string("Enter your email").email("Enter a valid email").required("Email is required"), */
-  /* password: yup
-    .string("Enter your password")
-    .min(6, "Password should be of minimum 6 characters length")
-    .required("Password is required"), */
+
   category: yup.string().required("category is required!"),
 });
 
@@ -30,28 +25,23 @@ const SignUpStore = (props) => {
 
   const formik = useFormik({
     initialValues: {
-      /*   CID: "", */
-    /*   ownerName: "", */
+
       bName: "",
       description:"",
       category: "",
       storeLogo: "",
-    /*   password: "", */
+
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
        alert(JSON.stringify(values, null, 2));
        alert(ta.description);
-
-
       let formData = new FormData();
-      /*  formData.append("CID", values.CID); */
-    /*   formData.append("ownerName", values.ownerName); */
+
       formData.append("bName", values.bName);
       formData.append("description", ta.description);
       formData.append("category", values.category);
-     /*  formData.append("storeLogo", values.storeLogo); */
-    /*   formData.append("password", values.password); */
+
       formData.append("userImg", photo.userImg);
 
       console.log("soy el values", values);
@@ -83,27 +73,7 @@ const SignUpStore = (props) => {
           </div>{" "}
         </NavLink>
         <form onSubmit={formik.handleSubmit}>
-          {/*    <TextField
-            fullWidth
-            id="CID"
-            name="CID"
-            label="company identification number (CID)"
-            value={formik.values.CID}
-            onChange={formik.handleChange}
-            error={formik.touched.CID && Boolean(formik.errors.CID)}
-            helperText={formik.touched.CID && formik.errors.CID}
-          /> */}
 
-       {/*    <TextField
-            fullWidth
-            id="ownerName"
-            name="ownerName"
-            label="Name or ID of the owner or legal representative"
-            value={formik.values.ownerName}
-            onChange={formik.handleChange}
-            error={formik.touched.ownerName && Boolean(formik.errors.ownerName)}
-            helperText={formik.touched.ownerName && formik.errors.ownerName}
-          /> */}
 
           <TextField
             fullWidth
