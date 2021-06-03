@@ -12,7 +12,6 @@ import { Link } from "react-router-dom";
 // import "../gracia.css";
 import { FaTags } from "react-icons/fa";
 import { useEffect, useState } from "react";
-import "boxicons";
 
 const validationSchema = yup.object({
   firstName: yup
@@ -52,6 +51,9 @@ const validationSchema = yup.object({
 const SignUp = (props) => {
   const [photo, setPhoto] = useState({ userImg: "" });
   const [photoName, setPhotoName] = useState({ userImgName: "" });
+  useEffect(()=>{
+    window.scrollTo(0,0)
+  },[])
   const respuestaGoogle = (response) => {
     const { givenName, familyName, email, googleId, imageUrl } = response.profileObj;
     console.log({
@@ -104,21 +106,20 @@ const SignUp = (props) => {
   };
 
   return (
+
+    // <div style={{backgroundImage: "url('https://webdesing881317710.files.wordpress.com/2021/06/3606268de57686baaa14bf67254ec618.png')"}} className="imgForm" >
     <div className="contenedorSignUp">
-      <div className="contenedorHeaderSignUp">
-        <Link to="/" className="backToHome">
-          <span class="material-icons-outlined iconBack">arrow_back_ios_new</span> Back
-        </Link>
-      </div>
+      <video src="./assets/formVideo.mp4" autoPlay loop muted className="videoForm"></video>
+      {/* <div className="contenedorHeaderSignUp"> */}
+        <Link to="/" className="backToHome"><span class="material-icons-outlined iconBack">arrow_back_ios_new</span> Back</Link>
+      {/* </div> */}
       <div className="contenedorInfoForm">
         <div className="contenedorLogoForm">
           <FaTags className="logoForm" />
           {/* <box-icon type='solid' name='purchase-tag' size="lg"></box-icon> */}
           <h1>clickabuy</h1>
-          <span>YOU NEEDED, YOU WANTED, WITH CLICKABUY YOU CAN HAVE IT</span>
-          <Link to="/SignUpStore" className="bussinesAccount">
-            Create a Business Account <span class="material-icons-outlined iconBussines">arrow_forward_ios</span>
-          </Link>
+          <span className="fraseClickabuy">DO YOUR BUSSINES OR FIND WHAT YOU NEED</span>
+          <Link to="/SignUpStore" className="bussinesAccount">Create a Business Account <span class="material-icons-outlined iconBussines">arrow_forward_ios</span></Link>
           <div>
             <span className="linkLogInText"> Already have an account?</span>
             <Link to="/SignIn" className="linkLogIn">
@@ -133,10 +134,10 @@ const SignUp = (props) => {
           <form onSubmit={formik.handleSubmit} className="formulario">
             <TextField
               fullWidth
-              // className="inputForm"
               id="firstName"
               name="firstName"
               label="Firstname"
+              autoComplete="off"
               value={formik.values.firstName}
               onChange={formik.handleChange}
               error={formik.touched.firstName && Boolean(formik.errors.firstName)}
@@ -147,6 +148,7 @@ const SignUp = (props) => {
               id="lastName"
               name="lastName"
               label="Lastname"
+              autoComplete="off"
               value={formik.values.lastName}
               onChange={formik.handleChange}
               error={formik.touched.lastName && Boolean(formik.errors.lastName)}
@@ -158,6 +160,7 @@ const SignUp = (props) => {
               id="email"
               name="email"
               label="Email"
+              autoComplete="off"
               value={formik.values.email}
               onChange={formik.handleChange}
               error={formik.touched.email && Boolean(formik.errors.email)}
@@ -170,35 +173,28 @@ const SignUp = (props) => {
               name="password"
               label="Password"
               type="password"
+              autoComplete="off"
               value={formik.values.password}
               onChange={formik.handleChange}
               error={formik.touched.password && Boolean(formik.errors.password)}
               helperText={formik.touched.password && formik.errors.password}
             />
-
             <div>
-              <label htmlFor="userImg" className="btn btn-secondary">
+              <label htmlFor="userImg" className="buttonInputFile">
                 Choose Your Image
                 <input id="userImg" name="userImg" type="file" style={{ display: "none" }} onChange={cargarFoto} />
               </label>
               <span>{photoName.userImgName}</span>
             </div>
-
-            {/* <label for="files" class="btn">Select Image</label> */}
-            {/* <input id="userImg" name="userImg" type="file" onChange={cargarFoto} className="inputFile"></input> */}
-            {/* <input id="userImg"  type="file" /> */}
             <Button variant="contained" type="submit">
               Sign Up
             </Button>
           </form>
           <div>
             <GoogleLogin
-              // className=""
               clientId="453615867535-mmnqpnp68m7du525dnif9647ll1bssi5.apps.googleusercontent.com"
-              render={(renderProps) => (
-                <button onClick={renderProps.onClick} disabled={renderProps.disabled} className="bGoogle">
-                  <FcGoogle /> Sign Up with Google
-                </button>
+              render={renderProps => (
+                <button onClick={renderProps.onClick} disabled={renderProps.disabled} className="bGoogle"><FcGoogle className="iconGoogle" /> Sign Up with Google</button>
               )}
               buttonText="Sign Up with Google"
               onSuccess={respuestaGoogle}
@@ -210,6 +206,7 @@ const SignUp = (props) => {
         </div>
       </div>
     </div>
+    // </div>
   );
 };
 

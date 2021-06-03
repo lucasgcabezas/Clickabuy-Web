@@ -1,10 +1,11 @@
 import React from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
+import { makeStyles } from '@material-ui/core/styles';
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import "bootstrap/dist/css/bootstrap.css";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import storeActions from "../redux/actions/storeActions";
@@ -16,26 +17,38 @@ const validationSchema = yup.object({
 
   category: yup.string().required("category is required!"),
 });
+const useStyles = makeStyles((theme) => ({
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
+}));
 
 const SignUpStore = (props) => {
+  const classes = useStyles();
   /*  console.log(props.categories); */
   const [photo, setPhoto] = useState({ userImg: "" });
+  const [photoName, setPhotoName] = useState({ userImgName: "" });
   const [ta, setTA] = useState({ description: "" });
-
-
+  useEffect(()=>{
+    window.scrollTo(0,0)
+  },[])
   const formik = useFormik({
     initialValues: {
 
       bName: "",
-      description:"",
+      description: "",
       category: "",
       storeLogo: "",
 
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-       alert(JSON.stringify(values, null, 2));
-       alert(ta.description);
+      alert(JSON.stringify(values, null, 2));
+      alert(ta.description);
       let formData = new FormData();
 
       formData.append("bName", values.bName);
@@ -47,34 +60,39 @@ const SignUpStore = (props) => {
       console.log("soy el values", values);
       console.log("soy el Formdata", formData);
 
-    /*   props.addStore(formData); */
+      /*   props.addStore(formData); */
     },
   });
 
   const cargarFoto = (e) => {
     setPhoto({ userImg: e.target.files[0] });
+    console.log("soy el e", e.target.files[0].name);
+    setPhotoName({ userImgName: e.target.files[0].name });
   };
 
-   const cargarTA = (e) => {
-     /* console.log("TA",e.nativeEvent.data) */
-     console.log("TargetValue",e.target.value)
+  const cargarTA = (e) => {
+    /* console.log("TA",e.nativeEvent.data) */
+    console.log("TargetValue", e.target.value)
 
-      setTA({ description:e.target.value});
+    setTA({ description: e.target.value });
   };
 
 
   return (
-    <div>
-      <div className="w-50 mt-5 mx-auto">
-        <label className="h3 ml-0">Complete your Business Data</label>
-        <NavLink to="/SignUp">
-          <div className="d-flex  justify-content-end">
-            <label className="btn text-primary">create a person account {">"} </label>
-          </div>{" "}
-        </NavLink>
+    <div className="contenedorSignUp">
+      <video src="./assets/formVideo.mp4" autoPlay loop muted className="videoForm"></video>
+      {/* <div className="contenedorHeaderSignUp"> */}
+        <Link to="/" className="backToHome"><span class="material-icons-outlined iconBack">arrow_back_ios_new</span> Back</Link>
+      {/* </div> */}
+      <div className="contenedorFormAdminStore">
+      <div className="contenedorInfoFormAdminStore">
+        <h3>Complete your Business Data</h3>
+        <Link to="/SignUp" className="linkPersonAccount">
+          <div className="d-flex justify-content-end">
+            <label className="btn text-primary">Create a person account </label>
+          </div>
+        </Link>
         <form onSubmit={formik.handleSubmit}>
-
-
           <TextField
             fullWidth
             id="bName"
@@ -85,48 +103,28 @@ const SignUpStore = (props) => {
             error={formik.touched.bName && Boolean(formik.errors.bName)}
             helperText={formik.touched.bName && formik.errors.bName}
           />
-
-<textarea placeHolder={"description of your business (optional)"} onChange={(e)=>cargarTA(e)}></textarea>
-
           <select
             name="category"
             value={formik.values.category}
             onChange={formik.handleChange}
-            /* onBlur={handleBlur} */
-            style={{ display: "block" }}
+            className="selectSignUpStore"
           >
             <option value="" label="Select a category" />
             {props.categories.map((category) => {
               return <option value={category.nameCategory} label={category.nameCategory} />;
             })}
           </select>
-
-          <input id="userImg" name="userImg" type="file" onChange={cargarFoto} />
-          {/*     <TextField
-            fullWidth
-            id="email"
-            name="email"
-            label="Email"
-            value={formik.values.email}
-            onChange={formik.handleChange}
-            error={formik.touched.email && Boolean(formik.errors.email)}
-            helperText={formik.touched.email && formik.errors.email}
-          /> */}
-        {/*   <TextField
-            fullWidth
-            id="password"
-            name="password"
-            label="Password"
-            type="password"
-            value={formik.values.password}
-            onChange={formik.handleChange}
-            error={formik.touched.password && Boolean(formik.errors.password)}
-            helperText={formik.touched.password && formik.errors.password}
-          /> */}
-          <Button color="secondary" variant="contained" fullWidth type="submit">
-            Submit
-          </Button>
+          <textarea placeHolder="description of your business (optional)" onChange={(e) => cargarTA(e)} className="textareaSignUpStore"></textarea>
+          <div>
+              <label htmlFor="userImg" className="buttonInputFile">
+                Choose Your Image
+              <input id="userImg" name="userImg" type="file" style={{ display: "none" }} onChange={cargarFoto} />
+              </label>
+              <span>{photoName.userImgName}</span>
+            </div>
+          <Button variant="contained" fullWidth type="submit">Create a new Store</Button>
         </form>
+        </div>
       </div>
     </div>
   );
@@ -135,16 +133,11 @@ const SignUpStore = (props) => {
 const mapStateToProps = (state) => {
   return {
     categories: state.categoryReducer.categories,
-
-    /*  userLogged: state.authReducer.userLogged, */
   };
 };
 
 const mapDispatchToProps = {
-  /* reloadCartLS: cartActions.reloadCartLS,
-  loginForced: authActions.loginForced, */
   addStore: storeActions.addStore,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignUpStore);
-/* export default SignUpStore; */
