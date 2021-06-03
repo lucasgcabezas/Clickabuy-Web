@@ -19,12 +19,12 @@ const Store = (props) => {
   const [stars, setStars] = useState(0);
   const [ver, setVer] = useState(false);
   const [cantRate, setCantRate] = useState(store.rate.length);
-  /*  const [productsCurrentStoreF, setproductsCurrentStoreF] = useState([]); */
+  const [productsCurrentStoreF, setproductsCurrentStoreF] = useState(props.productsCurrentStore);
 
   const [linkText, setLinkText] = useState([]);
   const changeLinkText = (nuArray) => {
     console.log("soy el arreglo filtrado devuelta en el padre", nuArray);
-    /*   setproductsCurrentStoreF(nuArray); */
+    setproductsCurrentStoreF(nuArray);
   };
 
   useEffect(() => {
@@ -153,14 +153,14 @@ const Store = (props) => {
           </div>
           <div className="containerCards">
             {/*  {console.log("soy el arreglo filtradro que pasa?", )} */}
-
-            {props.productsCurrentStore.length === 0 ? (
+            {console.log("este si", productsCurrentStoreF)}
+            {productsCurrentStoreF.length === 0 ? (
               <div>
                 {" "}
                 <h2>No products</h2>{" "}
               </div>
             ) : (
-              props.productsCurrentStore.map((product) => {
+              productsCurrentStoreF.map((product) => {
                 return (
                   <div key={product._id}>
                     <Product product={product} />
