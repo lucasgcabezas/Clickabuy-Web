@@ -59,7 +59,7 @@ const Category = (props) => {
                                                         fullIcon={<i className="fa fa-star"></i>}
                                                         activeColor="#ffd700"
                                                         // activeColor="#48d1be"
-                                                        color="#444444"
+                                                        color="#999999"
                                                         value={starsValue}
                                                     />
                                                     < span style={{ fontSize: 12, verticalAlign: 'center', marginTop: 5, marginLeft: 5, color: '#777777' }} >({store.rate.length})</span>

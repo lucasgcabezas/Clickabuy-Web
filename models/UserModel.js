@@ -8,7 +8,8 @@ const userSchema = new mongoose.Schema({
     role : {type:String,default:"commonUser",enum: ['commonUser', 'adminStores','adminApp']}, //roles: commonUser,adminStores,adminApp
     email:{type: String, required: true},
     loggedWithGoogle: {type: Boolean , default: false},
-    storesRated: [String] 
+    storesRated: [String], 
+    productsRated: [String], 
 })
 
 const User = mongoose.model('user',userSchema);

@@ -3,6 +3,7 @@ const Product = require('../models/ProductModel');
 const StoreModel = require('../models/StoreModel');
 const fs = require("fs")
 let cloudinary = require('cloudinary').v2;
+const UserModel = require('../models/UserModel');
 
 const respondFrontend = (res, response, error) => {
     res.json({
@@ -206,6 +207,7 @@ const productControllers = {
     },
     addReviews: async (req, res) => {
         const productId = req.params.id
+        console.log(req.body)
         try {
             const addReview = await Product.findOneAndUpdate({ _id: productId },
                 { $push: { reviews: { ...req.body, userId: req.user._id } } }, { new: true }).populate({ path: "reviews", populate: { path: "userId", select: { "firstName": 1, "lastName": 1, "email": 1 } } })
@@ -230,13 +232,35 @@ const productControllers = {
         const productId = req.params.id
         const idReview = req.body.idReview
         try {
-            const deleteReview = await Product.findOneAndUpdate({ _id: productId, "reviews._id": idReview },
-                { $pull: { reviews: { _id: idReview } } }, { new: true })
+            const deleteReview = await Product.findOneAndUpdate({ _id: productId, "reviews._id": idReview }, { $pull: { reviews: { _id: idReview } } }, { new: true })
+            
             res.json({ response: deleteReview, success: true })
         } catch (error) {
             res.json({ response: 'An error has occurred on the server, try later!', success: false })
         }
-    }
+    },
+
+    rateProduct: async (req, res) => {
+        let response, error;
+        const idProduct = req.params.id;
+        const user = req.user;
+
+        try {
+            checkRatedStore = await Product.findOne({ _id: idProduct, usersRated: [user._id] })
+            response = await Product.findOneAndUpdate({ _id: idProduct }, { $push: { rateProduct: { vote: req.body.numberRate, userId: user._id } }, usersRatedProduct: user._id }, { new: true })
+            console.log(response)
+            if (!checkRatedStore) {
+                await UserModel.findOneAndUpdate({ _id: user._id }, { $push: { productsRated: idProduct } })
+            } else {
+                console.log('ya lo votaste')
+            }
+        } catch (err) {
+            error = `${err.name} : ${err.message}`
+            console.log(err)
+        }
+
+        // res.json({ success: !error ? true : false, response, error })
+    },
 
 }
 

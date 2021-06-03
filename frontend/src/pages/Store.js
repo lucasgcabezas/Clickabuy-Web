@@ -57,7 +57,7 @@ const Store = (props) => {
                     <div style={{ backgroundImage: `url('../assets/${store.logoStore}')` }} className="storeLogoStore"></div>
                     <h1>{store.nameStore}</h1>
                     <div className="contenedorFindProductStore">
-                        {/* <input type="text" className="inputSearchStore" placeholder={placeholderStoreInput} name="" id="buscar" onChange={(e) => { props.filter(e.target.value) }} /> */}
+                        <input type="text" className="inputSearchStore" placeholder={placeholderStoreInput} name="" id="buscar" onChange={(e) => { props.filter(e.target.value) }} />
                         <span className="material-icons-outlined iconSearchStore">search</span>
                     </div>
                 </div>
@@ -69,7 +69,6 @@ const Store = (props) => {
                     <div className="contenedorFiltrosStore">
                         <div style={{ width: '100%', textAlign: 'center', marginTop: 60 }}>
                             <span> Rate us </span>
-
                         </div>
                         <div className="storeStars">
 
@@ -88,7 +87,7 @@ const Store = (props) => {
                                         fullIcon={<i className="fa fa-star"></i>}
                                         activeColor="#ffd700"
                                         // activeColor="#48d1be"
-                                        color="#444444"
+                                        color="#999999"
                                         value={stars}
                                     />
                                     : store.rate.length === 0
@@ -104,7 +103,7 @@ const Store = (props) => {
                                             fullIcon={<i className="fa fa-star"></i>}
                                             activeColor="#ffd700"
                                             // activeColor="#48d1be"
-                                            color="#444444"
+                                            color="#999999"
                                             value={0}
                                         />
                                         : <span>Loading</span>

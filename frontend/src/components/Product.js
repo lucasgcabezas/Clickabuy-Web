@@ -8,7 +8,7 @@ import ReactStars from "react-rating-stars-component"
 
 
 const Product = ({ product, addProductToCart, deleteProductFromCart, cart, likeProduct, userLogged }) => {
-    const { stock, description, nameProduct, price, productImg, _id, userLiked } = product
+    const { stock, description, nameProduct, price, productImg, _id, userLiked, rateProduct, reviews  } = product
     const [loadingHeart, setLoadingHeart] = useState(true)
     const likes = async () => {
         if (!userLogged) {
@@ -19,10 +19,16 @@ const Product = ({ product, addProductToCart, deleteProductFromCart, cart, likeP
             setLoadingHeart(true)
         }
     }
-    const ratingChanged = (newRating, storeId) => {
-        // props.rateStore(storeId, newRating, props.userLogged.token)
-    }
 
+    let ratingCounter = 0
+
+    reviews.forEach(rating => {
+        ratingCounter = ratingCounter + rating.vote
+        console.log(rating.vote)
+    })
+    var starsValue = ratingCounter / reviews.length
+
+    console.log(product.reviews)
 
     return (
         <div className="cardProduct">
@@ -31,21 +37,24 @@ const Product = ({ product, addProductToCart, deleteProductFromCart, cart, likeP
                 <h3>{nameProduct}</h3>
                 <p>Price: ${price}</p>
                 <p>Stock: {stock}</p>
-                <ReactStars
-                    count={5}
-                    // onChange={() => ratingChanged(value, store._id)}
-                    // onChange={(e) => ratingChanged(e, store._id)}
-                    size={32}
-                    isHalf={true}
-                    edit={false}
-                    emptyIcon={<i className="far fa-star"></i>}
-                    halfIcon={<i className="fa fa-star-half-alt"></i>}
-                    fullIcon={<i className="fa fa-star"></i>}
-                    activeColor="#ffd700"
-                    // activeColor="#48d1be"
-                    color="#444444"
-                    value={5}
-                />
+
+                <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', height: 40 }}>
+                    <ReactStars
+                        count={5}
+                        size={32}
+                        isHalf={true}
+                        edit={false}
+                        emptyIcon={<i className="far fa-star"></i>}
+                        halfIcon={<i className="fa fa-star-half-alt"></i>}
+                        fullIcon={<i className="fa fa-star"></i>}
+                        activeColor="#ffd700"
+                        // activeColor="#48d1be"
+                        color="#999999"
+                        value={starsValue}
+                    />
+                    < span style={{ fontSize: 12, verticalAlign: 'center', marginTop: 5, marginLeft: 5, color: '#777777', fontWeight: 'lighter' }} >({reviews.length})</span>
+                </div>
+
             </div>
             <div onClick={(loadingHeart ? likes : null)} className="contenedorIconoCorazon">
                 {userLogged && (userLiked.includes(userLogged.email)) ? <FaHeart className="iconoCorazon" /> : <FaRegHeart className="iconoCorazon" />}

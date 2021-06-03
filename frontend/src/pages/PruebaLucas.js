@@ -1,16 +1,19 @@
-import React from "react";
-// import "./styles.css";
-import ReactStars from "react-rating-stars-component"
+import React, { useState } from "react";
+import ReactStars from 'react-stars'
+
 
 
 
 const PruebaLucas = () => {
 
-    const ratingChanged = (newRating) => {
-        console.log(newRating);
-    };
+    const [state, setState] = useState(0)
 
-    
+    const ratingChanged = (newRating) => {
+        console.log(newRating)
+    }
+
+
+
 
     return (
         <div style={{ textAlign: 'center', backgroundColor: 'red', height: '100px', paddingTop: '20px' }}>
@@ -18,21 +21,11 @@ const PruebaLucas = () => {
             <ReactStars
                 count={5}
                 onChange={ratingChanged}
-                size={32}
-                isHalf={true}
-                edit={true}
-                emptyIcon={<i className="far fa-star"></i>}
-                halfIcon={<i className="fa fa-star-half-alt"></i>}
-                fullIcon={<i className="fa fa-star"></i>}
-                activeColor="#ffd700"
-                // activeColor="#48d1be"
-                color="#444444"
-                value={2}
+                size={24}
+                color2={'#ffd700'}
+                value={state}
             />
-
-
-
-
+        <span onClick={()=>setState(state+1)}>cambiar</span>
         </div >
 
     )

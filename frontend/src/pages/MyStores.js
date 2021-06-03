@@ -1,8 +1,13 @@
 import {connect} from 'react-redux'
 import  '../css/jona.css'
 import {Link} from 'react-router-dom'
+import Header from '../components/Header'
+
+
 const MyStore = (userLogged) => {
     return (
+        <>
+        <Header />
         <div className ="body">
             <span style={{textAlign:"center"}}>YOUR STORES</span> 
             <div className="containerOfItems">
@@ -15,6 +20,7 @@ const MyStore = (userLogged) => {
                 <div className="oneStore"></div>
             </div>
         </div>
+        </>
     )
 }
 
