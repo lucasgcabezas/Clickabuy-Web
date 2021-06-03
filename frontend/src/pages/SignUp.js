@@ -3,16 +3,16 @@ import ReactDOM from "react-dom";
 import { useFormik, Form } from "formik";
 import * as yup from "yup";
 import Button from "@material-ui/core/Button";
-import { FcGoogle } from 'react-icons/fc'
+import { FcGoogle } from "react-icons/fc";
 import TextField from "@material-ui/core/TextField";
 import authActions from "../redux/actions/authActions";
 import { connect } from "react-redux";
 import GoogleLogin from "react-google-login";
 import { Link } from "react-router-dom";
 // import "../gracia.css";
-import { FaTags } from 'react-icons/fa'
+import { FaTags } from "react-icons/fa";
 import { useEffect, useState } from "react";
-import 'boxicons'
+import "boxicons";
 
 const validationSchema = yup.object({
   firstName: yup
@@ -99,14 +99,16 @@ const SignUp = (props) => {
 
   const cargarFoto = (e) => {
     setPhoto({ userImg: e.target.files[0] });
-    console.log("soy el e", e.target.files[0].name);
+    /*  console.log("soy el e", e.target.files[0].name); */
     setPhotoName({ userImgName: e.target.files[0].name });
   };
 
   return (
     <div className="contenedorSignUp">
       <div className="contenedorHeaderSignUp">
-        <Link to="/" className="backToHome"><span class="material-icons-outlined iconBack">arrow_back_ios_new</span> Back</Link>
+        <Link to="/" className="backToHome">
+          <span class="material-icons-outlined iconBack">arrow_back_ios_new</span> Back
+        </Link>
       </div>
       <div className="contenedorInfoForm">
         <div className="contenedorLogoForm">
@@ -114,9 +116,15 @@ const SignUp = (props) => {
           {/* <box-icon type='solid' name='purchase-tag' size="lg"></box-icon> */}
           <h1>clickabuy</h1>
           <span>YOU NEEDED, YOU WANTED, WITH CLICKABUY YOU CAN HAVE IT</span>
-          <Link to="/SignUpStore" className="bussinesAccount">Create a Business Account <span class="material-icons-outlined iconBussines">arrow_forward_ios</span></Link>
+          <Link to="/SignUpStore" className="bussinesAccount">
+            Create a Business Account <span class="material-icons-outlined iconBussines">arrow_forward_ios</span>
+          </Link>
           <div>
-            <span className="linkLogInText"> Already have an account?</span><Link to="/SignIn" className="linkLogIn"> Log In</Link>
+            <span className="linkLogInText"> Already have an account?</span>
+            <Link to="/SignIn" className="linkLogIn">
+              {" "}
+              Log In
+            </Link>
           </div>
         </div>
         <div className="contenedorForm">
@@ -171,7 +179,7 @@ const SignUp = (props) => {
             <div>
               <label htmlFor="userImg" className="btn btn-secondary">
                 Choose Your Image
-              <input id="userImg" name="userImg" type="file" style={{ display: "none" }} onChange={cargarFoto} />
+                <input id="userImg" name="userImg" type="file" style={{ display: "none" }} onChange={cargarFoto} />
               </label>
               <span>{photoName.userImgName}</span>
             </div>
@@ -181,14 +189,16 @@ const SignUp = (props) => {
             {/* <input id="userImg"  type="file" /> */}
             <Button variant="contained" type="submit">
               Sign Up
-          </Button>
+            </Button>
           </form>
           <div>
             <GoogleLogin
               // className=""
               clientId="453615867535-mmnqpnp68m7du525dnif9647ll1bssi5.apps.googleusercontent.com"
-              render={renderProps => (
-                <button onClick={renderProps.onClick} disabled={renderProps.disabled} className="bGoogle"><FcGoogle /> Sign Up with Google</button>
+              render={(renderProps) => (
+                <button onClick={renderProps.onClick} disabled={renderProps.disabled} className="bGoogle">
+                  <FcGoogle /> Sign Up with Google
+                </button>
               )}
               buttonText="Sign Up with Google"
               onSuccess={respuestaGoogle}
@@ -196,7 +206,6 @@ const SignUp = (props) => {
               cookiePolicy={"single_host_origin"}
             />
             {/* secreto google esu21qkgDbOgSQKwu8JWeBFb */}
-
           </div>
         </div>
       </div>
