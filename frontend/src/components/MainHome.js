@@ -8,9 +8,9 @@ const MainHome = (props) => {
     useEffect(() => {
         props.getAllProducts()
     }, [])
-    console.log(products)
+    
     const productsFiltered = products.filter((product, index) => index <= 3)
-    // console.log(productsFiltered)
+    
     return (
         <>
             <div className="contenedorPublicity">
@@ -61,10 +61,11 @@ const MainHome = (props) => {
 }
 const mapStateToProps = state => {
     return{
-        products: state.productReducer.products
+        products: state.productReducer.products,    
     }
 }
 const mapDispatchToProps = {
     getAllProducts: productsActions.getAllProducts
+
 }
 export default connect(mapStateToProps, mapDispatchToProps)(MainHome)

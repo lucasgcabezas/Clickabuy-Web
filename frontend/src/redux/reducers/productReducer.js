@@ -19,9 +19,12 @@ const productReducer = (state = initialState, action) => {
                 filterProducts: action.payload
             } 
         case 'FILTER_PRODUCTS':
+            let newFilterProducts = state.products.filter(product =>{
+                return product.nameProduct.toLowerCase().indexOf(action.payload.toString().toLowerCase().trim()) === 0
+            })
             return{
                 ...state,
-                filterProducts: state.products.filter(product =>{return product.nameProduct.toLowerCase().indexOf(action.payload.toString().toLowerCase().trim()) === 0})
+                filterProducts: newFilterProducts
             }
         case 'UPDATE_PRODUCT':
             var newProducts = state.products.map(product => {

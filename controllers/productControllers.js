@@ -5,6 +5,12 @@ const fs = require("fs")
 let cloudinary = require('cloudinary').v2;
 const UserModel = require('../models/UserModel');
 
+cloudinary.config({ 
+    cloud_name: 'clickabuy', 
+    api_key: process.env.CLOUDINNARY_API_KEY, 
+    api_secret: process.env.CLOUDINNARY_API_SECRET
+});
+
 const respondFrontend = (res, response, error) => {
     res.json({
         success: !error ? true : false,
@@ -69,7 +75,9 @@ const productControllers = {
     getAllProducts: async (req, res) => {
         let response, error;
         try {
-            response = await Product.find().populate({path: "reviews", populate: {path: "userId", select: {"firstName": 1, "lastName": 1, "email":1}}})
+            response = await Product.find()
+                .populate({path: "reviews", populate: {path: "userId", select: {"firstName": 1, "lastName": 1, "email":1}}})
+                //.populate("storeId")
         } catch (err) {
             console.log(err);
             error = errorBackend;

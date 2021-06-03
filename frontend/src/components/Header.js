@@ -14,17 +14,10 @@ const Header = (props) => {
 
   const { pathname } = useLocation();
   const [productFilter, setProductFilter] = useState('')
-  console.log('Soy producFilter', productFilter)
-  console.log('Soy todos los productos', props.products)
+  
 
   function handleFilter(e) {
-    setProductFilter(e.target.value)
-    let productosFiltrados = props.products.filter((producto) => {
-      return (
-        producto.nameProduct = e.target.value
-      )
-    })
-    console.log(productosFiltrados)
+    props.filtrar(e.target.value)
   }
 
   return (

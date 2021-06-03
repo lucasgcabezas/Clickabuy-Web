@@ -7,9 +7,13 @@ import Footer from './Footer'
 import Product from './Product'
 /* import categoryActions from '../redux/actions/categoryActions' */
 import storeActions from '../redux/actions/storeActions'
+import {useEffect} from 'react'
 
 const FilTerProductsStore = (props) => {   
-    console.log(props)
+    useEffect(() => {
+        if(props.products.length === 0)
+            props.getAllProducts()
+    }, []);
     
     return (
         <>  
@@ -23,7 +27,6 @@ const FilTerProductsStore = (props) => {
                         return (
                             <div key={product._id}>
                                 <p>Tienda: <NavLink to={`/store/${product.storeId}`}>{product.storeId}</NavLink> </p>
-                                {console.log(product.storeId)}
                                 <Product product={product} />
                             </div>
                         )
@@ -37,6 +40,7 @@ const FilTerProductsStore = (props) => {
 const mapStateToProps = state =>{
     return{
         filterProducts: state.productReducer.filterProducts,
+        products: state.productReducer.products
     }
 }
    
