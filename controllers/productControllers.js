@@ -20,7 +20,7 @@ const validationStore = async (idStore, user) => {
     if (!store) throw new Error("this Store doesn't exist")
 
     userExist = store.owners.find(idUser => idUser.toString() === user._id.toString())
-    if (!userExist) throw new Error("this user is not Authorizated to modify the Store " + store.nameStore)
+    if (!userExist && user.role!== "adminApp") throw new Error("this user is not Authorizated to modify the Store " + store.nameStore)
 
     return store
 }

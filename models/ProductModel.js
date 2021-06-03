@@ -11,7 +11,7 @@ const productSchema = new mongoose.Schema({
     reviews:[{name:{type:String}, avatar:{type:String}, review:{type:String, required: true}, userId:{type: mongoose.Types.ObjectId, ref: 'user', required:true}, default: 0}],
     usersRatedProduct: [String],   
     rateProduct: [{ vote: { type: Number, default: 0 }, userId: { type: mongoose.Types.ObjectId, ref: 'user', required: true } }],
-
+    
 })
 
 const Product = mongoose.model('product',productSchema);

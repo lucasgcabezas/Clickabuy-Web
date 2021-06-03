@@ -6,13 +6,13 @@ const userControllers = require('../controllers/userControllers')
 const storeControllers = require('../controllers/storeControllers')
 const productControllers = require('../controllers/productControllers')
 const categoryControllers = require('../controllers/categoryControllers')
-
+const requestCreateStoreControllers = require('../controllers/requestCreateStoreControllers')
 
 const { addUser, getAllUsers, getUserById, updateUser, deleteUser, loginUser, forcedLogin } = userControllers
 const { getAllStores, addStore, editStore, deleteStore, getStoresByCategory,modifyOwnerOfStore, getStoresUser, rateStore } = storeControllers
 const { getAllCategories, getSingleCategory, addCategory, deleteCategory, modifyCategory } = categoryControllers
 const { addProduct, getAllProducts, getProductById, updateProduct, deleteProduct, getProductsFromStore,getProductFromCartLS,productsLiked, addReviews, editReviews, deleteReviews } = productControllers
-
+const {getAllRequestCreateStore,addRequestCreateStore,approveRequest,rejectRequest} = requestCreateStoreControllers
 
 router.route("/users")
     .get(getAllUsers)
@@ -31,7 +31,7 @@ router.route("/user/:id")
 
 router.route("/stores")
     .get(getAllStores)
-    .post(passport.authenticate('jwt', { session: false }), addStore)
+    //.post(passport.authenticate('jwt', { session: false }), addStore)
 
 router.route("/storesByUser")
     .get(passport.authenticate('jwt', { session: false }), getStoresUser)
@@ -82,5 +82,21 @@ router.route('/reviews/:id')
 .post(passport.authenticate('jwt', {session: false}), addReviews)
 .put(editReviews)
 .delete(deleteReviews)
+
+
+router.route("/request")
+.get(passport.authenticate('jwt', {session: false}), getAllRequestCreateStore)
+.post(passport.authenticate('jwt', {session: false}), addRequestCreateStore)
+
+router.route("/respondRequest/:id")
+.post(passport.authenticate('jwt', {session: false}), approveRequest)
+.delete(passport.authenticate('jwt', {session: false}), rejectRequest)
+
+
+
+
+
+
+
 
 module.exports = router

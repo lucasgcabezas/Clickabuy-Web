@@ -19,7 +19,8 @@ const validationStore = async (idStore, user) => {
     if (!store) throw new Error("this Store doesn't exist")
 
     userExist = store.owners.find(idUser => idUser.toString() === user._id.toString())
-    if (!userExist) throw new Error("this user is not Authorizated to modify the Store " + store.nameStore)
+    
+    if (!userExist && user.role!== "adminApp") throw new Error("this user is not Authorizated to modify the Store " + store.nameStore)
 
     return store
 }
@@ -36,7 +37,7 @@ const storeControllers = {
         }
         res.json({ success: !error ? true : false, response, error })
     },
-    addStore: async (req, res) => {
+    /*addStore: async (req, res) => {
         let response, error;
         let { category } = req.body;
         let { logoStore } = req.files;
@@ -74,7 +75,7 @@ const storeControllers = {
             console.log(err)
         }
         res.json({ success: !error ? true : false, response, error })
-    },
+    },*/
     getStoreFromId: async (req, res) => {
         const id = req.params.id
         let response;
@@ -110,7 +111,7 @@ const storeControllers = {
 
             if (storeHero) {
                 await cloudinary.api.delete_resources([store.storeHero.publicId]);
-                const hero = getPathAndNameFile(store, storeHero, "storeHeros");
+                const hero = getPathAndNameFile(store, storeHero, "fotosAHostear");
                 await storeHero.mv(hero.filePath);
                 let storeHeroHost = await cloudinary.uploader.upload(hero.filePath);
                 fs.unlink(hero.filePath, (err) => err && console.log(err));
@@ -120,7 +121,7 @@ const storeControllers = {
             }
             if (logoStore) {
                 await cloudinary.api.delete_resources([store.logoStore.publicId]);
-                const logo = getPathAndNameFile(store, logoStore, "storeLogos");
+                const logo = getPathAndNameFile(store, logoStore, "fotosAHostear");
                 await logoStore.mv(logo.filePath);
                 
                 let logoStoreHost = await cloudinary.uploader.upload(logo.filePath);
