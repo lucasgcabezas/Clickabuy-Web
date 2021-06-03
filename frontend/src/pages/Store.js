@@ -12,7 +12,6 @@ const Store = (props) => {
     const { getProductsFromStore } = props
     const idParams = props.match.params.id
     const [store, setStore] = useState({ rate: [] })
-
     const [stars, setStars] = useState(0)
     const [ver, setVer] = useState(false)
     const [cantRate, setCantRate] = useState(store.rate.length)
@@ -58,7 +57,7 @@ const Store = (props) => {
                     <div style={{ backgroundImage: `url('../assets/${store.logoStore}')` }} className="storeLogoStore"></div>
                     <h1>{store.nameStore}</h1>
                     <div className="contenedorFindProductStore">
-                        <input type="text" className="inputSearchStore" placeholder={placeholderStoreInput} name="" id="buscar" onChange={(e) => { props.filter(e.target.value) }} />
+                        {/* <input type="text" className="inputSearchStore" placeholder={placeholderStoreInput} name="" id="buscar" onChange={(e) => { props.filter(e.target.value) }} /> */}
                         <span className="material-icons-outlined iconSearchStore">search</span>
                     </div>
                 </div>
@@ -116,9 +115,9 @@ const Store = (props) => {
 
                     </div>
                     <div className="containerCards">
-                        {props.filterProducts.length === 0
+                        {props.productsCurrentStore.length === 0
                             ? <div> <h2>No products</h2> </div>
-                            : props.filterProducts.map(product => {
+                            : props.productsCurrentStore.map(product => {
                                 return (
                                     <div key={product._id}>
                                         <Product product={product} />
@@ -138,6 +137,7 @@ const mapStateToProps = state => {
     return {
         storesForCategory: state.categoryReducer.stores,
         products: state.productReducer.products,
+        productsCurrentStore: state.productReducer.productsCurrentStore,
         filterProducts: state.productReducer.filterProducts,
         userLogged: state.authReducer.userLogged
     }

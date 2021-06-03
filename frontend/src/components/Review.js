@@ -15,12 +15,12 @@ const Comment = (props) => {
     const [enabledUser, setEnabledUser] = useState(false)
     const [updateReview, setUpdateReview] = useState(false)
     // console.log(userLogged)
-    // console.log(review)
-    // useEffect(() => {
-    //     if (userLogged && userLogged.email === review.userId.email) {
-    //         setEnabledUser(true)
-    //     }
-    // }, [])
+    console.log(review)
+    useEffect(() => {
+        if (userLogged && userLogged.email === review.userId.email) {
+            setEnabledUser(true)
+        }
+    }, [])
     const sendEnter = (e) => {
         if (e.key === 'Enter') {
             updatedReview(reviewContent, review._id)
@@ -48,7 +48,7 @@ const Comment = (props) => {
 
                 }
                 {
-                    // enabledUser &&
+                    enabledUser &&
                     <div className="contenedorButtonsOptions">
                         <div onClick={() => { setUpdateReview(!updateReview) }}>
                             {!updateReview ? <FaPencilAlt /> : <TiDelete />}

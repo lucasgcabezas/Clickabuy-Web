@@ -1,20 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { useFormik, Formik, Form, Field, ErrorMessage } from "formik";
-/* Formik, Form, Field, ErrorMessage */
 import * as yup from "yup";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import "bootstrap/dist/css/bootstrap.css";
 import { useEffect, useState } from "react";
 import { connect } from "react-redux";
-/* import axios from "axios"; */
 import authActions from "../redux/actions/authActions";
 import GoogleLogin from "react-google-login";
 import { NavLink } from "react-router-dom";
-/* import ProgressStepBar from "../components/ProgressStepBar"; */
-// import "react-step-progress-bar/styles.css";
-// import { ProgressBar, Step } from "react-step-progress-bar";
 
 const validationSchema = yup.object({
   email: yup
@@ -72,9 +67,17 @@ const SignIn = (props) => {
   });
 
   return (
-    <div>
-      <div className="w-50 mt-5 mx-auto">
-        <label className="h3 ml-0">Complete your Personal Data</label>
+    <div className="contenedorLogIn">
+      {/* <video src="./assets/formBackground.mp4" autoPlay loop muted className="videoForm"></video> */}
+      {/* <div className="imageSignUpLogIn" style={{ backgroundImage: "url('https://webdesing881317710.files.wordpress.com/2021/06/formclickabuy.jpg')" }}>
+        <div className="contenedorHeroLogIn">
+          <div className="infoRegister">
+            <h2>Log In</h2>
+            {/* <button className="buttonSignUp">Iniciar Sesión</button> */}
+          {/* </div>
+        </div> */}
+      <div>
+        <label>Complete your Personal Data</label>
         <form onSubmit={formik.handleSubmit}>
           <TextField
             fullWidth
@@ -102,7 +105,6 @@ const SignIn = (props) => {
           </Button>
         </form>
         <GoogleLogin
-          className="mt-1 w-100 text-center text-white bg-primary"
           clientId="453615867535-mmnqpnp68m7du525dnif9647ll1bssi5.apps.googleusercontent.com"
           buttonText="LogIn with Google"
           onSuccess={respuestaGoogle}
@@ -111,7 +113,7 @@ const SignIn = (props) => {
         />
         {/* secreto google esu21qkgDbOgSQKwu8JWeBFb */}
         <NavLink to="/SignUp">
-          <label className="mt-2 w-100 btn  h6">
+          <label>
             Don't have an account?, <span className="text-primary">Sign Up Here</span>{" "}
           </label>{" "}
         </NavLink>

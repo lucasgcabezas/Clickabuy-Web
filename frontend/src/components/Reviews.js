@@ -8,7 +8,7 @@ const Reviews = (props) => {
     const [inputReview, setInputReview] = useState({ review: '', token: '' })
     const [loadingReviews, setLoadingReviews] = useState(true)
 
-    let input = userLogged ? { inputReview: 'Write a review...', disabled: false } : { inputReview: 'You must be logged in to post a comment', disabled: true }
+    let input = userLogged ? { inputReview: 'Write a review...', disabled: false } : { inputReview: 'You must be logged in to post a review', disabled: true }
     let buttonDisabled = inputReview.review ? false : true
 
     const leerInput = (e) => {
@@ -23,7 +23,7 @@ const Reviews = (props) => {
         const spaceComment = inputReview.review.charAt(0)
         if (userLogged) {
             if (spaceComment === " " || inputReview.review === "") {
-                alert("You can't post an empty comment")
+                alert("You can't post an empty review")
             } else {
                 setLoadingReviews(false)
                 const response = await addReview(inputReview, product)
@@ -33,7 +33,7 @@ const Reviews = (props) => {
             }
 
         } else {
-            alert("You must be logged in to post a comment")
+            alert("You must be logged in to post a review")
         }
     }
     const updatedReview = async (review, idReview) => {
@@ -42,7 +42,6 @@ const Reviews = (props) => {
     }
     const deleteReviews = async (idReview) => {
         const response = await deleteReview(product, idReview)
-        // console.log(response)
         setReviews(response.reviews)
     }
     const sendEnter = (e) => {
@@ -52,10 +51,10 @@ const Reviews = (props) => {
     }
     return (
         <div className="contenedorReviews">
-                <div className="tituloReviews">Reviews of Products <span>({reviews.length})</span></div>
+                <div className="tituloReviews">Reviews of Product <span>({reviews.length})</span></div>
                 {reviews.length === 0
                     ? <div className="noReviews">
-                        <p>No comments yet</p>
+                        <p>No reviews yet</p>
                         <p>Be the first to post one!</p>
                     </div>
                     :

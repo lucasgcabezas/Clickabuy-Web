@@ -2,10 +2,9 @@ import React from 'react'
 import Header from '../components/Header'
 import Hero from '../components/Hero'
 import Footer from '../components/Footer'
-import Categories from '../components/Categories'
-import BannerCarousel from '../components/BannerCarousel'
 import CategoriesBanner from '../components/CategoriesBanner'
 import MainHome from '../components/MainHome'
+import HeroHome from '../components/HeroHome'
 
 class Home extends React.Component{
     componentDidMount(){
@@ -14,14 +13,12 @@ class Home extends React.Component{
     render(){
         return(
             <div className="contenedorHome">  
-            {/* <div className='principalContainer'>                              */}
                 <Header/>
                 <Hero />
-                <BannerCarousel/>
+                <HeroHome/>
                 <CategoriesBanner/>
                 <MainHome/>    
                 <Footer /> 
-            {/* </div> */}
             </div>
         )        
     }

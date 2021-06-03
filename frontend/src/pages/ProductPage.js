@@ -11,10 +11,14 @@ const ProductPage = (props) => {
     const idOfProduct = props.match.params.id
     
     const productSelected = products.find(product => product._id === idOfProduct)
-
     const [reviews, setReviews] = useState(productSelected.reviews)
-
+    // if (!productSelected.reviews) {
+    //     <span>cargando...</span>
+    // } else {
+        
+    // }
     // console.log(reviews)
+
 
     return (
         <>

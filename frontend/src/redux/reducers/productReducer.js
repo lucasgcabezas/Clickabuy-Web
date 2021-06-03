@@ -1,14 +1,16 @@
 const initialState = {
     products: [],
-    filterProducts: []
+    filterProducts: [],
+    productsCurrentStore: []
+    // favorites: []
 }
 
 const productReducer = (state = initialState, action) => {
     switch (action.type) {
-        case 'FETCH_PRODUCTS':
+        case 'FETCH_PRODUCTS_STORE':
             return {
                 ...state,
-                products: action.payload
+                productsCurrentStore: action.payload
             }
         case 'FETCH_ALL_PRODUCTS':
             return {
@@ -20,6 +22,26 @@ const productReducer = (state = initialState, action) => {
             return{
                 ...state,
                 filterProducts: state.products.filter(product =>{return product.nameProduct.toLowerCase().indexOf(action.payload.toString().toLowerCase().trim()) === 0})
+            }
+        case 'UPDATE_PRODUCT':
+            var newProducts = state.products.map(product => {
+                if (product._id === action.payload._id)
+                    return action.payload;
+                return product;
+            })           
+            return{
+                ...state,
+                products: newProducts,
+            }
+        case 'UPDATE_CURRENT_STORE':
+            var newProducts = state.productsCurrentStore.map(product => {
+                if (product._id === action.payload._id)
+                    return action.payload;
+                return product;
+            })
+            return{
+                ...state,
+                productsCurrentStore: newProducts
             }
         default:
             return state

@@ -16,27 +16,27 @@ html *{
 } */
 
 /*HERO*/
-.heroContainer{
+/* .heroContainer{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;
     flex-grow: 1;
-}
+} */
 
 /*HEADER*/
-.headerContainer{
+/* .headerContainer{
     height: 10vh;
     width: 100%;
     display: flex;
-}
-.menu-logo{
+} */
+/* .menu-logo{
     display:flex;
     width: 50%;
     justify-content: left;
     align-items: center;
-}
+} */
 /* .menu-options{
     color: #ee4054;
     display: flex;

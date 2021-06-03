@@ -68,7 +68,7 @@ const productControllers = {
     getAllProducts: async (req, res) => {
         let response, error;
         try {
-            response = await Product.find();
+            response = await Product.find().populate({path: "reviews", populate: {path: "userId", select: {"firstName": 1, "lastName": 1, "email":1}}})
         } catch (err) {
             console.log(err);
             error = errorBackend;
@@ -151,7 +151,7 @@ const productControllers = {
         let response;
         let error;
         try {
-            const productsFromStore = await Product.find({ storeId: id })
+            const productsFromStore = await Product.find({ storeId: id }).populate({path: "reviews", populate: {path: "userId", select: {"firstName": 1, "lastName": 1, "email":1}}})
             response = productsFromStore
         } catch (error) {
             error = 'An error has occurred on the server, try later!'
@@ -185,11 +185,11 @@ const productControllers = {
         try {
             const product = await Product.findOne({ _id: idProduct, "userLiked": userEmail })
             if (!product) {
-                const likeProduct = await Product.findOneAndUpdate({ _id: idProduct }, { $push: { userLiked: userEmail } }, { new: true })
-                res.json({ success: true, response: { userLiked: likeProduct.userLiked, heart: true } })
-            } else {
-                const deslikeProduct = await Product.findOneAndUpdate({ _id: idProduct }, { $pull: { userLiked: userEmail } }, { new: true })
-                res.json({ success: true, response: { userLiked: deslikeProduct.userLiked, heart: false } })
+                const likeProduct = await Product.findOneAndUpdate({_id: idProduct}, {$push: {userLiked: userEmail}}, {new:true})
+                res.json({success: true, response: likeProduct})
+            } else{
+                const deslikeProduct = await Product.findOneAndUpdate({_id:idProduct}, {$pull: {userLiked: userEmail}}, {new:true})
+                res.json({success: true, response: deslikeProduct})
             }
         } catch (error) {
             res.json({ success: false, respuesta: 'An error has occurred on the server, try later!' })
