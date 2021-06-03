@@ -11,7 +11,7 @@ const Categories = (props) => {
     return (
         <Dropdown>
             <Dropdown.Toggle id="dropdown-basic">
-                Categories
+            <span class="material-icons-outlined categoriesIcon">format_list_bulleted</span> Categories
             </Dropdown.Toggle>
             <Dropdown.Menu>
                 {props.categories.length === 0

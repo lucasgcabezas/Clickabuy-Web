@@ -5,7 +5,7 @@ const productsActions = {
         return async (dispatch, getState) => {
             try {
                 const response = await axios.get('http://localhost:4000/api/productsFromStore/'+idStore)               
-                dispatch({type: 'FETCH_PRODUCTS', payload: response.data.response})
+                dispatch({type: 'FETCH_PRODUCTS_STORE', payload: response.data.response})
             } catch (error) {
                 console.log(error)
             }
@@ -34,16 +34,16 @@ const productsActions = {
                         'Authorization': 'Bearer ' +token 
                     }
                 })
-                return response.data.response
                 // console.log(response.data.response)
+                dispatch({type: 'UPDATE_PRODUCT', payload: response.data.response})
+                dispatch({type: 'UPDATE_CURRENT_STORE', payload: response.data.response})
+                // return response.data.response
             } catch (error) {
                 console.log(error)
-                // toast.error("Oops! Something went wrong")
             }
         }
     },
     addReview: (inputreview, id) => {
-        // console.log({inputreview, id})
         var review = inputreview.review
         return async (dispatch, getState) => {
             try {
@@ -55,7 +55,6 @@ const productsActions = {
                 return response.data.response
             } catch (error) {
                 console.log(error)
-                // toast.error("Oops! Something went wrong")
             }
         }
     },
@@ -66,7 +65,6 @@ const productsActions = {
                 return response.data.response.reviews
             } catch (error) {
                 console.log(error)
-                // toast.error("Oops! Something went wrong")
             }
         }
     },
@@ -78,11 +76,9 @@ const productsActions = {
                         idReview: idReview
                     }
                 })
-                // console.log(response.data.response)
                 return response.data.response
             } catch (error) {
                 console.log(error)
-                // toast.error("Oops! Something went wrong")
             }
         }
     },
