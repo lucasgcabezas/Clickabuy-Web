@@ -104,7 +104,9 @@ const SignUp = (props) => {
   };
 
   return (
+    // <div style={{backgroundImage: "url('https://webdesing881317710.files.wordpress.com/2021/06/shoppingmall7jpg.jpg')"}} className="imgForm" >
     <div className="contenedorSignUp">
+          <video src="./assets/formVideo.mp4" autoPlay loop muted className="videoForm"></video>
       <div className="contenedorHeaderSignUp">
         <Link to="/" className="backToHome"><span class="material-icons-outlined iconBack">arrow_back_ios_new</span> Back</Link>
       </div>
@@ -169,7 +171,7 @@ const SignUp = (props) => {
             />
 
             <div>
-              <label htmlFor="userImg" className="btn btn-secondary">
+              <label htmlFor="userImg" className="buttonInputFile">
                 Choose Your Image
               <input id="userImg" name="userImg" type="file" style={{ display: "none" }} onChange={cargarFoto} />
               </label>
@@ -181,7 +183,7 @@ const SignUp = (props) => {
             {/* <input id="userImg"  type="file" /> */}
             <Button variant="contained" type="submit">
               Sign Up
-          </Button>
+            </Button>
           </form>
           <div>
             <GoogleLogin
@@ -201,6 +203,7 @@ const SignUp = (props) => {
         </div>
       </div>
     </div>
+    // </div>
   );
 };
 
