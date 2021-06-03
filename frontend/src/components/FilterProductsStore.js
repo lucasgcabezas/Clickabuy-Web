@@ -5,10 +5,12 @@ import {NavLink} from 'react-router-dom'
 import Header from './Header'
 import Footer from './Footer'
 import Product from './Product'
+/* import categoryActions from '../redux/actions/categoryActions' */
+import storeActions from '../redux/actions/storeActions'
 
-const FilTerProductsStore = (props) => { 
-    console.log(props)  
-
+const FilTerProductsStore = (props) => {   
+    console.log(props)
+    
     return (
         <>  
             <Header />  
@@ -21,6 +23,7 @@ const FilTerProductsStore = (props) => {
                         return (
                             <div key={product._id}>
                                 <p>Tienda: <NavLink to={`/store/${product.storeId}`}>{product.storeId}</NavLink> </p>
+                                {console.log(product.storeId)}
                                 <Product product={product} />
                             </div>
                         )
@@ -33,12 +36,12 @@ const FilTerProductsStore = (props) => {
 }
 const mapStateToProps = state =>{
     return{
-        filterProducts: state.productReducer.filterProducts
+        filterProducts: state.productReducer.filterProducts,
     }
 }
    
 const mapDispatchToProps = {
     filtrar: productsActions.filterProducts,
-    getAllProducts: productsActions.getAllProducts
+    getAllProducts: productsActions.getAllProducts,
 }
 export default connect(mapStateToProps, mapDispatchToProps)(FilTerProductsStore)

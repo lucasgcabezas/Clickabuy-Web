@@ -19,14 +19,16 @@ const adminStoreActions = {
       }
     };
   },
-  addStore: (token,objInputsValues) => { //esta adaptado para que el logo se cargue por inputFile
+  /*let { idCategory,nameStore,description } = req.body;
+        let { logoStore } = req.files; */
+  addRequest: (token,objInputsValues) => { //esta adaptado para que el logo se cargue por inputFile
     return async (dispatch) => {
       try {
-        const { data } = await axios.post(API + "/stores", objInputsValues, {
+        const { data } = await axios.post(API + "/request", objInputsValues, {
             headers: { "Authorization": "Bearer "+token },
         });
         if(data.success)
-            return data.response;//devuelve el nuevo store creado 
+            return data.response;//devuelve la request
         else
             showToast("error",data.error);
       } catch (err) {

@@ -19,6 +19,7 @@ const populateOneDocument = async (document) => {
 
     let retorno = await document
         .populate({ path: 'userOfRequest', select: '-_id -password' })
+        .populate({ path: 'category'})
         //.populate({ path: 'answeredByUser', select: '-_id -password' })
         .execPopulate();
     return retorno;
@@ -27,6 +28,7 @@ const populateOneDocument = async (document) => {
 const populateArrayDocuments = async (documents) => {
     const opts = [
         { path: 'userOfRequest', select: '-_id -password' },
+        { path: 'category', },
         //{ path: 'answeredByUser', select: '-_id -password' },
     ];
     let retorno = await RequestCreateStoreModel.populate(documents, opts);
@@ -89,6 +91,7 @@ const requestCreateStoreControllers = {
         try {
             if (user.role !== "adminApp") throw new Error("Unauthorized user");
             let request = await RequestCreateStoreModel.findById(idRequest);
+            if(!request) throw new Error("this request dosen't exist")
             let newStore = {
                 nameStore: request.nameStore,
                 description: request.description,

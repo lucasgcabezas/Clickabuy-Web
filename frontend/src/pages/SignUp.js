@@ -3,17 +3,15 @@ import ReactDOM from "react-dom";
 import { useFormik, Form } from "formik";
 import * as yup from "yup";
 import Button from "@material-ui/core/Button";
-import { FcGoogle } from 'react-icons/fc'
+import { FcGoogle } from "react-icons/fc";
 import TextField from "@material-ui/core/TextField";
 import authActions from "../redux/actions/authActions";
 import { connect } from "react-redux";
 import GoogleLogin from "react-google-login";
 import { Link } from "react-router-dom";
 // import "../gracia.css";
-import { FaTags } from 'react-icons/fa'
+import { FaTags } from "react-icons/fa";
 import { useEffect, useState } from "react";
-import 'boxicons'
-// import AccountCircle from '@material-ui/icons/AccountCircle';
 
 const validationSchema = yup.object({
   firstName: yup
@@ -103,7 +101,7 @@ const SignUp = (props) => {
 
   const cargarFoto = (e) => {
     setPhoto({ userImg: e.target.files[0] });
-    console.log("soy el e", e.target.files[0].name);
+    /*  console.log("soy el e", e.target.files[0].name); */
     setPhotoName({ userImgName: e.target.files[0].name });
   };
 
@@ -123,7 +121,11 @@ const SignUp = (props) => {
           <span className="fraseClickabuy">DO YOUR BUSSINES OR FIND WHAT YOU NEED</span>
           <Link to="/SignUpStore" className="bussinesAccount">Create a Business Account <span class="material-icons-outlined iconBussines">arrow_forward_ios</span></Link>
           <div>
-            <span className="linkLogInText"> Already have an account?</span><Link to="/SignIn" className="linkLogIn"> Log In</Link>
+            <span className="linkLogInText"> Already have an account?</span>
+            <Link to="/SignIn" className="linkLogIn">
+              {" "}
+              Log In
+            </Link>
           </div>
         </div>
         <div className="contenedorForm">
@@ -180,7 +182,7 @@ const SignUp = (props) => {
             <div>
               <label htmlFor="userImg" className="buttonInputFile">
                 Choose Your Image
-              <input id="userImg" name="userImg" type="file" style={{ display: "none" }} onChange={cargarFoto} />
+                <input id="userImg" name="userImg" type="file" style={{ display: "none" }} onChange={cargarFoto} />
               </label>
               <span>{photoName.userImgName}</span>
             </div>
@@ -200,7 +202,6 @@ const SignUp = (props) => {
               cookiePolicy={"single_host_origin"}
             />
             {/* secreto google esu21qkgDbOgSQKwu8JWeBFb */}
-
           </div>
         </div>
       </div>
