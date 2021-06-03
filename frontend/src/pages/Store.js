@@ -17,9 +17,11 @@ const Store = (props) => {
     const [cantRate, setCantRate] = useState(store.rate.length)
 
     useEffect(() => {
+        window.scrollTo(0,0)
         !props.storesForCategory.length ? props.history.push('/') : setStore(props.storesForCategory.find(store => store._id === idParams))
         getProductsFromStore(idParams)
     }, [])
+
 
     useEffect(() => {
         let ratingCounter = 0
@@ -68,7 +70,7 @@ const Store = (props) => {
                 <div className="contenedorInfoCards">
                     <div className="contenedorFiltrosStore">
                         <div style={{ width: '100%', textAlign: 'center', marginTop: 60 }}>
-                            <span> Rate us </span>
+                            <span> RATE {store.nameStore.toUpperCase()}</span>
                         </div>
                         <div className="storeStars">
 

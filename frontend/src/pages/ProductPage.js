@@ -19,7 +19,9 @@ const ProductPage = (props) => {
     // }
     // console.log(reviews)
 
-
+    useEffect(()=>{
+        window.scrollTo(0,0)
+    },[])
     return (
         <>
             <Header />
