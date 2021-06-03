@@ -20,6 +20,7 @@ import MyStores from "./pages/MyStores";
 import MyStoreView from "./pages/MyStoreView";
 import ProductPage from "./pages/ProductPage";
 import MyFilters from "./components/MyFilters";
+import MyProgressBar from "./components/MyProgressBar";
 import Favorites from "./pages/Favorites";
 import FilterProductsStore from './components/FilterProductsStore'
 
@@ -32,7 +33,7 @@ const App = ({ cart, reloadCartLS, loginForced, userLogged, history }) => {
       if (cartLS instanceof Array && cartLS.length !== 0) reloadCartLS(cartLS);
     } else localStorage.removeItem("cartLS");
   }
-  
+
   const token = localStorage.getItem("token");
 
   // veo que no haya en el store un usuario logueado y que haya un token en el localStorage
@@ -41,9 +42,9 @@ const App = ({ cart, reloadCartLS, loginForced, userLogged, history }) => {
   // console.log("token", token);
 
   if (!userLogged && token && token !== "undefined") {
-    
+
     loginForced(JSON.parse(token), history);
-    
+
   }
   // if (!userLogged && localStorage.getItem('token')) {
   //   const objectUser = JSON.parse(localStorage.getItem('userLogged'))
@@ -73,6 +74,7 @@ const App = ({ cart, reloadCartLS, loginForced, userLogged, history }) => {
         <Route path="/myStoreView" component={MyStoreView} />
         <Route path="/myFilters" component={MyFilters} />
         <Route path="/products" component={FilterProductsStore} />
+        <Route path="/myProgressBar" component={MyProgressBar} />
         <Redirect to="/" />
       </Switch>
     </BrowserRouter>

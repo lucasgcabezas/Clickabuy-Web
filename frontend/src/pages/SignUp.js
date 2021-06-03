@@ -48,6 +48,7 @@ const validationSchema = yup.object({
 
 const SignUp = (props) => {
   const [photo, setPhoto] = useState({ userImg: "" });
+  const [photoName, setPhotoName] = useState({ userImgName: "" });
   const respuestaGoogle = (response) => {
     const { givenName, familyName, email, googleId, imageUrl } = response.profileObj;
     /* setPreUser({name:givenName,email:email,pass:googleId,url:imageUrl}) */
@@ -107,6 +108,8 @@ const SignUp = (props) => {
 
   const cargarFoto = (e) => {
     setPhoto({ userImg: e.target.files[0] });
+    console.log("soy el e", e.target.files[0].name);
+    setPhotoName({ userImgName: e.target.files[0].name });
   };
 
   return (
@@ -118,7 +121,7 @@ const SignUp = (props) => {
             <label className="btn text-primary">create a Business account {">"} </label>
           </div>{" "}
         </NavLink>
-        <form onSubmit={formik.handleSubmit}>
+        <form id="myForm" onSubmit={formik.handleSubmit}>
           <TextField
             fullWidth
             id="firstName"
@@ -162,13 +165,18 @@ const SignUp = (props) => {
             error={formik.touched.password && Boolean(formik.errors.password)}
             helperText={formik.touched.password && formik.errors.password}
           />
-
-          <input id="userImg" name="userImg" type="file" onChange={cargarFoto} />
-
+          <div>
+            <label htmlFor="userImg" className="btn btn-secondary">
+              Choose Your Image
+              <input id="userImg" name="userImg" type="file" style={{ display: "none" }} onChange={cargarFoto} />
+            </label>
+            <span>{photoName.userImgName}</span>
+          </div>
           <Button color="primary" variant="contained" fullWidth type="submit">
             Submit
           </Button>
         </form>
+
         <GoogleLogin
           className="mt-1 w-100 text-center text-white bg-primary"
           clientId="453615867535-mmnqpnp68m7du525dnif9647ll1bssi5.apps.googleusercontent.com"
