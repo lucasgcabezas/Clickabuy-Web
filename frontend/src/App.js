@@ -23,6 +23,8 @@ import MyFilters from "./components/MyFilters";
 import MyProgressBar from "./components/MyProgressBar";
 import Favorites from "./pages/Favorites";
 import FilterProductsStore from './components/FilterProductsStore'
+import AdminApp from './pages/AdminApp'
+
 
 const App = ({ cart, reloadCartLS, loginForced, userLogged, history }) => {
   if (cart.length === 0) {
@@ -46,14 +48,9 @@ const App = ({ cart, reloadCartLS, loginForced, userLogged, history }) => {
     loginForced(JSON.parse(token), history);
 
   }
-  // if (!userLogged && localStorage.getItem('token')) {
-  //   const objectUser = JSON.parse(localStorage.getItem('userLogged'))
-  //   const userLocalStorage = {
-  //     ...objectUser,
-  //     token: localStorage.getItem('token')
-  //   }
-  //   loginForced(userLocalStorage)
-  // }
+  if (!userLogged && token && token !== "undefined") {
+    return null;
+  }
 
   return (
     <BrowserRouter>
@@ -75,6 +72,7 @@ const App = ({ cart, reloadCartLS, loginForced, userLogged, history }) => {
         <Route path="/myFilters" component={MyFilters} />
         <Route path="/products" component={FilterProductsStore} />
         <Route path="/myProgressBar" component={MyProgressBar} />
+        <Route path="/adminApp" component={AdminApp} />
         <Redirect to="/" />
       </Switch>
     </BrowserRouter>
