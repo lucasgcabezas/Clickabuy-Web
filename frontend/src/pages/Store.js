@@ -70,7 +70,7 @@ const Store = (props) => {
                 <div className="contenedorInfoCards">
                     <div className="contenedorFiltrosStore">
                         <div style={{ width: '100%', textAlign: 'center', marginTop: 60 }}>
-                            <span> RATE {store.nameStore.toUpperCase()}</span>
+                            <span> RATE {store.nameStore}</span>
                         </div>
                         <div className="storeStars">
 
