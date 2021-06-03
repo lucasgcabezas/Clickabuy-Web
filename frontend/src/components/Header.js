@@ -13,7 +13,7 @@ import 'boxicons'
 import { FaHeart, FaRegHeart, FaTags } from 'react-icons/fa'
 const Header = (props) => {
   const { userLogged } = props
-  const usuarioImage = userLogged ? <div style={{ backgroundImage: "url('./assets" + userLogged.userImg + "')" }} className="usuarioImage"></div> : <span className="material-icons-outlined iconUser">account_circle</span>
+  const usuarioImage = userLogged ? <div style={{ backgroundImage: `url(${userLogged.userImg.url})` }} className="usuarioImage"></div> : <span className="material-icons-outlined iconUser">account_circle</span>
 
   const { pathname } = useLocation();
   const [productFilter, setProductFilter] = useState('')

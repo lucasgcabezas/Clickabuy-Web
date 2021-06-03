@@ -262,6 +262,34 @@ const productControllers = {
         // res.json({ success: !error ? true : false, response, error })
     },
 
+    /*payCart: async (req, res) => {
+        let response, error;
+        const user = req.user;
+        const {cart} = req.body;
+        let corruptProductsStocks = [];
+        try {
+            
+            response = await Promise.all(cart.filter(async (item) => {
+                let product = await Product.findById(item._id);
+                if(product.stock < item.quantity)
+                    return {...product,quantity: item.quantity}
+            }))
+
+
+            if (!response) throw new Error("response is undefined")
+                
+            });
+        } catch (err) {
+            console.log(err)
+            error = `${err.name}: ${err.message}`            
+        }
+
+        respondFrontend(res, response, error);
+
+    }*/
+
+
+
 }
 
 
