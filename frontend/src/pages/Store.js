@@ -41,7 +41,6 @@ const Store = (props) => {
         }
     }, [store])
 
-
     const ratingChanged = (newRating, storeId) => {
         props.rateStore(storeId, newRating, props.userLogged.token)
         setCantRate(
@@ -64,7 +63,6 @@ const Store = (props) => {
                     </div>
                 </div>
             </div>
-
 
             <div className='buscador'>
 

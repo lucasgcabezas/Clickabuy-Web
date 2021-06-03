@@ -20,6 +20,7 @@ const FilTerProductsStore = (props) => {
                     : props.filterProducts.map(product => {
                         return (
                             <div key={product._id}>
+                                <p>Tienda: <NavLink to={`/store/${product.storeId}`}>{product.storeId}</NavLink> </p>
                                 <Product product={product} />
                             </div>
                         )
