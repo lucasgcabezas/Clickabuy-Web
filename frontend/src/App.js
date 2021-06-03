@@ -29,7 +29,6 @@ import AdminApp from './pages/AdminApp'
 const App = ({ cart, reloadCartLS, loginForced, userLogged, history }) => {
   if (cart.length === 0) {
     let cartLS = localStorage.getItem("cartLS");
-
     if (cartLS !== "undefined" && cartLS !== null) {
       cartLS = JSON.parse(cartLS);
       if (cartLS instanceof Array && cartLS.length !== 0) reloadCartLS(cartLS);
@@ -38,17 +37,8 @@ const App = ({ cart, reloadCartLS, loginForced, userLogged, history }) => {
 
   const token = localStorage.getItem("token");
 
-  // veo que no haya en el store un usuario logueado y que haya un token en el localStorage
-
-  // console.log("userLogged", userLogged);
-  // console.log("token", token);
-
   if (!userLogged && token && token !== "undefined") {
-
     loginForced(JSON.parse(token), history);
-
-  }
-  if (!userLogged && token && token !== "undefined") {
     return null;
   }
 

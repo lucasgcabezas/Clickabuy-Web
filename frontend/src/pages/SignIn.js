@@ -9,7 +9,9 @@ import { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import authActions from "../redux/actions/authActions";
 import GoogleLogin from "react-google-login";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { FaTags } from 'react-icons/fa'
+import { FcGoogle } from 'react-icons/fc'
 
 const validationSchema = yup.object({
   email: yup
@@ -36,7 +38,9 @@ const validationSchema = yup.object({
 
 const SignIn = (props) => {
   const [pbStatus, setPBStatus] = useState(25);
-
+  useEffect(()=>{
+    window.scrollTo(0,0)
+  },[])
   const respuestaGoogle = (response) => {
     const { givenName, familyName, email, googleId, imageUrl } = response.profileObj;
     /* setPreUser({name:givenName,email:email,pass:googleId,url:imageUrl}) */
@@ -67,23 +71,31 @@ const SignIn = (props) => {
   });
 
   return (
-    <div className="contenedorLogIn">
-      {/* <video src="./assets/formBackground.mp4" autoPlay loop muted className="videoForm"></video> */}
-      {/* <div className="imageSignUpLogIn" style={{ backgroundImage: "url('https://webdesing881317710.files.wordpress.com/2021/06/formclickabuy.jpg')" }}>
-        <div className="contenedorHeroLogIn">
-          <div className="infoRegister">
-            <h2>Log In</h2>
-            {/* <button className="buttonSignUp">Iniciar Sesión</button> */}
-          {/* </div>
-        </div> */}
-      <div>
-        <label>Complete your Personal Data</label>
-        <form onSubmit={formik.handleSubmit}>
+    <div className="contenedorSignUp">
+      {/* <div style={{ backgroundImage: "url('https://webdesing881317710.files.wordpress.com/2021/06/wave.gif')" }} className="imgForm"> */}
+      <video src="./assets/formVideo.mp4" autoPlay loop muted className="videoForm"></video>
+      {/* <div className="contenedorHeaderSignUp"> */}
+        <Link to="/" className="backToHome"><span class="material-icons-outlined iconBack">arrow_back_ios_new</span> Back</Link>
+      {/* </div> */}
+      <div className="contenedorInfoForm">
+        <div className="contenedorLogoForm">
+          <FaTags className="logoForm" />
+          <h1>clickabuy</h1>
+          <span className="fraseClickabuy">YOU NEEDED, YOU WANTED, WITH CLICKABUY YOU CAN HAVE IT</span>
+          <Link to="/SignInAdmin" className="bussinesAccount">Shortcut Admin Login <span class="material-icons-outlined iconBussines">arrow_forward_ios</span></Link>
+          <div>
+            <span className="linkLogInText">Don't have an account?</span><Link to="/SignUp" className="linkLogIn">Sign Up</Link>
+          </div>
+        </div>
+        <div className="contenedorFormLogIn">
+        <h2>Welcome Back!</h2>
+        <form onSubmit={formik.handleSubmit} className="formulario">
           <TextField
             fullWidth
             id="email"
             name="email"
             label="Email"
+            autoComplete="off"
             value={formik.values.email}
             onChange={formik.handleChange}
             error={formik.touched.email && Boolean(formik.errors.email)}
@@ -95,34 +107,31 @@ const SignIn = (props) => {
             name="password"
             label="Password"
             type="password"
+            autoComplete="off"
             value={formik.values.password}
             onChange={formik.handleChange}
             error={formik.touched.password && Boolean(formik.errors.password)}
             helperText={formik.touched.password && formik.errors.password}
           />
-          <Button color="primary" variant="contained" fullWidth type="submit">
-            Submit
-          </Button>
+          <Button variant="contained" fullWidth type="submit">Log In</Button>
         </form>
-        <GoogleLogin
-          clientId="453615867535-mmnqpnp68m7du525dnif9647ll1bssi5.apps.googleusercontent.com"
-          buttonText="LogIn with Google"
-          onSuccess={respuestaGoogle}
-          onFailure={respuestaGoogle}
-          cookiePolicy={"single_host_origin"}
-        />
+        <div>
+          <GoogleLogin
+            clientId="453615867535-mmnqpnp68m7du525dnif9647ll1bssi5.apps.googleusercontent.com"
+            render={renderProps => (
+              <button onClick={renderProps.onClick} disabled={renderProps.disabled} className="bGoogle"><FcGoogle className="iconGoogle" /> Log In with Google</button>
+            )}
+            onSuccess={respuestaGoogle}
+            onFailure={respuestaGoogle}
+            cookiePolicy={"single_host_origin"}
+          />
+        </div>
+        </div>
         {/* secreto google esu21qkgDbOgSQKwu8JWeBFb */}
-        <NavLink to="/SignUp">
-          <label>
-            Don't have an account?, <span className="text-primary">Sign Up Here</span>{" "}
-          </label>{" "}
-        </NavLink>
 
-        <NavLink to="/SignInAdmin">
-          <label className="mt-2 w-100 btn  h6">shortcut admin login </label>
-        </NavLink>
+          </div>
       </div>
-    </div>
+    // </div>
   );
 };
 const mapStateToProps = (state) => {

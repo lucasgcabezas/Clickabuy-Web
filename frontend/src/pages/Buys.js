@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
@@ -7,6 +7,11 @@ import { connect } from 'react-redux'
 import cartActions from '../redux/actions/cartActions'
 
 const Buys = ({ cart, clearCart }) => {
+
+    useEffect(()=>{
+        window.scrollTo(0,0)
+    },[])
+
     return (
         <>
             <Header/>
