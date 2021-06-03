@@ -51,9 +51,9 @@ const validationSchema = yup.object({
 const SignUp = (props) => {
   const [photo, setPhoto] = useState({ userImg: "" });
   const [photoName, setPhotoName] = useState({ userImgName: "" });
-  useEffect(()=>{
-    window.scrollTo(0,0)
-  },[])
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const respuestaGoogle = (response) => {
     const { givenName, familyName, email, googleId, imageUrl } = response.profileObj;
     console.log({
@@ -106,12 +106,13 @@ const SignUp = (props) => {
   };
 
   return (
-
     // <div style={{backgroundImage: "url('https://webdesing881317710.files.wordpress.com/2021/06/3606268de57686baaa14bf67254ec618.png')"}} className="imgForm" >
     <div className="contenedorSignUp">
       <video src="./assets/formVideo.mp4" autoPlay loop muted className="videoForm"></video>
       {/* <div className="contenedorHeaderSignUp"> */}
-        <Link to="/" className="backToHome"><span class="material-icons-outlined iconBack">arrow_back_ios_new</span> Back</Link>
+      <Link to="/" className="backToHome">
+        <span class="material-icons-outlined iconBack">arrow_back_ios_new</span> Back
+      </Link>
       {/* </div> */}
       <div className="contenedorInfoForm">
         <div className="contenedorLogoForm">
@@ -119,7 +120,9 @@ const SignUp = (props) => {
           {/* <box-icon type='solid' name='purchase-tag' size="lg"></box-icon> */}
           <h1>clickabuy</h1>
           <span className="fraseClickabuy">DO YOUR BUSSINES OR FIND WHAT YOU NEED</span>
-          <Link to="/SignUpStore" className="bussinesAccount">Create a Business Account <span class="material-icons-outlined iconBussines">arrow_forward_ios</span></Link>
+          <Link to="/SignUpStore" className="bussinesAccount">
+            Create a Business Account <span class="material-icons-outlined iconBussines">arrow_forward_ios</span>
+          </Link>
           <div>
             <span className="linkLogInText"> Already have an account?</span>
             <Link to="/SignIn" className="linkLogIn">
@@ -193,8 +196,10 @@ const SignUp = (props) => {
           <div>
             <GoogleLogin
               clientId="453615867535-mmnqpnp68m7du525dnif9647ll1bssi5.apps.googleusercontent.com"
-              render={renderProps => (
-                <button onClick={renderProps.onClick} disabled={renderProps.disabled} className="bGoogle"><FcGoogle className="iconGoogle" /> Sign Up with Google</button>
+              render={(renderProps) => (
+                <button onClick={renderProps.onClick} disabled={renderProps.disabled} className="bGoogle">
+                  <FcGoogle className="iconGoogle" /> Sign Up with Google
+                </button>
               )}
               buttonText="Sign Up with Google"
               onSuccess={respuestaGoogle}

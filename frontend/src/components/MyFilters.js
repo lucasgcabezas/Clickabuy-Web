@@ -2,15 +2,6 @@ import React, { useRef } from "react";
 import { useEffect, useState } from "react";
 import "font-awesome/css/font-awesome.min.css";
 
-const productos = [
-  { name: "cocacola", price: 100, type: "food", reviews: 5 },
-  { name: "bencina", price: 200, type: "fuel", reviews: 3 },
-  { name: "almendras", price: 300, type: "food", reviews: 2 },
-  { name: "Pepsi", price: 500, type: "food", reviews: 4 },
-  { name: "Petroleo", price: 240, type: "fuel", reviews: 1 },
-  { name: "avellanas", price: 2300, type: "food", reviews: 3 },
-];
-
 const min = 0;
 const max = 100000;
 let promedio = 0;
@@ -24,10 +15,6 @@ const MyFilters = (props) => {
   const [lowEnd, setLowEnd] = useState(0);
   const [highEnd, setHighEnd] = useState(100000);
   const [reviews, setReviews] = useState([]);
-
-  /*  useEffect(() => {
-    setMyProducts(props.products);
-  }, []); */
 
   const handleFilters = (e) => {
     /* console.log("e", e); */
@@ -75,21 +62,8 @@ const MyFilters = (props) => {
     }
 
     if (typeof e == "number") {
-      /*  myProducts.map((product) => {
-        if (product.reviews.length > 0) {
-
-          promedio = product.reviews.reduce((a, b) => a + b.vote, 0) / product.reviews.length;
-          myArray.push(promedio);
-        } else {
-          promedio = 0;
-          myArray.push(promedio);
-        }
-      });
-      console.log("myArray", myArray); */
-
       let reviewsAux = reviews;
-      console.log("soy el nuevo reviews", reviewsAux);
-
+      /*       console.log("soy el nuevo reviews", reviewsAux); */
       if (reviewsAux.includes(e)) {
         reviewsAux.splice(reviewsAux.indexOf(e), 1);
       } else {
@@ -97,7 +71,7 @@ const MyFilters = (props) => {
         setReviews(reviewsAux);
       }
       newArrayProducts = myProductsPrice.filter((product) => {
-        return reviewsAux.includes(product.reviews);
+        return reviewsAux.includes(product.miPromedio);
       });
       setMyProducts(newArrayProducts);
 
@@ -105,6 +79,9 @@ const MyFilters = (props) => {
         setMyProducts(myProductsPrice);
       }
     }
+
+    console.log("devolerago al padre");
+    props.changeLinkText(newArrayProducts);
   };
   const textInput1 = useRef(),
     textInput2 = useRef(),
@@ -112,7 +89,8 @@ const MyFilters = (props) => {
     textInput4 = useRef(),
     textInput5 = useRef();
 
-  console.log("soy los productos de lucas", props.products);
+  /*  console.log("soy los productos de lucas", props.products); */
+  /*  props.changeLinkText(myProducts); */
 
   return (
     <div className="mt-5">
@@ -260,11 +238,8 @@ const MyFilters = (props) => {
           {myProducts.map((product) => {
             return (
               <p>
-                {product.nameProduct} {"|"} {product.price} {"|"}{" "}
-                {product.reviews.length > 0
-                  ? (promedio = product.reviews.reduce((a, b) => a + b.vote, 0) / product.reviews.length)
-                  : (promedio = 0)}
-                {console.log("soy casi el promedio", promedio)}
+                {product.nameProduct} {"|"} {product.price} {"|"}
+                {product.miPromedio}
               </p>
             );
           })}

@@ -9,6 +9,9 @@ import Footer from "../components/Footer";
 import storeActions from "../redux/actions/storeActions";
 import MyFilters from "../components/MyFilters";
 
+let promedio = 0;
+/* let myCopia = []; */
+
 const Store = (props) => {
   const { getProductsFromStore } = props;
   const idParams = props.match.params.id;
@@ -16,9 +19,16 @@ const Store = (props) => {
   const [stars, setStars] = useState(0);
   const [ver, setVer] = useState(false);
   const [cantRate, setCantRate] = useState(store.rate.length);
+  /*  const [productsCurrentStoreF, setproductsCurrentStoreF] = useState([]); */
+
+  const [linkText, setLinkText] = useState([]);
+  const changeLinkText = (nuArray) => {
+    console.log("soy el arreglo filtrado devuelta en el padre", nuArray);
+    /*   setproductsCurrentStoreF(nuArray); */
+  };
 
   useEffect(() => {
-    window.scrollTo(0,0)
+    window.scrollTo(0, 0);
     !props.storesForCategory.length
       ? props.history.push("/")
       : setStore(props.storesForCategory.find((store) => store._id === idParams));
@@ -50,6 +60,19 @@ const Store = (props) => {
   };
 
   var placeholderStoreInput = `Search products in ${store.nameStore}`;
+
+  let ratingCounter = 0;
+  let myCopia = [];
+  props.productsCurrentStore.map((product) => {
+    if (product.reviews.length > 0) {
+      promedio = product.reviews.reduce((a, b) => a + b.vote, 0) / product.reviews.length;
+    } else {
+      promedio = 0;
+    }
+    myCopia.push({ ...product, miPromedio: promedio });
+    /*   console.log("soy el promedio", promedio || 0); */
+  });
+  console.log("soyMiCopia", myCopia);
 
   return (
     <div className="contenedorStore">
@@ -122,9 +145,15 @@ const Store = (props) => {
               </span>
             </div>
 
-            <MyFilters products={props.productsCurrentStore} />
+            <div>
+              {" "}
+              {console.log("explorando mi store", myCopia)}
+              <MyFilters changeLinkText={changeLinkText} products={myCopia} />
+            </div>
           </div>
           <div className="containerCards">
+            {/*  {console.log("soy el arreglo filtradro que pasa?", )} */}
+
             {props.productsCurrentStore.length === 0 ? (
               <div>
                 {" "}
