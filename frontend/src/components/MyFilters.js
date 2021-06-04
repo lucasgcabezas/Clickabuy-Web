@@ -90,21 +90,18 @@ const MyFilters = (props) => {
         averageScoresAux.push(e);
       }
       setAverageScores(averageScoresAux);  
-      
+      console.log("averageScoresAux:", averageScoresAux)
 
       if(averageScoresAux.length === 0){
         averageScoresAux = [0,1,2,3,4,5]
       }
+      
       newArrayProducts = myCopia.filter((product) => {    
-        return averageScoresAux.includes(product.miPromedio);
+        console.log(Math.round(product.miPromedio))
+        return averageScoresAux.includes(Math.round(product.miPromedio));
       });
         
       
-      
-      
-      newArrayProducts = myCopia.filter((product) => {    
-        return averageScoresAux.includes(product.miPromedio);
-      });
       setMyProducts(newArrayProducts);
       console.log(newArrayProducts)
       if (averageScoresAux.length == 0) {
@@ -241,7 +238,7 @@ const MyFilters = (props) => {
         <div className="w-50 bg-success">
           {myProducts.map((product) => {
             return (
-              <p>
+              <p key = {product._id}>
                 {product.nameProduct} {"|"} {product.price} {"|"}
                 {product.miPromedio}
               </p>
