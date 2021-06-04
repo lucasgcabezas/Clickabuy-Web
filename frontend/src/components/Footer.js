@@ -45,7 +45,7 @@ const Footer = (props) => {
                 <div>
                     {
                         pagosArray.map(elemento => {
-                            return <div style={{ backgroundImage: `url('${elemento.imagePagos}')` }} className="imagePagos"></div>
+                            return <div key={elemento._id} style={{ backgroundImage: `url('${elemento.imagePagos}')` }} className="imagePagos"></div>
                         })
                     }
                 </div>

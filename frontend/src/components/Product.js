@@ -6,9 +6,10 @@ import { Link } from "react-router-dom";
 import productsActions from "../redux/actions/productsActions";
 import ReactStars from "react-rating-stars-component";
 
-const Product = ({ product, addProductToCart, deleteProductFromCart, cart, likeProduct, userLogged }) => {
-  const { stock, description, nameProduct, price, productImg, _id, userLiked, rateProduct, reviews } = product;
+const Product = ({ product, likeProduct, userLogged }) => {
+  const { stock, nameProduct, price, productImg, userLiked, reviews } = product;
   const [loadingHeart, setLoadingHeart] = useState(true);
+  
   const likes = async () => {
     if (!userLogged) {
       alert("no podes likear");
@@ -73,12 +74,6 @@ const Product = ({ product, addProductToCart, deleteProductFromCart, cart, likeP
       <Link to={`/product/${product._id}`}>
         <button className="buttonAddProduct">View More</button>
       </Link>
-      {/* {cart.find(item => item._id === product._id)
-                ?
-                <button className="buttonRemoveProduct" onClick={() => deleteProductFromCart(product)}>- Remove product</button>
-                :
-                <button className="buttonAddProduct" onClick={() => addProductToCart(product)}>+ Add Product</button>
-            } */}
     </div>
   );
 };

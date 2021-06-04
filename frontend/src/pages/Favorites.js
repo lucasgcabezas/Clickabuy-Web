@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { connect } from "react-redux"
 import Header from "../components/Header"
 import Footer from "../components/Footer"
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Product from '../components/Product'
 const Favorites = (props) => {
     const { products, userLogged } = props
@@ -16,23 +16,16 @@ const Favorites = (props) => {
             <Header />
             <div className="contenedorInfoFavoritos">
                 {
-                    favorites.length === 0 
-                    ? <div className="noFavorites">
-                        <h2>You have no favorites yet</h2>
-                        <Link to="/" className="linkExplore">GO EXPLORE!</Link>
-                    </div>
-                    : favorites.map(favorite => {
-                        return (
-                            /*<div className="cardProduct">
-                                <div style={{ backgroundImage: `url('${favorite.productImg}')` }} className="productImg"></div>
-                                <div className="cardProductInfo">
-                                    <h3>{favorite.nameProduct}</h3>
-                                    <p>Price: ${favorite.price}</p>
-                                </div>
-                        </div>*/
-                        <Product key = {favorite._id} product = {favorite} />
-                        )
-                    })
+                    favorites.length === 0
+                        ? <div className="noFavorites">
+                            <h2>You have no favorites yet</h2>
+                            <Link to="/" className="linkExplore">GO EXPLORE!</Link>
+                        </div>
+                        : favorites.map(favorite => {
+                            return (
+                                <Product key={favorite._id} product={favorite} />
+                            )
+                        })
                 }
             </div>
             <Footer />
