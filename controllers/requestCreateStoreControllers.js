@@ -63,6 +63,17 @@ const requestCreateStoreControllers = {
         let { logoStore } = req.files;
         let user = req.user;
 
+        if(!idCategory || !nameStore || !description || !logoStore ){
+            error = ("some fields are required "
+                + "\n idCategory: " +idCategory
+                + "\n nameStore: " +nameStore
+                + "\n logoStore: " +logoStore
+                + "\n description: " +description
+            )
+            res.json({ success: !error ? true : false, response, error })
+        } 
+            
+
         try {
             let objLogoStore = { url: "", publicId: "" };
             let category = await CategoryModel.findById(idCategory);

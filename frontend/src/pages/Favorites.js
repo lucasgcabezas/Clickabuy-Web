@@ -3,7 +3,7 @@ import { connect } from "react-redux"
 import Header from "../components/Header"
 import Footer from "../components/Footer"
 import {Link} from 'react-router-dom'
-
+import Product from '../components/Product'
 const Favorites = (props) => {
     const { products, userLogged } = props
     const favorites = products.filter(product => {
@@ -23,13 +23,14 @@ const Favorites = (props) => {
                     </div>
                     : favorites.map(favorite => {
                         return (
-                            <div className="cardProduct">
+                            /*<div className="cardProduct">
                                 <div style={{ backgroundImage: `url('${favorite.productImg}')` }} className="productImg"></div>
                                 <div className="cardProductInfo">
                                     <h3>{favorite.nameProduct}</h3>
                                     <p>Price: ${favorite.price}</p>
                                 </div>
-                            </div>
+                        </div>*/
+                        <Product key = {favorite._id} product = {favorite} />
                         )
                     })
                 }

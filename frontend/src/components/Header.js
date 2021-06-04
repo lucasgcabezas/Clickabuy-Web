@@ -10,12 +10,11 @@ import { FaHeart, FaRegHeart, FaTags } from 'react-icons/fa'
 
 const Header = (props) => {
   const { userLogged, userRole } = props
-  // const usuarioImage = userLogged ? <div style={{ backgroundImage: "url('./assets" + userLogged.userImg + "')" }} className="usuarioImage"></div> : <span className="material-icons-outlined iconUser">account_circle</span>
-  const usuarioImage = userLogged ? <div style={{ backgroundImage: `url('${userLogged.userImg.url}')` }} className="usuarioImage"></div> : <span className="material-icons-outlined iconUser">account_circle</span>
+  const usuarioImage = userLogged ? <div style={{ backgroundImage: `url(${userLogged.userImg.url})` }} className="usuarioImage"></div> : <span className="material-icons-outlined iconUser">account_circle</span>
+
   const { pathname } = useLocation();
   const [productFilter, setProductFilter] = useState('')
-  console.log('Soy producFilter', productFilter)
-  console.log('Soy todos los productos', props.products)
+  
 
   const [userRoleState, setUserRoleState] = useState('')
 
@@ -24,13 +23,7 @@ const Header = (props) => {
   }, [userRole])
 
   function handleFilter(e) {
-    setProductFilter(e.target.value)
-    let productosFiltrados = props.products.filter((producto) => {
-      return (
-        producto.nameProduct = e.target.value
-      )
-    })
-    console.log(productosFiltrados)
+    props.filtrar(e.target.value)
   }
 
 
@@ -40,7 +33,7 @@ const Header = (props) => {
   return (
     <header className="headerContainer">
       <div className="contenedorFlexHome">
-        <Link className="linkLogoHome">
+        <Link to="/" className="linkLogoHome">
           <div className="contenedorLogo">
             <FaTags className="logoHome" />
             <h1>clickabuy</h1>

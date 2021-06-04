@@ -73,7 +73,7 @@ const SignUp = (props) => {
     formData.append("password", "a" + googleId);
     formData.append("userImg", imageUrl);
     props.signUpUser(formData);
-    props.history.push("/");
+    //props.history.push("/");
   };
 
   const formik = useFormik({
@@ -95,7 +95,6 @@ const SignUp = (props) => {
       formData.append("password", values.password);
       formData.append("userImg", photo.userImg);
       props.signUpUser(formData);
-      props.history.push("/");
     },
   });
 

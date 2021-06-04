@@ -5,6 +5,12 @@ const fs = require("fs")
 let cloudinary = require('cloudinary').v2;
 const UserModel = require('../models/UserModel');
 
+cloudinary.config({ 
+    cloud_name: 'clickabuy', 
+    api_key: process.env.CLOUDINNARY_API_KEY, 
+    api_secret: process.env.CLOUDINNARY_API_SECRET
+});
+
 const respondFrontend = (res, response, error) => {
     res.json({
         success: !error ? true : false,
@@ -69,7 +75,9 @@ const productControllers = {
     getAllProducts: async (req, res) => {
         let response, error;
         try {
-            response = await Product.find().populate({path: "reviews", populate: {path: "userId", select: {"firstName": 1, "lastName": 1, "email":1}}})
+            response = await Product.find()
+                .populate({path: "reviews", populate: {path: "userId", select: {"firstName": 1, "lastName": 1, "email":1}}})
+                //.populate("storeId")
         } catch (err) {
             console.log(err);
             error = errorBackend;
@@ -261,6 +269,34 @@ const productControllers = {
 
         // res.json({ success: !error ? true : false, response, error })
     },
+
+    /*payCart: async (req, res) => {
+        let response, error;
+        const user = req.user;
+        const {cart} = req.body;
+        let corruptProductsStocks = [];
+        try {
+            
+            response = await Promise.all(cart.filter(async (item) => {
+                let product = await Product.findById(item._id);
+                if(product.stock < item.quantity)
+                    return {...product,quantity: item.quantity}
+            }))
+
+
+            if (!response) throw new Error("response is undefined")
+                
+            });
+        } catch (err) {
+            console.log(err)
+            error = `${err.name}: ${err.message}`            
+        }
+
+        respondFrontend(res, response, error);
+
+    }*/
+
+
 
 }
 

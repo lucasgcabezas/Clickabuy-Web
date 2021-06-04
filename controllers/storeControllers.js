@@ -5,6 +5,12 @@ const UserModel = require('../models/UserModel')
 const fs = require("fs")
 let cloudinary = require('cloudinary').v2;
 
+cloudinary.config({ 
+    cloud_name: 'clickabuy', 
+    api_key: process.env.CLOUDINNARY_API_KEY, 
+    api_secret: process.env.CLOUDINNARY_API_SECRET
+});
+
 
 const getPathAndNameFile = (store, file, folderName) => {
     let extensionImg = file.name.split(".")[file.name.split(".").length - 1];

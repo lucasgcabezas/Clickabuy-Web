@@ -24,7 +24,7 @@ import MyProgressBar from "./components/MyProgressBar";
 import Favorites from "./pages/Favorites";
 import FilterProductsStore from './components/FilterProductsStore'
 import AdminApp from './pages/AdminApp'
-
+import getRouteRoles from './helpers/routesRoles'
 
 const App = ({ cart, reloadCartLS, loginForced, userLogged, history,checkUserRole }) => {
   if (cart.length === 0) {
@@ -49,7 +49,7 @@ const App = ({ cart, reloadCartLS, loginForced, userLogged, history,checkUserRol
   return (
     <BrowserRouter>
       <ToastContainer />
-      {/* <Header /> */}
+{/*       
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/category/:id" component={Category} />
@@ -60,7 +60,7 @@ const App = ({ cart, reloadCartLS, loginForced, userLogged, history,checkUserRol
         <Route path="/SignUp" component={SignUp} />
         <Route path="/favorites" component={Favorites} />
         <Route path="/SignUpStore" component={SignUpStore} />
-        {/* <Route path="/SignInAdmin" component={SignInAdmin} /> */}
+        <Route path="/SignInAdmin" component={SignInAdmin} />
         <Route path="/myStores" component={MyStores} />
         <Route path="/myStoreView" component={MyStoreView} />
         <Route path="/myFilters" component={MyFilters} />
@@ -68,7 +68,8 @@ const App = ({ cart, reloadCartLS, loginForced, userLogged, history,checkUserRol
         <Route path="/myProgressBar" component={MyProgressBar} />
         <Route path="/adminApp" component={AdminApp} />
         <Redirect to="/" />
-      </Switch>
+      </Switch> */}
+      {userLogged? getRouteRoles(userLogged.role) : getRouteRoles("notLogged")}
     </BrowserRouter>
   );
 };
