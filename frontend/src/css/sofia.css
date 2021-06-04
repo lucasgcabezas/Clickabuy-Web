@@ -2,6 +2,9 @@ html *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    /* font-family: 'Source Sans Pro';  */
+    /* font-family: 'Source Sans Pro-SemiBold', sans-serif; */
+    /* font-style: Bold; */
     font-family: 'Poppins',Helvetica,Arial,sans-serif;
     /* font-family: 'semplicitapro', sans-serif;
     font-style: normal; */
@@ -210,6 +213,7 @@ html *{
 .navegadores, .categoriesDropdown{
     color: black;
     font-size: 17px;
+    /* font-weight: 600; */
 }
 .navegadores:hover{
     text-decoration: none;
