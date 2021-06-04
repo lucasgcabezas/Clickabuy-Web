@@ -9,13 +9,19 @@ import { useLocation } from "react-router-dom";
 import { FaHeart, FaRegHeart, FaTags } from 'react-icons/fa'
 
 const Header = (props) => {
-  const { userLogged } = props
+  const { userLogged, userRole } = props
   // const usuarioImage = userLogged ? <div style={{ backgroundImage: "url('./assets" + userLogged.userImg + "')" }} className="usuarioImage"></div> : <span className="material-icons-outlined iconUser">account_circle</span>
   const usuarioImage = userLogged ? <div style={{ backgroundImage: `url('${userLogged.userImg.url}')` }} className="usuarioImage"></div> : <span className="material-icons-outlined iconUser">account_circle</span>
   const { pathname } = useLocation();
   const [productFilter, setProductFilter] = useState('')
   console.log('Soy producFilter', productFilter)
   console.log('Soy todos los productos', props.products)
+
+  const [userRoleState, setUserRoleState] = useState('')
+
+  useEffect(() => {
+    setUserRoleState(userRole)
+  }, [userRole])
 
   function handleFilter(e) {
     setProductFilter(e.target.value)
@@ -26,6 +32,10 @@ const Header = (props) => {
     })
     console.log(productosFiltrados)
   }
+
+
+
+  console.log(userRole)
 
   return (
     <header className="headerContainer">
@@ -59,7 +69,13 @@ const Header = (props) => {
           <input type="text" className="filtroHome" placeholder="Search products" onChange={(e) => handleFilter(e)}></input>
           <NavLink to="/products"><span className="material-icons-outlined iconSearchHome">search</span></NavLink>
         </div>
-        {userLogged && <Link to="/SignUpStore" className="linkRegisterStore">Register your Store</Link>}
+        {
+          userLogged &&
+          <Link
+            to={userRoleState === 'adminApp' ? "/adminApp" : userRoleState === 'adminStores' ? "/myStores" : "/SignUpStore"}
+            className="linkRegisterStore"
+          >{userRoleState === 'adminApp' ? "Admin general" : userRoleState === 'adminStores' ? "Admin your store" : "Register your Store"}</Link>
+        }
         {/* <Link to="/myStoresView"></Link> */}
       </div>
     </header>
@@ -70,6 +86,7 @@ const mapStateToProps = (state) => {
   return {
     products: state.productReducer.products,
     userLogged: state.authReducer.userLogged,
+    userRole: state.authReducer.userRole,
     filterProducts: state.productReducer.filterProducts
   };
 };
@@ -77,7 +94,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
   logOut: authActions.logOutUser,
   filtrar: productsActions.filterProducts,
-  getAllProducts: productsActions.getAllProducts
+  getAllProducts: productsActions.getAllProducts,
+  checkUserRole: authActions.checkUserRole
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

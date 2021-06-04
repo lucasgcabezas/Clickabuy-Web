@@ -4,9 +4,9 @@ const jwToken = require("jsonwebtoken");
 const fs = require("fs");
 let cloudinary = require('cloudinary').v2;
 
-cloudinary.config({ 
-    cloud_name: 'clickabuy', 
-    api_key: process.env.CLOUDINNARY_API_KEY, 
+cloudinary.config({
+    cloud_name: 'clickabuy',
+    api_key: process.env.CLOUDINNARY_API_KEY,
     api_secret: process.env.CLOUDINNARY_API_SECRET
 });
 
@@ -23,8 +23,8 @@ const errorUserNotFound = "error: User not found";
 const userControllers = {
     addUser: async (req, res) => {
         let response, error;
-        let { email, password, loggedWithGoogle,userImg } = req.body;
-        
+        let { email, password, loggedWithGoogle, userImg } = req.body;
+
         loggedWithGoogle = JSON.parse(loggedWithGoogle);
         let extensionImg;
 
@@ -34,7 +34,7 @@ const userControllers = {
         }
 
         try {
-            let objImage = {url:"" , publicId:""}
+            let objImage = { url: "", publicId: "" }
 
             let userExist = await User.findOne({ email });
             if (!userExist) {
@@ -43,18 +43,18 @@ const userControllers = {
                 if (!loggedWithGoogle) {
                     //guardo la imagen localmente para luego hostearla
                     //let fileName = `user-${newUser._id}.${extensionImg}`;
-                    let filePath = `${__dirname}/../frontend/public/assets/usersImg/newImageUser.${extensionImg}`;    
+                    let filePath = `${__dirname}/../frontend/public/assets/usersImg/newImageUser.${extensionImg}`;
                     await userImg.mv(filePath);
                     let imageHost = await cloudinary.uploader.upload(`${__dirname}/../frontend/public/assets/usersImg/newImageUser.${extensionImg}`);
 
                     //borro para que no quede una imagen
-                    fs.unlink(filePath, (err) =>console.log(err));
+                    fs.unlink(filePath, (err) => console.log(err));
 
                     objImage.url = imageHost.secure_url;
                     objImage.publicId = imageHost.public_id;
                 }
-                else{
-                    if(userImg === "") throw new Error('error , loggedWithGoogle = true and userImg = ""');
+                else {
+                    if (userImg === "") throw new Error('error , loggedWithGoogle = true and userImg = ""');
                     objImage.url = userImg;
                 }
 
@@ -117,7 +117,7 @@ const userControllers = {
     deleteUser: async (req, res) => {
         let response, error;
         let id = req.params.id;
-        
+
         try {
             let user = await User.findById(id);
 
@@ -127,7 +127,7 @@ const userControllers = {
                     console.log(err)
                 );*/
                 await cloudinary.api.delete_resources([user.userImg.publicId]);
-                
+
             }
 
             response = await User.findByIdAndRemove(id);
@@ -169,12 +169,20 @@ const userControllers = {
 
         respondFrontend(res, response, undefined);
     },
-    
 
+    userCheckRole: async (req, res) => {
+        let response, error;
+        let userId = req.user._id;
 
-
-    
-   
+        try {
+            let userSearched = await User.findById(userId);
+            response = userSearched.role
+        } catch (err) {
+            console.log(err);
+            error = err.message;
+        }
+        respondFrontend(res, response, error);
+    },
 };
 
 module.exports = userControllers;

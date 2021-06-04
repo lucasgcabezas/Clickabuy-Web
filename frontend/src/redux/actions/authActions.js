@@ -82,23 +82,39 @@ const authActions = {
   // loginForced: (userLocalStorage) => {
   //   console.log(userLocalStorage)
   //   return async (dispatch, getState) => {
-        // try {
-        //     const response = await axios.get(API + "/relogin", {
-        //         headers: {
-        //             'Authorization': 'Bearer ' + userLocalStorage.token
-        //         }
-        //     })
-        //     console.log(response)
-        //     // dispatch({type: 'LOGIN_USER', payload: {...response.data.response, token:userLocalStorage.token}})
-        // } catch (error) {
-        //     if (error.response.status === 401) {
-        //       showToast("error", "Oops! Something went wrong! You are not authorized to enter this page");
-        //     }
-        // }
-    // }
-// },
+  // try {
+  //     const response = await axios.get(API + "/relogin", {
+  //         headers: {
+  //             'Authorization': 'Bearer ' + userLocalStorage.token
+  //         }
+  //     })
+  //     console.log(response)
+  //     // dispatch({type: 'LOGIN_USER', payload: {...response.data.response, token:userLocalStorage.token}})
+  // } catch (error) {
+  //     if (error.response.status === 401) {
+  //       showToast("error", "Oops! Something went wrong! You are not authorized to enter this page");
+  //     }
+  // }
+  // }
+  // },
 
- 
-};
+  checkUserRole: (token) => {
+    return async (dispatch) => {
+      try {
+        const response = await axios.get(API + "/userCheckRole", {
+          headers: { Authorization: "Bearer " + token },
+        });
+        dispatch({ type: "USER_ROLE", payload: response.data.response })
+
+      } catch (err) {
+        if (err) {
+          console.log(err)
+        }
+      }
+    }
+  }
+
+
+}
 
 export default authActions;

@@ -8,11 +8,11 @@ const productControllers = require('../controllers/productControllers')
 const categoryControllers = require('../controllers/categoryControllers')
 const requestCreateStoreControllers = require('../controllers/requestCreateStoreControllers')
 
-const { addUser, getAllUsers, getUserById, updateUser, deleteUser, loginUser, forcedLogin } = userControllers
+const { addUser, getAllUsers, getUserById, updateUser, deleteUser, loginUser, forcedLogin, userCheckRole } = userControllers
 const { getAllStores, addStore, editStore, deleteStore, getStoresByCategory, modifyOwnerOfStore, getStoresUser, rateStore } = storeControllers
 const { getAllCategories, getSingleCategory, addCategory, deleteCategory, modifyCategory } = categoryControllers
-const { addProduct, getAllProducts, getProductById, updateProduct, deleteProduct, getProductsFromStore,getProductFromCartLS,productsLiked, addReviews, editReviews, deleteReviews, rateProduct } = productControllers
-const {getAllRequestCreateStore,addRequestCreateStore,approveRequest,rejectRequest} = requestCreateStoreControllers
+const { addProduct, getAllProducts, getProductById, updateProduct, deleteProduct, getProductsFromStore, getProductFromCartLS, productsLiked, addReviews, editReviews, deleteReviews, rateProduct } = productControllers
+const { getAllRequestCreateStore, addRequestCreateStore, approveRequest, rejectRequest } = requestCreateStoreControllers
 
 // USER
 router.route("/users")
@@ -30,10 +30,14 @@ router.route("/user/:id")
     .put(updateUser)
     .delete(deleteUser)
 
+router.route("/userCheckRole")
+    .get(passport.authenticate('jwt', { session: false }), userCheckRole)
+
+
 // STORES
 router.route("/stores")
     .get(getAllStores)
-    //.post(passport.authenticate('jwt', { session: false }), addStore)
+//.post(passport.authenticate('jwt', { session: false }), addStore)
 
 router.route("/storesByUser")
     .get(passport.authenticate('jwt', { session: false }), getStoresUser)
@@ -89,12 +93,12 @@ router.route('/reviews/:id')
 
 
 router.route("/request")
-.get(passport.authenticate('jwt', {session: false}), getAllRequestCreateStore)
-.post(passport.authenticate('jwt', {session: false}), addRequestCreateStore)
+    .get(passport.authenticate('jwt', { session: false }), getAllRequestCreateStore)
+    .post(passport.authenticate('jwt', { session: false }), addRequestCreateStore)
 
 router.route("/respondRequest/:id")
-.post(passport.authenticate('jwt', {session: false}), approveRequest)
-.delete(passport.authenticate('jwt', {session: false}), rejectRequest)
+    .post(passport.authenticate('jwt', { session: false }), approveRequest)
+    .delete(passport.authenticate('jwt', { session: false }), rejectRequest)
 
 
 
