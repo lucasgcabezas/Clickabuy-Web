@@ -19,15 +19,17 @@ const Store = (props) => {
   const [stars, setStars] = useState(0);
   const [ver, setVer] = useState(false);
   const [cantRate, setCantRate] = useState(store.rate.length);
-  const [productsCurrentStoreF, setproductsCurrentStoreF] = useState(props.productsCurrentStore);
-  const [aux, setAux] = useState("");
-
-  const [linkText, setLinkText] = useState([]);
+  const [inputSearch,setInputSearch] = useState("");
+  //const [productsCurrentStoreF, setProductsCurrentStoreF] = useState(props.filterProductCurrentStore);
+  /*useEffect(() => {
+    setProductsCurrentStoreF(props.filterProductCurrentStore)
+  }, [props.filterProductCurrentStore]);
+  
   const changeLinkText = (nuArray) => {
     console.log("soy el arreglo filtrado devuelta en el padre", nuArray);
-    setproductsCurrentStoreF(nuArray);
-  };
-
+    setProductsCurrentStoreF(nuArray);
+  };*/
+  
   useEffect(() => {
     window.scrollTo(0, 0);
     !props.storesForCategory.length
@@ -65,14 +67,14 @@ const Store = (props) => {
     props.rateStore(storeId, newRating, props.userLogged.token);
     setCantRate(cantRate + 1);
   };
-  console.log(props.filterProductCurrentStore);
+  
   var placeholderStoreInput = `Search products in ${store.nameStore}`;
 
   let ratingCounter = 0;
 
   let myCopia = [];
 
-  props.productsCurrentStore.map((product) => {
+  props.filterProductCurrentStore.map((product) => {
     if (product.reviews.length > 0) {
       promedio = product.reviews.reduce((a, b) => a + b.vote, 0) / product.reviews.length;
     } else {
@@ -81,7 +83,7 @@ const Store = (props) => {
     myCopia.push({ ...product, miPromedio: promedio });
     /*   console.log("soy el promedio", promedio || 0); */
   });
-  console.log("soyMiCopia", myCopia);
+  
 
   return (
     <div className="contenedorStore">
@@ -99,6 +101,7 @@ const Store = (props) => {
               id="buscar"
               onChange={(e) => {
                 props.filterProductsCurrentStore(e.target.value);
+                setInputSearch(e.target.value);
               }}
             />
             <span className="material-icons-outlined iconSearchStore">search</span>
@@ -155,25 +158,22 @@ const Store = (props) => {
             </div>
 
             <div>
-              {" "}
-              {console.log("aca", myCopia)}
-              {console.log("aca", typeof myCopia)}
-              {myCopia.length == 0 ? (
-                <MyFilters changeLinkText={changeLinkText} products={props.filterProductCurrentStore} />
+              
+              
+              {/*myCopia.length == 0 ? (
+                {<MyFilters changeLinkText={changeLinkText} products={productsCurrentStoreF} />}
               ) : (
-                <MyFilters changeLinkText={changeLinkText} products={myCopia} />
-              )}
+                {<MyFilters changeLinkText={changeLinkText} products={myCopia} />}
+              )*/}
+              <MyFilters inputSearch={inputSearch}/>
             </div>
           </div>
           <div className="containerCards">
-            {/*  {console.log("soy el arreglo filtradro que pasa?", )} */}
-            {console.log("este si", productsCurrentStoreF)}
             {props.filterProductCurrentStore.length === 0 ? (
               <div>
-                {" "}
                 <h2>No products</h2>{" "}
               </div>
-            ) : productsCurrentStoreF.length == 0 ? (
+            ) : props.filterProductCurrentStore.length == 0 ? (
               props.filterProductCurrentStore.map((product) => {
                 return (
                   <div key={product._id}>
@@ -182,7 +182,7 @@ const Store = (props) => {
                 );
               })
             ) : (
-              productsCurrentStoreF.map((product) => {
+              props.filterProductCurrentStore.map((product) => {
                 return (
                   <div key={product._id}>
                     <Product product={product} />

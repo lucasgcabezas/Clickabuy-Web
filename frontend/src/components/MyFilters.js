@@ -1,25 +1,43 @@
 import React, { useRef } from "react";
 import { useEffect, useState } from "react";
 import "font-awesome/css/font-awesome.min.css";
+import {connect} from 'react-redux'
+import productsActions from '../redux/actions/productsActions'
+
 
 const min = 0;
 const max = 100000;
 let promedio = 0;
 let myArray = [];
 const MyFilters = (props) => {
-  const [myProducts, setMyProducts] = useState(props.products);
-  const [myProductsAll, setMyProductsAll] = useState(props.products);
-  const [myProductsPrice, setMyProductsPrice] = useState(props.products);
+  let myCopia = [];
+
+  props.productsCurrentStore.map((product) => {
+  //  props.productsCurrentStore.map((product) => {
+    if (product.reviews.length > 0) {
+      promedio = product.reviews.reduce((a, b) => a + b.vote, 0) / product.reviews.length;
+    } else {
+      promedio = 0;
+    }
+    myCopia.push({ ...product, miPromedio: promedio });
+    /*   console.log("soy el promedio", promedio || 0); */
+  });
+
+
+
+  const [myProducts, setMyProducts] = useState(myCopia);
+  const [myProductsAll, setMyProductsAll] = useState(myCopia);
+  const [myProductsPrice, setMyProductsPrice] = useState(myCopia);
   const [myPromedio, setMyPromedio] = useState(0);
 
   const [lowEnd, setLowEnd] = useState(0);
   const [highEnd, setHighEnd] = useState(100000);
-  const [reviews, setReviews] = useState([]);
+  const [averageScores, setAverageScores] = useState([]);
 
   const handleFilters = (e) => {
     /* console.log("e", e); */
     /* myArray = []; */
-    setMyProducts(props.products);
+    setMyProducts(myCopia);
 
     let newArrayProducts = [];
     switch (e) {
@@ -54,7 +72,7 @@ const MyFilters = (props) => {
           textInput4.current.checked =
           textInput5.current.checked =
             false;
-        setReviews([]);
+        setAverageScores([]);
         break;
 
       /*  default:
@@ -62,26 +80,48 @@ const MyFilters = (props) => {
     }
 
     if (typeof e == "number") {
-      let reviewsAux = reviews;
-      /*       console.log("soy el nuevo reviews", reviewsAux); */
-      if (reviewsAux.includes(e)) {
-        reviewsAux.splice(reviewsAux.indexOf(e), 1);
+      
+      let averageScoresAux = averageScores;
+      
+      if (averageScoresAux.includes(e)) {
+          averageScoresAux = averageScoresAux.filter(aReviewAux => {
+            return aReviewAux !== e})
       } else {
-        reviewsAux.push(e);
-        setReviews(reviewsAux);
+        averageScoresAux.push(e);
       }
-      newArrayProducts = myProductsPrice.filter((product) => {
-        return reviewsAux.includes(product.miPromedio);
+      setAverageScores(averageScoresAux);  
+      
+
+      if(averageScoresAux.length === 0){
+        averageScoresAux = [0,1,2,3,4,5]
+      }
+      newArrayProducts = myCopia.filter((product) => {    
+        return averageScoresAux.includes(product.miPromedio);
+      });
+        
+      
+      
+      
+      newArrayProducts = myCopia.filter((product) => {    
+        return averageScoresAux.includes(product.miPromedio);
       });
       setMyProducts(newArrayProducts);
-
-      if (reviewsAux.length == 0) {
+      console.log(newArrayProducts)
+      if (averageScoresAux.length == 0) {
         setMyProducts(myProductsPrice);
       }
     }
-
-    console.log("devolerago al padre");
-    props.changeLinkText(newArrayProducts);
+  
+    props.filterProductsByMyFilter(newArrayProducts,props.inputSearch);  
+    
+    /*if(props.filterProductCurrentStore.length === 0){
+      props.filterProductsByMyFilter(props.productsCurrentStore);  
+    }
+    else{
+      props.filterProductsByMyFilter(newArrayProducts);
+    }*/
+    
+      
   };
   const textInput1 = useRef(),
     textInput2 = useRef(),
@@ -89,7 +129,7 @@ const MyFilters = (props) => {
     textInput4 = useRef(),
     textInput5 = useRef();
 
-  /*  console.log("soy los productos de lucas", props.products); */
+  /*  console.log("soy los productos de lucas", props.filterProductCurrentStore); */
   /*  props.changeLinkText(myProducts); */
 
   return (
@@ -121,43 +161,7 @@ const MyFilters = (props) => {
           </div>
           <div>
             <h5 className="small"> by price range</h5>
-            <div className="d-flex mb-5 ">
-              <div>
-                <input
-                  className="small"
-                  id="lowEnd"
-                  name="lowEnd"
-                  type="number"
-                  min={0}
-                  max={highEnd}
-                  value={lowEnd}
-                  step={5}
-                  onChange={(e) => setLowEnd(e.target.value)}
-                />
-              </div>
-              <div>
-                <input
-                  className="small"
-                  id="highEnd"
-                  name="highEnd"
-                  type="number"
-                  min={lowEnd}
-                  step={5} /* onChange={cargarFoto} */
-                  value={highEnd}
-                  onChange={(e) => setHighEnd(e.target.value)}
-                />
-              </div>
-              <div
-                className="btn btn-primary mybtn"
-                onClick={() => handleFilters("rPrice")}
-                style={{ backgroundImage: `url('https://imagizer.imageshack.com/img923/3675/Hyj9vL.png` }}
-              ></div>
-              <div
-                className="ml-1 btn btn-primary mybtn "
-                onClick={() => handleFilters("rPrice")}
-                style={{ backgroundImage: ` url('https://imagizer.imageshack.com/img922/5039/wV9Xr0.png` }}
-              ></div>
-            </div>
+            
           </div>
           {lowEnd > highEnd && <div>enter a valid price range</div>}
           <div>
@@ -249,4 +253,16 @@ const MyFilters = (props) => {
   );
 };
 
-export default MyFilters;
+const mapStateToProps = (state) => {
+  return {
+    filterProductCurrentStore : state.productReducer.filterProductCurrentStore,
+    productsCurrentStore: state.productReducer.productsCurrentStore,
+  };
+};
+
+const mapDispatchToProps = {
+  filterProductsByMyFilter: productsActions.filterProductsByMyFilter,
+  filterProductsCurrentStore: productsActions.filterProductsCurrentStore,
+};
+
+export default connect(mapStateToProps,mapDispatchToProps)(MyFilters);
