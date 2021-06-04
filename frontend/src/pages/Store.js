@@ -155,7 +155,6 @@ const Store = (props) => {
             </div>
 
             <div>
-              {" "}
               {console.log("aca", myCopia)}
               {console.log("aca", typeof myCopia)}
               {myCopia.length == 0 ? (
@@ -170,8 +169,7 @@ const Store = (props) => {
             {console.log("este si", productsCurrentStoreF)}
             {props.filterProductCurrentStore.length === 0 ? (
               <div>
-                {" "}
-                <h2>No products</h2>{" "}
+                <h2>No products</h2>
               </div>
             ) : productsCurrentStoreF.length == 0 ? (
               props.filterProductCurrentStore.map((product) => {

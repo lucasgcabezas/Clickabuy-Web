@@ -12,8 +12,6 @@ const Reviews = (props) => {
     const [loadingReviews, setLoadingReviews] = useState(true)
     // const [starState, setStarState] = useState(0)
 
-
-
     let input = userLogged ? { inputReview: 'Write a review...', disabled: false } : { inputReview: 'You must be logged in to post a review', disabled: true }
     let buttonDisabled = inputReview.review ? false : true
 
@@ -113,62 +111,59 @@ const Reviews = (props) => {
                             halfIcon={<i className="fa fa-star-half-alt"></i>}
                             fullIcon={<i className="fa fa-star"></i>}
                             // activeColor="#ffd700"
-                            color2="#48d1be"
+                            color2="#dca6ac"
                             color1="#555555"
                             value={starsValue}
                         />
                     </div>
-
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
 
                     <div className="progressStarContainer">
                         <span>1 star </span>
                         <progress id="file" value={star1} max={reviews.length}></progress>
-                        <span>{star1}</span>
+                        <span>({star1})</span>
                     </div>
                     <div className="progressStarContainer">
                         <span>2 stars</span>
 
                         <progress id="file" value={star2} max={reviews.length}></progress>
-                        <span>{star2}</span>
+                        <span>({star2})</span>
                     </div>
                     <div className="progressStarContainer">
                         <span>3 stars</span>
                         <progress id="file" value={star3} max={reviews.length}></progress>
-                        <span>{star3}</span>
+                        <span>({star3})</span>
                     </div>
                     <div className="progressStarContainer">
                         <span>4 stars</span>
                         <progress id="file" value={star4} max={reviews.length}></progress>
-                        <span>{star4}</span>
+                        <span>({star4})</span>
                     </div>
                     <div className="progressStarContainer">
                         <span>5 stars</span>
                         <progress id="file" value={star5} max={reviews.length}></progress>
-                        <span>{star5}</span>
+                        <span>({star5})</span>
                     </div>
-
                 </div>
             </div>
-            <span style={{ fontSize: 15 }}>Average of {reviews.length} reviews.</span>
-
-
-            <div className="tituloReviews"></div>
-            {reviews.length === 0
-                ? <div className="noReviews">
-                    <p>No comments yet</p>
-                    <p>Be the first to post one!</p>
-                </div>
-                :
-                <div className="reviews">
-                    {reviews.map(review => {
-                        return (
-                            <Review key={review._id} review={review} updatedReview={updatedReview} deleteReviews={deleteReviews} productSelected={productSelected} />
-                        )
-                    })}
-                </div>
-            }
+            <span style={{ fontSize: 15 }}>Based on {reviews.length} Reviews</span>
+            <div className="reviewsInfo">
+                {reviews.length === 0
+                    ? <div className="noReviews">
+                        <p>No comments yet</p>
+                        <p>Be the first to post one!</p>
+                    </div>
+                    :
+                    <div className="reviews">
+                        {reviews.map(review => {
+                            return (
+                                <Review key={review._id} review={review} updatedReview={updatedReview} deleteReviews={deleteReviews} productSelected={productSelected} />
+                            )
+                        })}
+                    </div>
+                }
+            </div>
             {/* <div className="contenedorEmojis">{visible && <Picker onEmojiClick={onEmojiClick} className="emojis"/>}</div> */}
 
 
@@ -182,9 +177,11 @@ const Reviews = (props) => {
                     emptyIcon={<i className="far fa-star"></i>}
                     halfIcon={<i className="fa fa-star-half-alt"></i>}
                     fullIcon={<i className="fa fa-star"></i>}
-                    activeColor="#ffd700"
+                    // activeColor="#dca6ac"
                     // activeColor="#48d1be"
-                    color="#999999"
+                    // color="#dca6ac"
+                    color2="#dca6ac"
+                    color1="#555555"
                     value={0}
                 />
             </div>
