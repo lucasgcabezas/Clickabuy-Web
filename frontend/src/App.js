@@ -12,7 +12,7 @@ import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import authActions from "./redux/actions/authActions";
 import SignUpStore from "./pages/SignUpStore";
-import SignInAdmin from "./pages/SignInAdmin";
+// import SignInAdmin from "./pages/SignInAdmin";
 import Buys from "./pages/Buys";
 import { connect } from "react-redux";
 import cartActions from "./redux/actions/cartActions";
@@ -56,7 +56,7 @@ const App = ({ cart, reloadCartLS, loginForced, userLogged, history }) => {
         <Route path="/SignUp" component={SignUp} />
         <Route path="/favorites" component={Favorites} />
         <Route path="/SignUpStore" component={SignUpStore} />
-        <Route path="/SignInAdmin" component={SignInAdmin} />
+        {/* <Route path="/SignInAdmin" component={SignInAdmin} /> */}
         <Route path="/myStores" component={MyStores} />
         <Route path="/myStoreView" component={MyStoreView} />
         <Route path="/myFilters" component={MyFilters} />
