@@ -44,11 +44,17 @@ const Store = (props) => {
     }
   }, [store]);
 
+  useEffect(() => {
+    return  ()=>{
+      props.filterProductsCurrentStore("")
+    }
+  },[])
+
   const ratingChanged = (newRating, storeId) => {
     props.rateStore(storeId, newRating, props.userLogged.token);
     setCantRate(cantRate + 1);
   };
-
+  console.log(props.filterProductCurrentStore);
   var placeholderStoreInput = `Search products in ${store.nameStore}`;
 
   return (
@@ -66,7 +72,7 @@ const Store = (props) => {
               name=""
               id="buscar"
               onChange={(e) => {
-                props.filter(e.target.value);
+                props.filterProductsCurrentStore(e.target.value);
               }}
             />
             <span className="material-icons-outlined iconSearchStore">search</span>
@@ -125,13 +131,13 @@ const Store = (props) => {
             <MyFilters products={props.productsCurrentStore} />
           </div>
           <div className="containerCards">
-            {props.productsCurrentStore.length === 0 ? (
+            {props.filterProductCurrentStore.length === 0 ? (
               <div>
                 {" "}
                 <h2>No products</h2>{" "}
               </div>
             ) : (
-              props.productsCurrentStore.map((product) => {
+              props.filterProductCurrentStore.map((product) => {
                 return (
                   <div key={product._id}>
                     <Product product={product} />
@@ -152,14 +158,14 @@ const mapStateToProps = (state) => {
     storesForCategory: state.categoryReducer.stores,
     products: state.productReducer.products,
     productsCurrentStore: state.productReducer.productsCurrentStore,
-    filterProducts: state.productReducer.filterProducts,
     userLogged: state.authReducer.userLogged,
+    filterProductCurrentStore : state.productReducer.filterProductCurrentStore
   };
 };
 
 const mapDispatchToProps = {
   getProductsFromStore: productsActions.getProductsFromStore,
-  filter: productsActions.filterProducts,
+  filterProductsCurrentStore: productsActions.filterProductsCurrentStore,
   rateStore: storeActions.rateStore,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Store);

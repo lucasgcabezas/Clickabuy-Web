@@ -23,9 +23,16 @@ const productsActions = {
     },
     filterProducts: (value) => {
         return (dispatch, getstate) => {
+            
             dispatch({ type: 'FILTER_PRODUCTS', payload: value })
         }
     },
+    filterProductsCurrentStore: (value) => {
+        return (dispatch, getstate) => {
+            dispatch({ type: 'FILTER_PRODUCTS_CURRENT_STORE', payload: value })
+        }
+    },
+    
     likeProduct: (token, idProduct) => {
         return async (dispatch, getState) => {
             try {
@@ -35,8 +42,8 @@ const productsActions = {
                     }
                 })
                 // console.log(response.data.response)
-                dispatch({type: 'UPDATE_PRODUCT', payload: response.data.response})
-                dispatch({type: 'UPDATE_CURRENT_STORE', payload: response.data.response})
+                dispatch({type: 'UPDATE_PRODUCT_OF_ALL_PRODUCTS', payload: response.data.response})
+                //dispatch({type: 'UPDATE_CURRENT_STORE', payload: response.data.response})
                 // return response.data.response
             } catch (error) {
                 console.log(error)

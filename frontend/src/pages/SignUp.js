@@ -95,7 +95,6 @@ const SignUp = (props) => {
       formData.append("password", values.password);
       formData.append("userImg", photo.userImg);
       props.signUpUser(formData);
-      props.history.push("/");
     },
   });
 

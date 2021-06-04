@@ -55,6 +55,8 @@ const routesProtected = {
                 <Route path="/myStores" component={MyStores} />
                 <Route path="/myStoreView" component={MyStoreView} />
                 <Route path="/myFilters" component={MyFilters} />
+                <Route path="/product/:id" component={ProductPage} />
+                <Route path="/products" component={FilterProductsStore} />
                 <Redirect to="/" />
             </Switch>
         )
@@ -72,6 +74,8 @@ const routesProtected = {
                 <Route path="/myStores" component={MyStores} />
                 <Route path="/myStoreView" component={MyStoreView} />
                 <Route path="/myFilters" component={MyFilters} />
+                <Route path="/product/:id" component={ProductPage} />
+                <Route path="/products" component={FilterProductsStore} />
                 <Redirect to="/" />
             </Switch>
         )
@@ -90,6 +94,8 @@ const routesProtected = {
                 <Route path="/myStoreView" component={MyStoreView} />
                 <Route path="/myFilters" component={MyFilters} />
                 <Route path="/adminApp" component={AdminApp} />
+                <Route path="/product/:id" component={ProductPage} />
+                <Route path="/products" component={FilterProductsStore} />
                 <Redirect to="/" />
             </Switch>
         )

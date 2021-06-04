@@ -23,7 +23,7 @@ const Header = (props) => {
   return (
     <header className="headerContainer">
       <div className="contenedorFlexHome">
-        <Link className="linkLogoHome">
+        <Link to="/" className="linkLogoHome">
           <div className="contenedorLogo">
             <FaTags className="logoHome" />
             <h1>clickabuy</h1>
