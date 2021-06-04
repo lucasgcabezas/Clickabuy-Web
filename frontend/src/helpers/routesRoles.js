@@ -5,6 +5,7 @@ import Store from "../pages/Store";
 import SignIn from "../pages/SignIn";
 import SignUp from "../pages/SignUp";
 import SignUpStore from "../pages/SignUpStore";
+import SignUpProduct from "../pages/SignUpProduct";
 // import SignInAdmin from "../pages/SignInAdmin";
 import Buys from "../pages/Buys";
 import MyStores from "../pages/MyStores";
@@ -51,8 +52,8 @@ const routesProtected = {
                 <Route path="/buys" component={Buys} />
                 <Route path="/favorites" component={Favorites} />
                 <Route path="/SignUpStore" component={SignUpStore} />
-                <Route path="/myStores" component={MyStores} />
-                <Route path="/myStoreView" component={MyStoreView} />
+                {/* <Route path="/myStores" component={MyStores} />
+                <Route path="/myStore/:id" component={MyStoreView} /> */}
                 <Route path="/myFilters" component={MyFilters} />
                 <Route path="/product/:id" component={ProductPage} />
                 <Route path="/products" component={FilterProductsStore} />
@@ -70,8 +71,9 @@ const routesProtected = {
                 <Route path="/buys" component={Buys} />
                 <Route path="/favorites" component={Favorites} />
                 <Route path="/SignUpStore" component={SignUpStore} />
+                <Route path="/SignUpProduct" component={SignUpProduct} />
                 <Route path="/myStores" component={MyStores} />
-                <Route path="/myStoreView" component={MyStoreView} />
+                <Route path="/myStore/:id" component={MyStoreView} />
                 <Route path="/myFilters" component={MyFilters} />
                 <Route path="/product/:id" component={ProductPage} />
                 <Route path="/products" component={FilterProductsStore} />
@@ -88,9 +90,9 @@ const routesProtected = {
                 <Route path="/store/:id" component={Store} />
                 <Route path="/buys" component={Buys} />
                 <Route path="/favorites" component={Favorites} />
-                <Route path="/SignUpStore" component={SignUpStore} />
+                {/* <Route path="/SignUpStore" component={SignUpStore} />
                 <Route path="/myStores" component={MyStores} />
-                <Route path="/myStoreView" component={MyStoreView} />
+                <Route path="/myStore" component={MyStoreView} /> */}
                 <Route path="/myFilters" component={MyFilters} />
                 <Route path="/adminApp" component={AdminApp} />
                 <Route path="/product/:id" component={ProductPage} />

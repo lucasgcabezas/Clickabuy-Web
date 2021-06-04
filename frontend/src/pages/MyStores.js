@@ -51,7 +51,7 @@ const MyStore = (props) => {
                                 let starsValue = ratingCounter / store.rate.length
 
                                 return (
-                                    <NavLink to={`/store/${store._id}`} className="linkStore categoryStoresCards" key={i} >
+                                    <Link to={`/myStore/${store._id}`} className="linkStore categoryStoresCards" key={i} >
                                         <div>
                                             <div style={{ backgroundImage: `url('${store.logoStore.url}')` }} className="logoStoreCategory"></div>
                                             <span className="nameStoresCards">{store.nameStore}</span>
@@ -74,7 +74,7 @@ const MyStore = (props) => {
                                             </div>
                                             {/* <span className="nameCategoryStoresCards">{currentCategory.nameCategory}</span> */}
                                         </div>
-                                    </ NavLink>
+                                    </ Link>
                                 )
                             })
                     }

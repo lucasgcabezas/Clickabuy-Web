@@ -1,11 +1,41 @@
-import  '../css/jona.css'
+import '../css/jona.css'
+import { connect } from 'react-redux'
 import TextField from '@material-ui/core/TextField';
+import Header from '../components/Header'
+import adminStoreActions from '../redux/actions/adminStoreActions';
+import { useEffect } from 'react';
 
-const MyStoreView = () => {
+
+const MyStoreView = (props) => {
+
+    const { getProductsFromStore } = props
+
+    // console.log(props.match.params.id)
+
+    useEffect(() => { fetchAllProducts() }, [])
+
+
+    const fetchAllProducts = async () => {
+        const response = await getProductsFromStore(props.match.params.id)
+        console.log(response)
+    }
+
+
     return (
-        <div className = "body">
-            <TextField id="standard-basic" label="search by title"  />
-            <div className ="containerOfItems">
+        <>
+            <Header />
+            <div className="myStoreContainer">
+
+
+
+                <span>Hola</span>
+                <button>Add product</button>
+                {/* <TextField id="standard-basic" label="search by title"  /> */}
+                <div className="containerOfItems">
+
+
+
+                    {/* 
                 <div className="oneProduct" >
                     <button className="boton"> Boton</button>
                     <div className = "portImageCard">
@@ -22,12 +52,29 @@ const MyStoreView = () => {
                 <div className="oneProduct" />
                 <div className="oneProduct" />
                 <div className="oneProduct" />
-                <div className="oneProduct" />
+                <div className="oneProduct" /> */}
+
+
+                </div>
+
 
             </div>
-        </div>
+        </>
     )
 }
 
 
-export default MyStoreView;
+
+const mapStateToProps = (state) => {
+    return {
+        userLogged: state.authReducer.userLogged,
+    }
+}
+
+const mapDispatchToProps = {
+    getProductsFromStore: adminStoreActions.getProductsFromStore,
+
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MyStoreView);
+
