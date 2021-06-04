@@ -2,8 +2,8 @@ const initialState = {
     products: [],
     filterProducts: [],
     productsCurrentStore: [],
-    filterProductCurrentStore: []
-    // favorites: []
+    filterProductCurrentStore: [],
+    productFilteredAvarageScore:[]
 }
 
 const productReducer = (state = initialState, action) => {
@@ -13,6 +13,14 @@ const productReducer = (state = initialState, action) => {
         })
         return retorno;
     }
+
+    const getFilterProductCurrentStore = (productFilteredAvarageScore,inputSearch) => {
+        let retorno = productFilteredAvarageScore.filter(product => {
+            return product.nameProduct.toLowerCase().indexOf(inputSearch.toString().toLowerCase().trim()) === 0
+        } )
+        return retorno
+    }
+
     let newFilterProductCurrentStore;
     let newFilterProducts;
     let newProductsCurrentStore;
@@ -22,7 +30,8 @@ const productReducer = (state = initialState, action) => {
             return {
                 ...state,
                 productsCurrentStore: action.payload,
-                filterProductCurrentStore: action.payload
+                filterProductCurrentStore: action.payload,
+                productFilteredAvarageScore: action.payload
             }
         case 'FETCH_ALL_PRODUCTS':
             return {
@@ -42,9 +51,9 @@ const productReducer = (state = initialState, action) => {
 
 
             if (action.payload === "")
-                newFilterProductCurrentStore = state.productsCurrentStore;
+                newFilterProductCurrentStore = state.productFilteredAvarageScore;
             else {
-                newFilterProductCurrentStore = state.productsCurrentStore.filter(product => {
+                newFilterProductCurrentStore = state.productFilteredAvarageScore.filter(product => {
                     return product.nameProduct.toLowerCase().indexOf(action.payload.toString().toLowerCase().trim()) === 0
                 })
             }
@@ -67,25 +76,18 @@ const productReducer = (state = initialState, action) => {
                 ...state,
                 products: newProducts,
                 filterProducts: newFilterProducts,
-                productsCurrentStore: newFilterProducts,
-                filterProductCurrentStore: newProductsCurrentStore
+                productsCurrentStore: newProductsCurrentStore,
+                filterProductCurrentStore: newFilterProductCurrentStore
             }
-        /*case 'UPDATE_CURRENT_STORE':
-
-            var newProducts = state.productsCurrentStore.map(product => {
-                if (product._id === action.payload._id)
-                    return action.payload;
-                return product;
-            })
-
-            newFilterProductCurrentStore = state.filterProductCurrentStore.map(productFiltered => {
-                return newProducts.find(product => product._id === productFiltered._id)
-            })
+        case  "UPDATE_PRODUCT_MY_FILTER"  :
+            console.log("reducer",action.payload)
+            newFilterProductCurrentStore = getFilterProductCurrentStore(action.payload.productFiltered,action.payload.inputSearch)
             return {
                 ...state,
-                productsCurrentStore: newProducts,
-                filterProductCurrentStore: newFilterProductCurrentStore
-            }*/
+                productFilteredAvarageScore :action.payload.productFiltered ,
+                filterProductCurrentStore : newFilterProductCurrentStore
+            }
+            
         default:
             return state
     }

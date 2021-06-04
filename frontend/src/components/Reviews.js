@@ -174,9 +174,9 @@ const Reviews = (props) => {
                     size={32}
                     isHalf={true}
                     edit={true}
-                    emptyIcon={<i className="far fa-star"></i>}
-                    halfIcon={<i className="fa fa-star-half-alt"></i>}
-                    fullIcon={<i className="fa fa-star"></i>}
+                    // emptyIcon={<i className="far fa-star"></i>}
+                    // halfIcon={<i className="fa fa-star-half-alt"></i>}
+                    // fullIcon={<i className="fa fa-star"></i>}
                     // activeColor="#dca6ac"
                     // activeColor="#48d1be"
                     // color="#dca6ac"

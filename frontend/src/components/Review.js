@@ -45,9 +45,8 @@ const Comment = (props) => {
                             size={32}
                             isHalf={true}
                             edit={false}
-                            activeColor="#ffd700"
-                            // activeColor="#48d1be"
-                            color="#999999"
+                            color2="#dca6ac"
+                            color1="#555555"
                             value={review.vote}
                         />
 
@@ -60,9 +59,8 @@ const Comment = (props) => {
                             size={32}
                             isHalf={true}
                             edit={true}
-                            activeColor="#ffd700"
-                            // activeColor="#48d1be"
-                            color="#999999"
+                            color2="#dca6ac"
+                            color1="#555555"
                             value={0}
                         />
                     }
