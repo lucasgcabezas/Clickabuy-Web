@@ -19,7 +19,7 @@ const Store = (props) => {
   const [stars, setStars] = useState(0);
   const [ver, setVer] = useState(false);
   const [cantRate, setCantRate] = useState(store.rate.length);
-  const [productsCurrentStoreF, setproductsCurrentStoreF] = useState(props.productsCurrentStore);
+  const [productsCurrentStoreF, setproductsCurrentStoreF] = useState(props.filterProductCurrentStore);
   const [aux, setAux] = useState("");
 
   const [linkText, setLinkText] = useState([]);
