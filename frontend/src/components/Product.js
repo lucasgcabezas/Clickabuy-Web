@@ -4,7 +4,7 @@ import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import productsActions from "../redux/actions/productsActions";
-import ReactStars from "react-rating-stars-component";
+import ReactStars from 'react-stars'
 
 const Product = ({ product, likeProduct, userLogged }) => {
   const { stock, nameProduct, price, productImg, userLiked, reviews } = product;
@@ -45,9 +45,8 @@ const Product = ({ product, likeProduct, userLogged }) => {
             emptyIcon={<i className="far fa-star"></i>}
             halfIcon={<i className="fa fa-star-half-alt"></i>}
             fullIcon={<i className="fa fa-star"></i>}
-            activeColor="#ffd700"
-            // activeColor="#48d1be"
-            color="#999999"
+            color2="#dca6ac"
+            color1="#555555"
             value={starsValue}
           />
           <span

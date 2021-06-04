@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import ReactStars from "react-rating-stars-component"
+import ReactStars from 'react-stars'
 
 // import { useState } from 'react'
 import categoryActions from '../redux/actions/categoryActions'
@@ -54,12 +54,8 @@ const Category = (props) => {
                                                         size={32}
                                                         isHalf={true}
                                                         edit={false}
-                                                        emptyIcon={<i className="far fa-star"></i>}
-                                                        halfIcon={<i className="fa fa-star-half-alt"></i>}
-                                                        fullIcon={<i className="fa fa-star"></i>}
-                                                        activeColor="#ffd700"
-                                                        // activeColor="#48d1be"
-                                                        color="#999999"
+                                                        color2="#dca6ac"
+                                                        color1="#555555"
                                                         value={starsValue}
                                                     />
                                                     < span style={{ fontSize: 12, verticalAlign: 'center', marginTop: 5, marginLeft: 5, color: '#777777' }} >({store.rate.length})</span>

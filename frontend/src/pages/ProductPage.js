@@ -38,26 +38,16 @@ const ProductPage = (props) => {
             setLoadingHeart(true);
         }
     };
-    // console.log(props.cart)
-    // reviews.forEach(rating => {
-    //     if (rating.vote === 1) {
-    //         star1++
-    //     } else if (rating.vote === 2) {
-    //         star2++
-    //     }
-    //     else if (rating.vote === 3) {
-    //         star3++
-    //     }
-    //     else if (rating.vote === 4) {
-    //         star4++
-    //     }
-    //     else if (rating.vote === 5) {
-    //         star5++
-    //     }
+    
+    let ratingCounter = 0
 
-    //     ratingCounter = ratingCounter + rating.vote
-    // })
-    // let starsValue = ratingCounter / reviews.length
+
+    productSelected.reviews.forEach(rating => {
+
+        ratingCounter = ratingCounter + rating.vote
+    })
+    let starsValue = ratingCounter / productSelected.reviews.length
+
     return (
         <>
             <Header />
@@ -75,6 +65,33 @@ const ProductPage = (props) => {
                                         <FaRegHeart className="iconoCorazon2" />
                                     )}
                                 </div>
+                            </div>
+
+                            <div style={{ display: "flex", flexDirection: "row", alignItems: "center", height: 30 }}>
+                                <ReactStars
+                                    count={5}
+                                    size={32}
+                                    isHalf={true}
+                                    edit={false}
+                                    emptyIcon={<i className="far fa-star"></i>}
+                                    halfIcon={<i className="fa fa-star-half-alt"></i>}
+                                    fullIcon={<i className="fa fa-star"></i>}
+                                    color2="#dca6ac"
+                                    color1="#555555"
+                                    value={starsValue}
+                                />
+                                <span
+                                    style={{
+                                        fontSize: 12,
+                                        verticalAlign: "center",
+                                        marginTop: 5,
+                                        marginLeft: 5,
+                                        color: "#777777",
+                                        fontWeight: "lighter",
+                                    }}
+                                >
+                                    ({reviews.length})
+          </span>
                             </div>
                             {/* <div className="starsReviews">
                                 <span style={{ fontSize: 15, fontWeight: 'lighter' }}>{(isNaN(starsValue)) ? 0 : (starsValue).toFixed(1)}</span>
