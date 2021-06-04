@@ -92,6 +92,25 @@ const Reviews = (props) => {
     let starsValue = ratingCounter / reviews.length
 
 
+    const newStar = (initialValue, size) => {
+        return (
+            <ReactStars
+                // onChange={(e) => changeValueStar(e)}
+                count={5}
+                size={size}
+                isHalf={true}
+                edit={false}
+                emptyIcon={<i className="far fa-star"></i>}
+                halfIcon={<i className="fa fa-star-half-alt"></i>}
+                fullIcon={<i className="fa fa-star"></i>}
+                color2="#dca6ac"
+                color1="#555555"
+                value={initialValue}
+            />
+        )
+
+    }
+
 
     return (
         <div className="contenedorReviews">
@@ -101,50 +120,45 @@ const Reviews = (props) => {
                 <div className="starsReviews">
                     <span style={{ fontSize: 50, fontWeight: 'lighter' }}>{(isNaN(starsValue)) ? 0 : (starsValue).toFixed(1)}</span>
                     <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', height: 40 }}>
-                        <ReactStars
-                            // onChange={(e) => changeValueStar(e)}
-                            count={5}
-                            size={50}
-                            isHalf={true}
-                            edit={false}
-                            emptyIcon={<i className="far fa-star"></i>}
-                            halfIcon={<i className="fa fa-star-half-alt"></i>}
-                            fullIcon={<i className="fa fa-star"></i>}
-                            // activeColor="#ffd700"
-                            color2="#dca6ac"
-                            color1="#555555"
-                            value={starsValue}
-                        />
+
+                        {newStar(starsValue, 50)}
+
                     </div>
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
-
                     <div className="progressStarContainer">
-                        <span>1 star </span>
-                        <progress id="file" value={star1} max={reviews.length}></progress>
-                        <span>({star1})</span>
+                        {newStar(5, 25)}
+                        <progress id="file" value={star5} max={reviews.length}></progress>
+                        <span>({star5})</span>
                     </div>
                     <div className="progressStarContainer">
-                        <span>2 stars</span>
-
-                        <progress id="file" value={star2} max={reviews.length}></progress>
-                        <span>({star2})</span>
-                    </div>
-                    <div className="progressStarContainer">
-                        <span>3 stars</span>
-                        <progress id="file" value={star3} max={reviews.length}></progress>
-                        <span>({star3})</span>
-                    </div>
-                    <div className="progressStarContainer">
-                        <span>4 stars</span>
+                        {newStar(4, 25)}
                         <progress id="file" value={star4} max={reviews.length}></progress>
                         <span>({star4})</span>
                     </div>
                     <div className="progressStarContainer">
-                        <span>5 stars</span>
-                        <progress id="file" value={star5} max={reviews.length}></progress>
-                        <span>({star5})</span>
+                        {newStar(3, 25)}
+                        <progress id="file" value={star3} max={reviews.length}></progress>
+                        <span>({star3})</span>
                     </div>
+                    <div className="progressStarContainer">
+                        {newStar(2, 25)}
+                        <progress id="file" value={star2} max={reviews.length}></progress>
+                        <span>({star2})</span>
+                    </div>
+                    <div className="progressStarContainer">
+                        {/* <span>1 star </span> */}
+                        {newStar(1, 25)}
+                        <progress id="file" value={star1} max={reviews.length}></progress>
+                        <span>({star1})</span>
+                    </div>
+
+
+
+
+
+
+
                 </div>
             </div>
             <span style={{ fontSize: 15 }}>Based on {reviews.length} Reviews</span>
@@ -168,22 +182,18 @@ const Reviews = (props) => {
 
 
             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', height: 40 }}>
+
                 <ReactStars
                     onChange={(e) => changeValueStar(e)}
                     count={5}
                     size={32}
                     isHalf={true}
                     edit={true}
-                    // emptyIcon={<i className="far fa-star"></i>}
-                    // halfIcon={<i className="fa fa-star-half-alt"></i>}
-                    // fullIcon={<i className="fa fa-star"></i>}
-                    // activeColor="#dca6ac"
-                    // activeColor="#48d1be"
-                    // color="#dca6ac"
                     color2="#dca6ac"
                     color1="#555555"
-                    value={0}
+                    value={inputReview.vote}
                 />
+
             </div>
 
             <div className="contenedorInputReviews">

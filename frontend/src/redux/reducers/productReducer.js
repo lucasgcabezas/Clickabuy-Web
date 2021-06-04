@@ -31,7 +31,7 @@ const productReducer = (state = initialState, action) => {
                 ...state,
                 productsCurrentStore: action.payload,
                 filterProductCurrentStore: action.payload,
-                productFilteredAvarageScore: action.payload
+                productFilteredAvarageScore:action.payload,
             }
         case 'FETCH_ALL_PRODUCTS':
             return {

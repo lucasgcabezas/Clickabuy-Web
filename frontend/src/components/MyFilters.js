@@ -1,8 +1,9 @@
 import React, { useRef } from "react";
 import { useEffect, useState } from "react";
 import "font-awesome/css/font-awesome.min.css";
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import productsActions from '../redux/actions/productsActions'
+import ReactStars from 'react-stars'
 
 
 const min = 0;
@@ -13,7 +14,7 @@ const MyFilters = (props) => {
   let myCopia = [];
 
   props.productsCurrentStore.map((product) => {
-  //  props.productsCurrentStore.map((product) => {
+    //  props.productsCurrentStore.map((product) => {
     if (product.reviews.length > 0) {
       promedio = product.reviews.reduce((a, b) => a + b.vote, 0) / product.reviews.length;
     } else {
@@ -71,7 +72,7 @@ const MyFilters = (props) => {
           textInput3.current.checked =
           textInput4.current.checked =
           textInput5.current.checked =
-            false;
+          false;
         setAverageScores([]);
         break;
 
@@ -80,48 +81,46 @@ const MyFilters = (props) => {
     }
 
     if (typeof e == "number") {
-      
+
       let averageScoresAux = averageScores;
-      
+
       if (averageScoresAux.includes(e)) {
-          averageScoresAux = averageScoresAux.filter(aReviewAux => {
-            return aReviewAux !== e})
+        averageScoresAux = averageScoresAux.filter(aReviewAux => {
+          return aReviewAux !== e
+        })
       } else {
         averageScoresAux.push(e);
       }
-      setAverageScores(averageScoresAux);  
-      
+      setAverageScores(averageScoresAux);
+      console.log("averageScoresAux:", averageScoresAux)
 
-      if(averageScoresAux.length === 0){
-        averageScoresAux = [0,1,2,3,4,5]
+      if (averageScoresAux.length === 0) {
+        averageScoresAux = [0, 1, 2, 3, 4, 5]
       }
-      newArrayProducts = myCopia.filter((product) => {    
-        return averageScoresAux.includes(product.miPromedio);
+
+      newArrayProducts = myCopia.filter((product) => {
+        console.log(Math.round(product.miPromedio))
+        return averageScoresAux.includes(Math.round(product.miPromedio));
       });
-        
-      
-      
-      
-      newArrayProducts = myCopia.filter((product) => {    
-        return averageScoresAux.includes(product.miPromedio);
-      });
+
+
       setMyProducts(newArrayProducts);
       console.log(newArrayProducts)
       if (averageScoresAux.length == 0) {
         setMyProducts(myProductsPrice);
       }
     }
-  
-    props.filterProductsByMyFilter(newArrayProducts,props.inputSearch);  
-    
+
+    props.filterProductsByMyFilter(newArrayProducts, props.inputSearch);
+
     /*if(props.filterProductCurrentStore.length === 0){
       props.filterProductsByMyFilter(props.productsCurrentStore);  
     }
     else{
       props.filterProductsByMyFilter(newArrayProducts);
     }*/
-    
-      
+
+
   };
   const textInput1 = useRef(),
     textInput2 = useRef(),
@@ -131,6 +130,20 @@ const MyFilters = (props) => {
 
   /*  console.log("soy los productos de lucas", props.filterProductCurrentStore); */
   /*  props.changeLinkText(myProducts); */
+
+  const newStar = (initialV) => {
+    return (
+      <ReactStars
+        count={5}
+        size={25}
+        isHalf={false}
+        edit={false}
+        color2="#dca6ac"
+        color1="#555555"
+        value={initialV}
+      />
+    )
+  }
 
   return (
     <div className="mt-5">
@@ -161,14 +174,18 @@ const MyFilters = (props) => {
           </div>
           <div>
             <h5 className="small"> by price range</h5>
-            
+
           </div>
           {lowEnd > highEnd && <div>enter a valid price range</div>}
+
+
+
+
+
           <div>
             <div>
               <div>by opinions of Customers</div>
               <input
-                /*  style={{ display: "none" }} */
                 type="checkbox"
                 id={"Z"}
                 onClick={() => {
@@ -177,12 +194,11 @@ const MyFilters = (props) => {
                 name={"Z"}
                 ref={textInput5}
               ></input>
-              <label htmlFor={"Z"}>⭐⭐⭐⭐⭐</label>
+              <label htmlFor={"Z"}>{newStar(5)}</label>
             </div>
 
             <div>
               <input
-                /*  style={{ display: "none" }} */
                 type="checkbox"
                 id={"Z"}
                 onClick={() => {
@@ -191,12 +207,11 @@ const MyFilters = (props) => {
                 name={"Z"}
                 ref={textInput4}
               ></input>
-              <label htmlFor={"Z"}>⭐⭐⭐⭐</label>
+              <label htmlFor={"Z"}>{newStar(4)}</label>
             </div>
 
             <div>
               <input
-                /*  style={{ display: "none" }} */
                 type="checkbox"
                 id={"Z"}
                 onClick={() => {
@@ -205,12 +220,11 @@ const MyFilters = (props) => {
                 name={"Z"}
                 ref={textInput3}
               ></input>
-              <label htmlFor={"Z"}>⭐⭐⭐</label>
+              <label htmlFor={"Z"}>{newStar(3)}</label>
             </div>
 
             <div>
               <input
-                /*  style={{ display: "none" }} */
                 type="checkbox"
                 id={"Z"}
                 onClick={() => {
@@ -219,12 +233,11 @@ const MyFilters = (props) => {
                 name={"Z"}
                 ref={textInput2}
               ></input>
-              <label htmlFor={"Z"}>⭐⭐</label>
+              <label htmlFor={"Z"}>{newStar(2)}</label>
             </div>
 
             <div>
               <input
-                /*     style={{ display: "none" }} */
                 type="checkbox"
                 id={"Z"}
                 onClick={() => {
@@ -233,21 +246,28 @@ const MyFilters = (props) => {
                 name={"Z"}
                 ref={textInput1}
               ></input>
-              <label htmlFor={"Z"}>⭐</label>
+              <label htmlFor={"Z"}>{newStar(1)}</label>
             </div>
+
           </div>
+
+
+
         </div>
+
         {/*   {console.log(myProducts)} */}
-        <div className="w-50 bg-success">
+
+        {/* <div className="w-50 bg-success">
           {myProducts.map((product) => {
             return (
-              <p>
+              <p key = {product._id}>
                 {product.nameProduct} {"|"} {product.price} {"|"}
                 {product.miPromedio}
               </p>
             );
           })}
-        </div>
+        </div> */}
+
       </div>
     </div>
   );
@@ -255,7 +275,7 @@ const MyFilters = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    filterProductCurrentStore : state.productReducer.filterProductCurrentStore,
+    filterProductCurrentStore: state.productReducer.filterProductCurrentStore,
     productsCurrentStore: state.productReducer.productsCurrentStore,
   };
 };
@@ -265,4 +285,4 @@ const mapDispatchToProps = {
   filterProductsCurrentStore: productsActions.filterProductsCurrentStore,
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(MyFilters);
+export default connect(mapStateToProps, mapDispatchToProps)(MyFilters);

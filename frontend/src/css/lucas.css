@@ -124,11 +124,12 @@ html * {
     margin-top: 12vh;
 }
 .progressStarContainer{
-    width: 23vw;
+    width: 28vw;
     /* background-color: red; */
     display: flex;
     justify-content: space-between;
     align-items: center;
+    height: 25px;
     font-family: "Poppins-Regular", Helvetica, Arial, sans-serif !important;
 
 }
@@ -141,7 +142,7 @@ html * {
 
 .starsReviewsContainer{
     display: flex;
-    width: 40vw;
+    width: 46vw;
     justify-content: space-between;
     align-items: center;
     margin: 4vh 0;
