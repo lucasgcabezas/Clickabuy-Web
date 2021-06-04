@@ -26,13 +26,17 @@ import FilterProductsStore from './components/FilterProductsStore'
 import AdminApp from './pages/AdminApp'
 
 
-const App = ({ cart, reloadCartLS, loginForced, userLogged, history }) => {
+const App = ({ cart, reloadCartLS, loginForced, userLogged, history,checkUserRole }) => {
   if (cart.length === 0) {
     let cartLS = localStorage.getItem("cartLS");
     if (cartLS !== "undefined" && cartLS !== null) {
       cartLS = JSON.parse(cartLS);
       if (cartLS instanceof Array && cartLS.length !== 0) reloadCartLS(cartLS);
     } else localStorage.removeItem("cartLS");
+  }
+
+  if(userLogged){
+    checkUserRole(userLogged.token)
   }
 
   const token = localStorage.getItem("token");
@@ -78,6 +82,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
   reloadCartLS: cartActions.reloadCartLS,
   loginForced: authActions.loginForced,
+  checkUserRole: authActions.checkUserRole,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

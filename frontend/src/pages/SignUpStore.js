@@ -10,13 +10,14 @@ import { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import storeActions from "../redux/actions/storeActions";
 import { FiCamera } from 'react-icons/fi'
+import adminStoreActions from "../redux/actions/adminStoreActions";
 
 const validationSchema = yup.object({
 
 
   bName: yup.string("Enter business name").required("Business Name is required"),
 
-  category: yup.string().required("category is required!"),
+  idCategory: yup.string().required("category is required!"),
 });
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -31,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
 const SignUpStore = (props) => {
   const classes = useStyles();
   /*  console.log(props.categories); */
-  const {userLogged} = props
+  const { userLogged } = props
   const [photo, setPhoto] = useState({ userImg: "" });
   const [photoName, setPhotoName] = useState({ userImgName: "" });
   const [ta, setTA] = useState({ description: "" });
@@ -53,16 +54,17 @@ const SignUpStore = (props) => {
       alert(ta.description);
       let formData = new FormData();
 
-      formData.append("bName", values.bName);
+      formData.append("nameStore", values.bName);
       formData.append("description", ta.description);
-      formData.append("category", values.category);
+      formData.append("idCategory", values.category);
 
-      formData.append("userImg", photo.userImg);
+      formData.append("logoStore", photo.userImg);
 
       console.log("soy el values", values);
       console.log("soy el Formdata", formData);
 
-      /*   props.addStore(formData); */
+      props.addRequest(props.userLogged.token, formData);
+      props.history.push("/myStores")
     },
   });
 
@@ -115,13 +117,13 @@ const SignUpStore = (props) => {
               >
                 <option value="" label="Select a category" />
                 {props.categories.map((category) => {
-                  return <option value={category.nameCategory} label={category.nameCategory} />;
+                  return <option value={category._id} label={category.nameCategory} />;
                 })}
               </select>
               <textarea placeHolder="Description of your business (optional)" onChange={(e) => cargarTA(e)} className="textareaSignUpStore"></textarea>
               <div className="contenedorInputFile">
                 <label htmlFor="userImg" className="buttonInputFile">
-                <span class="material-icons-outlined iconCamera">add_a_photo</span> UPLOAD STORE'S LOGO
+                  <span class="material-icons-outlined iconCamera">add_a_photo</span> UPLOAD STORE'S LOGO
                   <input id="userImg" name="userImg" type="file" style={{ display: "none" }} onChange={cargarFoto} />
                 </label>
                 <span>{photoName.userImgName}</span>
@@ -143,7 +145,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-  addStore: storeActions.addStore,
+  addRequest: adminStoreActions.addRequest,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignUpStore);

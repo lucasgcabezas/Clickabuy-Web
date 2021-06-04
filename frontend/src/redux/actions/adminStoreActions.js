@@ -6,7 +6,8 @@ const adminStoreActions = {
   getStoresByUser: (token) => {
     return  async (dispatch) => {
       try {
-        const { data } = await axios.get(API + "/storesByUser", objInputsValues, {
+        // const { data } = await axios.get(API + "/storesByUser", objInputsValues, {
+        const { data } = await axios.get(API + "/storesByUser", {
             headers: { "Authorization": "Bearer "+token },
         });
         if(data.success)
@@ -130,7 +131,7 @@ const adminStoreActions = {
 
   deleteProduct:(token,idProduct,body) => { //solo se modifican aquellas  que no sean null
     return async (dispatch) => {
-        let {storeId} = req.body;
+        let {storeId} = body
         try {
           const { data } = await axios.post(API + "/product/"+idProduct ,{storeId} ,{
               headers: { "Authorization": "Bearer "+token },
@@ -151,7 +152,7 @@ const adminStoreActions = {
         try {
             const {data} = await axios.get(API+"/productsFromStore/"+idStore)               
             return data.response;
-        } catch (error) {
+        } catch (err) {
             console.log(err);
             showTostError500();
         }
