@@ -106,9 +106,10 @@ const SignUp = (props) => {
   };
 
   return (
-    // <div style={{backgroundImage: "url('https://webdesing881317710.files.wordpress.com/2021/06/3606268de57686baaa14bf67254ec618.png')"}} className="imgForm" >
+
+    <div style={{backgroundImage: "url('https://webdesing881317710.files.wordpress.com/2021/06/videoform3.gif')"}} className="imgForm" >
     <div className="contenedorSignUp">
-      <video src="./assets/formVideo.mp4" autoPlay loop muted className="videoForm"></video>
+      {/* <video src="./assets/formVideo.mp4" autoPlay loop muted className="videoForm"></video> */}
       {/* <div className="contenedorHeaderSignUp"> */}
       <Link to="/" className="backToHome">
         <span class="material-icons-outlined iconBack">arrow_back_ios_new</span> Back
@@ -119,17 +120,13 @@ const SignUp = (props) => {
           <FaTags className="logoForm" />
           {/* <box-icon type='solid' name='purchase-tag' size="lg"></box-icon> */}
           <h1>clickabuy</h1>
-          <span className="fraseClickabuy">DO YOUR BUSSINES OR FIND WHAT YOU NEED</span>
-          <Link to="/SignUpStore" className="bussinesAccount">
-            Create a Business Account <span class="material-icons-outlined iconBussines">arrow_forward_ios</span>
-          </Link>
-          <div>
+          {/* DO YOUR BUSSINES OR FIND WHAT YOU NEED */}
+          <span className="fraseClickabuy">YOU NEED IT, YOU WANT IT, WITH CLICKABUY YOU CAN HAVE IT</span>
+          {/* <Link to="/SignUpStore" className="bussinesAccount">Create a Business Account <span class="material-icons-outlined iconBussines">arrow_forward_ios</span></Link> */}
+          {/* <div> */}
             <span className="linkLogInText"> Already have an account?</span>
-            <Link to="/SignIn" className="linkLogIn">
-              {" "}
-              Log In
-            </Link>
-          </div>
+            <Link to="/SignIn" className="bussinesAccount">Log In</Link>
+          {/* </div> */}
         </div>
         <div className="contenedorForm">
           <h2>Register</h2>
@@ -211,7 +208,7 @@ const SignUp = (props) => {
         </div>
       </div>
     </div>
-    // </div>
+    </div>
   );
 };
 

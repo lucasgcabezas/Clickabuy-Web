@@ -1205,7 +1205,7 @@ video {
 .contenedorLogoForm h1{
     font-size: 4em;
     color: black;
-    margin-bottom: 2vh;
+    margin-bottom: 4vh;
     /* margin-left: 0.6vw; */
 }
 .contenedorLogoForm{
@@ -1224,12 +1224,26 @@ video {
 .contenedorForm h2{
     color: black;
 }
+.contenedorInputFile{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.iconCamera{
+    font-size: 2em;
+    margin-right: 2vw;
+}
 .buttonInputFile{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: white;
     margin-top: 3vh;
     color: black;
     padding: 2vh 3vw;
     border-radius: 10px;
+    width: 80%;
     border: 1px solid #e5edef;
     cursor: pointer !important;
 }
@@ -1254,7 +1268,7 @@ video {
     align-items: center;
 }
 .bussinesAccount{
-    margin-top: 16vh;
+    /* margin-top: 16vh; */
     margin-bottom: 6vh;
     color: white;
     background-color: black;
@@ -1263,8 +1277,8 @@ video {
     padding: 2vh 4vw;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    width: 30vw;
+    justify-content: center;
+    width: 23vw;
 }
 .bussinesAccount:hover{
     color: black;
@@ -1285,6 +1299,8 @@ video {
     margin-left: 1vw;
 }
 .linkLogInText{
+    margin-top: 12vh;
+    margin-bottom: 5vh;
     font-size: 18px !important;
     color: black;
 }
@@ -1341,7 +1357,10 @@ video {
 .textareaSignUpStore{
     margin-top: 3vh;
     width: 100%;
-    border: 1px solid #e7e7e7;
+    border: none;
+    /* border: 1px solid #e7e7e7; */
+    /* background-color: rgba(116, 116, 116, 0.26); */
+    background-color: rgba(173, 173, 173, 0.26);
     border-radius: 5px;
     padding: 1vh 0.5vw;
     font-family: "Poppins-Regular", Helvetica, Arial, sans-serif !important;
@@ -1351,11 +1370,14 @@ video {
     outline:none;
 }
 .selectSignUpStore{
+    border: none;
     margin-top: 3vh;
     width: 100%;
-    border: 1px solid #e7e7e7;
+    /* border: 1px solid #e7e7e7; */
     border-radius: 5px;
     padding: 2vh 0.5vw;
+    /* background-color: rgba(116, 116, 116, 0.26); */
+    background-color: rgba(173, 173, 173, 0.26);
     font-family: "Poppins-Regular", Helvetica, Arial, sans-serif !important;
 }
 option{
@@ -1368,10 +1390,23 @@ option{
     align-items: center;
 }
 .contenedorInfoFormAdminStore{
-    background-color: #fff;
+    /* background-color: #fff; */
     border-radius: 5px;
     padding: 7vh 6vw;
-    box-shadow: 0px 4px 5px 1px #00000022;
+    width: 55%;
+    /* box-shadow: 0px 4px 5px 1px #00000022; */
+}
+.personAccount{
+    margin-top: 2vh;
+    /* color: rgba(128, 128, 128, 0.507); */
+    color: black;
+    cursor: pointer;
+}
+.personAccount:hover{
+    text-decoration: underline;
+}
+.contenedorInfoFormAdminStore h3{
+    text-align: center;
 }
 .linkPersonAccount:hover{
     text-decoration: none;
