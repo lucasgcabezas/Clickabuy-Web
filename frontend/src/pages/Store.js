@@ -20,6 +20,7 @@ const Store = (props) => {
   const [ver, setVer] = useState(false);
   const [cantRate, setCantRate] = useState(store.rate.length);
   const [productsCurrentStoreF, setproductsCurrentStoreF] = useState(props.productsCurrentStore);
+  const [aux, setAux] = useState("");
 
   const [linkText, setLinkText] = useState([]);
   const changeLinkText = (nuArray) => {
@@ -62,7 +63,9 @@ const Store = (props) => {
   var placeholderStoreInput = `Search products in ${store.nameStore}`;
 
   let ratingCounter = 0;
+
   let myCopia = [];
+
   props.productsCurrentStore.map((product) => {
     if (product.reviews.length > 0) {
       promedio = product.reviews.reduce((a, b) => a + b.vote, 0) / product.reviews.length;
@@ -147,18 +150,31 @@ const Store = (props) => {
 
             <div>
               {" "}
-              {console.log("explorando mi store", myCopia)}
-              <MyFilters changeLinkText={changeLinkText} products={myCopia} />
+              {console.log("aca", myCopia)}
+              {console.log("aca", typeof myCopia)}
+              {myCopia.length == 0 ? (
+                <MyFilters changeLinkText={changeLinkText} products={props.productsCurrentStore} />
+              ) : (
+                <MyFilters changeLinkText={changeLinkText} products={myCopia} />
+              )}
             </div>
           </div>
           <div className="containerCards">
             {/*  {console.log("soy el arreglo filtradro que pasa?", )} */}
             {console.log("este si", productsCurrentStoreF)}
-            {productsCurrentStoreF.length === 0 ? (
+            {props.productsCurrentStore.length === 0 ? (
               <div>
                 {" "}
                 <h2>No products</h2>{" "}
               </div>
+            ) : productsCurrentStoreF.length == 0 ? (
+              props.productsCurrentStore.map((product) => {
+                return (
+                  <div key={product._id}>
+                    <Product product={product} />
+                  </div>
+                );
+              })
             ) : (
               productsCurrentStoreF.map((product) => {
                 return (
