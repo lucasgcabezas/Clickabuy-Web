@@ -16,7 +16,7 @@ const productsActions = {
     getAllProducts: () => {
         return async (dispatch, getState) => {
             try {
-                const response = await axios.get(API + '/api/products')
+                const response = await axios.get(API + '/products')
                 dispatch({ type: 'FETCH_ALL_PRODUCTS', payload: response.data.response })
             } catch (error) {
                 console.log(error)
@@ -57,7 +57,7 @@ const productsActions = {
         var vote = inputreview.vote
         return async (dispatch, getState) => {
             try {
-                const response = await axios.post(API + '/api/reviews/' + id, { review, vote }, {
+                const response = await axios.post(API + '/reviews/' + id, { review, vote }, {
                     headers: {
                         'Authorization': 'Bearer ' + inputreview.token
                     }
