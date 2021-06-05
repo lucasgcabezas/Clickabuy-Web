@@ -4,11 +4,12 @@ import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import productsActions from "../redux/actions/productsActions";
-import ReactStars from "react-rating-stars-component";
+import ReactStars from 'react-stars'
 
-const Product = ({ product, addProductToCart, deleteProductFromCart, cart, likeProduct, userLogged }) => {
-  const { stock, description, nameProduct, price, productImg, _id, userLiked, rateProduct, reviews } = product;
+const Product = ({ product, likeProduct, userLogged }) => {
+  const { stock, nameProduct, price, productImg, userLiked, reviews } = product;
   const [loadingHeart, setLoadingHeart] = useState(true);
+  
   const likes = async () => {
     if (!userLogged) {
       alert("no podes likear");
@@ -44,9 +45,8 @@ const Product = ({ product, addProductToCart, deleteProductFromCart, cart, likeP
             emptyIcon={<i className="far fa-star"></i>}
             halfIcon={<i className="fa fa-star-half-alt"></i>}
             fullIcon={<i className="fa fa-star"></i>}
-            activeColor="#ffd700"
-            // activeColor="#48d1be"
-            color="#999999"
+            color2="#dca6ac"
+            color1="#555555"
             value={starsValue}
           />
           <span
@@ -73,12 +73,6 @@ const Product = ({ product, addProductToCart, deleteProductFromCart, cart, likeP
       <Link to={`/product/${product._id}`}>
         <button className="buttonAddProduct">View More</button>
       </Link>
-      {/* {cart.find(item => item._id === product._id)
-                ?
-                <button className="buttonRemoveProduct" onClick={() => deleteProductFromCart(product)}>- Remove product</button>
-                :
-                <button className="buttonAddProduct" onClick={() => addProductToCart(product)}>+ Add Product</button>
-            } */}
     </div>
   );
 };

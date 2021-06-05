@@ -3,17 +3,28 @@ html *{
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins',Helvetica,Arial,sans-serif;
+    /* font-family: 'semplicitapro', sans-serif;
+    font-style: normal; */
 }
 :root{
-    --primarycolor: #45d6c5;
-    --secondarycolor: #f64c54;
-    --thirdcolor: #ecf0f1;
+    --primarycolor: black;
+    --secondarycolor: white;
+    --thirdcolor: #dca6ac;
     --fourthcolor: #fafaf8;
 }
-/* background-color: rgba(0,0,0,.403921568627451); */
-/* .contenedorHome{
-    background-color: var(--fourthcolor);
-} */
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+   }
+   ::-webkit-scrollbar-thumb {
+    background: #000000;
+    border-radius: 10px;
+   }
+   ::-webkit-scrollbar-track{
+    /* background: #f0f0f0; */
+    border-radius: 5px;
+    box-shadow: inset 7px 10px 12px #f0f0f0;
+   }
 .contenedorIconoCorazon{
     position: relative;
 }
@@ -26,7 +37,15 @@ html *{
     font-size: 1.2em;
     bottom: 10vh;
     left: 10vw;
-    color: red;
+    color: black;
+}
+.iconoCorazon2{
+    position: absolute;
+    font-size: 1em;
+    bottom: 0;
+    left: 10vw;
+    color: black;
+    cursor: pointer;
 }
 /* transition: opacity .2s; */
 .clickabuyLogo{
@@ -87,7 +106,7 @@ html *{
     align-items: center;
     padding-left: 3vw;
     padding-right: 3vw;
-    padding-bottom: 1vh;
+    padding-bottom: 2vh;
 }
 .linkRegisterStore{
     color: black;
@@ -129,12 +148,12 @@ html *{
     outline: none;
 }
 .headerContainer{
-    position: fixed;
+    /* position: fixed;
     top: 0;
-    left: 0;
+    left: 0; */
     width: 100%;
-    z-index: 99;
-    background-color: rgba(255, 255, 255, 0.418);
+    /* z-index: 99; */
+    background-color: #fff;
     display: flex;
     flex-direction: column;
 }
@@ -160,9 +179,8 @@ html *{
 .galleryContainer{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-auto-rows: 250px;
+    grid-auto-rows: 251px;
     grid-gap: 5px;
-    margin-top: 24vh;
     width: 100%;
 }
 .galleryItem{
@@ -195,7 +213,7 @@ html *{
 }
 .navegadores:hover{
     text-decoration: none;
-    color: var(--secondarycolor);
+    color: black;
 }
 .contenedorCategoriesBanner{
     width: 100%;
@@ -296,7 +314,6 @@ html *{
 }
 .contenedorStore{
     background-color: #fafaf8;
-    margin-top: 23vh;
 }
 .contenedorInfoCards{
     width: 95%;
@@ -359,17 +376,44 @@ html *{
     border: none;
     width: 13vw;
 }
-.buttonAddProduct:hover{
+.buttonAddProduct:hover, .buttonBuyNow:hover, .buttonAddProduct2:hover, .buttonRemoveProduct:hover{
     box-shadow: 0px 4px 5px 1px #00000022;
 }
-.buttonRemoveProduct{
-    margin-top: 20vh;
-    margin-right: 1vw;
-    background-color: var(--secondarycolor);
+.buttonAddProduct2{
+    background-color: black;
     color: white;
-    padding: 1vh 2.3vw;
-    border-radius: 10px;
-    border: none; 
+    padding: 2vh 2vw;
+    border-radius: 5px;
+    border: none;
+    width: 13vw;
+}
+.buttonBuyNow{
+    background-color: black;
+    color: white;
+    padding: 2vh 2vw;
+    border-radius: 5px;
+    border: none;
+    width: 13vw;
+    margin-left: 3vw;
+}
+.contenedorButtonsProductCart{
+    display: flex;
+    align-items: flex-end;
+}
+.contenedorQuantity{
+    height: 10vh;
+}
+.buttonRemoveProduct{
+    width: 13vw;
+    background-color: black;
+    color: white;
+    padding: 2vh 2vw;
+    border-radius: 5px;
+    border: none;
+}
+.contenedorButtonAccionCart{
+    display: flex;
+    align-items: center;
 }
 .cardProductInfo{
     display: flex;
@@ -382,7 +426,7 @@ html *{
 }
 .cardProductInfo h3, .cardProductInfo p{
     font-family: "Poppins-Regular", Helvetica, Arial, sans-serif !important;
-    color: #666;
+    color: black;
     margin-bottom: 4vh;
 
 }
@@ -544,7 +588,7 @@ html *{
     margin-bottom: 3px;
 }
 .iconFavoritesHome:hover{
-    color: var(--secondarycolor);
+    color: var(--primarycolor);
 }
 .iconCart{
     background-color: black;
@@ -552,7 +596,7 @@ html *{
     padding: 2vh 1vw;  
 }
 .iconCart:hover{
-    background-color: var(--secondarycolor);
+    background-color: var(--primarycolor);
 }
 .usuarioImage{
     background-size: cover;
@@ -1057,7 +1101,7 @@ html *{
 .tituloReviews{
     margin: 0;
     padding: 2vh 0;
-    border-bottom: 1px solid #e5edef;
+    /* border-bottom: 1px solid #e5edef; */
     font-size: 2.5em;
     display: flex;
     align-items: center;
@@ -1069,6 +1113,24 @@ html *{
 }
 .contenedorReview{
     display: flex;
+}
+.reviews{
+    height: 40vh;
+    overflow-y: auto;
+    /* margin-top: 6vh; */
+}
+.reviews::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+.reviews::-webkit-scrollbar-thumb {
+    background: #000000;
+    border-radius: 10px;
+}
+.reviews::-webkit-scrollbar-track{
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: inset 7px 10px 12px #f0f0f0;
 }
 .contenedorButtonsOptions{
     display: flex;
@@ -1358,8 +1420,6 @@ video {
     margin-top: 3vh;
     width: 100%;
     border: none;
-    /* border: 1px solid #e7e7e7; */
-    /* background-color: rgba(116, 116, 116, 0.26); */
     background-color: rgba(173, 173, 173, 0.26);
     border-radius: 5px;
     padding: 1vh 0.5vw;
@@ -1373,10 +1433,8 @@ video {
     border: none;
     margin-top: 3vh;
     width: 100%;
-    /* border: 1px solid #e7e7e7; */
     border-radius: 5px;
     padding: 2vh 0.5vw;
-    /* background-color: rgba(116, 116, 116, 0.26); */
     background-color: rgba(173, 173, 173, 0.26);
     font-family: "Poppins-Regular", Helvetica, Arial, sans-serif !important;
 }
@@ -1390,15 +1448,12 @@ option{
     align-items: center;
 }
 .contenedorInfoFormAdminStore{
-    /* background-color: #fff; */
     border-radius: 5px;
     padding: 7vh 6vw;
     width: 55%;
-    /* box-shadow: 0px 4px 5px 1px #00000022; */
 }
 .personAccount{
     margin-top: 2vh;
-    /* color: rgba(128, 128, 128, 0.507); */
     color: black;
     cursor: pointer;
 }
@@ -1410,4 +1465,96 @@ option{
 }
 .linkPersonAccount:hover{
     text-decoration: none;
+}
+.productPageTitle span{
+    font-family: "Poppins-Regular", Helvetica, Arial, sans-serif !important;
+}
+.productPagePrice{
+    height: 10vh;
+    display: flex;
+    align-items: center;
+}
+.productPagePrice span{
+    font-family: "Poppins-Regular", Helvetica, Arial, sans-serif !important;
+    font-size: 2em;
+}
+.productPageTitlePrice{
+    display: flex;
+    flex-direction: column;
+    width: 40%
+}
+.productPageCardInfo{
+    display: flex;
+    border-bottom: 1px solid #e5edef;
+    padding-bottom: 9vh;
+    /* width: 90%; */
+}
+.productPageTitle{
+    
+    height: 15vh;
+    display: flex;
+    align-items: center;
+    font-size: 1.9rem;
+}
+.productPageStock span{
+    font-family: "Poppins-Regular", Helvetica, Arial, sans-serif !important;
+    /* font-size: em; */
+    /* font-weight: 500; */
+}
+.productPageStock{
+    height: 10vh;
+    display: flex;
+    align-items: center; margin-bottom: 6vh;
+}
+.contenedorPaymentMethods{
+    margin-top: 3vh;
+    padding-top: 2vh;
+    border-top: 1px solid #e5edef;
+    /* border-radius: 10px; */
+    /* width: 35%; */
+    display: flex;
+    /* align-items: center; */
+    flex-direction: column;
+    /* align-items: center; */
+}
+.borderClass{
+    background-color: black;
+    height: 2px;
+    width: 5vw;
+    border-radius: 20px;
+    margin-bottom: 3vh;
+}
+.contenedorPaymentMethods span{
+    color: black;
+    /* border-bottom: 1px solid black; */
+    /* font-family: "Poppins-Regular", Helvetica, Arial, sans-serif !important; */
+    /* font-size: 1em; */
+    /* margin-bottom: 2vh; */
+    padding-bottom: 1vh;
+}
+.pagosArrayProductPage{
+    display: flex;
+    /* justify-content: center; */
+    /* flex-wrap: wrap; */
+}
+.productPageImg{
+    width: 50vw;
+    height: 80vh;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.buttonAccionProductPage{
+    background-color: transparent;
+    border: none;
+}
+.contenedorButtonQuantity{
+    border: 1px solid #e5edef;
+    width: 13vw;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 2vh 2vw;
+}
+.react-stars:before{
+    color: var(--thirdcolor) !important;
 }

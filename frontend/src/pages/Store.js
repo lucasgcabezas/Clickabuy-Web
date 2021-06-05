@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import Product from "../components/Product";
 import productsActions from "../redux/actions/productsActions";
-import ReactStars from "react-rating-stars-component";
+import ReactStars from 'react-stars'
 import { NavLink } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -124,12 +124,8 @@ const Store = (props) => {
                   size={32}
                   isHalf={true}
                   edit={true}
-                  emptyIcon={<i className="far fa-star"></i>}
-                  halfIcon={<i className="fa fa-star-half-alt"></i>}
-                  fullIcon={<i className="fa fa-star"></i>}
-                  activeColor="#ffd700"
-                  // activeColor="#48d1be"
-                  color="#999999"
+                  color2="#dca6ac"
+                  color1="#555555"
                   value={stars}
                 />
               ) : store.rate.length === 0 ? (
@@ -140,12 +136,8 @@ const Store = (props) => {
                   size={32}
                   isHalf={true}
                   edit={true}
-                  emptyIcon={<i className="far fa-star"></i>}
-                  halfIcon={<i className="fa fa-star-half-alt"></i>}
-                  fullIcon={<i className="fa fa-star"></i>}
-                  activeColor="#ffd700"
-                  // activeColor="#48d1be"
-                  color="#999999"
+                  color2="#dca6ac"
+                  color1="#555555"
                   value={0}
                 />
               ) : (

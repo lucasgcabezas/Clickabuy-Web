@@ -1,6 +1,7 @@
 import adminAppActions from '../redux/actions/adminAppActions'
 import {connect} from 'react-redux'
 import {useState,useEffect} from 'react'
+import Header from '../components/Header'
 
 
 
@@ -33,6 +34,8 @@ const AdminApp = ({userLogged,getAllRequest,approveRequest,rejectRequest}) => {
     }
 
     return(
+        <>
+        <Header />
         <div className = "body">
             {requests.map(request => {
                 {console.log(request)}
@@ -58,6 +61,7 @@ const AdminApp = ({userLogged,getAllRequest,approveRequest,rejectRequest}) => {
             })}
             
         </div>
+        </>
     )
 }
 

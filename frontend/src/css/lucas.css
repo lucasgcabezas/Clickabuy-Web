@@ -2,11 +2,6 @@
     /* --fcolor: #ee4054; */
     --fcolor: #48d1be;
 }
-
-
-
-
-
 html * {
     margin: 0;
     padding: 0;
@@ -36,15 +31,9 @@ html * {
     margin-right: 10px;
 }
 
-
-
-
-
-
-
 .categoryContainer {
     /* background-color: #555555; */
-    margin-top: 23vh;
+    /* margin-top: 23vh; */
     /* min-height: 100vh; */
     width: 100%;
     display: flex;
@@ -118,17 +107,11 @@ html * {
     background-color: #f7f7f7;
     /* background-color: yellow; */
     /* flex: 1; */
-    padding: 10vh 0;
+    padding: 0 0 10vh 0;
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
-}
-
-.productPageImg{
-    width: 400px;
-    height: 400px;
-    background-size: cover;
 }
 
 .productPageCard{
@@ -138,57 +121,28 @@ html * {
     padding: 5vh 5vw;
     box-shadow: 0px 2px 5px 1px #00000022;
     border-radius: 5px;
-    margin-top: 15vh;
+    margin-top: 12vh;
 }
-
-.productPageCardInfo{
-    display: flex;
-    /* background-color: blue; */
-}
-
-.productPageTitlePrice{
-    /* background-color: blueviolet; */
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.productPageTitle{
-    height: 15vh;
-    display: flex;
-    align-items: center;
-    font-size: 1.9rem;
-}
-
-.productPagePrice{
-    height: 10vh;
-    display: flex;
-    align-items: center;
-}
-
-.productPageStock{
-    height: 10vh;
-    display: flex;
-    align-items: center;
-}
-
 .progressStarContainer{
-    width: 23vw;
+    width: 28vw;
     /* background-color: red; */
     display: flex;
     justify-content: space-between;
     align-items: center;
+    height: 25px;
+    font-family: "Poppins-Regular", Helvetica, Arial, sans-serif !important;
+
 }
 .progressStarContainer span {
+    font-family: "Poppins-Regular", Helvetica, Arial, sans-serif !important;
     width: 20%;
-    text-align: center;
+    /* text-align: center; */
     
 }
 
 .starsReviewsContainer{
     display: flex;
-    width: 40vw;
+    width: 46vw;
     justify-content: space-between;
     align-items: center;
     margin: 4vh 0;
@@ -203,7 +157,7 @@ html * {
 .myStoreContainer{
     background-color: #eeeeee;
     min-height: 100vh;
-    padding: 25vh 2vw 0 2vw;
+    padding: 2vh 2vw 0 2vw;
     display: flex;
     flex-direction: column;
 }
