@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 import categoryActions from "../redux/actions/categoryActions"
 import Dropdown from 'react-bootstrap/Dropdown'
 const Categories = (props) => {
-    const { getAllCategories, getCurrentCategory } = props
+    const { getAllCategories, getCurrentCategory, categories } = props
     useEffect(() => {
         getAllCategories()
     }, [])
@@ -14,9 +14,9 @@ const Categories = (props) => {
             <span class="material-icons-outlined categoriesIcon">format_list_bulleted</span> Categories
             </Dropdown.Toggle>
             <Dropdown.Menu>
-                {props.categories.length === 0
+                {categories.length === 0
                     ? <span>No Categories</span>
-                    : props.categories.map((category, index) => {
+                    : categories.map((category, index) => {
                         return (
                             <div onClick={()=> getCurrentCategory(category._id)}>
                                 <Link to={`/category/${category._id}`} className="nameCategory" key={index}><span>{category.nameCategory}</span></Link>

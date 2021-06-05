@@ -1,6 +1,7 @@
 const initialState = {
   userLogged: null,
-  userRole: ''
+  userRole: '',
+  firstAnimation: true
 };
 
 const authReducer = (state = initialState, action) => {
@@ -25,7 +26,10 @@ const authReducer = (state = initialState, action) => {
         ...state,
         userRole: action.payload
       };
-
+    case 'ANIMATION_STATE':
+      return{
+        firstAnimation: action.payload
+      }  
     default:
       return state;
   }

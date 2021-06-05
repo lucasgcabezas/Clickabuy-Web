@@ -7,6 +7,7 @@ import SignUp from "../pages/SignUp";
 import SignUpStore from "../pages/SignUpStore";
 import SignUpProduct from "../pages/SignUpProduct";
 // import SignInAdmin from "../pages/SignInAdmin";
+
 import Buys from "../pages/Buys";
 import MyStores from "../pages/MyStores";
 import MyStoreView from "../pages/MyStoreView";
@@ -16,9 +17,9 @@ import MyProgressBar from "../components/MyProgressBar";
 import Favorites from "../pages/Favorites";
 import FilterProductsStore from '../components/FilterProductsStore'
 import AdminApp from '../pages/AdminApp'
-
-
+import FinalizePurchase from "../pages/FinalizePurchase";
 import { Route, Switch, Redirect } from "react-router-dom";
+import PruebaLotties from "../pages/PruebaLotties";
 
 const routesProtected = {
     routerUserDontLogged: () => {
@@ -31,7 +32,7 @@ const routesProtected = {
                 <Route path="/buys" component={Buys} />
                 <Route path="/SignIn" component={SignIn} />
                 <Route path="/SignUp" component={SignUp} />
-                
+                <Route path="/pruebalotties" component={PruebaLotties}/>
                 {/*<Route path="/SignInAdmin" component={SignInAdmin} />*/}
                 
                 <Route path="/myFilters" component={MyFilters} />
@@ -54,6 +55,7 @@ const routesProtected = {
                 <Route path="/SignUpStore" component={SignUpStore} />
                 {/* <Route path="/myStores" component={MyStores} />
                 <Route path="/myStore/:id" component={MyStoreView} /> */}
+                <Route path="/finalizepurchase" component={FinalizePurchase}/>
                 <Route path="/myFilters" component={MyFilters} />
                 <Route path="/product/:id" component={ProductPage} />
                 <Route path="/products" component={FilterProductsStore} />

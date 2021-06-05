@@ -9,12 +9,14 @@ import Header from '../components/Header'
 import Footer from '../components/Footer'
 import storeActions from '../redux/actions/storeActions'
 
-
 const Category = (props) => {
-    const { currentCategory } = props
-
-    if (!props.currentCategory) {
-        return <h1>cargando...</h1>
+    const { currentCategory, getCurrentCategory, storesForCategory, getAllCategories } = props
+    // const idParams = props.match.params.id
+    if (!currentCategory) {
+        // getAllCategories()
+        // getCurrentCategory(idParams)
+        // getStoresbByCategory(idParams)
+        return <span>cargando</span>
     }
     return (
         <>
@@ -32,9 +34,9 @@ const Category = (props) => {
                     <span>STORES</span>
                     <div className="categoryStoresSection">
                         {
-                            props.storesForCategory.length === 0
+                            storesForCategory.length === 0
                                 ? <span>No hay disponibles</span>
-                                : props.storesForCategory.map((store, i) => {
+                                : storesForCategory.map((store, i) => {
                                     let ratingCounter = 0
 
                                     store.rate.forEach(rating => {
@@ -86,7 +88,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
     getStoresbByCategory: categoryActions.getStoresbByCategory,
     getCurrentCategory: categoryActions.getCurrentCategory,
-    rateStore: storeActions.rateStore
+    rateStore: storeActions.rateStore,
+    getAllCategories: categoryActions.getAllCategories
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Category)

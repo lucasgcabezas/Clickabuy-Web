@@ -49,9 +49,6 @@ const storeActions = {
 
   rateStore: (storeId, numberRate, token) => {
     return (dispatch) => {
-
-      // console.log(token)
-
       try {
         const response = axios.put(API + "/storeRate/" + storeId, {numberRate}, {
           headers:{

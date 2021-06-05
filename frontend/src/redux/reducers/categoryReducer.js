@@ -11,15 +11,13 @@ const categoryReducer = (state = initialState, action) => {
                 ...state,
                 stores: action.payload
             }
-            break
         case 'FETCH_CATEGORIES':
             return {
                 ...state,
                 categories: action.payload
             }
         case 'CURRENT_CATEGORY':
-            // console.log(action.payload.stores)
-            // stores: action.payload.stores
+            console.log(action.payload)
             return {
                 ...state,
                 currentCategory: state.categories.find(category => category._id === action.payload.id),

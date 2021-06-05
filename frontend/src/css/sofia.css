@@ -177,6 +177,18 @@ html *{
 }
 .videoHeroHome{
     width: 100%;
+    /* position: absolute; */
+}
+.phone{
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 80%;
+    height: 100vh;
+    position: absolute;
+    right: 0;
+    top: 230vh;
+    /* padding-bottom: 3vh; */
 }
 .galleryContainer{
     display: grid;
@@ -454,7 +466,7 @@ html *{
     background-color: #fff;
     box-shadow: 0 1px 2px 0 rgb(0 0 0 / 30%);
     border-radius: 4px;
-    margin-top: 25vh;
+    margin-top: 3vh;
     padding: 64px;
     margin-bottom: 10vh;
 }
@@ -655,6 +667,7 @@ html *{
     justify-content: space-evenly;
     width: 100%;
     margin: 6vh auto;
+    overflow-x: hidden !important;
 }
 .imagePublicity{
     background-size: cover;
@@ -738,7 +751,8 @@ html *{
     padding: 1vh 2vw;
 }
 .descuentoHome{
-    background-color:#56cb60;
+    background-color:black;
+    /* background-color:#56cb60; */
     color: white !important;
     font-family: "Poppins-Regular", Helvetica, Arial, sans-serif !important;
     font-size: 11px;
@@ -1500,4 +1514,101 @@ option{
 }
 .react-stars:before{
     color: var(--thirdcolor) !important;
+}
+.contenedorPurchase{
+    width: 100%;
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: center;
+}
+.contenedorInfoPurchase{
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.productPurchase{
+    display: flex;
+    align-items: center;
+}
+.productPurchase h3{
+    font-family: "Poppins-Regular", Helvetica, Arial, sans-serif !important;
+}
+/* .formCreditCards{
+
+} */
+.creditCardModal{
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}  
+.Payment{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+.App-payment {
+    padding: 30px;
+}  
+.formCreditCards {
+    margin: 30px auto 0;
+    max-width: 400px;
+}
+.form-actions {
+    margin-top: 15px;
+}  
+.App-cards {
+    margin: 0 auto;
+    max-width: 1280px;
+    text-align: center;
+}  
+.App-cards-list {
+    display: flex;
+    margin-top: 30px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.App-cards-list > * {
+    transform: scale(0.8);
+    margin-bottom: 30px !important;
+}
+  
+.App-highlight {
+    font-family: serif;
+    margin: 15px auto 0;
+    max-width: 300px;
+}
+  
+.App-highlight > div {
+    padding-left: 40px;
+}
+  
+.App-badges {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.App-badges a {
+    display: block;
+}
+.buttonCreditCard{
+    background-color: var(--thirdcolor);
+    color: white;
+    border: none;
+    width: 100%;
+    border-radius: 5px;
+    padding: 1vh 2vw;
+}
+.buttonCreditCard:focus{
+    outline: none;
+}
+.contenedorAnimation{
+    width: 100%;
+    height: 100%;
+    overflow-y: hidden !important;
 }

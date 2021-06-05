@@ -109,6 +109,6 @@ const productsActions = {
         return (dispatch)=>{
             dispatch({type:"UPDATE_PRODUCT_MY_FILTER",payload:{productFiltered,inputSearch}})
         }
-    }
+    },
 }
 export default productsActions
