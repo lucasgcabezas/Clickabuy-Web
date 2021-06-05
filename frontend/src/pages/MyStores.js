@@ -10,26 +10,20 @@ import ReactStars from "react-rating-stars-component"
 
 const MyStore = (props) => {
 
-    const { userLogged, getStoresByUser } = props
-
-    const [storesOfUser, setStoresOfUser] = useState([])
+    const { userLogged, getStoresByUser, storesByUser } = props
 
     useEffect(() => {
-        fetchAllStores()
+        getStoresByUser(userLogged.token)
     }, [])
 
-    const fetchAllStores = async () => {
-        const response = await getStoresByUser(userLogged.token)
-        console.log(response)
-        setStoresOfUser(response)
-    }
 
-    // console.log()
 
     return (
         <>
             <Header />
             <div className="myStoreContainer">
+            <div onClick={props.history.goBack} style={{cursor:'pointer'}} className="backToHome"><span class="material-icons-outlined iconBack">arrow_back_ios_new</span> Back</div>
+
                 <span style={{ textAlign: "center" }}>YOUR STORES</span>
 
                 <div className="containerOfItemsMyStores">
@@ -40,9 +34,9 @@ const MyStore = (props) => {
                     </Link>
 
                     {
-                        storesOfUser.length === 0
+                        storesByUser.length === 0
                             ? <span>You dont have any store yet.</span>
-                            : storesOfUser.map((store, i) => {
+                            : storesByUser.map((store, i) => {
                                 let ratingCounter = 0
 
                                 store.rate.forEach(rating => {
@@ -97,6 +91,7 @@ const MyStore = (props) => {
 const mapStateToProps = (state) => {
     return {
         userLogged: state.authReducer.userLogged,
+        storesByUser: state.adminStoreReducer.storesByUser
     }
 }
 

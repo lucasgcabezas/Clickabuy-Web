@@ -71,7 +71,7 @@ const routesProtected = {
                 <Route path="/buys" component={Buys} />
                 <Route path="/favorites" component={Favorites} />
                 <Route path="/SignUpStore" component={SignUpStore} />
-                <Route path="/SignUpProduct" component={SignUpProduct} />
+                <Route path="/addProducts/:id" component={SignUpProduct} />
                 <Route path="/myStores" component={MyStores} />
                 <Route path="/myStore/:id" component={MyStoreView} />
                 <Route path="/myFilters" component={MyFilters} />

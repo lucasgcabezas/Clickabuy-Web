@@ -46,6 +46,7 @@ const productControllers = {
         let user = req.user;
         let { description, price, stock, nameProduct, storeId } = req.body;
         let { productImg } = req.files;
+
         try {
             let objProductImg = { url: "", publicId: "" };
             await validationStore(storeId, user)
@@ -72,6 +73,7 @@ const productControllers = {
         }
         respondFrontend(res, response, error);
     },
+    
     getAllProducts: async (req, res) => {
         let response, error;
         try {

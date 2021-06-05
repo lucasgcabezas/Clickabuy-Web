@@ -14,10 +14,9 @@ import adminStoreActions from "../redux/actions/adminStoreActions";
 
 const validationSchema = yup.object({
 
-
   bName: yup.string("Enter business name").required("Business Name is required"),
+  category: yup.string().required("category is required!"),
 
-  idCategory: yup.string().required("category is required!"),
 });
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -39,6 +38,7 @@ const SignUpStore = (props) => {
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
+
   const formik = useFormik({
     initialValues: {
 
@@ -49,9 +49,10 @@ const SignUpStore = (props) => {
 
     },
     validationSchema: validationSchema,
+
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-      alert(ta.description);
+      // alert(JSON.stringify(values, null, 2));
+      // alert(ta.description);
       let formData = new FormData();
 
       formData.append("nameStore", values.bName);
@@ -60,11 +61,13 @@ const SignUpStore = (props) => {
 
       formData.append("logoStore", photo.userImg);
 
-      console.log("soy el values", values);
+      // console.log("soy el values", values);
       console.log("soy el Formdata", formData);
 
+      // console.log(formData)
+
       props.addRequest(props.userLogged.token, formData);
-      props.history.push("/myStores")
+      props.history.goBack()
     },
   });
 
@@ -88,16 +91,17 @@ const SignUpStore = (props) => {
 
         {/* <video src="./assets/formVideo.mp4" autoPlay loop muted className="videoForm"></video> */}
         {/* <div className="contenedorHeaderSignUp"> */}
-        <Link to="/" className="backToHome"><span class="material-icons-outlined iconBack">arrow_back_ios_new</span> Back</Link>
+        <div onClick={props.history.goBack} style={{cursor:'pointer'}} className="backToHome"><span class="material-icons-outlined iconBack">arrow_back_ios_new</span> Back</div>
+
         {/* </div> */}
         <div className="contenedorFormAdminStore">
           <div className="contenedorInfoFormAdminStore">
             <h3>Hello {userLogged.firstName}! Complete the following details to create a Business Account</h3>
-            <Link to="/SignUp" className="linkPersonAccount">
+            {/* <Link to="/SignUp" className="linkPersonAccount">
               <div className="d-flex justify-content-end">
                 <label className="personAccount">Create a person account </label>
               </div>
-            </Link>
+            </Link> */}
             <form onSubmit={formik.handleSubmit}>
               <TextField
                 fullWidth
