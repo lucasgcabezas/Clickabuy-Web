@@ -19,14 +19,14 @@ const Store = (props) => {
   const [stars, setStars] = useState(0);
   const [ver, setVer] = useState(false);
   const [cantRate, setCantRate] = useState(store.rate.length);
-  const [inputSearch,setInputSearch] = useState("");
+  const [inputSearch, setInputSearch] = useState("");
 
   useEffect(() => {
     window.scrollTo(0, 0);
     !storesForCategory.length
       ? props.history.push('/')
       : setStore(storesForCategory.find((store) => store._id === idParams));
-      getProductsFromStore(idParams);
+    getProductsFromStore(idParams);
   }, []);
   useEffect(() => {
     let ratingCounter = 0;
@@ -48,16 +48,16 @@ const Store = (props) => {
   }, [store]);
 
   useEffect(() => {
-    return  ()=>{
+    return () => {
       props.filterProductsCurrentStore("")
     }
-  },[])
+  }, [])
 
   const ratingChanged = (newRating, storeId) => {
     props.rateStore(storeId, newRating, props.userLogged.token);
     setCantRate(cantRate + 1);
   };
-  
+
   var placeholderStoreInput = `Search products in ${store.nameStore}`;
 
   let ratingCounter = 0;
@@ -72,12 +72,12 @@ const Store = (props) => {
     }
     myCopia.push({ ...product, miPromedio: promedio });
   });
-  
+
 
   return (
     <div className="contenedorStore">
       <Header />
-      <div style={{ backgroundImage: `url('${store.storeHero.url}')` }} className="storeHero">
+      <div style={{ backgroundImage: `url('${store.storeHero && store.storeHero.url}')` }} className="storeHero">
         <div className="contenedorInfoStorePage">
           <div style={{ backgroundImage: `url('../assets/${store.logoStore}')` }} className="storeLogoStore"></div>
           <h1>{store.nameStore}</h1>
@@ -97,71 +97,71 @@ const Store = (props) => {
           </div> */}
         </div>
       </div>
-        <div className="contenedorInfoCards">
-          <div className="contenedorFiltrosStore">
-            <div style={{ width: "100%", textAlign: "center", marginTop: 70 }}>
-              <span> RATE US </span>
-            </div>
-            <div className="storeStars">
-              {ver ? (
-                <ReactStars
-                  count={5}
-                  onChange={(e) => ratingChanged(e, store._id)}
-                  size={32}
-                  isHalf={true}
-                  edit={true}
-                  color2="#EA957F"
-                  color1="#555555"
-                  value={stars}
-                />
-              ) : store.rate.length === 0 ? (
-                <ReactStars
-                  count={5}
-                  onChange={(e) => ratingChanged(e, store._id)}
-                  size={32}
-                  isHalf={true}
-                  edit={true}
-                  color2="#EA957F"
-                  color1="#555555"
-                  value={0}
-                />
-              ) : (
-                <span>Loading</span>
-              )}
-
-              <span style={{ fontSize: 12, verticalAlign: "center", marginTop: 5, marginLeft: 5, color: "#777777" }}>
-                ( {store.rate && cantRate} )
-              </span>
-            </div>
-
-            <div>
-              <MyFilters inputSearch={inputSearch} setInputSearch={setInputSearch} placeholderStoreInput={placeholderStoreInput}/>
-            </div>
+      <div className="contenedorInfoCards">
+        <div className="contenedorFiltrosStore">
+          <div style={{ width: "100%", textAlign: "center", marginTop: 70 }}>
+            <span> RATE US </span>
           </div>
-          <div className="containerCards">
-            {props.filterProductCurrentStore.length === 0 ? (
-              <div className="noProducts">
-                <h2>No products</h2>{" "}
-              </div>
-            ) : props.filterProductCurrentStore.length == 0 ? (
-              props.filterProductCurrentStore.map((product) => {
-                return (
-                  <div key={product._id}>
-                    <Product product={product} />
-                  </div>
-                );
-              })
+          <div className="storeStars">
+            {ver ? (
+              <ReactStars
+                count={5}
+                onChange={(e) => ratingChanged(e, store._id)}
+                size={32}
+                isHalf={true}
+                edit={true}
+                color2="#EA957F"
+                color1="#555555"
+                value={stars}
+              />
+            ) : store.rate.length === 0 ? (
+              <ReactStars
+                count={5}
+                onChange={(e) => ratingChanged(e, store._id)}
+                size={32}
+                isHalf={true}
+                edit={true}
+                color2="#EA957F"
+                color1="#555555"
+                value={0}
+              />
             ) : (
-              props.filterProductCurrentStore.map((product) => {
-                return (
-                  <div key={product._id}>
-                    <Product product={product} />
-                  </div>
-                );
-              })
+              <span>Loading</span>
             )}
+
+            <span style={{ fontSize: 12, verticalAlign: "center", marginTop: 5, marginLeft: 5, color: "#777777" }}>
+              ( {store.rate && cantRate} )
+              </span>
+          </div>
+
+          <div>
+            <MyFilters inputSearch={inputSearch} setInputSearch={setInputSearch} placeholderStoreInput={placeholderStoreInput} />
           </div>
         </div>
+        <div className="containerCards">
+          {props.filterProductCurrentStore.length === 0 ? (
+            <div className="noProducts">
+              <h2>No products</h2>{" "}
+            </div>
+          ) : props.filterProductCurrentStore.length == 0 ? (
+            props.filterProductCurrentStore.map((product) => {
+              return (
+                <div key={product._id}>
+                  <Product product={product} />
+                </div>
+              );
+            })
+          ) : (
+            props.filterProductCurrentStore.map((product) => {
+              return (
+                <div key={product._id}>
+                  <Product product={product} />
+                </div>
+              );
+            })
+          )}
+        </div>
+      </div>
       <Footer />
     </div>
   );
@@ -173,7 +173,7 @@ const mapStateToProps = (state) => {
     products: state.productReducer.products,
     productsCurrentStore: state.productReducer.productsCurrentStore,
     userLogged: state.authReducer.userLogged,
-    filterProductCurrentStore : state.productReducer.filterProductCurrentStore
+    filterProductCurrentStore: state.productReducer.filterProductCurrentStore
   };
 };
 
