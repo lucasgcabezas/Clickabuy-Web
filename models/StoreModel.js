@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const storeSchema = new mongoose.Schema({
     nameStore: { type: String, required: true },
-    storeHero:{url:{type: String},publicId:{type: String}},
+    storeHero:{url:{type: String, default: '../assets/usersImg/backgroundStore.png'},publicId:{type: String}},
     description: { type: String },
     category: { type: mongoose.Types.ObjectId, ref: 'category' },
     rate: [{ vote: { type: Number, default: 0 }, userId: { type: mongoose.Types.ObjectId, ref: 'user', required: true } }],
