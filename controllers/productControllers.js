@@ -5,9 +5,9 @@ const fs = require("fs")
 let cloudinary = require('cloudinary').v2;
 const UserModel = require('../models/UserModel');
 
-cloudinary.config({ 
-    cloud_name: 'clickabuy', 
-    api_key: process.env.CLOUDINNARY_API_KEY, 
+cloudinary.config({
+    cloud_name: 'clickabuy',
+    api_key: process.env.CLOUDINNARY_API_KEY,
     api_secret: process.env.CLOUDINNARY_API_SECRET
 });
 
@@ -27,7 +27,7 @@ const validationStore = async (idStore, user) => {
     if (!store) throw new Error("this Store doesn't exist")
 
     userExist = store.owners.find(idUser => idUser.toString() === user._id.toString())
-    if (!userExist && user.role!== "adminApp") throw new Error("this user is not Authorizated to modify the Store " + store.nameStore)
+    if (!userExist && user.role !== "adminApp") throw new Error("this user is not Authorizated to modify the Store " + store.nameStore)
 
     return store
 }
@@ -46,6 +46,7 @@ const productControllers = {
         let user = req.user;
         let { description, price, stock, nameProduct, storeId } = req.body;
         let { productImg } = req.files;
+
         try {
             let objProductImg = { url: "", publicId: "" };
             await validationStore(storeId, user)
@@ -72,12 +73,13 @@ const productControllers = {
         }
         respondFrontend(res, response, error);
     },
+
     getAllProducts: async (req, res) => {
         let response, error;
         try {
             response = await Product.find()
-                .populate({path: "reviews", populate: {path: "userId", select: {"firstName": 1, "lastName": 1, "email":1}}})
-                //.populate("storeId")
+                .populate({ path: "reviews", populate: { path: "userId", select: { "firstName": 1, "lastName": 1, "email": 1 } } })
+            //.populate("storeId")
         } catch (err) {
             console.log(err);
             error = errorBackend;
@@ -99,9 +101,11 @@ const productControllers = {
     updateProduct: async (req, res) => {
         const idProduct = req.params.id;
         let { description, price, stock, nameProduct, storeId } = req.body;
-        let { productImg } = req.files;
+
         let user = req.user;
         let response, error;
+
+
         try {
             await validationStore(storeId, user);
             const product = await Product.findById(idProduct);
@@ -110,7 +114,8 @@ const productControllers = {
             if (!product) throw new Error("this product doesn't exist");
             if (product.storeId.toString() !== storeId) throw new Error("Not Authorizated, the product does not belong to the store")
 
-            if (productImg) {
+            if (req.files.productImg) {
+                let { productImg } = req.files;
                 await cloudinary.api.delete_resources([product.productImg.publicId]);
                 const image = getPathAndNameFile(product, productImg, "fotosAHostear");
                 await productImg.mv(image.filePath);
@@ -122,19 +127,21 @@ const productControllers = {
                 objProductImg.publicId = productImgHost.public_id;
             }
 
-            let fieldsObj = { description, price, stock, productImg : objProductImg, nameProduct };
+            let fieldsObj = { description, price, stock, productImg: objProductImg, nameProduct };
+            console.log(fieldsObj)
             let update = {};
             for (const field in fieldsObj) {
                 if (fieldsObj[field])
                     update[field] = fieldsObj[field];
             }
-
             response = await Product.findByIdAndUpdate(idProduct, update, { new: true });
+
         } catch (err) {
             console.log(err);
             error = err.name + " " + err.message;
         }
         respondFrontend(res, response, error);
+
     },
     deleteProduct: async (req, res) => {
         const idProduct = req.params.id;
@@ -144,7 +151,7 @@ const productControllers = {
         try {
             await validationStore(storeId, user);
             const product = await Product.findById(idProduct);
-            
+
             if (!product) throw new Error("this product doesn't exist");
             if (product.storeId.toString() !== storeId) throw new Error("Not Authorizated, the product does not belong to the store")
             await cloudinary.api.delete_resources([product.productImg.publicId]);
@@ -160,7 +167,7 @@ const productControllers = {
         let response;
         let error;
         try {
-            const productsFromStore = await Product.find({ storeId: id }).populate({path: "reviews", populate: {path: "userId", select: {"firstName": 1, "lastName": 1, "email":1}}})
+            const productsFromStore = await Product.find({ storeId: id }).populate({ path: "reviews", populate: { path: "userId", select: { "firstName": 1, "lastName": 1, "email": 1 } } })
             response = productsFromStore
         } catch (error) {
             error = 'An error has occurred on the server, try later!'
@@ -194,11 +201,11 @@ const productControllers = {
         try {
             const product = await Product.findOne({ _id: idProduct, "userLiked": userEmail })
             if (!product) {
-                const likeProduct = await Product.findOneAndUpdate({_id: idProduct}, {$push: {userLiked: userEmail}}, {new:true})
-                res.json({success: true, response: likeProduct})
-            } else{
-                const deslikeProduct = await Product.findOneAndUpdate({_id:idProduct}, {$pull: {userLiked: userEmail}}, {new:true})
-                res.json({success: true, response: deslikeProduct})
+                const likeProduct = await Product.findOneAndUpdate({ _id: idProduct }, { $push: { userLiked: userEmail } }, { new: true })
+                res.json({ success: true, response: likeProduct })
+            } else {
+                const deslikeProduct = await Product.findOneAndUpdate({ _id: idProduct }, { $pull: { userLiked: userEmail } }, { new: true })
+                res.json({ success: true, response: deslikeProduct })
             }
         } catch (error) {
             res.json({ success: false, respuesta: 'An error has occurred on the server, try later!' })
@@ -240,7 +247,7 @@ const productControllers = {
         const idReview = req.body.idReview
         try {
             const deleteReview = await Product.findOneAndUpdate({ _id: productId, "reviews._id": idReview }, { $pull: { reviews: { _id: idReview } } }, { new: true })
-            
+
             res.json({ response: deleteReview, success: true })
         } catch (error) {
             res.json({ response: 'An error has occurred on the server, try later!', success: false })

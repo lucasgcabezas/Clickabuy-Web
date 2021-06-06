@@ -1,68 +1,86 @@
 import adminAppActions from '../redux/actions/adminAppActions'
-import {connect} from 'react-redux'
-import {useState,useEffect} from 'react'
+import { connect } from 'react-redux'
+import { useState, useEffect } from 'react'
+import Header from '../components/Header'
 
 
 
 
 
-const AdminApp = ({userLogged,getAllRequest,approveRequest,rejectRequest}) => {
-    const [requests,setRequests] = useState(null);
+const AdminApp = (props) => {
+
+    const { userLogged, getAllRequest, approveRequest, rejectRequest } = props
+    const [requests, setRequests] = useState(null);
 
     /*const fetchAPIGetAllRequest = async () => {
         
     }*/
 
-    useEffect(()=>{
+    useEffect(() => {
         getAllRequest(userLogged.token)
-        .then(res => setRequests(res))
-        .catch(err => {console.log(err)})
-    },[])
+            .then(res => setRequests(res))
+            .catch(err => { console.log(err) })
+    }, [])
 
-    if(!requests) return <h1>Loading ...</h1>
+    if (!requests) return <h1>Loading ...</h1>
 
-    const respondRequest = async (request,type) => {
+    const respondRequest = async (request, type) => {
         let functionReference = type === "approve" ? approveRequest : rejectRequest;
 
-        let data = await functionReference(userLogged.token,request._id);
-        if(data.success){
+        let data = await functionReference(userLogged.token, request._id);
+        if (data.success) {
             let newRequests = requests.filter(req => req._id !== request._id)
             setRequests(newRequests)
         }
 
     }
 
-    return(
-        <div className = "body">
-            {requests.map(request => {
-                return (
-                    <div key = {request._id}  style={{width:"90vw",display:'flex',alignItems:'center',justifyContent:"space-around",marginTop:"12px",backgroundColor:"lightblue" }}> 
-                        <img  src = {request.logoStore.url} style={{width:"100px"}}/>
-                        <div style={{width:"60%",display:'flex',flexDirection:"column"}}>
-                            <div style= {{display:'flex',justifyContent:"space-around"}}>
-                                <span>From : {`${request.userOfRequest.firstName} ${request.userOfRequest.lastName}`}</span>
-                                <img  src = {request.userOfRequest.userImg.url} style={{width:"40px"}}/>
+    return (
+        <>
+            <Header />
+            <div className="body" style={{backgroundColor: '#eeeeee'}}>
+
+            <div className="adminAppHeader">
+                    <div onClick={props.history.goBack} style={{ cursor: 'pointer' }} className="backToHome"><span class="material-icons-outlined iconBack">arrow_back_ios_new</span> Back</div>
+                    <span className="myAdminAppTitle" > NEW STORES REQUESTS</span>
+                </div>
+                {requests.map(request => {
+                    // { console.log(request) }
+                    return (
+                        <div key={request._id} className="adminAppCard">
+
+                            <div className="adminAppStoreImg" style={{ backgroundImage: `url('${request.logoStore.url}')` }} ></div>
+
+                            <div className="adminAppStoreInfo">
+
+                                <div className="adminAppStoreInfoStore">
+                                    <span>Store:  {request.nameStore}</span>
+                                    <span>Category: {request.category.nameCategory}</span>
+                                </div>
+                                <div className="adminAppStoreInfoUser">
+                                    <span>Author:</span>
+                                    {/* <div className="adminAppUserImg"  style={{ backgroundImage: `url('${request.userOfRequest.userImg.url}')` }}></div> */}
+                                    <span> {`${request.userOfRequest.firstName} ${request.userOfRequest.lastName}`}</span>
+                                </div>
                             </div>
-                            <div style={{display:'flex',justifyContent:"space-around"}}>
-                                <span>Category: {request.category.nameCategory}</span>
-                                <span>Descripcion:  {request.description}</span>
+
+                            <div className="adminAppStoreButtons">
+                                <button onClick={() => respondRequest(request, "approve")}>Accept</button>
+                                <button onClick={() => respondRequest(request, "reject")}>Decline</button>
                             </div>
-                        </div>    
-                        <div style = {{width:"10%",display:"flex", flexDirection:"column"}}>
-                            <button onClick = {()=> respondRequest(request,"approve")}>Approve</button>
-                            <button onClick = {()=> respondRequest(request,"reject")}>Reject</button>
+
                         </div>
-                    </div>
-                )
-            })}
-            
-        </div>
+                    )
+                })}
+
+            </div>
+        </>
     )
 }
 
 const mapStateToProps = (state) => {
     return {
-        userLogged : state.authReducer.userLogged,
+        userLogged: state.authReducer.userLogged,
     }
 }
 
@@ -73,4 +91,4 @@ const mapDispatchToProps = {
 }
 
 
-export default connect(mapStateToProps,mapDispatchToProps)(AdminApp)
+export default connect(mapStateToProps, mapDispatchToProps)(AdminApp)
