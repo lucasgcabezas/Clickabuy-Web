@@ -9,7 +9,6 @@ import "react-step-progress-bar/styles.css";
 const MyProgressBar = () => {
     const [pbStatus, setPBStatus] = useState(25);
     const handleProgressBar = (e) => {
-        console.log(e);
         if (e === 25 && pbStatus < 100) {
           setPBStatus(pbStatus + e);
         }

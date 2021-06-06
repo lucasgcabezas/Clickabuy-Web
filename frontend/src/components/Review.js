@@ -17,7 +17,6 @@ const Comment = (props) => {
     const [enabledUser, setEnabledUser] = useState(false)
     const [updateReview, setUpdateReview] = useState(false)
 
-    console.log(review)
     useEffect(() => {
         if (userLogged && userLogged.email === review.userId.email) {
             setEnabledUser(true)

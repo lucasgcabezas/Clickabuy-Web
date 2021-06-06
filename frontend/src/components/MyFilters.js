@@ -4,7 +4,7 @@ import "font-awesome/css/font-awesome.min.css";
 import { connect } from 'react-redux'
 import productsActions from '../redux/actions/productsActions'
 import ReactStars from 'react-stars'
-
+import {BiDownArrowAlt, BiUpArrowAlt} from 'react-icons/bi'
 
 const min = 0;
 const max = 100000;
@@ -12,16 +12,14 @@ let promedio = 0;
 let myArray = [];
 const MyFilters = (props) => {
   let myCopia = [];
-
+  const {inputSearch, setInputSearch, placeholderStoreInput} = props
   props.productsCurrentStore.map((product) => {
-    //  props.productsCurrentStore.map((product) => {
     if (product.reviews.length > 0) {
       promedio = product.reviews.reduce((a, b) => a + b.vote, 0) / product.reviews.length;
     } else {
       promedio = 0;
     }
     myCopia.push({ ...product, miPromedio: promedio });
-    /*   console.log("soy el promedio", promedio || 0); */
   });
 
 
@@ -36,8 +34,6 @@ const MyFilters = (props) => {
   const [averageScores, setAverageScores] = useState([]);
 
   const handleFilters = (e) => {
-    /* console.log("e", e); */
-    /* myArray = []; */
     setMyProducts(myCopia);
 
     let newArrayProducts = [];
@@ -92,34 +88,22 @@ const MyFilters = (props) => {
         averageScoresAux.push(e);
       }
       setAverageScores(averageScoresAux);
-      console.log("averageScoresAux:", averageScoresAux)
 
       if (averageScoresAux.length === 0) {
         averageScoresAux = [0, 1, 2, 3, 4, 5]
       }
 
       newArrayProducts = myCopia.filter((product) => {
-        console.log(Math.round(product.miPromedio))
         return averageScoresAux.includes(Math.round(product.miPromedio));
       });
 
-
       setMyProducts(newArrayProducts);
-      console.log(newArrayProducts)
       if (averageScoresAux.length == 0) {
         setMyProducts(myProductsPrice);
       }
     }
 
-    props.filterProductsByMyFilter(newArrayProducts, props.inputSearch);
-
-    /*if(props.filterProductCurrentStore.length === 0){
-      props.filterProductsByMyFilter(props.productsCurrentStore);  
-    }
-    else{
-      props.filterProductsByMyFilter(newArrayProducts);
-    }*/
-
+    props.filterProductsByMyFilter(newArrayProducts, inputSearch);
 
   };
   const textInput1 = useRef(),
@@ -128,9 +112,6 @@ const MyFilters = (props) => {
     textInput4 = useRef(),
     textInput5 = useRef();
 
-  /*  console.log("soy los productos de lucas", props.filterProductCurrentStore); */
-  /*  props.changeLinkText(myProducts); */
-
   const newStar = (initialV) => {
     return (
       <ReactStars
@@ -138,7 +119,7 @@ const MyFilters = (props) => {
         size={25}
         isHalf={false}
         edit={false}
-        color2="#dca6ac"
+        color2="#EA957F"
         color1="#555555"
         value={initialV}
       />
@@ -146,54 +127,42 @@ const MyFilters = (props) => {
   }
 
   return (
-    <div className="mt-5">
-      <div>
-        <i class="fas fa-filter"></i>
-      </div>
-      <div className="w-100 d-flex">
-        <div className="w-50 d-flex flex-column bg-light ">
-          Filters
-          <div className="d-flex mb-5">
-            <h5 className="small">sort by price</h5>
-            <div
-              className="btn btn-primary"
-              onClick={() => {
-                handleFilters("hf");
+      <div className="contenedorFiltrosProducts">
+        <div className="contenedorInfoFiltros">
+          <h2>FILTERS</h2>
+          <div className="borderFilter"></div>
+          <div className="contenedorFindProductStore">
+            <input
+              type="text"
+              className="inputSearchStore"
+              placeholder={placeholderStoreInput}
+              name=""
+              id="buscar"
+              autoComplete="off"
+              onChange={(e) => {
+                props.filterProductsCurrentStore(e.target.value);
+                setInputSearch(e.target.value);
               }}
-            >
-              ▼
+            />
+            <span className="material-icons-outlined iconSearchStore">search</span>
+          </div>
+          
+          <div className="contenedorFiltroPrecio">
+            <h3>sort by price:</h3>
+            <div onClick={() => {handleFilters("hf")}} className="priceFilter">
+              <span className="lowest">LOWEST <BiDownArrowAlt className="arrowPrice"/></span>
             </div>
-            <div
-              className="btn btn-primary"
-              onClick={(e) => {
-                handleFilters("lf");
-              }}
-            >
-              ▲
+            <div onClick={(e) => {handleFilters("lf")}} className="priceFilter">
+              {/* ▲ */}
+              <span>HIGHEST <BiUpArrowAlt className="arrowPrice"/></span>
             </div>
           </div>
-          <div>
-            <h5 className="small"> by price range</h5>
-
-          </div>
-          {lowEnd > highEnd && <div>enter a valid price range</div>}
-
-
-
-
-
-          <div>
+          {/* {lowEnd > highEnd && <div>enter a valid price range</div>} */}
+          <div className="custumerOpinions">
+              {/* <div>by opinions of Customers</div> */}
+              <h3>sort by customers opinions:</h3>
             <div>
-              <div>by opinions of Customers</div>
-              <input
-                type="checkbox"
-                id={"Z"}
-                onClick={() => {
-                  handleFilters(5);
-                }}
-                name={"Z"}
-                ref={textInput5}
-              ></input>
+              <input type="checkbox" id={"Z"} onClick={() => { handleFilters(5)}} name={"Z"} ref={textInput5} className="inputCheck"></input>
               <label htmlFor={"Z"}>{newStar(5)}</label>
             </div>
 
@@ -204,6 +173,7 @@ const MyFilters = (props) => {
                 onClick={() => {
                   handleFilters(4);
                 }}
+                className="inputCheck"
                 name={"Z"}
                 ref={textInput4}
               ></input>
@@ -217,6 +187,7 @@ const MyFilters = (props) => {
                 onClick={() => {
                   handleFilters(3);
                 }}
+                className="inputCheck"
                 name={"Z"}
                 ref={textInput3}
               ></input>
@@ -230,6 +201,7 @@ const MyFilters = (props) => {
                 onClick={() => {
                   handleFilters(2);
                 }}
+                className="inputCheck"
                 name={"Z"}
                 ref={textInput2}
               ></input>
@@ -243,6 +215,7 @@ const MyFilters = (props) => {
                 onClick={() => {
                   handleFilters(1);
                 }}
+                className="inputCheck"
                 name={"Z"}
                 ref={textInput1}
               ></input>
@@ -250,26 +223,8 @@ const MyFilters = (props) => {
             </div>
 
           </div>
-
-
-
         </div>
-
-        {/*   {console.log(myProducts)} */}
-
-        {/* <div className="w-50 bg-success">
-          {myProducts.map((product) => {
-            return (
-              <p key = {product._id}>
-                {product.nameProduct} {"|"} {product.price} {"|"}
-                {product.miPromedio}
-              </p>
-            );
-          })}
-        </div> */}
-
       </div>
-    </div>
   );
 };
 

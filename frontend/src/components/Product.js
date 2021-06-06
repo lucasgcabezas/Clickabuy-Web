@@ -26,7 +26,6 @@ const Product = ({ product, likeProduct, userLogged }) => {
     ratingCounter = ratingCounter + rating.vote;
   });
   var starsValue = ratingCounter / reviews.length;
-  /*   console.log("este es mi sospechoso", starsValue); */
 
   return (
     <div className="cardProduct">
@@ -45,7 +44,7 @@ const Product = ({ product, likeProduct, userLogged }) => {
             emptyIcon={<i className="far fa-star"></i>}
             halfIcon={<i className="fa fa-star-half-alt"></i>}
             fullIcon={<i className="fa fa-star"></i>}
-            color2="#dca6ac"
+            color2="#EA957F"
             color1="#555555"
             value={starsValue}
           />

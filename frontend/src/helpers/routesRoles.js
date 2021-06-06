@@ -2,11 +2,12 @@
 import Home from "../pages/Home";
 import Category from "../pages/Category";
 import Store from "../pages/Store";
-import SignIn from "../pages/SignIn";
+import LogIn from "../pages/LogIn";
 import SignUp from "../pages/SignUp";
 import SignUpStore from "../pages/SignUpStore";
 import SignUpProduct from "../pages/SignUpProduct";
 // import SignInAdmin from "../pages/SignInAdmin";
+
 import Buys from "../pages/Buys";
 import MyStores from "../pages/MyStores";
 import MyStoreView from "../pages/MyStoreView";
@@ -16,9 +17,9 @@ import MyProgressBar from "../components/MyProgressBar";
 import Favorites from "../pages/Favorites";
 import FilterProductsStore from '../components/FilterProductsStore'
 import AdminApp from '../pages/AdminApp'
-
-
+import FinalizePurchase from "../pages/FinalizePurchase";
 import { Route, Switch, Redirect } from "react-router-dom";
+
 
 const routesProtected = {
     routerUserDontLogged: () => {
@@ -29,9 +30,8 @@ const routesProtected = {
                 <Route path="/store/:id" component={Store} />
                 <Route path="/product/:id" component={ProductPage} />
                 <Route path="/buys" component={Buys} />
-                <Route path="/SignIn" component={SignIn} />
-                <Route path="/SignUp" component={SignUp} />
-                
+                <Route path="/login" component={LogIn} />
+                <Route path="/signup" component={SignUp} />
                 {/*<Route path="/SignInAdmin" component={SignInAdmin} />*/}
                 
                 <Route path="/myFilters" component={MyFilters} />
@@ -54,6 +54,7 @@ const routesProtected = {
                 <Route path="/SignUpStore" component={SignUpStore} />
                 {/* <Route path="/myStores" component={MyStores} />
                 <Route path="/myStore/:id" component={MyStoreView} /> */}
+                <Route path="/finalizepurchase" component={FinalizePurchase}/>
                 <Route path="/myFilters" component={MyFilters} />
                 <Route path="/product/:id" component={ProductPage} />
                 <Route path="/products" component={FilterProductsStore} />

@@ -5,6 +5,7 @@ import Header from '../components/Header'
 import PurchaseDetail from '../components/PurchaseDetail'
 import { connect } from 'react-redux'
 import cartActions from '../redux/actions/cartActions'
+import { Link } from 'react-router-dom'
 
 const Buys = ({ cart, clearCart }) => {
 
@@ -21,11 +22,10 @@ const Buys = ({ cart, clearCart }) => {
                     {cart.map(item=>{
                         return <PurchaseDetail itemCart ={item}/>
                     })}
-                    
-                    <h2>Total= ${cart.reduce((total,item)=>total+=item.quantity*item.price ,0)}</h2> 
+                    <h2>Total = ${cart.reduce((total,item)=>total+=item.quantity*item.price ,0).toFixed(2)}</h2> 
                     <div className="contenedorButtonsOrder">
                         <button onClick={()=>clearCart()} className="buttonCancelOrder">Cancel Order</button>
-                        <button className="buttonReady">Ready</button>
+                        <Link to="/finalizepurchase" className="buttonReady">Ready</Link>
                     </div>
                 </div>
             </div>

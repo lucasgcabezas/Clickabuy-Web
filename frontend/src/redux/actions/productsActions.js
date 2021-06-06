@@ -100,7 +100,6 @@ const productsActions = {
                     headers: { 'Authorization': 'Bearer ' + token }
                 }
                 )
-                console.log("respuesta de rate", response.data);
             } catch (err) {
                 console.log(err);
                 // showTostError500();
@@ -111,6 +110,6 @@ const productsActions = {
         return (dispatch) => {
             dispatch({ type: "UPDATE_PRODUCT_MY_FILTER", payload: { productFiltered, inputSearch } })
         }
-    }
+    },
 }
 export default productsActions

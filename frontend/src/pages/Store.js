@@ -13,31 +13,21 @@ let promedio = 0;
 /* let myCopia = []; */
 
 const Store = (props) => {
-  const { getProductsFromStore } = props;
+  const { getProductsFromStore, storesForCategory } = props;
   const idParams = props.match.params.id;
   const [store, setStore] = useState({ rate: [] });
   const [stars, setStars] = useState(0);
   const [ver, setVer] = useState(false);
   const [cantRate, setCantRate] = useState(store.rate.length);
   const [inputSearch,setInputSearch] = useState("");
-  //const [productsCurrentStoreF, setProductsCurrentStoreF] = useState(props.filterProductCurrentStore);
-  /*useEffect(() => {
-    setProductsCurrentStoreF(props.filterProductCurrentStore)
-  }, [props.filterProductCurrentStore]);
-  
-  const changeLinkText = (nuArray) => {
-    console.log("soy el arreglo filtrado devuelta en el padre", nuArray);
-    setProductsCurrentStoreF(nuArray);
-  };*/
-  
+
   useEffect(() => {
     window.scrollTo(0, 0);
-    !props.storesForCategory.length
-      ? props.history.push("/")
-      : setStore(props.storesForCategory.find((store) => store._id === idParams));
-    getProductsFromStore(idParams);
+    !storesForCategory.length
+      ? props.history.push('/')
+      : setStore(storesForCategory.find((store) => store._id === idParams));
+      getProductsFromStore(idParams);
   }, []);
-
   useEffect(() => {
     let ratingCounter = 0;
     let starsValue = 0;
@@ -81,7 +71,6 @@ const Store = (props) => {
       promedio = 0;
     }
     myCopia.push({ ...product, miPromedio: promedio });
-    /*   console.log("soy el promedio", promedio || 0); */
   });
   
 
@@ -92,7 +81,7 @@ const Store = (props) => {
         <div className="contenedorInfoStorePage">
           <div style={{ backgroundImage: `url('../assets/${store.logoStore}')` }} className="storeLogoStore"></div>
           <h1>{store.nameStore}</h1>
-          <div className="contenedorFindProductStore">
+          {/* <div className="contenedorFindProductStore">
             <input
               type="text"
               className="inputSearchStore"
@@ -105,38 +94,34 @@ const Store = (props) => {
               }}
             />
             <span className="material-icons-outlined iconSearchStore">search</span>
-          </div>
+          </div> */}
         </div>
       </div>
-
-      <div className="buscador">
         <div className="contenedorInfoCards">
           <div className="contenedorFiltrosStore">
-            <div style={{ width: "100%", textAlign: "center", marginTop: 60 }}>
+            <div style={{ width: "100%", textAlign: "center", marginTop: 70 }}>
               <span> RATE US </span>
             </div>
             <div className="storeStars">
               {ver ? (
                 <ReactStars
                   count={5}
-                  // onChange={() => ratingChanged(value, store._id)}
                   onChange={(e) => ratingChanged(e, store._id)}
                   size={32}
                   isHalf={true}
                   edit={true}
-                  color2="#dca6ac"
+                  color2="#EA957F"
                   color1="#555555"
                   value={stars}
                 />
               ) : store.rate.length === 0 ? (
                 <ReactStars
                   count={5}
-                  // onChange={() => ratingChanged(value, store._id)}
                   onChange={(e) => ratingChanged(e, store._id)}
                   size={32}
                   isHalf={true}
                   edit={true}
-                  color2="#dca6ac"
+                  color2="#EA957F"
                   color1="#555555"
                   value={0}
                 />
@@ -150,19 +135,12 @@ const Store = (props) => {
             </div>
 
             <div>
-              
-              
-              {/*myCopia.length == 0 ? (
-                {<MyFilters changeLinkText={changeLinkText} products={productsCurrentStoreF} />}
-              ) : (
-                {<MyFilters changeLinkText={changeLinkText} products={myCopia} />}
-              )*/}
-              <MyFilters inputSearch={inputSearch}/>
+              <MyFilters inputSearch={inputSearch} setInputSearch={setInputSearch} placeholderStoreInput={placeholderStoreInput}/>
             </div>
           </div>
           <div className="containerCards">
             {props.filterProductCurrentStore.length === 0 ? (
-              <div>
+              <div className="noProducts">
                 <h2>No products</h2>{" "}
               </div>
             ) : props.filterProductCurrentStore.length == 0 ? (
@@ -184,7 +162,6 @@ const Store = (props) => {
             )}
           </div>
         </div>
-      </div>
       <Footer />
     </div>
   );
@@ -204,5 +181,6 @@ const mapDispatchToProps = {
   getProductsFromStore: productsActions.getProductsFromStore,
   filterProductsCurrentStore: productsActions.filterProductsCurrentStore,
   rateStore: storeActions.rateStore,
+  getCurrentStore: storeActions.getCurrentStore
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Store);

@@ -40,7 +40,7 @@ const Footer = (props) => {
             <div className="contenedorMediosDePago">
                 {/* <div> */}
                 <div style={{ backgroundImage: "url('https://webdesing881317710.files.wordpress.com/2021/05/door-to-door-delivery-2937689-2426383.png')" }} className="imageShipping"></div>
-                <p>We have our very own fleet of delivery vans. Your order will be packed with care at our warehouse and delivered right to your door by our friendly ClickaBuy team.</p>
+                <p>We have our very own fleet of delivery vans. Your order will be packed with care and delivered right to your door by our friendly ClickaBuy team.</p>
                 {/* </div> */}
                 <div>
                     {

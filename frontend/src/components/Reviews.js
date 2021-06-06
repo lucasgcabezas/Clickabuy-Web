@@ -61,7 +61,6 @@ const Reviews = (props) => {
         }
     }
 
-    console.log(reviews)
 
     let ratingCounter = 0
 

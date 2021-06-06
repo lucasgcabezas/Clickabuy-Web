@@ -52,7 +52,8 @@ const adminStoreActions = {
           headers: { "Authorization": "Bearer " + token },
         });
         if (data.success)
-          return data.response;//devuelve el nuevo store modificado
+          return data.response;
+
         else
           showToast("error", data.error);
       } catch (err) {
@@ -68,7 +69,10 @@ const adminStoreActions = {
           headers: { "Authorization": "Bearer " + token },
         });
         if (data.success)
-          return data.response;//devuelve el store borrado, este  (usarlo si se quiere)
+        dispatch({ type: "DELETE_ONE_STORE", payload: data.response })
+
+          // return data.response;
+          //devuelve el store borrado, este  (usarlo si se quiere)
         else
           showToast("error", data.error);
       } catch (err) {
@@ -116,13 +120,16 @@ const adminStoreActions = {
 
   editProduct: (token, idProduct, body) => { //solo se modifican aquellas  que no sean null
     return async (dispatch) => {
-      let { description, price, stock, productImg, nameProduct, storeId } = body;
+      // let { description, price, stock, productImg, nameProduct, storeId } = body;
       try {
-        const { data } = await axios.post(API + "/product/" + idProduct, { description, price, stock, productImg, nameProduct, storeId }, {
+        const { data } = await axios.put(API + "/product/" + idProduct, body, {
           headers: { "Authorization": "Bearer " + token },
         });
         if (data.success)
-          return data.response;//devuelve el producto actualizado
+          dispatch({ type: "EDIT_ONE_PRODUCT", payload: data.response })
+
+        // return data.response;
+        //devuelve el producto actualizado
         else
           showToast("error", data.error);
       } catch (err) {
@@ -137,7 +144,7 @@ const adminStoreActions = {
       // let { storeId } = body
       try {
         console.log('hola')
-        const { data } = await axios.post(API + "/product/" + idProduct, {storeId}, {
+        const { data } = await axios.post(API + "/product/" + idProduct, { storeId }, {
           headers: { "Authorization": "Bearer " + token },
         });
         console.log('chau')
@@ -171,7 +178,13 @@ const adminStoreActions = {
   },
   cleanProducts: () => {
     return (dispatch, getState) => {
-      dispatch({ type: "ADMIN_PRODUCTS", payload: [] })
+      dispatch({ type: "ADMIN_PRODUCTS_CLEAN", payload: [] })
+
+    }
+  },
+  cleanStores: () => {
+    return (dispatch, getState) => {
+      dispatch({ type: "ADMIN_STORES_CLEAN", payload: [] })
 
     }
   },

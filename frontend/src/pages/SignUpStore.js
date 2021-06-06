@@ -61,11 +61,6 @@ const SignUpStore = (props) => {
 
       formData.append("logoStore", photo.userImg);
 
-      // console.log("soy el values", values);
-      console.log("soy el Formdata", formData);
-
-      // console.log(formData)
-
       props.addRequest(props.userLogged.token, formData);
       props.history.goBack()
     },
@@ -73,13 +68,11 @@ const SignUpStore = (props) => {
 
   const cargarFoto = (e) => {
     setPhoto({ userImg: e.target.files[0] });
-    console.log("soy el e", e.target.files[0].name);
     setPhotoName({ userImgName: e.target.files[0].name });
   };
 
   const cargarTA = (e) => {
     /* console.log("TA",e.nativeEvent.data) */
-    console.log("TargetValue", e.target.value)
 
     setTA({ description: e.target.value });
   };
@@ -87,57 +80,56 @@ const SignUpStore = (props) => {
 
   return (
     <div className="contenedorSignUp">
-      <div style={{ backgroundImage: "url('https://webdesing881317710.files.wordpress.com/2021/06/videoform3.gif')" }} className="imgForm" >
+      <video src="./assets/videoBuissnessAccount.mp4" autoPlay loop muted className="videoForm"></video>
 
-        {/* <video src="./assets/formVideo.mp4" autoPlay loop muted className="videoForm"></video> */}
-        {/* <div className="contenedorHeaderSignUp"> */}
-        <div onClick={props.history.goBack} style={{cursor:'pointer'}} className="backToHome"><span class="material-icons-outlined iconBack">arrow_back_ios_new</span> Back</div>
+      {/* <video src="./assets/formVideo.mp4" autoPlay loop muted className="videoForm"></video> */}
+      {/* <div className="contenedorHeaderSignUp"> */}
+      <div onClick={props.history.goBack} style={{ cursor: 'pointer' }} className="backToHome"><span class="material-icons-outlined iconBack">arrow_back_ios_new</span> Back</div>
 
-        {/* </div> */}
-        <div className="contenedorFormAdminStore">
-          <div className="contenedorInfoFormAdminStore">
-            <h3>Hello {userLogged.firstName}! Complete the following details to create a Business Account</h3>
-            {/* <Link to="/SignUp" className="linkPersonAccount">
+      {/* </div> */}
+      <div className="contenedorFormAdminStore">
+        <div className="contenedorInfoFormAdminStore">
+          <h3>Hello {userLogged.firstName}! Complete the following details to create a Business Account</h3>
+          {/* <Link to="/SignUp" className="linkPersonAccount">
               <div className="d-flex justify-content-end">
                 <label className="personAccount">Create a person account </label>
               </div>
             </Link> */}
-            <form onSubmit={formik.handleSubmit}>
-              <TextField
-                fullWidth
-                id="bName"
-                name="bName"
-                label="Business name"
-                value={formik.values.bName}
-                onChange={formik.handleChange}
-                error={formik.touched.bName && Boolean(formik.errors.bName)}
-                helperText={formik.touched.bName && formik.errors.bName}
-              />
-              <select
-                name="category"
-                value={formik.values.category}
-                onChange={formik.handleChange}
-                className="selectSignUpStore"
-              >
-                <option value="" label="Select a category" />
-                {props.categories.map((category) => {
-                  return <option value={category._id} label={category.nameCategory} />;
-                })}
-              </select>
-              <textarea placeHolder="Description of your business (optional)" onChange={(e) => cargarTA(e)} className="textareaSignUpStore"></textarea>
-              <div className="contenedorInputFile">
-                <label htmlFor="userImg" className="buttonInputFile">
-                  <span class="material-icons-outlined iconCamera">add_a_photo</span> UPLOAD STORE'S LOGO
+          <form onSubmit={formik.handleSubmit}>
+            <TextField
+              fullWidth
+              id="bName"
+              name="bName"
+              label="Business name"
+              value={formik.values.bName}
+              onChange={formik.handleChange}
+              error={formik.touched.bName && Boolean(formik.errors.bName)}
+              helperText={formik.touched.bName && formik.errors.bName}
+            />
+            <select
+              name="category"
+              value={formik.values.category}
+              onChange={formik.handleChange}
+              className="selectSignUpStore"
+            >
+              <option value="" label="Select a category" />
+              {props.categories.map((category) => {
+                return <option value={category._id} label={category.nameCategory} />;
+              })}
+            </select>
+            <textarea placeholder="Description of your business (optional)" onChange={(e) => cargarTA(e)} className="textareaSignUpStore"></textarea>
+            <div className="contenedorInputFile">
+              <label htmlFor="userImg" className="buttonInputFile">
+                <span class="material-icons-outlined iconCamera">add_a_photo</span> UPLOAD STORE'S LOGO
                   <input id="userImg" name="userImg" type="file" style={{ display: "none" }} onChange={cargarFoto} />
-                </label>
-                <span>{photoName.userImgName}</span>
-              </div>
-              <Button variant="contained" fullWidth type="submit">Create a new Store</Button>
-            </form>
-          </div>
+              </label>
+              <span>{photoName.userImgName}</span>
+            </div>
+            <Button variant="contained" fullWidth type="submit">Create a new Store</Button>
+          </form>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 
