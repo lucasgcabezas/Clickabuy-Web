@@ -23,7 +23,7 @@ const Paypal = (props) => {
                 return actions.order.create({
                     intent: 'CAPTURE',
                     purchase_units: [
-                        {description: 'clickabuy compra', amount: { value: total, currency_code: 'USD' }}
+                        { description: 'clickabuy compra', amount: { value: total, currency_code: 'USD' } }
                     ]
                 })
             },
@@ -41,7 +41,7 @@ const Paypal = (props) => {
     }, [])
     return (
         <>
-            <div ref={paypal}></div>
+            <div ref={paypal} className="paypalButtons"></div>
             <Modal
                 isOpen={show}
                 onRequestClose={() => setShow(!show)}
@@ -54,7 +54,11 @@ const Paypal = (props) => {
                         <span className="material-icons-outlined closeModal" onClick={() => setShow(false)}>close</span>
                     </div>
                     <div className="creditCardModal">
-                        <h1>compra satisfactoria, se ha enviado un mail con el detalle a su cuenta</h1>
+                        <div className="orderCompleted">
+                            <h1>Your order is completed!</h1>
+                            <span>Thanks for shopping in clickabuy</span>
+                            <span>We will send you a confirmation email, including the summary of your purchase.</span>
+                        </div>
                     </div>
                 </div>
             </Modal>

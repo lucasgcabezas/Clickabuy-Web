@@ -77,8 +77,7 @@ const productControllers = {
     getAllProducts: async (req, res) => {
         let response, error;
         try {
-            response = await Product.find()
-                .populate({ path: "reviews", populate: { path: "userId", select: { "firstName": 1, "lastName": 1, "email": 1 } } })
+            response = await Product.find().populate({ path: "reviews", populate: { path: "userId", select: { "firstName": 1, "lastName": 1, "email": 1 } } })
             //.populate("storeId")
         } catch (err) {
             console.log(err);

@@ -41,6 +41,7 @@ const Reviews = (props) => {
                 setReviews(response.reviews)
                 setInputReview({ review: '', token: '' })
                 setLoadingReviews(true)
+                // window.scrollTo(0, 100)
             }
 
         } else {
@@ -102,7 +103,7 @@ const Reviews = (props) => {
                 emptyIcon={<i className="far fa-star"></i>}
                 halfIcon={<i className="fa fa-star-half-alt"></i>}
                 fullIcon={<i className="fa fa-star"></i>}
-                color2="#dca6ac"
+                color2="#EA957F"
                 color1="#555555"
                 value={initialValue}
             />
@@ -113,7 +114,7 @@ const Reviews = (props) => {
 
     return (
         <div className="contenedorReviews">
-            <div className="tituloReviews">Reviews of Products </div>
+            <div className="tituloReviews">Reviews</div>
 
             <div className="starsReviewsContainer" >
                 <div className="starsReviews">
@@ -151,16 +152,9 @@ const Reviews = (props) => {
                         <progress id="file" value={star1} max={reviews.length}></progress>
                         <span>({star1})</span>
                     </div>
-
-
-
-
-
-
-
                 </div>
             </div>
-            <span style={{ fontSize: 15 }}>Based on {reviews.length} Reviews</span>
+            <span style={{ fontSize: 15, marginBottom: '6vh'}}>BASED ON {reviews.length} REVIEWS</span>
             <div className="reviewsInfo">
                 {reviews.length === 0
                     ? <div className="noReviews">
@@ -188,7 +182,7 @@ const Reviews = (props) => {
                     size={32}
                     isHalf={true}
                     edit={true}
-                    color2="#dca6ac"
+                    color2="#EA957F"
                     color1="#555555"
                     value={inputReview.vote}
                 />

@@ -44,7 +44,7 @@ const Comment = (props) => {
                             size={32}
                             isHalf={true}
                             edit={false}
-                            color2="#dca6ac"
+                            color2="#EA957F"
                             color1="#555555"
                             value={review.vote}
                         />
@@ -58,7 +58,7 @@ const Comment = (props) => {
                             size={32}
                             isHalf={true}
                             edit={true}
-                            color2="#dca6ac"
+                            color2="#EA957F"
                             color1="#555555"
                             value={0}
                         />
