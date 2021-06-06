@@ -6,8 +6,8 @@ import cartActions from "../redux/actions/cartActions"
 import productsActions from "../redux/actions/productsActions"
 import Footer from '../components/Footer'
 import { FaHeart, FaRegHeart, FaTrashAlt } from "react-icons/fa";
-import {Link} from 'react-router-dom'
-import {showToast} from '../helpers/myToast'
+import { Link } from 'react-router-dom'
+import { showToast } from '../helpers/myToast'
 
 import ReactStars from 'react-stars'
 
@@ -40,7 +40,7 @@ const ProductPage = (props) => {
             setLoadingHeart(true);
         }
     };
-    
+
     let ratingCounter = 0
 
 
@@ -53,6 +53,9 @@ const ProductPage = (props) => {
     return (
         <>
             <Header />
+            <div className="myStoreBackTitle">
+                <div onClick={props.history.goBack} style={{ cursor: 'pointer' }} className="backToHome"><span className="material-icons-outlined iconBack">arrow_back_ios_new</span> Back</div>
+            </div>
             <div className="productPageContainer">
                 <div className="productPageCard" >
                     <div className="productPageCardInfo">
@@ -120,10 +123,10 @@ const ProductPage = (props) => {
                             <div className="contenedorButtonsProductCart">
                                 {cart.find(item => item._id === productSelected._id)
                                     ?
-                                    <button className="buttonRemoveProduct" onClick={() => {deleteProductFromCart(productSelected); showToast("success", "Product deleted from cart")}}><FaTrashAlt /></button>
+                                    <button className="buttonRemoveProduct" onClick={() => { deleteProductFromCart(productSelected); showToast("success", "Product deleted from cart") }}><FaTrashAlt /></button>
                                     : <div className="contenedorButtonAccionCart">
-                                        <button className="buttonAddProduct2" onClick={() => {addProductToCart(productSelected); showToast("success", "Added to cart")}}>ADD TO CART</button>
-                                        <Link to="/finalizepurchase"><button className="buttonBuyNow" onClick={() => {addProductToCart(productSelected); showToast("success", "Added to cart")}}>BUY NOW</button></Link>
+                                        <button className="buttonAddProduct2" onClick={() => { addProductToCart(productSelected); showToast("success", "Added to cart") }}>ADD TO CART</button>
+                                        <Link to="/finalizepurchase"><button className="buttonBuyNow" onClick={() => { addProductToCart(productSelected); showToast("success", "Added to cart") }}>BUY NOW</button></Link>
                                     </div>
                                 }
                             </div>

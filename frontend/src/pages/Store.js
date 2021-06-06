@@ -77,6 +77,7 @@ const Store = (props) => {
   return (
     <div className="contenedorStore">
       <Header />
+      
       <div style={{ backgroundImage: `url('${store.storeHero && store.storeHero.url}')` }} className="storeHero">
         <div className="contenedorInfoStorePage">
           <div style={{ backgroundImage: `url('../assets/${store.logoStore}')` }} className="storeLogoStore"></div>
@@ -97,6 +98,11 @@ const Store = (props) => {
           </div> */}
         </div>
       </div>
+      
+      <div className="myStoreBackTitle">
+        <div onClick={props.history.goBack} style={{ cursor: 'pointer' }} className="backToHome"><span className="material-icons-outlined iconBack">arrow_back_ios_new</span> Back</div>
+      </div>
+
       <div className="contenedorInfoCards">
         <div className="contenedorFiltrosStore">
           <div style={{ width: "100%", textAlign: "center", marginTop: 70 }}>
