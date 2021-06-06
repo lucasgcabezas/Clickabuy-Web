@@ -109,11 +109,13 @@ const storeControllers = {
                 }
             }
 
+            
             response = await StoreModel.findOneAndUpdate({ _id: idStore }, update, { new: true })
         } catch (err) {
             error = `${err.name} : ${err.message}`
             console.log(err)
         }
+        // console.log(response)
         res.json({ success: !error ? true : false, response, error })
     },
     deleteStore: async (req, res) => {

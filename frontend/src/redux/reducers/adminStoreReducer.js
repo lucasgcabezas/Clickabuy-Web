@@ -14,6 +14,17 @@ const adminStoreReducer = (state = initialState, action) => {
                 preloaderStore: false
             };
 
+        case "EDIT_ONE_STORE":
+            return {
+                ...state,
+                storesByUser: state.storesByUser.map(store => {
+                    if (store._id === action.payload._id) {
+                        return action.payload
+                    }
+                    return store
+                }),
+            };
+
         case "DELETE_ONE_STORE":
             return {
                 ...state,
@@ -28,6 +39,12 @@ const adminStoreReducer = (state = initialState, action) => {
 
             };
 
+        case "ADD_ONE_PRODUCT":
+            return {
+                ...state,
+                productsByUserStore: [...state.productsByUserStore, action.payload]
+            };
+
         case "DELETE_ONE_PRODUCT":
             return {
                 ...state,
@@ -37,8 +54,12 @@ const adminStoreReducer = (state = initialState, action) => {
         case "EDIT_ONE_PRODUCT":
             return {
                 ...state,
-                productsByUserStore: state.productsByUserStore.filter(prod => prod._id !== action.payload._id),
-                productsByUserStore: [...state.productsByUserStore, action.payload]
+                productsByUserStore: state.productsByUserStore.map(prod => {
+                    if (prod._id === action.payload._id) {
+                        return action.payload
+                    }
+                    return prod
+                }),
             };
 
         case "ADMIN_PRODUCTS_CLEAN":
@@ -54,8 +75,6 @@ const adminStoreReducer = (state = initialState, action) => {
                 storesByUser: action.payload,
                 preloaderStore: true
             };
-
-
 
         default:
             return state;

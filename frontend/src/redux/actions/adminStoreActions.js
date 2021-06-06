@@ -52,8 +52,7 @@ const adminStoreActions = {
           headers: { "Authorization": "Bearer " + token },
         });
         if (data.success)
-          return data.response;
-
+          dispatch({ type: "EDIT_ONE_STORE", payload: data.response })
         else
           showToast("error", data.error);
       } catch (err) {
@@ -69,10 +68,10 @@ const adminStoreActions = {
           headers: { "Authorization": "Bearer " + token },
         });
         if (data.success)
-        dispatch({ type: "DELETE_ONE_STORE", payload: data.response })
+          dispatch({ type: "DELETE_ONE_STORE", payload: data.response })
 
-          // return data.response;
-          //devuelve el store borrado, este  (usarlo si se quiere)
+        // return data.response;
+        //devuelve el store borrado, este  (usarlo si se quiere)
         else
           showToast("error", data.error);
       } catch (err) {
@@ -107,7 +106,9 @@ const adminStoreActions = {
           headers: { "Authorization": "Bearer " + token },
         });
         if (data.success)
-          return data.response;
+          dispatch({ type: "ADD_ONE_PRODUCT", payload: data.response })
+
+        // return data.response;
         //devuelve el producto creado, (usarlo si se quiere)
         else
           showToast("error", data.error);

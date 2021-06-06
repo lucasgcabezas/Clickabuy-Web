@@ -77,7 +77,7 @@ const Store = (props) => {
   return (
     <div className="contenedorStore">
       <Header />
-      <div style={{ backgroundImage: `url('${store.storeHero}')` }} className="storeHero">
+      <div style={{ backgroundImage: `url('${store.storeHero.url}')` }} className="storeHero">
         <div className="contenedorInfoStorePage">
           <div style={{ backgroundImage: `url('../assets/${store.logoStore}')` }} className="storeLogoStore"></div>
           <h1>{store.nameStore}</h1>

@@ -12,12 +12,16 @@ import { Lines } from 'react-preloaders';
 
 const MyStoreView = (props) => {
 
-    const { getProductsFromStore, storesByUser, productsByUserStore, cleanProducts, deleteStore, userLogged, preloaderProduct } = props
+    const { getProductsFromStore, storesByUser, productsByUserStore, cleanProducts, deleteStore, userLogged, preloaderProduct, editStore } = props
 
     const thisStore = storesByUser.find(store => store._id === props.match.params.id)
 
     const [modalState, setModalState] = useState(false)
     const [modalEditState, setModalEditState] = useState(false)
+    const [nameStoreState, setNameStoreState] = useState()
+    const [logoStoreState, setLogoStoreState] = useState()
+    const [storeHeroState, setStoreHeroState] = useState()
+
 
     useEffect(() => {
         getProductsFromStore(props.match.params.id)
@@ -29,7 +33,37 @@ const MyStoreView = (props) => {
         props.history.push("/myStores")
     }
 
-    console.log(thisStore)
+    const getInput = (e) => {
+
+        if (e.target.type === 'file') {
+            if (e.target.name === 'logoStore') {
+                setLogoStoreState(e.target.files[0])
+            } else if (e.target.name === 'storeHero') {
+                setStoreHeroState(e.target.files[0])
+            }
+        } else if (e.target.type === 'text') {
+            setNameStoreState(e.target.value)
+        }
+    }
+
+    const sendEdition = () => {
+        let infoToSend = new FormData()
+        infoToSend.append("nameStore", nameStoreState || '')
+        infoToSend.append("logoStore", logoStoreState || '')
+        infoToSend.append("storeHero", storeHeroState || '')
+
+        editStore(userLogged.token, props.match.params.id, infoToSend)
+        setModalEditState(false)
+    }
+
+    const cancelEdition = () => {
+        setNameStoreState(null)
+        setLogoStoreState(null)
+        setStoreHeroState(null)
+        setModalEditState(false)
+    }
+
+    console.log(logoStoreState)
 
     return (
         <div style={{ position: 'relative' }}>
@@ -54,15 +88,24 @@ const MyStoreView = (props) => {
                 </div>
                 <div className="myStoresEditModal">
                     <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', fontSize: 20 }}>
-                        <span>Are you sure you want to delete this store? </span>
-                        <span>This cannot be undone. </span>
-                        <input type="text" placeholder={thisStore.nameStore}></input>
-                        <input type="text" placeholder={thisStore.nameStore}></input>
-                        <input type="text" placeholder={thisStore.nameStore}></input>
+
+                        {/* <span>Are you sure you want to delete this store? </span>
+                        <span>This cannot be undone. </span> */}
+
+                        <input type="text" name="nameStore" placeholder={thisStore && thisStore.nameStore} onChange={(e) => getInput(e)}></input>
+
+                        <div className="buttonFileEditModal">
+                            <input type="file" name="logoStore" onChange={(e) => getInput(e)}></input>
+                        </div>
+
+                        <div className="buttonFileEditModal">
+                            <input type="file" name="storeHero" onChange={(e) => getInput(e)}></input>
+                        </div>
+
                     </div>
                     <div className="myStoresModalButtonContainer">
-                        <button onClick={() => setModalState(false)}>Cancel</button>
-                        {/* <button onClick={deleteStoreConfirm}>Delete</button> */}
+                        <button onClick={cancelEdition}>Cancel</button>
+                        <button onClick={sendEdition}>Confirm</button>
                     </div>
                 </div>
             </div>
@@ -122,6 +165,7 @@ const mapDispatchToProps = {
     getProductsFromStore: adminStoreActions.getProductsFromStore,
     cleanProducts: adminStoreActions.cleanProducts,
     deleteStore: adminStoreActions.deleteStore,
+    editStore: adminStoreActions.editStore
 
 };
 

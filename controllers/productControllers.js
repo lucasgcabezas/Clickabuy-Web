@@ -101,9 +101,11 @@ const productControllers = {
     updateProduct: async (req, res) => {
         const idProduct = req.params.id;
         let { description, price, stock, nameProduct, storeId } = req.body;
-
+        let productImg;
         let user = req.user;
         let response, error;
+
+
 
 
         try {
@@ -114,8 +116,8 @@ const productControllers = {
             if (!product) throw new Error("this product doesn't exist");
             if (product.storeId.toString() !== storeId) throw new Error("Not Authorizated, the product does not belong to the store")
 
-            if (req.files.productImg) {
-                let { productImg } = req.files;
+            if (req.files) {
+                productImg = req.files.productImg
                 await cloudinary.api.delete_resources([product.productImg.publicId]);
                 const image = getPathAndNameFile(product, productImg, "fotosAHostear");
                 await productImg.mv(image.filePath);
@@ -128,7 +130,6 @@ const productControllers = {
             }
 
             let fieldsObj = { description, price, stock, productImg: objProductImg, nameProduct };
-            console.log(fieldsObj)
             let update = {};
             for (const field in fieldsObj) {
                 if (fieldsObj[field])
@@ -140,6 +141,8 @@ const productControllers = {
             console.log(err);
             error = err.name + " " + err.message;
         }
+        console.log(response)
+
         respondFrontend(res, response, error);
 
     },

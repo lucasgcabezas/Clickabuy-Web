@@ -9,27 +9,37 @@ const ProdAdminStore = (props) => {
     const [deleteModal, setDeleteModal] = useState(false)
     const [editModal, setEditModal] = useState(false)
     const [elementsToModify, setElementsToModify] = useState({ storeId: idStore })
+    const [productImgState, setProductImgState] = useState(null)
 
     const getInput = e => { setElementsToModify({ ...elementsToModify, [e.target.name]: e.target.value }) }
 
     const sendEdition = () => {
-        editProduct(userLogged.token, prod._id, elementsToModify)
+        let infoToSend = new FormData()
+        infoToSend.append("storeId",elementsToModify.storeId)
+        infoToSend.append("nameProduct",elementsToModify.nameProduct || '')
+        infoToSend.append("description",elementsToModify.description|| '') 
+        infoToSend.append("price",elementsToModify.price|| '')
+        infoToSend.append("stock",elementsToModify.stock|| '')
+        infoToSend.append("productImg",productImgState|| '')
+        
+        editProduct(userLogged.token, prod._id, infoToSend)
+        setEditModal(!editModal)
+        setElementsToModify({ storeId: idStore })
+        setProductImgState(null)
     }
 
-    console.log(elementsToModify)
+    const getImg = (e) => {
+        setProductImgState(e.target.files[0])
+    }
+    
+    // console.log(prod)
+    
 
     return (
         <div className="prodAdminStore">
             <div className="prodAdminStoreInfoContainer">
-                <div className="prodAdminStoreImg" style={{ backgroundImage: `url(${prod.productImg.url})`, display: editModal ? 'none' : 'flex' }}></div>
-                <div className="prodAdminStoreImgEdit" style={{ display: editModal ? 'flex' : 'none' }}>
-                    {/* <span className="far fa-camera" style={{color: 'white'}}></span> */}
-                    {/* <span style={{ fontSize: 55, color: '#ffffff', }}>+</span> */}
-                    <input type="file" id="files" style={{ display: 'none' }}></input>
-                    <label for="files" style={{ cursor: 'pointer', fontSize: 60, color: '#ffffff' }}>+</label>
-                    {/* <span className="fas fa-camera adminStoresCardsIcons" style={{fontSize: 30}} ></span> */}
-
-                </div>
+                <div className="prodAdminStoreImg" style={{ backgroundImage: `url(${prod.productImg.url})` }}></div>
+          
 
                 <div className="prodAdminStoreInfoTitles">
                     <span className="spanProdCard">Name:</span>
@@ -50,6 +60,11 @@ const ProdAdminStore = (props) => {
                     <input type="text" className="inputProdCard" placeholder={prod.stock} name="stock" onChange={getInput} ></input>
                 </div>
                 <button className="buttonConfirmEdit" style={{ display: editModal ? 'flex' : 'none' }} onClick={sendEdition}>Confirm</button>
+
+            </div>
+            <div style={{ display: editModal ? 'flex' : 'none' }}>
+
+                <input type="file" id="files" style={{ visibility: 'block' }} onChange={(e) => getImg(e)}></input>
             </div>
 
             <div className="prodAdminStoreButtonsDiv">
