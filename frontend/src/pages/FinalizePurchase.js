@@ -16,24 +16,33 @@ const FinalizePurchase = (props) => {
     const [cards, setCards] = useState({ cvc: '', expiry: '', focus: '', name: '', number: '' })
     let display = !show ? 'none' : 'flex'
     let total = cart.reduce((total, item) => total += item.quantity * item.price, 0).toFixed(2)
-
+    console.log(cart)
     return (
         <>
             <Header />
-            <div className="contenedorPurchase">
-                <div className="contenedorInfoPurchase">
-                    <h1>Purchase Summary</h1>
+            <div className="contenedorPrincipal">
+                <div className="contenedorCarrito">
+                    <h1>PURCHASE SUMMARY</h1>
+                    <div className="borderSummary"></div>
                     {cart.map(item => {
                         return (
-                            <div key={item._id} className="productPurchase">
+                            <div key={item._id} className="detailFinalizePurchase">
                                 <div style={{ backgroundImage: `url('${item.productImg}')` }} className="productImageCarrito"></div>
-                                <h3>{item.nameProduct}</h3>
+                                <div className="nameProductCarrito">
+                                    <span>{item.nameProduct}</span>
+                                </div>
+                                <span>QTY: {item.quantity}</span>
+                                <p>$ {item.price}</p>
+                                {/* <h3></h3> */}
                             </div>
                         )
                     })}
                     <h2>Total = ${total}</h2>
-                    <Paypal buy={{ cart: cart, total: total }} />
-                    <button onClick={() => setShow(!show)} >Credit/Debit Card</button>
+                    <div className="contenedorPasarelaPago">
+                        <button onClick={() => setShow(!show)} className="buttonCreditCardModal">Credit/Debit Card</button>
+                        Or
+                        <Paypal buy={{ cart: cart, total: total }} />
+                    </div>
                     <Modal
                         isOpen={show}
                         onRequestClose={() => {setShow(!show); setNameModal("payment")}}
@@ -47,7 +56,12 @@ const FinalizePurchase = (props) => {
                             </div>
                             <div className="creditCardModal">
                                 {nameModal !== "payment"
-                                ? <h1>compra finalizada holo :v dijo el jona</h1>
+                                ? <div className="orderCompleted">
+                                    <div className="imgOrderCompleted" style={{backgroundImage:"url('https://webdesing881317710.files.wordpress.com/2021/06/invoice-3597241-3010221.png')"}}></div>
+                                    <h1>Your order is completed!</h1>
+                                    <span>Thanks for shopping in clickabuy</span>
+                                    <span>We will send you a confirmation email, including the summary of your purchase.</span>
+                                </div>
                                 : <PaymentForm buy={{ cart: cart, total: total }} setNameModal={setNameModal}/>
                                 }
                             </div>

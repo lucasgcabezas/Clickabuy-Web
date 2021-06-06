@@ -73,7 +73,7 @@ html *{
     align-items: center;
     margin: 3vh 0;
 }
-.contenedorFiltro{
+.contenedorFiltro, .contenedorBuscadorProductsFilter{
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -88,7 +88,7 @@ html *{
     display: none;
 
 }
-.contenedorSearch{
+.contenedorSearch, .contenedorBuscadorProductsFilter{
     display: flex;
     align-items: center;
     padding-left: 3vw;
@@ -450,7 +450,7 @@ html *{
     justify-content: center;
 }
 .contenedorPrincipal{
-    background-color: var(--fourthcolor);
+    background-color: white;
     display: flex;
     justify-content: center;
     width: 100%;
@@ -998,8 +998,8 @@ html *{
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    width: 39%;
-    height: 15vh;
+    width: 10vw;
+    height: 17vh;
     border-radius: 20px;
     margin-bottom: 3vh;
     margin-top: 9vh;
@@ -1037,15 +1037,18 @@ html *{
 .inputSearchStore:focus{
     outline: none;
 }
+.buttonFavorites{
+    display: none;
+}
 .contenedorFavoritos{
-    background-color: var(--fourthcolor);
+    background-color: white;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 .contenedorInfoFavoritos{
-    margin-top: 30vh;
+    margin-top: 6vh;
     margin-bottom: 10vh ;
     width: 70%;
 }
@@ -1091,7 +1094,8 @@ html *{
     display: flex;
 }
 .reviews{
-    height: 40vh;
+    height: 50vh;
+    /* width: 60vw; */
     overflow-y: auto;
 }
 .reviews::-webkit-scrollbar {
@@ -1099,7 +1103,7 @@ html *{
     height: 8px;
 }
 .reviews::-webkit-scrollbar-thumb {
-    background: #000000;
+    background: var(--thirdcolor);
     border-radius: 10px;
 }
 .reviews::-webkit-scrollbar-track{
@@ -1164,7 +1168,10 @@ html *{
     outline: none;
 }
 .contenedorInfo{
-    margin: 6vh 0;
+    padding: 1vh 1vw;
+    border-radius: 5px;
+    border: 1px solid #e5edef;
+    margin-bottom: 2vh;
 }
 .iconSend{
     color: var(--primarycolor);
@@ -1459,6 +1466,18 @@ option{
     height: 10vh;
     display: flex;
     align-items: center;
+    margin-top: 2vh;
+}
+.noReviews{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+}
+.reviewsInfo{
+    /* border-top: 1px solid #e5edef; */
+    margin-top: 4vh;
 }
 .productPagePrice span{
     font-family: "Poppins-Regular", Helvetica, Arial, sans-serif !important;
@@ -1467,10 +1486,12 @@ option{
 .productPageTitlePrice{
     display: flex;
     flex-direction: column;
-    width: 40%
+    width: 40%;
+    margin-left: 6vw;
 }
 .productPageCardInfo{
     display: flex;
+    justify-content: inherit;
     border-bottom: 1px solid #e5edef;
     padding-bottom: 9vh;
 }
@@ -1511,9 +1532,9 @@ option{
     display: flex;
 }
 .productPageImg{
-    width: 50vw;
+    width: 35vw;
     height: 80vh;
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
 }
@@ -1613,12 +1634,15 @@ option{
     display: block;
 }
 .buttonCreditCard{
-    background-color: var(--thirdcolor);
+    background-color: black;
     color: white;
     border: none;
     width: 100%;
     border-radius: 5px;
     padding: 1vh 2vw;
+}
+.buttonCreditCard:hover{
+    background-color: var(--thirdcolor);
 }
 .buttonCreditCard:focus{
     outline: none;
@@ -1708,6 +1732,128 @@ option{
     margin-bottom: 1vh;
     margin-right: 0.3vw;
 }
-.dom-ready .paypal-button .paypal-button-text:not(.immediate):not(.paypal-personalization-text):not(.hidden) {
-    visibility: hidden;
+progress {
+    -webkit-appearance: none;
+}
+/* progress::-webkit-progress-bar-value {
+   -webkit-appearance: none;
+   background: var(--thirdcolor); */ 
+/* } */
+progress[value]::-webkit-progress-bar {
+    background-color: #555555;
+}
+progress[value]::-webkit-progress-value {
+    background-color: var(--thirdcolor);
+}
+progress[value]{
+    width: 150px;
+    height: 10px;
+}
+progress {
+    border: 0;
+    /* height: 40px; */
+    border-radius: 20px;
+}
+progress::-webkit-progress-bar {
+    border: 0;
+    /* height: 40px; */
+    border-radius: 20px;
+}
+progress::-webkit-progress-value {
+    border: 0;
+    /* height: 40px; */
+    border-radius: 20px;
+}
+progress::-moz-progress-bar {
+    border: 0;
+    /* height: 40px; */
+    border-radius: 20px;
+}
+.detailFinalizePurchase{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #e6e6e6;
+    padding: 2vh;
+}
+.detailFinalizePurchase p{
+    width: 9vw;
+    text-align: left;
+    margin: 0;
+    font-size: 1.3em;
+    font-family: "Poppins-Regular", Helvetica, Arial, sans-serif !important;
+}
+.contenedorCarrito h1{
+    font-size: 2em;
+    color: black;
+}
+.borderSummary{
+    background-color: black;
+    height: 4px;
+    width: 16vw;
+    border-radius: 20px;
+    margin-bottom: 5vh;
+}
+.contenedorPasarelaPago{
+    margin-top: 10vh;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+    height: 40vh;
+}
+.contenedorCarrito h2{
+    text-align: end;
+    margin-bottom: 6vh;
+}
+.paypalButtons{
+    width: 40%;
+}
+.buttonCreditCardModal{
+    background-color:black;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 2vh 3vw;
+    width: 28vw;
+}
+.buttonCreditCardModal:hover{
+    box-shadow: 0px 4px 5px 1px #00000022;
+    background-color: var(--thirdcolor);
+}
+.orderCompleted{
+    padding: 2vh 3vw;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+.imgOrderCompleted{
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    width: 60vw;
+    height: 60vh;
+}
+.contenedorInputSendStarts{
+    margin-top: 6vh;
+}
+.contenedorPageProductsFilter{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.contenedorCardProductsFilter{
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    /* background-color: white; */
+    /* border-radius: 5px; */
+    /* box-shadow: 0px 4px 5px 1px #00000022; */
 }

@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import mailActions from '../redux/actions/mailActions'
 import cartActions from '../redux/actions/cartActions'
 import Modal from 'react-modal'
+import { showToast } from '../helpers/myToast'
 
 const Paypal = (props) => {
     const { buy, clearCart, mailOrderConfirmed } = props
@@ -12,18 +13,18 @@ const Paypal = (props) => {
     let display = !show ? 'none' : 'flex'
     let resumen = cart.map(product => {
         return {
-            product: { nameProduct: product.nameProduct, imageProduct: product.productImg, quantity: product.quantity },
+            product: { nameProduct: product.nameProduct, imageProduct: product.productImg, quantity: product.quantity, total: total, priceProduct: product.price },
         }
     })
-    let asunto = "compra en clickabuy"
-    let destinatario = "juancarlos.mindub@gmail.com"
+    let asunto = "Order Confirmation!"
+    let destinatario = "jonhdoe158243@gmail.com"
     useEffect(() => {
         window.paypal.Buttons({
             createOrder: (data, actions, err) => {
                 return actions.order.create({
                     intent: 'CAPTURE',
                     purchase_units: [
-                        {description: 'clickabuy compra', amount: { value: total, currency_code: 'USD' }}
+                        { description: 'Order Confirmation!', amount: { value: total, currency_code: 'USD' } }
                     ]
                 })
             },
@@ -34,14 +35,14 @@ const Paypal = (props) => {
                 clearCart()
             },
             onError: (err) => {
-                alert("Compra NO exitosa, intentá otro dia!")
+                showToast('error' , 'Unsuccessfull purchase, please try again later!')
                 console.log(err)
             }
         }).render(paypal.current)
     }, [])
     return (
         <>
-            <div ref={paypal}></div>
+            <div ref={paypal} className="paypalButtons"></div>
             <Modal
                 isOpen={show}
                 onRequestClose={() => setShow(!show)}
@@ -54,7 +55,12 @@ const Paypal = (props) => {
                         <span className="material-icons-outlined closeModal" onClick={() => setShow(false)}>close</span>
                     </div>
                     <div className="creditCardModal">
-                        <h1>compra satisfactoria, se ha enviado un mail con el detalle a su cuenta</h1>
+                        <div className="orderCompleted">
+                            <div className="imgOrderCompleted" style={{backgroundImage:"url('https://webdesing881317710.files.wordpress.com/2021/06/invoice-3597241-3010221.png')"}}></div>
+                            <h1>Your order is completed!</h1>
+                            <span>Thanks for shopping in clickabuy</span>
+                            <span>We will send you a confirmation email, including the summary of your purchase.</span>
+                        </div>
                     </div>
                 </div>
             </Modal>

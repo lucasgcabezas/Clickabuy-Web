@@ -6,6 +6,8 @@ import cartActions from "../redux/actions/cartActions"
 import productsActions from "../redux/actions/productsActions"
 import Footer from '../components/Footer'
 import { FaHeart, FaRegHeart, FaTrashAlt } from "react-icons/fa";
+import {Link} from 'react-router-dom'
+import {showToast} from '../helpers/myToast'
 
 import ReactStars from 'react-stars'
 
@@ -76,7 +78,7 @@ const ProductPage = (props) => {
                                     emptyIcon={<i className="far fa-star"></i>}
                                     halfIcon={<i className="fa fa-star-half-alt"></i>}
                                     fullIcon={<i className="fa fa-star"></i>}
-                                    color2="#dca6ac"
+                                    color2="#EA957F"
                                     color1="#555555"
                                     value={starsValue}
                                 />
@@ -93,25 +95,6 @@ const ProductPage = (props) => {
                                     ({reviews.length})
           </span>
                             </div>
-                            {/* <div className="starsReviews">
-                                <span style={{ fontSize: 15, fontWeight: 'lighter' }}>{(isNaN(starsValue)) ? 0 : (starsValue).toFixed(1)}</span>
-                                <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', height: 40 }}>
-                                    <ReactStars
-                                        // onChange={(e) => changeValueStar(e)}
-                                        count={5}
-                                        size={50}
-                                        isHalf={true}
-                                        edit={false}
-                                        emptyIcon={<i className="far fa-star"></i>}
-                                        halfIcon={<i className="fa fa-star-half-alt"></i>}
-                                        fullIcon={<i className="fa fa-star"></i>}
-                                        // activeColor="#ffd700"
-                                        color2="#48d1be"
-                                        color1="#555555"
-                                        value={starsValue}
-                                    />
-                                </div>
-                            </div> */}
                             <div className="productPagePrice">
                                 <span>$ {(productSelected.price).toFixed(2)}</span>
                             </div>
@@ -137,10 +120,10 @@ const ProductPage = (props) => {
                             <div className="contenedorButtonsProductCart">
                                 {cart.find(item => item._id === productSelected._id)
                                     ?
-                                    <button className="buttonRemoveProduct" onClick={() => deleteProductFromCart(productSelected)}><FaTrashAlt /></button>
+                                    <button className="buttonRemoveProduct" onClick={() => {deleteProductFromCart(productSelected); showToast("success", "Product deleted from cart")}}><FaTrashAlt /></button>
                                     : <div className="contenedorButtonAccionCart">
-                                        <button className="buttonAddProduct2" onClick={() => addProductToCart(productSelected)}>ADD TO CART</button>
-                                        <button className="buttonBuyNow" onClick={() => addProductToCart(productSelected)}>BUY NOW</button>
+                                        <button className="buttonAddProduct2" onClick={() => {addProductToCart(productSelected); showToast("success", "Added to cart")}}>ADD TO CART</button>
+                                        <Link to="/finalizepurchase"><button className="buttonBuyNow" onClick={() => {addProductToCart(productSelected); showToast("success", "Added to cart")}}>BUY NOW</button></Link>
                                     </div>
                                 }
                             </div>

@@ -4,7 +4,9 @@ import Header from "../components/Header"
 import Footer from "../components/Footer"
 import { Link } from 'react-router-dom'
 import Product from '../components/Product'
+
 const Favorites = (props) => {
+
     const { products, userLogged } = props
     const favorites = products.filter(product => {
         if (userLogged && product.userLiked.find(email => email === userLogged.email))

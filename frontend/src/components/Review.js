@@ -5,10 +5,10 @@ import { TiDelete } from 'react-icons/ti'
 import { IoSend } from 'react-icons/io5'
 import ReactStars from 'react-stars'
 
-// import Swal from 'sweetalert2'
-// import withReactContent from 'sweetalert2-react-content'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
-// const MySwal = withReactContent(Swal)
+const MySwal = withReactContent(Swal)
 
 const Comment = (props) => {
     const { review, updatedReview, deleteReviews, userLogged, productSelected } = props
@@ -29,6 +29,32 @@ const Comment = (props) => {
             setReviewContent(!reviewContent)
         }
     }
+    alert = () => {
+        MySwal.fire({
+            title: 'Are you sure?',
+            text: 'You will not be able to recover this review!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, keep it'
+          }).then((result) => {
+            if (result.value) {
+                MySwal.fire(
+                'Deleted!',
+                'Your review has been deleted.',
+                'success'
+              ).then(
+                deleteReviews(review._id)
+              )
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                MySwal.fire(
+                'Cancelled',
+                'Your review is safe :)',
+                'error'
+              )
+            }
+          })
+    }
 
     return (
         <div className="contenedorInfo">
@@ -44,7 +70,7 @@ const Comment = (props) => {
                             size={32}
                             isHalf={true}
                             edit={false}
-                            color2="#dca6ac"
+                            color2="#EA957F"
                             color1="#555555"
                             value={review.vote}
                         />
@@ -58,7 +84,7 @@ const Comment = (props) => {
                             size={32}
                             isHalf={true}
                             edit={true}
-                            color2="#dca6ac"
+                            color2="#EA957F"
                             color1="#555555"
                             value={0}
                         />
@@ -87,7 +113,7 @@ const Comment = (props) => {
                         <div onClick={() => { setUpdateReview(!updateReview) }}>
                             {!updateReview ? <FaPencilAlt /> : <TiDelete />}
                         </div>
-                        <FaTrashAlt onClick={() => { deleteReviews(review._id) }}></FaTrashAlt>
+                        <FaTrashAlt onClick={() => alert()}></FaTrashAlt>
                     </div>
                 }
             </div>
