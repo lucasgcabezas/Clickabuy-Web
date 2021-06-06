@@ -7,20 +7,13 @@ import { useEffect } from 'react';
 
 
 const MyStoreView = (props) => {
-
     const { getProductsFromStore } = props
-
-    // console.log(props.match.params.id)
-
     useEffect(() => { fetchAllProducts() }, [])
-
 
     const fetchAllProducts = async () => {
         const response = await getProductsFromStore(props.match.params.id)
-        console.log(response)
     }
-
-
+    
     return (
         <>
             <Header />

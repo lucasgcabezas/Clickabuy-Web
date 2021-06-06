@@ -17,7 +17,6 @@ const categoryReducer = (state = initialState, action) => {
                 categories: action.payload
             }
         case 'CURRENT_CATEGORY':
-            console.log(action.payload)
             return {
                 ...state,
                 currentCategory: state.categories.find(category => category._id === action.payload.id),

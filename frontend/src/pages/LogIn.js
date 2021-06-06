@@ -36,20 +36,14 @@ const validationSchema = yup.object({
       "string.min": "Your password must be at least 6 characters long" */
 });
 
-const SignIn = (props) => {
+const LogIn = (props) => {
   const [pbStatus, setPBStatus] = useState(25);
   useEffect(()=>{
     window.scrollTo(0,0)
   },[])
   const respuestaGoogle = (response) => {
     const { givenName, familyName, email, googleId, imageUrl } = response.profileObj;
-    /* setPreUser({name:givenName,email:email,pass:googleId,url:imageUrl}) */
-    /*   console.log(response); */
-    /*  alert("ahora"); */
-    console.log({
-      email: email,
-      password: "a" + googleId,
-    });
+    
     props.logInUser({
       email: email,
       password: "a" + googleId,
@@ -72,22 +66,14 @@ const SignIn = (props) => {
 
   return (
     <div className="contenedorSignUp">
-    <div style={{backgroundImage: "url('https://webdesing881317710.files.wordpress.com/2021/06/videoform3.gif')"}} className="imgForm" >
-
-      {/* <div style={{ backgroundImage: "url('https://webdesing881317710.files.wordpress.com/2021/06/wave.gif')" }} className="imgForm"> */}
-      <video src="./assets/formVideo.mp4" autoPlay loop muted className="videoForm"></video>
-      {/* <div className="contenedorHeaderSignUp"> */}
+      <video src="./assets/videoUserAccount.mp4" autoPlay loop muted className="videoForm"></video>
         <Link to="/" className="backToHome"><span class="material-icons-outlined iconBack">arrow_back_ios_new</span> Back</Link>
-      {/* </div> */}
       <div className="contenedorInfoForm">
         <div className="contenedorLogoForm">
           <FaTags className="logoForm" />
           <h1>clickabuy</h1>
           <span className="fraseClickabuy">YOU NEED IT, YOU WANT IT, WITH CLICKABUY YOU CAN HAVE IT</span>
-          {/* <Link to="/SignInAdmin" className="bussinesAccount">Shortcut Admin Login <span class="material-icons-outlined iconBussines">arrow_forward_ios</span></Link> */}
-          {/* <div> */}
             <span className="linkLogInText">Don't have an account?</span><Link to="/SignUp" className="bussinesAccount">Sign Up</Link>
-          {/* </div> */}
         </div>
         <div className="contenedorFormLogIn">
         <h2>Welcome Back!</h2>
@@ -133,7 +119,6 @@ const SignIn = (props) => {
 
           </div>
       </div>
-    </div>
   );
 };
 const mapStateToProps = (state) => {
@@ -143,5 +128,5 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
   logInUser: authActions.logInUser,
 };
-export default connect(null, mapDispatchToProps)(SignIn);
+export default connect(null, mapDispatchToProps)(LogIn);
 /* export default SignIn; */

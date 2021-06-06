@@ -39,23 +39,10 @@ html * {
     display: flex;
     flex-direction: column;
 }
-
-/* .categoryHero{
-    background-color: var(--fcolor);
-    background-color: #ee4054;
-    height: 200px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-} */
-
 .categoryStoresContainer{
-    background-color: #f5f5f5;
-    /* flex: 1; */
-    
+    background-color: white;    
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
     align-items: center;
     min-height: 100vh;
 }
@@ -100,7 +87,7 @@ html * {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 5vh;   
+    margin-bottom: 3vh;   
 }
 
 .productPageContainer{

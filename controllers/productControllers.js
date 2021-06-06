@@ -215,7 +215,6 @@ const productControllers = {
     },
     addReviews: async (req, res) => {
         const productId = req.params.id
-        console.log(req.body)
         try {
             const addReview = await Product.findOneAndUpdate({ _id: productId },
                 { $push: { reviews: { ...req.body, userId: req.user._id } } }, { new: true }).populate({ path: "reviews", populate: { path: "userId", select: { "firstName": 1, "lastName": 1, "email": 1 } } })
@@ -256,7 +255,6 @@ const productControllers = {
         try {
             checkRatedStore = await Product.findOne({ _id: idProduct, usersRated: [user._id] })
             response = await Product.findOneAndUpdate({ _id: idProduct }, { $push: { rateProduct: { vote: req.body.numberRate, userId: user._id } }, usersRatedProduct: user._id }, { new: true })
-            console.log(response)
             if (!checkRatedStore) {
                 await UserModel.findOneAndUpdate({ _id: user._id }, { $push: { productsRated: idProduct } })
             } else {

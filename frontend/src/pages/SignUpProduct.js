@@ -60,9 +60,6 @@ const SignUpStore = (props) => {
 
       formData.append("logoStore", photo.userImg);
 
-      console.log("soy el values", values);
-      console.log("soy el Formdata", formData);
-
       props.addRequest(props.userLogged.token, formData);
       props.history.push("/myStores")
     },
@@ -70,13 +67,11 @@ const SignUpStore = (props) => {
 
   const cargarFoto = (e) => {
     setPhoto({ userImg: e.target.files[0] });
-    console.log("soy el e", e.target.files[0].name);
     setPhotoName({ userImgName: e.target.files[0].name });
   };
 
   const cargarTA = (e) => {
     /* console.log("TA",e.nativeEvent.data) */
-    console.log("TargetValue", e.target.value)
 
     setTA({ description: e.target.value });
   };

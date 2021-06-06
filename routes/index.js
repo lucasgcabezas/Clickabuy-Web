@@ -7,13 +7,13 @@ const storeControllers = require('../controllers/storeControllers')
 const productControllers = require('../controllers/productControllers')
 const categoryControllers = require('../controllers/categoryControllers')
 const requestCreateStoreControllers = require('../controllers/requestCreateStoreControllers')
-
+const mailControllers = require('../controllers/mailControllers')
 const { addUser, getAllUsers, getUserById, updateUser, deleteUser, loginUser, forcedLogin, userCheckRole } = userControllers
-const { getAllStores, addStore, editStore, deleteStore, getStoresByCategory, modifyOwnerOfStore, getStoresUser, rateStore } = storeControllers
+const { getAllStores, addStore, editStore, deleteStore, getStoresByCategory, modifyOwnerOfStore, getStoresUser, rateStore, getStoreFromId } = storeControllers
 const { getAllCategories, getSingleCategory, addCategory, deleteCategory, modifyCategory } = categoryControllers
 const { addProduct, getAllProducts, getProductById, updateProduct, deleteProduct, getProductsFromStore, getProductFromCartLS, productsLiked, addReviews, editReviews, deleteReviews, rateProduct } = productControllers
 const { getAllRequestCreateStore, addRequestCreateStore, approveRequest, rejectRequest } = requestCreateStoreControllers
-
+const { mailOrderConfirmed, mailStoreConfirmed} = mailControllers
 // USER
 router.route("/users")
     .get(getAllUsers)
@@ -47,7 +47,8 @@ router.route("/store/:id")
     // passport.authenticate('jwt', { session: false }),
     .put(passport.authenticate('jwt', { session: false }), editStore)
     .delete(passport.authenticate('jwt', { session: false }), deleteStore)
-
+router.route("/getStoreFromId/:id")
+    .get(getStoreFromId)
 router.route("/storeRate/:id")
     .put(passport.authenticate('jwt', { session: false }), rateStore)
 
@@ -100,11 +101,10 @@ router.route("/respondRequest/:id")
     .post(passport.authenticate('jwt', { session: false }), approveRequest)
     .delete(passport.authenticate('jwt', { session: false }), rejectRequest)
 
+router.route('/orderconfirmed')
+    .post(mailOrderConfirmed)
 
-
-
-
-
-
+router.route('/storeconfirmed')
+    .post(mailOrderConfirmed)
 
 module.exports = router

@@ -26,10 +26,6 @@ const Header = (props) => {
     props.filtrar(e.target.value)
   }
 
-
-
-  console.log(userRole)
-
   return (
     
     <header className="headerContainer">
@@ -44,12 +40,12 @@ const Header = (props) => {
           <NavLink exact to="/" className="navegadores">Home</NavLink>
           {!userLogged ?
             <>
-              <NavLink to="/signUp" className="navegadores">Sign Up</NavLink>
-              <NavLink to="/SignIn" className="navegadores">Sign In</NavLink>
+              <NavLink to="/login" className="navegadores">Log In</NavLink>
+              <NavLink to="/signup" className="navegadores">Sign Up</NavLink>
             </>
             :
             <>
-              <Link to="/" className="navegadores"><span onClick={() => props.logOut()}>Sign Out</span></Link>
+              <Link to="/" className="navegadores"><span onClick={() => props.logOut()}>Log Out</span></Link>
             </>
           }
           <NavLink to="/buys" className="navegadores"><span className="material-icons-outlined iconCart">shopping_cart</span></NavLink>

@@ -80,7 +80,6 @@ const productReducer = (state = initialState, action) => {
                 filterProductCurrentStore: newFilterProductCurrentStore
             }
         case  "UPDATE_PRODUCT_MY_FILTER"  :
-            console.log("reducer",action.payload)
             newFilterProductCurrentStore = getFilterProductCurrentStore(action.payload.productFiltered,action.payload.inputSearch)
             return {
                 ...state,

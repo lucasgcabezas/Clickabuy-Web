@@ -2,17 +2,12 @@ html *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    /* font-family: 'Source Sans Pro';  */
-    /* font-family: 'Source Sans Pro-SemiBold', sans-serif; */
-    /* font-style: Bold; */
     font-family: 'Poppins',Helvetica,Arial,sans-serif;
-    /* font-family: 'semplicitapro', sans-serif;
-    font-style: normal; */
 }
 :root{
     --primarycolor: black;
     --secondarycolor: white;
-    --thirdcolor: #dca6ac;
+    --thirdcolor: #EA957F;
     --fourthcolor: #fafaf8;
 }
 ::-webkit-scrollbar {
@@ -20,12 +15,12 @@ html *{
     height: 12px;
    }
    ::-webkit-scrollbar-thumb {
-    background: #000000;
+    background-color: var(--thirdcolor);
     border-radius: 10px;
    }
    ::-webkit-scrollbar-track{
     border-radius: 5px;
-    box-shadow: inset 7px 10px 12px #f0f0f0;
+    background-color: white;
    }
 .contenedorIconoCorazon{
     position: relative;
@@ -62,7 +57,6 @@ html *{
     display: flex;
     align-items: center;
 }
-/* .contenedorLogo h1{} */
 .iconLogo{
     width: 20vw;
     height: 20vw;
@@ -78,14 +72,6 @@ html *{
     justify-content: center;
     align-items: center;
     margin: 3vh 0;
-}
-.bannerPoints{
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    width: 90%;
-    height: 15vh;
-    margin-left: 0.5vw;
 }
 .contenedorFiltro{
     display: flex;
@@ -104,7 +90,6 @@ html *{
 }
 .contenedorSearch{
     display: flex;
-    /* justify-content: space-between; */
     align-items: center;
     padding-left: 3vw;
     padding-right: 3vw;
@@ -115,7 +100,7 @@ html *{
     margin-left: 10vw;
 }
 .linkRegisterStore:hover{
-    color: black;
+    color: var(--thirdcolor);
     text-decoration: none;
 }
 .categoriesIcon{
@@ -130,7 +115,7 @@ html *{
     background-color: black;
     padding: 13px 40px;
     border-radius: 5px;
-    
+    z-index: 100;
 }
 #dropdown-basic:focus{
     box-shadow: none;
@@ -176,19 +161,22 @@ html *{
     width: 43%;
 }
 .videoHeroHome{
-    width: 100%;
-    /* position: absolute; */
-}
-.phone{
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
-    width: 80%;
-    height: 100vh;
+    /* width: 65%; */
+    width: 66.5%;
+    height: 77.2vh;
     position: absolute;
-    right: 0;
-    top: 230vh;
-    /* padding-bottom: 3vh; */
+    z-index: -1;
+}
+.react-reveal{
+    animation-fill-mode: none !important;
+}
+.gifDownload{
+    background-position: top;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    width: 39vw;
+    height: 49vh;
 }
 .galleryContainer{
     display: grid;
@@ -224,11 +212,10 @@ html *{
 .navegadores, .categoriesDropdown{
     color: black;
     font-size: 17px;
-    /* font-weight: 600; */
 }
 .navegadores:hover{
     text-decoration: none;
-    color: black;
+    color: var(--thirdcolor);
 }
 .contenedorCategoriesBanner{
     width: 100%;
@@ -328,7 +315,7 @@ html *{
     color: white;
 }
 .contenedorStore{
-    background-color: #fafaf8;
+    background-color: white;
 }
 .contenedorInfoCards{
     width: 95%;
@@ -346,7 +333,7 @@ html *{
     width: 25%;
 }
 .cardProduct{
-    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 20%);
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 40%);
     border-radius: 10px;
     display: flex;
     align-items: center;
@@ -377,9 +364,15 @@ html *{
 }
 .buttonCancelOrder:hover, .buttonReady:hover{
     box-shadow: 0px 4px 5px 1px #00000022;
+    background-color: var(--thirdcolor);
 }
 .buttonReady{
     margin-left: 3vw;
+    text-align: center;
+}
+.buttonReady:hover{
+    color: white;
+    text-decoration: none;
 }
 .buttonAddProduct{
     margin-top: 20vh;
@@ -393,6 +386,7 @@ html *{
 }
 .buttonAddProduct:hover, .buttonBuyNow:hover, .buttonAddProduct2:hover, .buttonRemoveProduct:hover{
     box-shadow: 0px 4px 5px 1px #00000022;
+    background-color: var(--thirdcolor);
 }
 .buttonAddProduct2{
     background-color: black;
@@ -600,7 +594,7 @@ html *{
     margin-bottom: 3px;
 }
 .iconFavoritesHome:hover{
-    color: var(--primarycolor);
+    color: var(--thirdcolor);
 }
 .iconCart{
     background-color: black;
@@ -608,7 +602,7 @@ html *{
     padding: 2vh 1vw;  
 }
 .iconCart:hover{
-    background-color: var(--primarycolor);
+    background-color: var(--thirdcolor);
 }
 .usuarioImage{
     background-size: cover;
@@ -654,13 +648,6 @@ html *{
     color: white;
     font-size: 18px;
     margin-left: 0.5em;
-}
-.downloadApp{
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    width: 17vw;
-    height: 20vh;
 }
 .contenedorPublicity{
     display: flex;
@@ -713,6 +700,10 @@ html *{
     margin-right: 1vw; 
     /* margin-right: 5vw; */
 }
+.downloadAppInfo div{
+    display: flex;
+    align-items: center;
+}
 .contenedorDownload{
     background-color: #fff;
     border-radius: 20px;
@@ -724,6 +715,7 @@ html *{
 .contenedorDownload div{
     padding: 3vh 2vw;
     display: flex;
+    justify-content: space-between;
     /* position: relative; */
 }
 .downloadAppInfo{
@@ -735,6 +727,11 @@ html *{
     font-size: 2em;
     margin-left: 2vw;
     margin-bottom: 1px;
+}
+.downloadApp{
+    background-repeat: no-repeat;
+    width: 17vw;
+    height: 20vh;
 }
 .contenedorflashDealsInfo{
     background-color: #fff;
@@ -1001,10 +998,11 @@ html *{
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    width: 19%;
+    width: 39%;
     height: 15vh;
     border-radius: 20px;
     margin-bottom: 3vh;
+    margin-top: 9vh;
 }
 .contenedorInfoStorePage{
     display: flex;
@@ -1017,21 +1015,24 @@ html *{
     align-items: center !important;
     justify-content: space-between !important;
     background-color: white;
-    border-radius: 30px;
-    padding: 6px 1vw;
-    width: 40vw;
+    padding: 9px 1vw;
+    border-radius: 5px;
+    padding: 2vh 1vw;
+    border: 1px solid black;
+    width: 100%;
+    margin-bottom: 6vh;
 }
 .iconSearchStore{
-    background-color: black;
-    color: white;
-    border-radius: 50%;
-    padding: 6px 6px;
+    color: black;
+    /* border-radius: 50%; */
+    /* padding: 6px 6px; */
     cursor: pointer;
 }
 .inputSearchStore{
     border: none;
-    width: 80%;
+    width: 83%;
     font-family: "Poppins-Regular", Helvetica, Arial, sans-serif !important;
+    background-color: transparent;
 }
 .inputSearchStore:focus{
     outline: none;
@@ -1068,6 +1069,8 @@ html *{
 .linkExplore:hover{
     color: white;
     text-decoration: none !important;
+    background-color: var(--thirdcolor);
+    box-shadow: 0px 4px 5px 1px #00000022;
 }
 .contenedorReviews{ 
     margin-top: 10vh;
@@ -1279,18 +1282,29 @@ video {
     border: 1px solid #e5edef;
     cursor: pointer !important;
 }
-.MuiInputBase-input .MuiInput-input{
+.MuiInput-input{
     font-size: 14px;
     height: 40px;
-    color: #333;
-    background: #fff;
+    color: white !important;
+    /* background: #fff; */
     width: 100%;
     border-radius: 15px;
+}
+.MuiFormLabel-root, .Mui-focused{
+    color: black !important;
+}
+.Mui-focused{
+    color: black !important;
+}
+/* .MuiInput-underline, .Mui-focused{
+    color: black !important;
+} */
+.MuiInput-underline:after{
+    border-bottom: 2px solid black !important;
 }
 .MuiInputBase-root{
     font-size: 14px;
     height: 40px;
-    color: #333 !important;
     /* background: #fff; */
     border-radius: 15px !important;
     font-family: "Poppins-Regular", Helvetica, Arial, sans-serif !important;
@@ -1304,7 +1318,7 @@ video {
     margin-bottom: 6vh;
     color: white;
     background-color: black;
-    border: 1px solid #e7e7e7;
+    /* border: 1px solid #e7e7e7; */
     border-radius: 5px;
     padding: 2vh 4vw;
     display: flex;
@@ -1315,7 +1329,7 @@ video {
 .bussinesAccount:hover{
     color: black;
     background-color: white;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     text-decoration: none;
 }
 .iconBussines{
@@ -1390,11 +1404,12 @@ video {
     margin-top: 3vh;
     width: 100%;
     border: none;
-    background-color: rgba(173, 173, 173, 0.26);
+    background-color: rgba(255, 255, 255, 0.541);
     border-radius: 5px;
     padding: 1vh 0.5vw;
     font-family: "Poppins-Regular", Helvetica, Arial, sans-serif !important;
     resize: none;
+    color: black !important;
 }
 .textareaSignUpStore:focus, .selectSignUpStore:focus{
     outline:none;
@@ -1405,7 +1420,7 @@ video {
     width: 100%;
     border-radius: 5px;
     padding: 2vh 0.5vw;
-    background-color: rgba(173, 173, 173, 0.26);
+    background-color: rgba(255, 255, 255, 0.541);
     font-family: "Poppins-Regular", Helvetica, Arial, sans-serif !important;
 }
 option{
@@ -1432,6 +1447,7 @@ option{
 }
 .contenedorInfoFormAdminStore h3{
     text-align: center;
+    color: white;
 }
 .linkPersonAccount:hover{
     text-decoration: none;
@@ -1611,4 +1627,87 @@ option{
     width: 100%;
     height: 100%;
     overflow-y: hidden !important;
+}
+.logoVisible{
+    color: white;
+    font-size: 6em;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--thirdcolor);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.clickabuyLoader{
+    width: 100%;
+    height: 100vh;
+}
+.contenedorFiltrosProducts{
+    display: flex;
+    /* flex-direction: column;
+    align-items: center; */
+    justify-content: center;
+    width: 100%;
+
+}
+.contenedorInfoFiltros{
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    /* padding: 6vh 1vw; */
+    width: 80%;
+    /* border: 1px solid var(--thirdcolor);
+    border-radius: 20px; */
+}
+.custumerOpinions div{
+    display: flex;
+    align-items: center;
+}
+.borderFilter{
+    background-color: black;
+    height: 4px;
+    width: 4vw;
+    border-radius: 40px;
+    margin-bottom: 4vh;
+}
+.contenedorFiltroPrecio h3{
+    /* font-family: "Poppins-Regular", Helvetica, Arial, sans-serif !important; */
+    font-size: 1.1em;
+    margin-bottom: 3vh;
+}
+.priceFilter{
+    margin-bottom: 3vh;
+    cursor: pointer;
+}
+.priceFilter span{
+    font-family: "Poppins-Regular", Helvetica, Arial, sans-serif !important;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    /* margin-top: 2vh; */
+}
+.arrowPrice{
+    font-size: 1.4em;
+}
+.custumerOpinions{
+    margin-top: 6vh;
+}
+.custumerOpinions h3{
+    /* font-family: "Poppins-Regular", Helvetica, Arial, sans-serif !important; */
+    font-size: 1.1em;
+}
+.noProducts{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.inputCheck:focus{
+    outline: none;
+}
+.inputCheck{
+    margin-bottom: 1vh;
+    margin-right: 0.3vw;
+}
+.dom-ready .paypal-button .paypal-button-text:not(.immediate):not(.paypal-personalization-text):not(.hidden) {
+    visibility: hidden;
 }

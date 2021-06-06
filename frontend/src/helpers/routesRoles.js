@@ -2,7 +2,7 @@
 import Home from "../pages/Home";
 import Category from "../pages/Category";
 import Store from "../pages/Store";
-import SignIn from "../pages/SignIn";
+import LogIn from "../pages/LogIn";
 import SignUp from "../pages/SignUp";
 import SignUpStore from "../pages/SignUpStore";
 import SignUpProduct from "../pages/SignUpProduct";
@@ -19,7 +19,7 @@ import FilterProductsStore from '../components/FilterProductsStore'
 import AdminApp from '../pages/AdminApp'
 import FinalizePurchase from "../pages/FinalizePurchase";
 import { Route, Switch, Redirect } from "react-router-dom";
-import PruebaLotties from "../pages/PruebaLotties";
+
 
 const routesProtected = {
     routerUserDontLogged: () => {
@@ -30,9 +30,8 @@ const routesProtected = {
                 <Route path="/store/:id" component={Store} />
                 <Route path="/product/:id" component={ProductPage} />
                 <Route path="/buys" component={Buys} />
-                <Route path="/SignIn" component={SignIn} />
-                <Route path="/SignUp" component={SignUp} />
-                <Route path="/pruebalotties" component={PruebaLotties}/>
+                <Route path="/login" component={LogIn} />
+                <Route path="/signup" component={SignUp} />
                 {/*<Route path="/SignInAdmin" component={SignInAdmin} />*/}
                 
                 <Route path="/myFilters" component={MyFilters} />

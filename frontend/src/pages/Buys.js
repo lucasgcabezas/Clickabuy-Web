@@ -22,7 +22,7 @@ const Buys = ({ cart, clearCart }) => {
                     {cart.map(item=>{
                         return <PurchaseDetail itemCart ={item}/>
                     })}
-                    <h2>Total= ${cart.reduce((total,item)=>total+=item.quantity*item.price ,0)}</h2> 
+                    <h2>Total = ${cart.reduce((total,item)=>total+=item.quantity*item.price ,0).toFixed(2)}</h2> 
                     <div className="contenedorButtonsOrder">
                         <button onClick={()=>clearCart()} className="buttonCancelOrder">Cancel Order</button>
                         <Link to="/finalizepurchase" className="buttonReady">Ready</Link>

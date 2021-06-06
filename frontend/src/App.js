@@ -10,7 +10,7 @@ import { connect } from "react-redux";
 import cartActions from "./redux/actions/cartActions";
 import getRouteRoles from './helpers/routesRoles'
 import { useState } from "react";
-import PruebaLotties from "./pages/PruebaLotties";
+
 
 const App = ({ cart, reloadCartLS, loginForced, userLogged, history, checkUserRole, firstAnimation, animationState }) => {
   if (cart.length === 0) {
@@ -26,17 +26,9 @@ const App = ({ cart, reloadCartLS, loginForced, userLogged, history, checkUserRo
   const token = localStorage.getItem("token");
   if (!userLogged && token && token !== "undefined") {
     loginForced(JSON.parse(token), history);
-    // return null;
+    return null;
   }
-  if (firstAnimation) {
-    // animationState()
-    setTimeout(() => animationState(), 2000)
-    return <PruebaLotties />
-    // setTimeout(() => {
-    //   // animationState()
-    //   return <PruebaLotties />
-    // }, 3000);
-  } 
+
   return (
     <BrowserRouter>
       <ToastContainer />

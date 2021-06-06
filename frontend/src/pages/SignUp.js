@@ -56,14 +56,14 @@ const SignUp = (props) => {
   }, []);
   const respuestaGoogle = (response) => {
     const { givenName, familyName, email, googleId, imageUrl } = response.profileObj;
-    console.log({
-      loggedWithGoogle: true,
-      firstName: givenName,
-      lastName: familyName,
-      userImg: imageUrl,
-      email: email,
-      password: "a" + googleId,
-    });
+    // console.log({
+    //   loggedWithGoogle: true,
+    //   firstName: givenName,
+    //   lastName: familyName,
+    //   userImg: imageUrl,
+    //   email: email,
+    //   password: "a" + googleId,
+    // });
 
     let formData = new FormData();
     formData.append("loggedWithGoogle", true);
@@ -105,27 +105,18 @@ const SignUp = (props) => {
   };
 
   return (
-
-    <div style={{backgroundImage: "url('https://webdesing881317710.files.wordpress.com/2021/06/videoform3.gif')"}} className="imgForm" >
     <div className="contenedorSignUp">
-      {/* <video src="./assets/formVideo.mp4" autoPlay loop muted className="videoForm"></video> */}
-      {/* <div className="contenedorHeaderSignUp"> */}
+      <video src="./assets/videoUserAccount2.mp4" autoPlay loop muted className="videoForm"></video>
       <Link to="/" className="backToHome">
         <span class="material-icons-outlined iconBack">arrow_back_ios_new</span> Back
       </Link>
-      {/* </div> */}
       <div className="contenedorInfoForm">
         <div className="contenedorLogoForm">
           <FaTags className="logoForm" />
-          {/* <box-icon type='solid' name='purchase-tag' size="lg"></box-icon> */}
           <h1>clickabuy</h1>
-          {/* DO YOUR BUSSINES OR FIND WHAT YOU NEED */}
           <span className="fraseClickabuy">YOU NEED IT, YOU WANT IT, WITH CLICKABUY YOU CAN HAVE IT</span>
-          {/* <Link to="/SignUpStore" className="bussinesAccount">Create a Business Account <span class="material-icons-outlined iconBussines">arrow_forward_ios</span></Link> */}
-          {/* <div> */}
-            <span className="linkLogInText"> Already have an account?</span>
-            <Link to="/SignIn" className="bussinesAccount">Log In</Link>
-          {/* </div> */}
+          <span className="linkLogInText"> Already have an account?</span>
+          <Link to="/SignIn" className="bussinesAccount">Log In</Link>
         </div>
         <div className="contenedorForm">
           <h2>Register</h2>
@@ -178,13 +169,20 @@ const SignUp = (props) => {
               error={formik.touched.password && Boolean(formik.errors.password)}
               helperText={formik.touched.password && formik.errors.password}
             />
-            <div>
+            <div className="contenedorInputFile">
+              <label htmlFor="userImg" className="buttonInputFile">
+                <span class="material-icons-outlined iconCamera">add_a_photo</span> CHOOSE A PROFILE PICTURE
+                  <input id="userImg" name="userImg" type="file" style={{ display: "none" }} onChange={cargarFoto} />
+              </label>
+              <span>{photoName.userImgName}</span>
+            </div>
+            {/* <div>
               <label htmlFor="userImg" className="buttonInputFile">
                 Choose Your Image
                 <input id="userImg" name="userImg" type="file" style={{ display: "none" }} onChange={cargarFoto} />
               </label>
               <span>{photoName.userImgName}</span>
-            </div>
+            </div> */}
             <Button variant="contained" type="submit">
               Sign Up
             </Button>
@@ -207,7 +205,7 @@ const SignUp = (props) => {
         </div>
       </div>
     </div>
-    </div>
+    // </div>
   );
 };
 

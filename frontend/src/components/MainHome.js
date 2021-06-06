@@ -54,12 +54,15 @@ const MainHome = (props) => {
                 <div>
                     <div className="downloadAppInfo">
                         <p>Download clickabuy app</p>
-                        <div style={{ backgroundImage: "url('https://webdesing881317710.files.wordpress.com/2021/05/download.png')" }} className="downloadApp"></div>
                         <p>for a better experience.</p>
+                        <div>
+                        <div style={{ backgroundImage: "url('https://webdesing881317710.files.wordpress.com/2021/06/google-play.png')" }} className="downloadApp"></div>
+                        <div style={{ backgroundImage: "url('https://webdesing881317710.files.wordpress.com/2021/06/app-store.png')" }} className="downloadApp"></div>
+                        </div>
                     </div>
                     {/* <img src="https://webdesing881317710.files.wordpress.com/2021/05/downloadclickabuy.png" alt="" className="phone"/> */}
                     {/* <div className="relative"> */}
-                    <div style={{ backgroundImage: "url('https://webdesing881317710.files.wordpress.com/2021/06/phone.png')" }} className="phone"></div>
+                    <div style={{ backgroundImage: "url('https://webdesing881317710.files.wordpress.com/2021/06/gif2.gif')" }} className="gifDownload"></div>
                     {/* </div> */}
                 </div>
             </div>

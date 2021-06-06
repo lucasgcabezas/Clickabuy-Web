@@ -9,6 +9,9 @@ import {
 } from "./utils";
 
 import "react-credit-cards/es/styles-compiled.css";
+import { connect } from "react-redux";
+import mailActions from "../redux/actions/mailActions";
+import cartActions from "../redux/actions/cartActions";
 
 class PaymentForm extends React.Component {
   state = {
@@ -21,6 +24,8 @@ class PaymentForm extends React.Component {
     formData: null
   };
 
+  // const { buy, clearCart, mailOrderConfirmed } = this.props
+  // const { cart, total } = buy
   handleCallback = ({ issuer }, isValid) => {
     if (isValid) {
       this.setState({ issuer });
@@ -61,7 +66,15 @@ class PaymentForm extends React.Component {
 
   render() {
     const { name, number, expiry, cvc, focused, issuer, formData } = this.state;
-
+    const { buy, clearCart, mailOrderConfirmed, setNameModal } = this.props
+    const { cart, total } = buy
+    let resumen = cart.map(product => {
+      return {
+        product: { nameProduct: product.nameProduct, imageProduct: product.productImg, quantity: product.quantity },
+      }
+    })
+    let asunto = "compra en clickabuy"
+    let destinatario = "juancarlos.mindub@gmail.com"
     return (
       <div key="Payment">
         <div className="App-payment">
@@ -125,20 +138,23 @@ class PaymentForm extends React.Component {
             </div>
             <input type="hidden" name="issuer" value={issuer} />
             <div className="form-actions">
-              <button className="buttonCreditCard">PAY</button>
+              <button className="buttonCreditCard" onClick={(e) => {setNameModal("purchaseCompleted"); mailOrderConfirmed(name, resumen, destinatario, asunto); clearCart()}}>PAY</button>
             </div>
           </form>
-          {formData && (
+          {/* {formData && (
             <div className="App-highlight">
               {formatFormData(formData).map((d, i) => (
                 <div key={i}>{d}</div>
               ))}
             </div>
-          )}
+          )} */}
         </div>
       </div>
     );
   }
 }
-
-export default PaymentForm
+const mapDispatchToProps = {
+  mailOrderConfirmed: mailActions.mailOrderConfirmed,
+  clearCart: cartActions.clearCart
+}
+export default connect(null, mapDispatchToProps)(PaymentForm)

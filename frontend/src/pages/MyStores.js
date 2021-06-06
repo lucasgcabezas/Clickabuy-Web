@@ -20,11 +20,9 @@ const MyStore = (props) => {
 
     const fetchAllStores = async () => {
         const response = await getStoresByUser(userLogged.token)
-        console.log(response)
         setStoresOfUser(response)
     }
 
-    // console.log()
 
     return (
         <>

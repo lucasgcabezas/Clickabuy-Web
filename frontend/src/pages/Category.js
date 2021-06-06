@@ -2,22 +2,39 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import ReactStars from 'react-stars'
-
-// import { useState } from 'react'
 import categoryActions from '../redux/actions/categoryActions'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import storeActions from '../redux/actions/storeActions'
+import Lottie from 'react-lottie'
+import animationData from '../lotties/clickabuy-loader.json'
 
 const Category = (props) => {
     const { currentCategory, getCurrentCategory, storesForCategory, getAllCategories } = props
-    // const idParams = props.match.params.id
-    if (!currentCategory) {
-        // getAllCategories()
-        // getCurrentCategory(idParams)
-        // getStoresbByCategory(idParams)
-        return <span>cargando</span>
+    const idParams = props.match.params.id
+    
+    const defaultOptions = {
+        loop: true,
+        autoplay: true,
+        animationData: animationData,
+        rendererSettings: {
+            preserveAspectRatio: "xMidYMid slice"
+        }
     }
+
+    if (!currentCategory) {
+        getAllCategories()
+        getCurrentCategory(idParams)
+        return <div className="clickabuyLoader">
+            <Lottie
+                options={defaultOptions}
+                // height={657}
+                // width={1365}
+                // speed={0}
+            />
+        </div>
+    }
+
     return (
         <>
             <Header />
@@ -35,7 +52,7 @@ const Category = (props) => {
                     <div className="categoryStoresSection">
                         {
                             storesForCategory.length === 0
-                                ? <span>No hay disponibles</span>
+                                ? <span>No categories</span>
                                 : storesForCategory.map((store, i) => {
                                     let ratingCounter = 0
 
@@ -49,14 +66,13 @@ const Category = (props) => {
                                             <div>
                                                 <div style={{ backgroundImage: `url('../assets/${store.logoStore}')` }} className="logoStoreCategory"></div>
                                                 <span className="nameStoresCards">{store.nameStore}</span>
-                                                {/* <span className="nameCategoryStoresCards">STARTS</span> */}
                                                 <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', height: 40 }}>
                                                     <ReactStars
                                                         count={5}
                                                         size={32}
                                                         isHalf={true}
                                                         edit={false}
-                                                        color2="#dca6ac"
+                                                        color2="#EA957F"
                                                         color1="#555555"
                                                         value={starsValue}
                                                     />

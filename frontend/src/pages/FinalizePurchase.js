@@ -12,16 +12,11 @@ import PaymentForm from "../components/PaymentForm"
 const FinalizePurchase = (props) => {
     const { cart } = props
     const [show, setShow] = useState(false)
+    const [nameModal, setNameModal] = useState("payment")
     const [cards, setCards] = useState({ cvc: '', expiry: '', focus: '', name: '', number: '' })
     let display = !show ? 'none' : 'flex'
-    let total = cart.reduce((total, item) => total += item.quantity * item.price, 0)
-    // const handleInputFocus = (e) => {
-    //     setCards({ focus: e.target.name })
-    // }
-    // const handleInputChange = (e) => {
-    //     const { name, value } = e.target
-    //     setCards({ [name]: value })
-    // }
+    let total = cart.reduce((total, item) => total += item.quantity * item.price, 0).toFixed(2)
+
     return (
         <>
             <Header />
@@ -36,22 +31,25 @@ const FinalizePurchase = (props) => {
                             </div>
                         )
                     })}
-                    <h2>Total= ${total}</h2>
-                    <Paypal buy={{ description: 'clickabuy', total: total }} />
+                    <h2>Total = ${total}</h2>
+                    <Paypal buy={{ cart: cart, total: total }} />
                     <button onClick={() => setShow(!show)} >Credit/Debit Card</button>
                     <Modal
                         isOpen={show}
-                        onRequestClose={() => setShow(!show)}
+                        onRequestClose={() => {setShow(!show); setNameModal("payment")}}
                         contentLabel="Example Modal"
                         className="ModalComponent"
                         overlayClassName="OverlayModal"
                     >
                         <div id="modal" style={{ display: display }}>
                             <div style={{ display: "flex" }}>
-                                <span className="material-icons-outlined closeModal" onClick={() => setShow(false)}>close</span>
+                                <span className="material-icons-outlined closeModal" onClick={() => {setShow(false); setNameModal("payment")}}>close</span>
                             </div>
                             <div className="creditCardModal">
-                                <PaymentForm/>
+                                {nameModal !== "payment"
+                                ? <h1>compra finalizada holo :v dijo el jona</h1>
+                                : <PaymentForm buy={{ cart: cart, total: total }} setNameModal={setNameModal}/>
+                                }
                             </div>
                         </div>
                     </Modal>

@@ -60,9 +60,6 @@ const SignUpStore = (props) => {
 
       formData.append("logoStore", photo.userImg);
 
-      console.log("soy el values", values);
-      console.log("soy el Formdata", formData);
-
       props.addRequest(props.userLogged.token, formData);
       props.history.push("/myStores")
     },
@@ -70,13 +67,11 @@ const SignUpStore = (props) => {
 
   const cargarFoto = (e) => {
     setPhoto({ userImg: e.target.files[0] });
-    console.log("soy el e", e.target.files[0].name);
     setPhotoName({ userImgName: e.target.files[0].name });
   };
 
   const cargarTA = (e) => {
     /* console.log("TA",e.nativeEvent.data) */
-    console.log("TargetValue", e.target.value)
 
     setTA({ description: e.target.value });
   };
@@ -84,20 +79,16 @@ const SignUpStore = (props) => {
 
   return (
     <div className="contenedorSignUp">
-      <div style={{ backgroundImage: "url('https://webdesing881317710.files.wordpress.com/2021/06/videoform3.gif')" }} className="imgForm" >
-
-        {/* <video src="./assets/formVideo.mp4" autoPlay loop muted className="videoForm"></video> */}
-        {/* <div className="contenedorHeaderSignUp"> */}
+        <video src="./assets/videoBuissnessAccount.mp4" autoPlay loop muted className="videoForm"></video>
         <Link to="/" className="backToHome"><span class="material-icons-outlined iconBack">arrow_back_ios_new</span> Back</Link>
-        {/* </div> */}
         <div className="contenedorFormAdminStore">
           <div className="contenedorInfoFormAdminStore">
             <h3>Hello {userLogged.firstName}! Complete the following details to create a Business Account</h3>
-            <Link to="/SignUp" className="linkPersonAccount">
+            {/* <Link to="/SignUp" className="linkPersonAccount">
               <div className="d-flex justify-content-end">
                 <label className="personAccount">Create a person account </label>
               </div>
-            </Link>
+            </Link> */}
             <form onSubmit={formik.handleSubmit}>
               <TextField
                 fullWidth
@@ -120,7 +111,7 @@ const SignUpStore = (props) => {
                   return <option value={category._id} label={category.nameCategory} />;
                 })}
               </select>
-              <textarea placeHolder="Description of your business (optional)" onChange={(e) => cargarTA(e)} className="textareaSignUpStore"></textarea>
+              <textarea placeholder="Description of your business (optional)" onChange={(e) => cargarTA(e)} className="textareaSignUpStore"></textarea>
               <div className="contenedorInputFile">
                 <label htmlFor="userImg" className="buttonInputFile">
                   <span class="material-icons-outlined iconCamera">add_a_photo</span> UPLOAD STORE'S LOGO
@@ -133,7 +124,6 @@ const SignUpStore = (props) => {
           </div>
         </div>
       </div>
-    </div>
   );
 };
 

@@ -9,7 +9,7 @@ const PruebaLucas = () => {
     const [state, setState] = useState(0)
 
     const ratingChanged = (newRating) => {
-        console.log(newRating)
+        // console.log(newRating)
     }
 
 

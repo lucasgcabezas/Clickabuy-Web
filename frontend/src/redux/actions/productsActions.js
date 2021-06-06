@@ -98,7 +98,6 @@ const productsActions = {
                     headers: { 'Authorization': 'Bearer ' + token }
                 }
                 )
-                console.log("respuesta de rate", response.data);
             } catch (err) {
                 console.log(err);
                 // showTostError500();

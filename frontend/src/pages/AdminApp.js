@@ -35,7 +35,6 @@ const AdminApp = ({userLogged,getAllRequest,approveRequest,rejectRequest}) => {
     return(
         <div className = "body">
             {requests.map(request => {
-                {console.log(request)}
                 return (
                     <div key = {request._id}  style={{width:"90vw",display:'flex',alignItems:'center',justifyContent:"space-around",marginTop:"12px",backgroundColor:"lightblue" }}> 
                         <img  src = {request.logoStore.url} style={{width:"100px"}}/>
