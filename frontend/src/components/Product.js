@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import productsActions from "../redux/actions/productsActions";
 import ReactStars from 'react-stars'
+import { showToast } from '../helpers/myToast'
 
 const Product = ({ product, likeProduct, userLogged }) => {
   const { stock, nameProduct, price, productImg, userLiked, reviews } = product;
@@ -12,7 +13,7 @@ const Product = ({ product, likeProduct, userLogged }) => {
   
   const likes = async () => {
     if (!userLogged) {
-      alert("no podes likear");
+      showToast('error', "You must be logged in to save the post in favorites")
     } else {
       setLoadingHeart(false);
       likeProduct(userLogged.token, product._id);

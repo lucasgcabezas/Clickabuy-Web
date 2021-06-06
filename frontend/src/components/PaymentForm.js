@@ -73,8 +73,8 @@ class PaymentForm extends React.Component {
         product: { nameProduct: product.nameProduct, imageProduct: product.productImg, quantity: product.quantity },
       }
     })
-    let asunto = "compra en clickabuy"
-    let destinatario = "juancarlos.mindub@gmail.com"
+    let asunto = "Order Confirmation!"
+    let destinatario = "jonhdoe158243@gmail.com"
     return (
       <div key="Payment">
         <div className="App-payment">

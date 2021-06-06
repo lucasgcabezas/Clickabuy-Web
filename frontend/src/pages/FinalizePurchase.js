@@ -57,6 +57,7 @@ const FinalizePurchase = (props) => {
                             <div className="creditCardModal">
                                 {nameModal !== "payment"
                                 ? <div className="orderCompleted">
+                                    <div className="imgOrderCompleted" style={{backgroundImage:"url('https://webdesing881317710.files.wordpress.com/2021/06/invoice-3597241-3010221.png')"}}></div>
                                     <h1>Your order is completed!</h1>
                                     <span>Thanks for shopping in clickabuy</span>
                                     <span>We will send you a confirmation email, including the summary of your purchase.</span>

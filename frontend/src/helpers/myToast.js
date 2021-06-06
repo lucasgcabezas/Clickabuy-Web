@@ -3,7 +3,7 @@ const defaultConfiguration = (position) => {
   return {
     position,
     autoClose: 3500,
-    hideProgressBar: false,
+    hideProgressBar: true,
     closeOnClick: true,
     pauseOnHover: true,
     draggable: true,
@@ -14,19 +14,19 @@ const defaultConfiguration = (position) => {
 export function showToast(type, message, position = "top-right") {
   switch (type) {
     case "error":
-      toast.error(message, defaultConfiguration(position));
+      toast.dark(message, defaultConfiguration(position));
       break;
     case "success":
-      toast.success(message, defaultConfiguration(position));
+      toast.dark(message, defaultConfiguration(position));
       break;
     case "info":
-      toast.info(message, defaultConfiguration(position));
+      toast.dark(message, defaultConfiguration(position));
       break;
     default:
-      toast.error(`error myToast, type: "${type}" is invalid`, "bottom-left");
+      toast.dark(`error myToast, type: "${type}" is invalid`, "bottom-left");
   }
 }
 
 export function showTostError500(position = "top-right") {
-  toast.error("ups , something went wrong, please try again... ", defaultConfiguration(position));
+  toast.dark("ups , something went wrong, please try again... ", defaultConfiguration(position));
 }

@@ -7,6 +7,7 @@ import productsActions from "../redux/actions/productsActions"
 import Footer from '../components/Footer'
 import { FaHeart, FaRegHeart, FaTrashAlt } from "react-icons/fa";
 import {Link} from 'react-router-dom'
+import {showToast} from '../helpers/myToast'
 
 import ReactStars from 'react-stars'
 
@@ -119,10 +120,10 @@ const ProductPage = (props) => {
                             <div className="contenedorButtonsProductCart">
                                 {cart.find(item => item._id === productSelected._id)
                                     ?
-                                    <button className="buttonRemoveProduct" onClick={() => deleteProductFromCart(productSelected)}><FaTrashAlt /></button>
+                                    <button className="buttonRemoveProduct" onClick={() => {deleteProductFromCart(productSelected); showToast("success", "Product deleted from cart")}}><FaTrashAlt /></button>
                                     : <div className="contenedorButtonAccionCart">
-                                        <button className="buttonAddProduct2" onClick={() => addProductToCart(productSelected)}>ADD TO CART</button>
-                                        <Link to="/finalizepurchase"><button className="buttonBuyNow" onClick={() => addProductToCart(productSelected)}>BUY NOW</button></Link>
+                                        <button className="buttonAddProduct2" onClick={() => {addProductToCart(productSelected); showToast("success", "Added to cart")}}>ADD TO CART</button>
+                                        <Link to="/finalizepurchase"><button className="buttonBuyNow" onClick={() => {addProductToCart(productSelected); showToast("success", "Added to cart")}}>BUY NOW</button></Link>
                                     </div>
                                 }
                             </div>

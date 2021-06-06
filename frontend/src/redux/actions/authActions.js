@@ -63,6 +63,7 @@ const authActions = {
   logOutUser: () => {
     return (dispatch) => {
       dispatch({ type: "LOG_OUT" });
+      showToast("info", "Hope to see you soon!")
     };
   },
   checkUserRole: (token) => {

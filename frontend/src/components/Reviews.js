@@ -4,6 +4,7 @@ import { IoSend } from 'react-icons/io5'
 import { useState } from "react"
 import Review from '../components/Review'
 import ReactStars from 'react-stars'
+import {showToast} from '../helpers/myToast'
 
 
 const Reviews = (props) => {
@@ -12,7 +13,7 @@ const Reviews = (props) => {
     const [loadingReviews, setLoadingReviews] = useState(true)
     // const [starState, setStarState] = useState(0)
 
-    let input = userLogged ? { inputReview: 'Write a review...', disabled: false } : { inputReview: 'You must be logged in to post a review', disabled: true }
+    let input = userLogged ? { inputReview: 'Write a review...', disabled: false } : { inputReview: 'You must be logged in to write a review', disabled: true }
     let buttonDisabled = inputReview.review ? false : true
 
     const leerInput = (e) => {
@@ -34,18 +35,17 @@ const Reviews = (props) => {
         const spaceComment = inputReview.review.charAt(0)
         if (userLogged) {
             if (spaceComment === " " || inputReview.review === "" || inputReview.vote === 0) {
-                alert("You can't post an empty comment")
+                showToast("error", "Rating with starts system is required to post a review")
             } else {
                 setLoadingReviews(false)
                 const response = await addReview(inputReview, product)
                 setReviews(response.reviews)
                 setInputReview({ review: '', token: '' })
                 setLoadingReviews(true)
-                // window.scrollTo(0, 100)
             }
 
         } else {
-            alert("You must be logged in to post a review")
+            showToast("error", "You must be logged in to write a review")
         }
     }
     const updatedReview = async (review, idReview) => {
@@ -90,12 +90,9 @@ const Reviews = (props) => {
         ratingCounter = ratingCounter + rating.vote
     })
     let starsValue = ratingCounter / reviews.length
-
-
     const newStar = (initialValue, size) => {
         return (
             <ReactStars
-                // onChange={(e) => changeValueStar(e)}
                 count={5}
                 size={size}
                 isHalf={true}
@@ -110,8 +107,6 @@ const Reviews = (props) => {
         )
 
     }
-
-
     return (
         <div className="contenedorReviews">
             <div className="tituloReviews">Reviews</div>
@@ -173,6 +168,7 @@ const Reviews = (props) => {
             </div>
             {/* <div className="contenedorEmojis">{visible && <Picker onEmojiClick={onEmojiClick} className="emojis"/>}</div> */}
 
+            <div className="contenedorInputSendStarts">
 
             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', height: 40 }}>
 
@@ -193,6 +189,7 @@ const Reviews = (props) => {
                 <input className="inputReviews" type="text" placeholder={input.inputReview} onKeyDown={sendEnter} value={inputReview.review} disabled={input.disabled} onChange={leerInput} />
                 {/* {userLogged && <GrEmoji onClick={()=> setVisible(!visible)} className="iconoEmoji" />} */}
                 <IoSend onClick={() => loadingReviews ? sendReview() : null} disabled={buttonDisabled} className="iconSend" />
+            </div>
             </div>
         </div>
     )
