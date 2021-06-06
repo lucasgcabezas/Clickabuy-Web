@@ -1,5 +1,6 @@
 import axios from 'axios'
 import API from "../../helpers/api"
+import { showToast } from '../../helpers/myToast'
 
 const categoryActions = {
     // getStoresbByCategory: (categoryId) => {
@@ -21,9 +22,12 @@ const categoryActions = {
         return async (dispatch, getState) => {
             try {
                 const response = await axios.get(API + '/categories')
-                // return response.data.response
-                dispatch({ type: 'FETCH_CATEGORIES', payload: response.data.response })
+                
+                if(response.data.success)
+                    dispatch({ type: 'FETCH_CATEGORIES', payload: response.data.response })
+                
             } catch (error) {
+                
                 console.log(error)
             }
         }

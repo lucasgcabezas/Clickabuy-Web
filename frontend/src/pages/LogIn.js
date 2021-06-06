@@ -67,7 +67,7 @@ const LogIn = (props) => {
   return (
     <div className="contenedorSignUp">
       <video src="./assets/videoUserAccount.mp4" autoPlay loop muted className="videoForm"></video>
-        <Link to="/" className="backToHome"><span class="material-icons-outlined iconBack">arrow_back_ios_new</span> Back</Link>
+        <Link to="/" className="backToHome"><span className="material-icons-outlined iconBack">arrow_back_ios_new</span> Back</Link>
       <div className="contenedorInfoForm">
         <div className="contenedorLogoForm">
           <FaTags className="logoForm" />

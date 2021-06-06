@@ -84,7 +84,7 @@ const SignUpStore = (props) => {
 
       {/* <video src="./assets/formVideo.mp4" autoPlay loop muted className="videoForm"></video> */}
       {/* <div className="contenedorHeaderSignUp"> */}
-      <div onClick={props.history.goBack} style={{ cursor: 'pointer' }} className="backToHome"><span class="material-icons-outlined iconBack">arrow_back_ios_new</span> Back</div>
+      <div onClick={props.history.goBack} style={{ cursor: 'pointer' }} className="backToHome"><span className="material-icons-outlined iconBack">arrow_back_ios_new</span> Back</div>
 
       {/* </div> */}
       <div className="contenedorFormAdminStore">
@@ -120,7 +120,7 @@ const SignUpStore = (props) => {
             <textarea placeholder="Description of your business (optional)" onChange={(e) => cargarTA(e)} className="textareaSignUpStore"></textarea>
             <div className="contenedorInputFile">
               <label htmlFor="userImg" className="buttonInputFile">
-                <span class="material-icons-outlined iconCamera">add_a_photo</span> UPLOAD STORE'S LOGO
+                <span className="material-icons-outlined iconCamera">add_a_photo</span> UPLOAD STORE'S LOGO
                   <input id="userImg" name="userImg" type="file" style={{ display: "none" }} onChange={cargarFoto} />
               </label>
               <span>{photoName.userImgName}</span>

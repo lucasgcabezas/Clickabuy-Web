@@ -11,14 +11,14 @@ const Categories = (props) => {
     return (
         <Dropdown>
             <Dropdown.Toggle id="dropdown-basic">
-            <span class="material-icons-outlined categoriesIcon">format_list_bulleted</span> Categories
+            <span className="material-icons-outlined categoriesIcon">format_list_bulleted</span> Categories
             </Dropdown.Toggle>
             <Dropdown.Menu>
                 {categories.length === 0
                     ? <span>No Categories</span>
                     : categories.map((category, index) => {
                         return (
-                            <div onClick={()=> getCurrentCategory(category._id)}>
+                            <div key={category._id} onClick={()=> getCurrentCategory(category._id)}>
                                 <Link to={`/category/${category._id}`} className="nameCategory" key={index}><span>{category.nameCategory}</span></Link>
                             </div>
                         )

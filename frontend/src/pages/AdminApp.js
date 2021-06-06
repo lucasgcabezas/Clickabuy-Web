@@ -41,7 +41,7 @@ const AdminApp = (props) => {
             <div className="body" style={{backgroundColor: '#eeeeee'}}>
 
             <div className="adminAppHeader">
-                    <div onClick={props.history.goBack} style={{ cursor: 'pointer' }} className="backToHome"><span class="material-icons-outlined iconBack">arrow_back_ios_new</span> Back</div>
+                    <div onClick={props.history.goBack} style={{ cursor: 'pointer' }} className="backToHome"><span className="material-icons-outlined iconBack">arrow_back_ios_new</span> Back</div>
                     <span className="myAdminAppTitle" > NEW STORES REQUESTS</span>
                 </div>
                 {requests.map(request => {

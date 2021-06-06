@@ -22,7 +22,7 @@ const MyFilters = (props) => {
     myCopia.push({ ...product, miPromedio: promedio });
   });
 
-
+  
 
   const [myProducts, setMyProducts] = useState(myCopia);
   const [myProductsAll, setMyProductsAll] = useState(myCopia);
@@ -41,11 +41,12 @@ const MyFilters = (props) => {
       case "hf":
         newArrayProducts = myProducts.slice().sort((a, b) => b.price - a.price);
         setMyProducts(newArrayProducts);
-
+        
         break;
       case "lf":
         newArrayProducts = myProducts.slice().sort((a, b) => a.price - b.price);
         setMyProducts(newArrayProducts);
+        
         break;
       case "rPrice":
         /*  debugger; */
@@ -62,7 +63,7 @@ const MyFilters = (props) => {
         }
         setMyProducts(newArrayProducts);
         setMyProductsPrice(newArrayProducts);
-
+        props.filterProductsByMyFilter(newArrayProducts, inputSearch);
         textInput1.current.checked =
           textInput2.current.checked =
           textInput3.current.checked =
@@ -149,10 +150,10 @@ const MyFilters = (props) => {
           
           <div className="contenedorFiltroPrecio">
             <h3>sort by price:</h3>
-            <div onClick={() => {handleFilters("hf")}} className="priceFilter">
+            <div onClick={() => {handleFilters("lf")}} className="priceFilter">
               <span className="lowest">LOWEST <BiDownArrowAlt className="arrowPrice"/></span>
             </div>
-            <div onClick={(e) => {handleFilters("lf")}} className="priceFilter">
+            <div onClick={(e) => {handleFilters("hf")}} className="priceFilter">
               {/* ▲ */}
               <span>HIGHEST <BiUpArrowAlt className="arrowPrice"/></span>
             </div>

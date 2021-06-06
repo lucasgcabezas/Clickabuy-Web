@@ -1,5 +1,6 @@
 import axios from 'axios'
 import API from "../../helpers/api";
+import { showToast } from '../../helpers/myToast';
 
 
 const productsActions = {
@@ -98,8 +99,7 @@ const productsActions = {
             try {
                 const response = axios.put(API + '/productRate/' + productId, { numberRate }, {
                     headers: { 'Authorization': 'Bearer ' + token }
-                }
-                )
+                })
             } catch (err) {
                 console.log(err);
                 // showTostError500();
@@ -111,5 +111,20 @@ const productsActions = {
             dispatch({ type: "UPDATE_PRODUCT_MY_FILTER", payload: { productFiltered, inputSearch } })
         }
     },
+    getProductById:(idProduct) => {
+        return async (dispatch)=> {
+            
+            try {
+                const {data} = await axios.get(API + '/product/' + idProduct, )
+                
+                if(data.success)
+                    return data.response;
+                else
+                    showToast("error",data.error)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+    }
 }
 export default productsActions
