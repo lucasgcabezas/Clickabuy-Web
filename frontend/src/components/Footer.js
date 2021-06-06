@@ -22,7 +22,7 @@ const Footer = (props) => {
                         {
                             categories.map(category => {
                                 return (
-                                    <Link to={`/category/${category._id}`} className="navegadoresFooter"><span>{category.nameCategory}</span></Link>
+                                    <Link key={category._id} to={`/category/${category._id}`} className="navegadoresFooter"><span>{category.nameCategory}</span></Link>
                                 )
                             })
                         }
@@ -45,21 +45,21 @@ const Footer = (props) => {
                 <div>
                     {
                         pagosArray.map(elemento => {
-                            return <div key={elemento._id} style={{ backgroundImage: `url('${elemento.imagePagos}')` }} className="imagePagos"></div>
+                            return <div key={elemento.id} style={{ backgroundImage: `url('${elemento.imagePagos}')` }} className="imagePagos"></div>
                         })
                     }
                 </div>
             </div>
             <div className="contenedorSocialMedia">
                 <div>
-                    <Link className="facebook"><FaFacebookF /></Link>
-                    <Link className="twitter"><FaTwitter /></Link>
-                    <Link className="google"><FaGooglePlusG /></Link>
-                    <Link className="github"><FaGithub /></Link>
-                    <Link className="pinterest"><FaPinterestP /></Link>
-                    <Link className="linkedin"><FaLinkedin /></Link>
-                    <Link className="instagram"><FaInstagram /></Link>
-                    <Link className="mail"><MdEmail /></Link>
+                    <Link exact to="/"  className="facebook"><FaFacebookF /></Link>
+                    <Link exact to="/" className="twitter"><FaTwitter /></Link>
+                    <Link exact to="/" className="google"><FaGooglePlusG /></Link>
+                    <Link exact to="/" className="github"><FaGithub /></Link>
+                    <Link exact to="/" className="pinterest"><FaPinterestP /></Link>
+                    <Link exact to="/" className="linkedin"><FaLinkedin /></Link>
+                    <Link exact to="/" className="instagram"><FaInstagram /></Link>
+                    <Link exact to="/" className="mail"><MdEmail /></Link>
                 </div>
             </div>
             <div className="copyright">

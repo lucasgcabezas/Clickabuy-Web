@@ -73,7 +73,7 @@ const MyStoreView = (props) => {
 
 
                 <div className="myStoreBackTitle">
-                    <div onClick={props.history.goBack} style={{ cursor: 'pointer' }} className="backToHome"><span class="material-icons-outlined iconBack">arrow_back_ios_new</span> Back</div>
+                    <div onClick={props.history.goBack} style={{ cursor: 'pointer' }} className="backToHome"><span className="material-icons-outlined iconBack">arrow_back_ios_new</span> Back</div>
                     <span className="myStoreTitle">{thisStore.nameStore}</span>
                 </div>
 
@@ -91,7 +91,7 @@ const MyStoreView = (props) => {
                         {
                             preloaderProduct
                                 ? <div className="prelaoderContainer">
-                                    <div class="lds-ripple"><div></div><div></div></div>
+                                    <div className="lds-ripple"><div></div><div></div></div>
                                 </div>
                                 : productsByUserStore.length > 0
                                 && productsByUserStore.map(prod => {

@@ -24,7 +24,7 @@ const MyStore = (props) => {
 
 
                 <div className="myStoresHeader">
-                    <div onClick={props.history.goBack} style={{ cursor: 'pointer' }} className="backToHome"><span class="material-icons-outlined iconBack">arrow_back_ios_new</span> Back</div>
+                    <div onClick={props.history.goBack} style={{ cursor: 'pointer' }} className="backToHome"><span className="material-icons-outlined iconBack">arrow_back_ios_new</span> Back</div>
                     <span className="myStoresTitle" >YOUR STORES</span>
                 </div>
                 <div className="containerOfItemsMyStores">
@@ -35,7 +35,7 @@ const MyStore = (props) => {
                     {
                         preloaderStore
                             ? <div className="prelaoderContainerStore">
-                                <div class="lds-ripple"><div></div><div></div></div>
+                                <div className="lds-ripple"><div></div><div></div></div>
                             </div>
                             : storesByUser.length === 0
                                 ? <span>You dont have any store yet.</span>

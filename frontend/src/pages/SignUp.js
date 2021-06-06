@@ -108,7 +108,7 @@ const SignUp = (props) => {
     <div className="contenedorSignUp">
       <video src="./assets/videoUserAccount2.mp4" autoPlay loop muted className="videoForm"></video>
       <Link to="/" className="backToHome">
-        <span class="material-icons-outlined iconBack">arrow_back_ios_new</span> Back
+        <span className="material-icons-outlined iconBack">arrow_back_ios_new</span> Back
       </Link>
       <div className="contenedorInfoForm">
         <div className="contenedorLogoForm">
@@ -171,7 +171,7 @@ const SignUp = (props) => {
             />
             <div className="contenedorInputFile">
               <label htmlFor="userImg" className="buttonInputFile">
-                <span class="material-icons-outlined iconCamera">add_a_photo</span> CHOOSE A PROFILE PICTURE
+                <span className="material-icons-outlined iconCamera">add_a_photo</span> CHOOSE A PROFILE PICTURE
                   <input id="userImg" name="userImg" type="file" style={{ display: "none" }} onChange={cargarFoto} />
               </label>
               <span>{photoName.userImgName}</span>

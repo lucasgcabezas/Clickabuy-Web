@@ -36,7 +36,7 @@ const MainHome = (props) => {
                     {
                         productsFiltered.map(product => {
                             return (
-                                <div className="productHome">
+                                <div key = {product._id} className="productHome">
                                     <div style={{ backgroundImage: `url('${product.productImg}')` }} className="imageProductHome">
                                         <span className="descuentoHome">NEW!</span>
                                     </div>

@@ -19,6 +19,25 @@ const respondFrontend = (res, response, error) => {
     })
 }
 
+const populateOneDocument = async (document) => {
+
+    let retorno = await document
+        .populate({ path: 'storeId'})
+        
+        .execPopulate();
+    return retorno;
+
+}
+const populateArrayDocuments = async (documents) => {
+    const opts = [
+        { path: 'storeId'}
+    ];
+    let retorno = await RequestCreateStoreModel.populate(documents, opts);
+    return retorno;
+}
+
+
+
 const errorBackend = "error 500 , avisar al  team backend";
 const errorProductNotFound = "error: Product not found";
 
@@ -90,12 +109,14 @@ const productControllers = {
         const id = req.params.id;
         let response, error;
         try {
-            response = await Product.findById(id);
-            response || (error = errorProductNotFound)
+            let product = await Product.findById(id);
+            product || (error = errorProductNotFound)
+            response = await populateOneDocument(product)
         } catch (err) {
             console.log(err);
             error = errorBackend;
         }
+        
         respondFrontend(res, response, error);
     },
     updateProduct: async (req, res) => {

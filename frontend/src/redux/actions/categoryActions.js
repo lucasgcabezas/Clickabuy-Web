@@ -19,14 +19,13 @@ const categoryActions = {
     //     }
     // },
     getAllCategories: () => {
-        console.log("categorias")
         return async (dispatch, getState) => {
             try {
                 const response = await axios.get(API + '/categories')
                 
                 if(response.data.success)
                     dispatch({ type: 'FETCH_CATEGORIES', payload: response.data.response })
-                console.log(response.data)
+                
             } catch (error) {
                 
                 console.log(error)
