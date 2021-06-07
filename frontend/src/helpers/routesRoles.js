@@ -33,11 +33,11 @@ const routesProtected = {
                 <Route path="/login" component={LogIn} />
                 <Route path="/signup" component={SignUp} />
                 {/*<Route path="/SignInAdmin" component={SignInAdmin} />*/}
-                
+
                 <Route path="/myFilters" component={MyFilters} />
                 <Route path="/products" component={FilterProductsStore} />
                 <Route path="/myProgressBar" component={MyProgressBar} />
-                
+
                 <Redirect to="/" />
 
             </Switch>
@@ -54,7 +54,7 @@ const routesProtected = {
                 <Route path="/SignUpStore" component={SignUpStore} />
                 {/* <Route path="/myStores" component={MyStores} />
                 <Route path="/myStore/:id" component={MyStoreView} /> */}
-                <Route path="/finalizepurchase" component={FinalizePurchase}/>
+                <Route path="/finalizepurchase" component={FinalizePurchase} />
                 <Route path="/myFilters" component={MyFilters} />
                 <Route path="/product/:id" component={ProductPage} />
                 <Route path="/products" component={FilterProductsStore} />
@@ -78,6 +78,8 @@ const routesProtected = {
                 <Route path="/myFilters" component={MyFilters} />
                 <Route path="/product/:id" component={ProductPage} />
                 <Route path="/products" component={FilterProductsStore} />
+                <Route path="/finalizepurchase" component={FinalizePurchase} />
+
                 <Redirect to="/" />
             </Switch>
         )
@@ -98,6 +100,8 @@ const routesProtected = {
                 <Route path="/adminApp" component={AdminApp} />
                 <Route path="/product/:id" component={ProductPage} />
                 <Route path="/products" component={FilterProductsStore} />
+                <Route path="/finalizepurchase" component={FinalizePurchase} />
+
                 <Redirect to="/" />
             </Switch>
         )
@@ -107,7 +111,7 @@ const routesProtected = {
 const getRoutesByRole = (role) => {
     if (role === "notLogged")
         return routesProtected.routerUserDontLogged();
-    if (role === "commonUser" )
+    if (role === "commonUser")
         return routesProtected.routerUserLoggedCommon();
     if (role === "adminStores")
         return routesProtected.routerUserLoggedAdminStores();
