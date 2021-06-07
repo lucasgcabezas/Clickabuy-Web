@@ -79,7 +79,7 @@ const userControllers = {
     },
     addUserNative: async (req, res) => {
         let response, error;
-        let { email, password, loggedWithGoogle, userImgUrl } = req.body;
+        let { email, password, loggedWithGoogle, userImg } = req.body;
         if(!userImg) userImg = "";
         loggedWithGoogle = JSON.parse(loggedWithGoogle);
     
