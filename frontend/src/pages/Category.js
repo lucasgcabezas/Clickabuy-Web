@@ -64,7 +64,8 @@ const Category = (props) => {
                                     return (
                                         <NavLink to={`/store/${store._id}`} className="linkStore categoryStoresCards" key={i} >
                                             <div>
-                                                <div style={{ backgroundImage: `url('../assets/${store.logoStore}')` }} className="logoStoreCategory"></div>
+                                                <div style={{ backgroundImage: `url('${store.logoStore.url}')` }} className="logoStoreCategory"></div>
+                                                {/* <div style={{ backgroundImage: `url('../assets/${store.logoStore}')` }} className="logoStoreCategory"></div> */}
                                                 <span className="nameStoresCards">{store.nameStore}</span>
                                                 <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', height: 40 }}>
                                                     <ReactStars

@@ -43,14 +43,13 @@ const LogIn = (props) => {
   },[])
   const respuestaGoogle = (response) => {
     const { givenName, familyName, email, googleId, imageUrl } = response.profileObj;
-    
     props.logInUser({
       email: email,
       password: "a" + googleId,
     });
+
     props.history.push("/");
   };
-
   const formik = useFormik({
     initialValues: {
       email: "",

@@ -32,7 +32,8 @@ const userControllers = {
             userImg = req.files.userImg;
             extensionImg = userImg.name.split(".")[userImg.name.split(".").length - 1];
         }
-
+        console.log(req.files)
+        console.log(req.body)
         try {
             let objImage = { url: "", publicId: "" }
 
@@ -58,6 +59,36 @@ const userControllers = {
                     objImage.url = userImg;
                 }
 
+                newUser.userImg = objImage;
+                await newUser.save();
+                let token = jwToken.sign({ ...newUser }, process.env.SECRET_OR_KEY);
+                response = {
+                    ...newUser.toObject(),
+                    _id: undefined,
+                    password: undefined,
+                    token,
+                };
+            } else {
+                error = "This email is already in use, choose another";
+            }
+        } catch (err) {
+            console.log(err);
+            error = errorBackend;
+        }
+        respondFrontend(res, response, error);
+    },
+    addUserNative: async (req, res) => {
+        let response, error;
+        let { email, password, loggedWithGoogle, userImgUrl } = req.body;
+        if(!userImgUrl) userImgUrl = "";
+        loggedWithGoogle = JSON.parse(loggedWithGoogle);
+    
+        try {
+            let objImage = { url:userImgUrl , publicId: "" }
+            let userExist = await User.findOne({ email });
+            if (!userExist) {
+                password = bcryptsjs.hashSync(password, 10);
+                let newUser = new User({ ...req.body, password });
                 newUser.userImg = objImage;
                 await newUser.save();
                 let token = jwToken.sign({ ...newUser }, process.env.SECRET_OR_KEY);

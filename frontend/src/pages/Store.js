@@ -80,7 +80,8 @@ const Store = (props) => {
       
       <div style={{ backgroundImage: `url('${store.storeHero && store.storeHero.url}')` }} className="storeHero">
         <div className="contenedorInfoStorePage">
-          <div style={{ backgroundImage: `url('../assets/${store.logoStore}')` }} className="storeLogoStore"></div>
+          {/* <div style={{ backgroundImage: `url('../assets/${store.logoStore}')` }} className="storeLogoStore"></div> */}
+          <div style={{ backgroundImage: `url('${store.logoStore && store.logoStore.url}')` }} className="storeLogoStore"></div>
           <h1>{store.nameStore}</h1>
           {/* <div className="contenedorFindProductStore">
             <input
