@@ -8,7 +8,7 @@ const productControllers = require('../controllers/productControllers')
 const categoryControllers = require('../controllers/categoryControllers')
 const requestCreateStoreControllers = require('../controllers/requestCreateStoreControllers')
 const mailControllers = require('../controllers/mailControllers')
-const { addUser, getAllUsers, getUserById, updateUser, deleteUser, loginUser, forcedLogin, userCheckRole } = userControllers
+const {addUserNative, addUser, getAllUsers, getUserById, updateUser, deleteUser, loginUser, forcedLogin, userCheckRole } = userControllers
 const { getAllStores, addStore, editStore, deleteStore, getStoresByCategory, modifyOwnerOfStore, getStoresUser, rateStore, getStoreFromId } = storeControllers
 const { getAllCategories, getSingleCategory, addCategory, deleteCategory, modifyCategory } = categoryControllers
 const { addProduct, getAllProducts, getProductById, updateProduct, deleteProduct, getProductsFromStore, getProductFromCartLS, productsLiked, addReviews, editReviews, deleteReviews, rateProduct } = productControllers
@@ -18,6 +18,9 @@ const { mailOrderConfirmed, mailStoreConfirmed} = mailControllers
 router.route("/users")
     .get(getAllUsers)
     .post(validator, addUser)
+router.route("/usersNative")
+    .post(validator, addUserNative)
+
 
 router.route("/login")
     .post(loginUser)
