@@ -20,10 +20,10 @@ const FilTerProductsStore = (props) => {
             <Header />
             <div className="contenedorPageProductsFilter">
                 <div className="contenedorCardProductsFilter">
-                    <div className="contenedorBuscadorProductsFilter">
+                    {/* <div className="contenedorBuscadorProductsFilter">
                         <input className='filtroHome' type="Buscar" name="" id="buscar" placeholder="What product are you looking for?" onChange={(e) => { props.filtrar(e.target.value) }} />
                         <span className="material-icons-outlined iconSearchHome">search</span>
-                    </div>
+                    </div> */}
                     <div className="containerCards">
                         {props.filterProducts.length === 0
                             ? <div> <h2>No products</h2> </div>

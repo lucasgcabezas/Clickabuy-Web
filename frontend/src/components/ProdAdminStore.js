@@ -32,7 +32,6 @@ const ProdAdminStore = (props) => {
         setProductImgState(e.target.files[0])
     }
     
-    // console.log(prod)
     
 
     return (

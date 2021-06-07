@@ -91,29 +91,26 @@ const SignUpStore = (props) => {
 
   const cargarFoto = (e) => {
     setPhoto({ userImg: e.target.files[0] });
-    // console.log("soy el e", e.target.files[0].name);
     setPhotoName({ userImgName: e.target.files[0].name });
   };
 
   const cargarTA = (e) => {
-    /* console.log("TA",e.nativeEvent.data) */
-    // console.log("TargetValue", e.target.value)
-
     setTA({ description: e.target.value });
   };
 
 
   return (
     <div className="contenedorSignUp">
-      <div style={{ backgroundImage: "url('https://webdesing881317710.files.wordpress.com/2021/06/videoform3.gif')" }} className="imgForm" >
 
         {/* <video src="./assets/formVideo.mp4" autoPlay loop muted className="videoForm"></video> */}
         {/* <div className="contenedorHeaderSignUp"> */}
         <div onClick={props.history.goBack} className="backToHome" style={{ cursor: 'pointer' }}><span className="material-icons-outlined iconBack">arrow_back_ios_new</span> Back</div>
         {/* </div> */}
+        <div className="contenedorProductAddFromStore">
+
         <div className="contenedorFormAdminStore">
           <div className="contenedorInfoFormAdminStore">
-            <h3>Add new products to your store {thisStore && thisStore.nameStore}</h3>
+            <h3 className="tituloAdminStore">Add a new product to your store!</h3>
             {/* <Link to="/SignUp" className="linkPersonAccount">
               <div className="d-flex justify-content-end">
                 <label className="personAccount">Create a person account </label>
@@ -124,7 +121,7 @@ const SignUpStore = (props) => {
                 fullWidth
                 id="bName"
                 name="bName"
-                label="Business name"
+                label="Product name"
                 value={formik.values.bName}
                 onChange={formik.handleChange}
                 error={formik.touched.bName && Boolean(formik.errors.bName)}
@@ -171,12 +168,13 @@ const SignUpStore = (props) => {
                 </label>
                 <span>{photoName.userImgName}</span>
               </div>
-              <Button variant="contained" fullWidth type="submit">Create a new Store</Button>
+              <Button variant="contained" fullWidth type="submit">Upload the new Product</Button>
             </form>
           </div>
         </div>
       </div>
-    </div>
+        </div>
+    // </div>
   );
 };
 

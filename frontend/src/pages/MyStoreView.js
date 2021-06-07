@@ -89,13 +89,10 @@ const MyStoreView = (props) => {
                 <div className="myStoresEditModal">
                     <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', fontSize: 20 }}>
 
-                        {/* <span>Are you sure you want to delete this store? </span>
-                        <span>This cannot be undone. </span> */}
-
                         <input type="text" name="nameStore" placeholder={thisStore && thisStore.nameStore} onChange={(e) => getInput(e)}></input>
 
                         <div className="buttonFileEditModal">
-                            <input type="file" name="logoStore" onChange={(e) => getInput(e)}></input>
+                            <input type="file" name="logoStore" ></input>
                         </div>
 
                         <div className="buttonFileEditModal">

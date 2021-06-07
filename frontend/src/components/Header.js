@@ -4,6 +4,7 @@ import Categories from "./Categories";
 import { connect } from "react-redux";
 import authActions from "../redux/actions/authActions";
 import productsActions from "../redux/actions/productsActions";
+import { Navbar, Nav, Dropdown } from 'react-bootstrap'
 import "../../src/gracia.css";
 import { useLocation } from "react-router-dom";
 import { FaHeart, FaRegHeart, FaTags } from 'react-icons/fa'
@@ -14,7 +15,7 @@ const Header = (props) => {
 
   const { pathname } = useLocation();
   const [productFilter, setProductFilter] = useState('')
-  
+
 
   const [userRoleState, setUserRoleState] = useState('')
 
@@ -27,31 +28,42 @@ const Header = (props) => {
   }
 
   return (
-    
+
     <header className="headerContainer">
       <div className="contenedorFlexHome">
-        <Link to="/" className="linkLogoHome">
-          <div className="contenedorLogo">
-            <FaTags className="logoHome" />
-            <h1>clickabuy</h1>
-          </div>
-        </Link>
-        <div className="contenedorNavs">
-          <NavLink exact to="/" className="navegadores">Home</NavLink>
-          {!userLogged ?
-            <>
-              <NavLink to="/login" className="navegadores">Log In</NavLink>
-              <NavLink to="/signup" className="navegadores">Sign Up</NavLink>
-            </>
-            :
-            <>
-              <Link to="/" className="navegadores"><span onClick={() => props.logOut()}>Log Out</span></Link>
-            </>
-          }
-          <NavLink to="/buys" className="navegadores"><span className="material-icons-outlined iconCart">shopping_cart</span></NavLink>
-          <Link to="/favorites" className="navegadores"><FaRegHeart className="iconFavoritesHome" /></Link>
-          <div>{usuarioImage}</div>
-        </div>
+        <Navbar expand="lg">
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse className="barraNav" id="basic-navbar-nav">
+            <Nav className="mr-auto contenedorNavs">
+              <Link to="/" className="linkLogoHome">
+                <div className="contenedorLogo">
+                  <FaTags className="logoHome" />
+                  <h1>clickabuy</h1>
+                </div>
+              </Link>
+              
+        <div className="contenedorLinksHome">
+
+              <NavLink exact to="/" className="navegadores">Home</NavLink>
+              {!userLogged ?
+                <>
+                  <NavLink to="/login" className="navegadores">Log In</NavLink>
+                  <NavLink to="/signup" className="navegadores">Sign Up</NavLink>
+                </>
+                :
+                <>
+                  <Link to="/" className="navegadores"><span onClick={() => props.logOut()}>Log Out</span></Link>
+                </>
+              }
+              <NavLink to="/buys" className="navegadores"><span className="material-icons-outlined iconCart">shopping_cart</span></NavLink>
+              <Link to="/favorites" className="navegadores"><FaRegHeart className="iconFavoritesHome" /></Link>
+              <div>{usuarioImage}</div>
+
+</div>
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>
+
       </div>
       <div className="contenedorSearch">
         <Categories />

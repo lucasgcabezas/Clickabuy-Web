@@ -209,6 +209,9 @@ html *{
     justify-content: center;
     align-items: center;
 }
+.navegadores{
+    margin-right: 6vw;
+}
 .navegadores, .categoriesDropdown{
     color: black;
     font-size: 17px;
@@ -599,7 +602,7 @@ html *{
 .iconCart{
     background-color: black;
     border-radius: 50%;
-    padding: 2vh 1vw;  
+    padding: 0.5rem 0.5rem;  
 }
 .iconCart:hover{
     background-color: var(--thirdcolor);
@@ -1856,4 +1859,169 @@ progress::-moz-progress-bar {
     /* background-color: white; */
     /* border-radius: 5px; */
     /* box-shadow: 0px 4px 5px 1px #00000022; */
+}
+.contenedorLinksHome{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 80%;
+}
+.contenedorNavs {
+    width: 95vw;
+}
+@media (max-width: 630px){
+    .dropdown-menu{
+        width: 40vw;
+    }
+    .linkRegisterStore{
+        position: absolute;
+        top: 30px;
+        right: 10px;
+    }
+    .contenedorFiltro{
+        width: 60vw;
+        margin-top: 3vh;
+        margin-left: 0;
+    }
+    .usuarioImage{
+        width: 2rem;
+        height: 2rem;
+    }
+    .contenedorflashDealsInfo span{
+        height: 12vh;
+        margin-bottom: 6vh;
+    }
+    .fraseBannerNike{
+        font-size: 1.2em !important;
+        top: 120vh !important;
+    }
+    .contenedorCategoriesBanner{
+        display: none;
+    }
+    .contenedorPublicity{
+        flex-direction: column;
+        align-items: center;
+    }
+    .imagePublicity, .imagePublicity2{
+        width: 100%;
+        margin-bottom: 3vh;
+    }
+    .downloadAppInfo p{
+        font-size: 1em;
+    }
+    .downloadAppInfo{
+        display: flex;
+    }
+    /* .contenedorDownload div {
+        flex-direction: column;
+        align-items: flex-start;
+    } */
+    .downloadApp{
+        width: 20vw;
+        background-size: contain;
+    }
+    .contenedorSocialMedia div{
+        width: 95%;
+    }
+    .contenedorMediosDePago p{
+        display: none;
+    }
+    .contenedorMediosDePago div{
+        width: 100%;
+        /* justify-content: space-between; */
+    }
+    .contenedorCategoriesFooter{
+        display: none;
+    }
+    .footerOptions1{
+        display: none;
+    }
+    .footerOptions2{
+        margin: 0 auto;
+    }
+    .imageShipping{
+        display: none !important;
+    }
+    .imagePagos{
+        min-width: 8vw;
+        min-height: 8vh;
+    }
+    .contenedorSearch{
+        flex-direction: column;
+    }
+}
+@media screen and (min-width:630px) and (max-width:992px){
+    .linkRegisterStore{
+        font-size: 15px;
+        text-align: center;
+        margin-left: 3vw;
+    }
+    .ModalComponent{
+        right: 23vw;
+    }
+    .fraseBannerNike{
+        font-size: 1.2em !important;
+        top: 100vh !important;
+    }
+    .videoHeroHome{
+        height: 89vh;
+    }
+    .downloadAppInfo{
+        padding: 0;
+    }
+    .contenedorDownload div{
+        padding: 0;
+    }
+    .downloadApp{
+        width: 30vw;
+    }
+    .contenedorSocialMedia div{
+        width: 60%;
+    }
+    .contenedorflashDealsInfo span{
+        height: 10vh;
+    }
+    .contenedorLinksHome{
+        justify-content: center;
+    }
+    .linkLogoHome{
+        margin-bottom: 3vh;
+    }
+    .nameCategorySpan{
+        font-size: 12px;
+    }
+    /* .navbar-collapse {
+        flex-grow: 1;
+        align-items: center;
+        position: absolute !important;
+        top: 55px !important;
+        width: 30vw !important;
+        border-radius: 10px;
+        padding: 2vh 0;
+        background-color: white;
+        left: 0px;
+        z-index: 1;
+    } */
+}
+@media screen and (min-width: 992px) and (max-width:1300px){
+    .linkRegisterStore{
+        font-size: 13px;
+    }
+    .videoHeroHome{
+        height: 89vh;
+    }
+    .contenedorDownload div{
+        padding: 0;
+    }
+    .downloadApp{
+        width: 30vw;
+    }
+    .fraseBannerNike span{
+        font-size: 1em !important;
+    }
+}
+@media (max-width: 1330px) {
+    .videoHeroHome{
+        height: 89vh;
+    }
 }
