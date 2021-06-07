@@ -18,7 +18,7 @@ const CategoriesBanner = (props) => {
                     {
                         firstCategories.map(category => {
                             return (
-                                <div onClick={() => getCurrentCategory(category._id)} className="category">
+                                <div key={category._id} onClick={() => getCurrentCategory(category._id)} className="category">
                                     <Link to={`/category/${category._id}`} className="nameCategoryBanner">
                                         <div className="imageCategoryBanner" style={{ backgroundImage: `url('${category.imageCategory}')` }}></div>
                                     </Link>
@@ -47,7 +47,7 @@ const CategoriesBanner = (props) => {
                                 {
                                     secondCategories.map(category => {
                                         return (
-                                            <div onClick={() => getCurrentCategory(category._id)} className="category categoryModal">
+                                            <div key={category._id} onClick={() => getCurrentCategory(category._id)} className="category categoryModal">
                                             <Link to={`/category/${category._id}`} className="nameCategoryBanner">
                                                 <div className="imageCategoryBanner" style={{ backgroundImage: `url('${category.imageCategory}')` }}></div>
                                             </Link>

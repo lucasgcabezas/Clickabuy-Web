@@ -1,21 +1,40 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import ReactStars from "react-rating-stars-component"
-
-// import { useState } from 'react'
+import ReactStars from 'react-stars'
 import categoryActions from '../redux/actions/categoryActions'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import storeActions from '../redux/actions/storeActions'
-
+import Lottie from 'react-lottie'
+import animationData from '../lotties/clickabuy-loader.json'
 
 const Category = (props) => {
-    const { currentCategory } = props
-
-    if (!props.currentCategory) {
-        return <h1>cargando...</h1>
+    const { currentCategory, getCurrentCategory, storesForCategory, getAllCategories } = props
+    const idParams = props.match.params.id
+    
+    const defaultOptions = {
+        loop: true,
+        autoplay: true,
+        animationData: animationData,
+        rendererSettings: {
+            preserveAspectRatio: "xMidYMid slice"
+        }
     }
+
+    if (!currentCategory) {
+        getAllCategories()
+        getCurrentCategory(idParams)
+        return <div className="clickabuyLoader">
+            <Lottie
+                options={defaultOptions}
+                // height={657}
+                // width={1365}
+                // speed={0}
+            />
+        </div>
+    }
+
     return (
         <>
             <Header />
@@ -32,9 +51,9 @@ const Category = (props) => {
                     <span>STORES</span>
                     <div className="categoryStoresSection">
                         {
-                            props.storesForCategory.length === 0
-                                ? <span>No hay disponibles</span>
-                                : props.storesForCategory.map((store, i) => {
+                            storesForCategory.length === 0
+                                ? <span>No categories</span>
+                                : storesForCategory.map((store, i) => {
                                     let ratingCounter = 0
 
                                     store.rate.forEach(rating => {
@@ -47,19 +66,14 @@ const Category = (props) => {
                                             <div>
                                                 <div style={{ backgroundImage: `url('../assets/${store.logoStore}')` }} className="logoStoreCategory"></div>
                                                 <span className="nameStoresCards">{store.nameStore}</span>
-                                                {/* <span className="nameCategoryStoresCards">STARTS</span> */}
                                                 <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', height: 40 }}>
                                                     <ReactStars
                                                         count={5}
                                                         size={32}
                                                         isHalf={true}
                                                         edit={false}
-                                                        emptyIcon={<i className="far fa-star"></i>}
-                                                        halfIcon={<i className="fa fa-star-half-alt"></i>}
-                                                        fullIcon={<i className="fa fa-star"></i>}
-                                                        activeColor="#ffd700"
-                                                        // activeColor="#48d1be"
-                                                        color="#999999"
+                                                        color2="#EA957F"
+                                                        color1="#555555"
                                                         value={starsValue}
                                                     />
                                                     < span style={{ fontSize: 12, verticalAlign: 'center', marginTop: 5, marginLeft: 5, color: '#777777' }} >({store.rate.length})</span>
@@ -90,7 +104,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
     getStoresbByCategory: categoryActions.getStoresbByCategory,
     getCurrentCategory: categoryActions.getCurrentCategory,
-    rateStore: storeActions.rateStore
+    rateStore: storeActions.rateStore,
+    getAllCategories: categoryActions.getAllCategories
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Category)

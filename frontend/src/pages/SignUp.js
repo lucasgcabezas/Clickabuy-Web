@@ -51,19 +51,19 @@ const validationSchema = yup.object({
 const SignUp = (props) => {
   const [photo, setPhoto] = useState({ userImg: "" });
   const [photoName, setPhotoName] = useState({ userImgName: "" });
-  useEffect(()=>{
-    window.scrollTo(0,0)
-  },[])
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const respuestaGoogle = (response) => {
     const { givenName, familyName, email, googleId, imageUrl } = response.profileObj;
-    console.log({
-      loggedWithGoogle: true,
-      firstName: givenName,
-      lastName: familyName,
-      userImg: imageUrl,
-      email: email,
-      password: "a" + googleId,
-    });
+    // console.log({
+    //   loggedWithGoogle: true,
+    //   firstName: givenName,
+    //   lastName: familyName,
+    //   userImg: imageUrl,
+    //   email: email,
+    //   password: "a" + googleId,
+    // });
 
     let formData = new FormData();
     formData.append("loggedWithGoogle", true);
@@ -73,7 +73,7 @@ const SignUp = (props) => {
     formData.append("password", "a" + googleId);
     formData.append("userImg", imageUrl);
     props.signUpUser(formData);
-    props.history.push("/");
+    //props.history.push("/");
   };
 
   const formik = useFormik({
@@ -95,7 +95,6 @@ const SignUp = (props) => {
       formData.append("password", values.password);
       formData.append("userImg", photo.userImg);
       props.signUpUser(formData);
-      props.history.push("/");
     },
   });
 
@@ -106,27 +105,18 @@ const SignUp = (props) => {
   };
 
   return (
-
-    // <div style={{backgroundImage: "url('https://webdesing881317710.files.wordpress.com/2021/06/3606268de57686baaa14bf67254ec618.png')"}} className="imgForm" >
     <div className="contenedorSignUp">
-      <video src="./assets/formVideo.mp4" autoPlay loop muted className="videoForm"></video>
-      {/* <div className="contenedorHeaderSignUp"> */}
-        <Link to="/" className="backToHome"><span class="material-icons-outlined iconBack">arrow_back_ios_new</span> Back</Link>
-      {/* </div> */}
+      <video src="./assets/videoUserAccount2.mp4" autoPlay loop muted className="videoForm"></video>
+      <Link to="/" className="backToHome">
+        <span className="material-icons-outlined iconBack">arrow_back_ios_new</span> Back
+      </Link>
       <div className="contenedorInfoForm">
         <div className="contenedorLogoForm">
           <FaTags className="logoForm" />
-          {/* <box-icon type='solid' name='purchase-tag' size="lg"></box-icon> */}
           <h1>clickabuy</h1>
-          <span className="fraseClickabuy">DO YOUR BUSSINES OR FIND WHAT YOU NEED</span>
-          <Link to="/SignUpStore" className="bussinesAccount">Create a Business Account <span class="material-icons-outlined iconBussines">arrow_forward_ios</span></Link>
-          <div>
-            <span className="linkLogInText"> Already have an account?</span>
-            <Link to="/SignIn" className="linkLogIn">
-              {" "}
-              Log In
-            </Link>
-          </div>
+          <span className="fraseClickabuy">YOU NEED IT, YOU WANT IT, WITH CLICKABUY YOU CAN HAVE IT</span>
+          <span className="linkLogInText"> Already have an account?</span>
+          <Link to="/SignIn" className="bussinesAccount">Log In</Link>
         </div>
         <div className="contenedorForm">
           <h2>Register</h2>
@@ -179,13 +169,20 @@ const SignUp = (props) => {
               error={formik.touched.password && Boolean(formik.errors.password)}
               helperText={formik.touched.password && formik.errors.password}
             />
-            <div>
+            <div className="contenedorInputFile">
+              <label htmlFor="userImg" className="buttonInputFile">
+                <span className="material-icons-outlined iconCamera">add_a_photo</span> CHOOSE A PROFILE PICTURE
+                  <input id="userImg" name="userImg" type="file" style={{ display: "none" }} onChange={cargarFoto} />
+              </label>
+              <span>{photoName.userImgName}</span>
+            </div>
+            {/* <div>
               <label htmlFor="userImg" className="buttonInputFile">
                 Choose Your Image
                 <input id="userImg" name="userImg" type="file" style={{ display: "none" }} onChange={cargarFoto} />
               </label>
               <span>{photoName.userImgName}</span>
-            </div>
+            </div> */}
             <Button variant="contained" type="submit">
               Sign Up
             </Button>
@@ -193,8 +190,10 @@ const SignUp = (props) => {
           <div>
             <GoogleLogin
               clientId="453615867535-mmnqpnp68m7du525dnif9647ll1bssi5.apps.googleusercontent.com"
-              render={renderProps => (
-                <button onClick={renderProps.onClick} disabled={renderProps.disabled} className="bGoogle"><FcGoogle className="iconGoogle" /> Sign Up with Google</button>
+              render={(renderProps) => (
+                <button onClick={renderProps.onClick} disabled={renderProps.disabled} className="bGoogle">
+                  <FcGoogle className="iconGoogle" /> Sign Up with Google
+                </button>
               )}
               buttonText="Sign Up with Google"
               onSuccess={respuestaGoogle}

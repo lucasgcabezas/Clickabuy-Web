@@ -1,4 +1,6 @@
 import axios from 'axios'
+import API from "../../helpers/api"
+import { showToast } from '../../helpers/myToast'
 
 const categoryActions = {
     // getStoresbByCategory: (categoryId) => {
@@ -16,13 +18,16 @@ const categoryActions = {
     //         }
     //     }
     // },
-    getAllCategories:() => {
+    getAllCategories: () => {
         return async (dispatch, getState) => {
             try {
-                const response = await axios.get('http://localhost:4000/api/categories')
-                // return response.data.response
-                dispatch({type: 'FETCH_CATEGORIES', payload: response.data.response})
+                const response = await axios.get(API + '/categories')
+                
+                if(response.data.success)
+                    dispatch({ type: 'FETCH_CATEGORIES', payload: response.data.response })
+                
             } catch (error) {
+                
                 console.log(error)
             }
         }
@@ -30,14 +35,14 @@ const categoryActions = {
     getCurrentCategory: (id) => {
         return async (dispatch, getState) => {
             try {
-                const response = await axios.get('http://localhost:4000/api/store/' + id)
+                const response = await axios.get(API + '/store/' + id)
                 if (response.data.success) {
                     // dispatch({ type: 'STORES_BY_CATEGORY', payload: response.data.response})
-                    dispatch({type: 'CURRENT_CATEGORY', payload: {id: id, stores: response.data.response}})
+                    dispatch({ type: 'CURRENT_CATEGORY', payload: { id: id, stores: response.data.response } })
                 } else {
-                    alert( response.data.error)
+                    alert(response.data.error)
                 }
-            } catch (error){
+            } catch (error) {
                 console.log(error)
             }
         }

@@ -5,6 +5,12 @@ const UserModel = require('../models/UserModel')
 const fs = require("fs")
 let cloudinary = require('cloudinary').v2;
 
+cloudinary.config({ 
+    cloud_name: 'clickabuy', 
+    api_key: process.env.CLOUDINNARY_API_KEY, 
+    api_secret: process.env.CLOUDINNARY_API_SECRET
+});
+
 
 const getPathAndNameFile = (store, file, folderName) => {
     let extensionImg = file.name.split(".")[file.name.split(".").length - 1];
@@ -37,45 +43,6 @@ const storeControllers = {
         }
         res.json({ success: !error ? true : false, response, error })
     },
-    /*addStore: async (req, res) => {
-        let response, error;
-        let { category } = req.body;
-        let { logoStore } = req.files;
-
-        let user = req.user;
-        try {
-            let objLogoStore = {url:"" , publicId:""};
-            
-            category = await CategoryModel.findOne({ nameCategory: category });
-            if (!category) throw new Error("this category doesn't exist");
-
-            let newStore = new StoreModel({ ...req.body });
-            newStore.owners = [user._id];
-            newStore.category = category._id;
-            // newStore.storeHero = `/storeHeros/defaultHero.jpg`
-            const logo = getPathAndNameFile(newStore, logoStore, "fotosAHostear");
-
-            
-            await logoStore.mv(logo.filePath);
-
-            let logoHost = await cloudinary.uploader.upload(logo.filePath);
-
-            //borro para que no quede una imagen
-            fs.unlink(logo.filePath, (err) => err && console.log(err));
-            
-            objLogoStore.url = logoHost.url;
-            objLogoStore.publicId = logoHost.public_id;
-            
-            newStore.logoStore = objLogoStore;
-            newStore.storeHero = {url:"" , publicId:""};
-            await newStore.save();
-            response = newStore
-        } catch (err) {
-            error = `${err.name} : ${err.message}`
-            console.log(err)
-        }
-        res.json({ success: !error ? true : false, response, error })
-    },*/
     getStoreFromId: async (req, res) => {
         const id = req.params.id
         let response;
@@ -98,8 +65,6 @@ const storeControllers = {
             storeHero = req.files.storeHero;
             logoStore = req.files.logoStore;
         }
-        //update = {} , rellenarlo con ternarios si no son vacios o nullos 
-
         let response, error;
         try {
             
@@ -144,11 +109,13 @@ const storeControllers = {
                 }
             }
 
+            
             response = await StoreModel.findOneAndUpdate({ _id: idStore }, update, { new: true })
         } catch (err) {
             error = `${err.name} : ${err.message}`
             console.log(err)
         }
+        // console.log(response)
         res.json({ success: !error ? true : false, response, error })
     },
     deleteStore: async (req, res) => {

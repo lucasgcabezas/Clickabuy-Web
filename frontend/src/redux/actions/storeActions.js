@@ -49,9 +49,6 @@ const storeActions = {
 
   rateStore: (storeId, numberRate, token) => {
     return (dispatch) => {
-
-      // console.log(token)
-
       try {
         const response = axios.put(API + "/storeRate/" + storeId, {numberRate}, {
           headers:{
@@ -59,13 +56,23 @@ const storeActions = {
           }
         }
         )
-        console.log("respuesta de rate", response.data);
       } catch (err) {
         console.log(err);
         showTostError500();
       }
     };
   },
+  getCurrentStore:(idStore) => {
+    return async (dispatch, getState) => {
+        try {
+            const response = await axios.get('http://localhost:4000/api/currentstore/' + idStore)
+            return response.data.response
+            // dispatch({type: 'FETCH_CURRENT_STORE', payload: response.data.response})
+        } catch (error) {
+            console.log(error)
+        }
+    }
+},
   
 };
 

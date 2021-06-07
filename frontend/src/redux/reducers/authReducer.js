@@ -1,4 +1,8 @@
-const initialState = { userLogged: null };
+const initialState = {
+  userLogged: null,
+  userRole: '',
+  firstAnimation: true
+};
 
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -17,6 +21,15 @@ const authReducer = (state = initialState, action) => {
         userLogged: null,
       };
 
+    case "USER_ROLE":
+      return {
+        ...state,
+        userRole: action.payload
+      };
+    case 'ANIMATION_STATE':
+      return{
+        firstAnimation: action.payload
+      }  
     default:
       return state;
   }

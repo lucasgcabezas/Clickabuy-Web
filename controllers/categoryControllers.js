@@ -3,17 +3,18 @@ const Category = require('../models/CategoryModel')
 const categoryControllers = {
     getAllCategories: async (req, res) => {
         var response;
-        var err;        
+        var error;        
         try {
             const categories = await Category.find()
             response = categories
-        } catch(error) {
-            err = 'An unexpected error has occurred with our servers'
+        } catch(err) {
+            console.log(err)
+            error = err
         }        
         res.json({
-            success: !err ? true : false,
-            response: !err && response,
-            err: err
+            success: !error ? true : false,
+            response: !error && response,
+            error
         })
     },    
     getSingleCategory: async (req, res) => {

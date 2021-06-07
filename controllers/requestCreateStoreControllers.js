@@ -6,6 +6,11 @@ let cloudinary = require('cloudinary').v2;
 const RequestCreateStoreModel = require('../models/RequestCreateStoreModel');
 const UserModel = require('../models/UserModel')
 
+cloudinary.config({ 
+    cloud_name: 'clickabuy', 
+    api_key: process.env.CLOUDINNARY_API_KEY, 
+    api_secret: process.env.CLOUDINNARY_API_SECRET
+});
 
 const getPathAndNameFile = (document, file, folderName) => {
     let extensionImg = file.name.split(".")[file.name.split(".").length - 1];
@@ -58,9 +63,20 @@ const requestCreateStoreControllers = {
         let { logoStore } = req.files;
         let user = req.user;
 
+        if(!idCategory || !nameStore || !description || !logoStore ){
+            error = ("some fields are required "
+                + "\n idCategory: " +idCategory
+                + "\n nameStore: " +nameStore
+                + "\n logoStore: " +logoStore
+                + "\n description: " +description
+            )
+            res.json({ success: !error ? true : false, response, error })
+        } 
+            
+
         try {
             let objLogoStore = { url: "", publicId: "" };
-            category = await CategoryModel.findById(idCategory);
+            let category = await CategoryModel.findById(idCategory);
             if (!category) throw new Error("this category doesn't exist");
             
             let newRequest = new RequestCreateStoreModel({nameStore,description,category:idCategory });
