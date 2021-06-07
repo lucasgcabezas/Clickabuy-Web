@@ -41,16 +41,16 @@ const ProdAdminStore = (props) => {
           
 
                 <div className="prodAdminStoreInfoTitles">
-                    <span className="spanProdCard">Name:</span>
-                    <span className="spanProdCard">Description:</span>
-                    <span className="spanProdCard">Price:</span>
-                    <span className="spanProdCard">Stock:</span>
+                    <span className="spanProdCard"></span>
+                    <span className="spanProdCardDescription"></span>
+                    <span className="spanProdCard"></span>
+                    <span className="spanProdCard"></span>
                 </div>
                 <div className="prodAdminStoreInfoFields" style={{ display: editModal ? 'none' : 'flex' }}>
-                    <span className="spanProdCard">{prod.nameProduct}</span>
-                    <span className="spanProdCard">{prod.description}</span>
-                    <span className="spanProdCard">{prod.price}</span>
-                    <span className="spanProdCard">{prod.stock}</span>
+                    <span className="spanProdCard">Name: {prod.nameProduct}</span>
+                    <span className="spanProdCardDescription">Description: {prod.description}</span>
+                    <span className="spanProdCard">Price: {prod.price}</span>
+                    <span className="spanProdCard">Stock: {prod.stock}</span>
                 </div>
                 <div className="prodAdminStoreEditModal" style={{ display: editModal ? 'flex' : 'none' }}>
                     <input type="text" className="inputProdCard" placeholder={prod.nameProduct} name="nameProduct" onChange={getInput} ></input>
