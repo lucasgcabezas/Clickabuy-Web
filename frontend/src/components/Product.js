@@ -10,7 +10,7 @@ import { showToast } from '../helpers/myToast'
 const Product = ({ product, likeProduct, userLogged }) => {
   const { stock, nameProduct, price, productImg, userLiked, reviews } = product;
   const [loadingHeart, setLoadingHeart] = useState(true);
-  
+
   const likes = async () => {
     if (!userLogged) {
       showToast('error', "You must be logged in to save the post in favorites")
@@ -30,7 +30,7 @@ const Product = ({ product, likeProduct, userLogged }) => {
 
   return (
     <div className="cardProduct">
-      <div style={{ backgroundImage: `url('${productImg}')` }} className="productImg"></div>
+      <div style={{ backgroundImage: `url('${productImg && productImg.url}')` }} className="productImg"></div>
       <div className="cardProductInfo">
         <h3>{nameProduct}</h3>
         <p>Price: ${price}</p>
