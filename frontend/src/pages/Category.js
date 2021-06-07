@@ -52,7 +52,7 @@ const Category = (props) => {
                     <div className="categoryStoresSection">
                         {
                             storesForCategory.length === 0
-                                ? <span>No categories</span>
+                                ? <span style={{display:'flex', justifyContent:'center', alignItems:'center'}}>There are no stores yet</span>
                                 : storesForCategory.map((store, i) => {
                                     let ratingCounter = 0
 
