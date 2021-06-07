@@ -16,7 +16,6 @@ const FinalizePurchase = (props) => {
     const [cards, setCards] = useState({ cvc: '', expiry: '', focus: '', name: '', number: '' })
     let display = !show ? 'none' : 'flex'
     let total = cart.reduce((total, item) => total += item.quantity * item.price, 0).toFixed(2)
-    console.log(cart)
     return (
         <>
             <Header />

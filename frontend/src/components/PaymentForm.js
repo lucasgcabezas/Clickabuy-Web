@@ -63,18 +63,19 @@ class PaymentForm extends React.Component {
     this.setState({ formData });
     this.form.reset();
   };
-
   render() {
     const { name, number, expiry, cvc, focused, issuer, formData } = this.state;
     const { buy, clearCart, mailOrderConfirmed, setNameModal } = this.props
     const { cart, total } = buy
     let resumen = cart.map(product => {
       return {
-        product: { nameProduct: product.nameProduct, imageProduct: product.productImg, quantity: product.quantity },
+        product: { nameProduct: product.nameProduct, imageProduct: product.productImg, quantity: product.quantity, priceProduct: product.price },
       }
     })
+    // console.log(namePerson)
     let asunto = "Order Confirmation!"
-    let destinatario = "jonhdoe158243@gmail.com"
+    let destinatario = "johndoe158243@gmail.com"
+    
     return (
       <div key="Payment">
         <div className="App-payment">
@@ -138,16 +139,9 @@ class PaymentForm extends React.Component {
             </div>
             <input type="hidden" name="issuer" value={issuer} />
             <div className="form-actions">
-              <button className="buttonCreditCard" onClick={(e) => {setNameModal("purchaseCompleted"); mailOrderConfirmed(name, resumen, destinatario, asunto); clearCart()}}>PAY</button>
+              <button className="buttonCreditCard" onClick={(e) => {setNameModal("purchaseCompleted"); mailOrderConfirmed(name, resumen, destinatario, asunto, total); clearCart()}}>PAY</button>
             </div>
           </form>
-          {/* {formData && (
-            <div className="App-highlight">
-              {formatFormData(formData).map((d, i) => (
-                <div key={i}>{d}</div>
-              ))}
-            </div>
-          )} */}
         </div>
       </div>
     );

@@ -59,7 +59,7 @@ const ProductPage = (props) => {
             <div className="productPageContainer">
                 <div className="productPageCard" >
                     <div className="productPageCardInfo">
-                        <div style={{ backgroundImage: `url(${productSelected.productImg})` }} className="productPageImg" ></div>
+                        <div style={{ backgroundImage: `url(${productSelected.productImg && productSelected.productImg.url})` }} className="productPageImg" ></div>
                         <div className="productPageTitlePrice">
                             <div className="productPageTitle" >
                                 <span>{productSelected.nameProduct}</span>

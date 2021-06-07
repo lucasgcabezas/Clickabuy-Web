@@ -81,7 +81,16 @@ html * {
     box-shadow: 0px 4px 5px 1px #00000022;
 } */
 
-
+.contenedorProductAddFromStore{
+    width: 80%;
+    background-color: white;
+    box-shadow: 0px 4px 5px 1px #00000022;
+    border-radius: 5px;
+    margin: 0 auto;
+}
+.tituloAdminStore{
+    color: black !important;
+}
 
 .storeStars{
     display: flex;
@@ -159,7 +168,7 @@ html * {
 }
 
 .myStoreContainer{
-    background-color: #eeeeee;
+    background-color: white;
     min-height: 77.5vh;
     /* padding: 0vh 2vw 0 3vw; */
     display: flex;
@@ -322,13 +331,12 @@ html * {
     justify-content: center;
     align-items: center;
     border-radius: 5px;
-    border: solid 1px black;
 }
 
 
 .buttonAdm:hover{
-    background-color: #ffffff;
-    color: #000000;
+    background-color: #EA957F;
+    /* color: #000000; */
     /* transition: .3s; */
 }
 
@@ -340,6 +348,7 @@ html * {
 
 .prodAdminStore{
     background-color: #ffffff;
+    box-shadow: 0px 4px 5px 1px #00000022;
     /* background-color: #555555; */
     margin: 1.5vh 0;
     border-radius: 5px;

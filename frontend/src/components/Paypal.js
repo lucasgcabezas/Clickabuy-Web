@@ -13,11 +13,11 @@ const Paypal = (props) => {
     let display = !show ? 'none' : 'flex'
     let resumen = cart.map(product => {
         return {
-            product: { nameProduct: product.nameProduct, imageProduct: product.productImg, quantity: product.quantity, total: total, priceProduct: product.price },
+            product: { nameProduct: product.nameProduct, imageProduct: product.productImg, quantity: product.quantity, priceProduct: product.price },
         }
     })
     let asunto = "Order Confirmation!"
-    let destinatario = "jonhdoe158243@gmail.com"
+    let destinatario = "johndoe158243@gmail.com"
     useEffect(() => {
         window.paypal.Buttons({
             createOrder: (data, actions, err) => {
@@ -31,7 +31,7 @@ const Paypal = (props) => {
             onApprove: async (data, actions) => {
                 const order = await actions.order.capture()
                 setShow(true)
-                mailOrderConfirmed(order.payer.name, resumen, destinatario, asunto)
+                mailOrderConfirmed(order.payer.name.given_name, resumen, destinatario, asunto, total)
                 clearCart()
             },
             onError: (err) => {
