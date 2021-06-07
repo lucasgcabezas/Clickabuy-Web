@@ -80,11 +80,11 @@ const userControllers = {
     addUserNative: async (req, res) => {
         let response, error;
         let { email, password, loggedWithGoogle, userImgUrl } = req.body;
-        if(!userImgUrl) userImgUrl = "";
+        if(!userImg) userImg = "";
         loggedWithGoogle = JSON.parse(loggedWithGoogle);
     
         try {
-            let objImage = { url:userImgUrl , publicId: "" }
+            let objImage = { url:userImg , publicId: "" }
             let userExist = await User.findOne({ email });
             if (!userExist) {
                 password = bcryptsjs.hashSync(password, 10);
