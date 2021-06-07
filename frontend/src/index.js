@@ -13,7 +13,6 @@ const myStore = createStore(rootReducer , applyMiddleware(thunk))
 ReactDOM.render(
   <Provider store={myStore}>
     <App />
-    {/* <PruebaLucas /> */}
   </Provider>,
 
   document.getElementById('root')
