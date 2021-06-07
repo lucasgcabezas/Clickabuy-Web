@@ -26,7 +26,7 @@ const FinalizePurchase = (props) => {
                     {cart.map(item => {
                         return (
                             <div key={item._id} className="detailFinalizePurchase">
-                                <div style={{ backgroundImage: `url('${item.productImg}')` }} className="productImageCarrito"></div>
+                                <div style={{ backgroundImage: `url('${item.productImg.url}')` }} className="productImageCarrito"></div>
                                 <div className="nameProductCarrito">
                                     <span>{item.nameProduct}</span>
                                 </div>
