@@ -97,7 +97,9 @@ html *{
 }
 .linkRegisterStore{
     color: black;
-    margin-left: 10vw;
+    /* margin-left: 10vw; */
+    position: absolute;
+    right: 10vw;
 }
 .linkRegisterStore:hover{
     color: var(--thirdcolor);

@@ -37,7 +37,7 @@ const PurchaseDetail = ({itemCart,deleteProductFromCart,increaseQuantity})=> {
     }
     return(
         <div className='detailContainer'>
-            <div style={{backgroundImage: `url('${itemCart.productImg}')`}} className="productImageCarrito"></div>
+            <div style={{backgroundImage: `url('${itemCart.productImg.url}')`}} className="productImageCarrito"></div>
             <div className="nameProductCarrito">
                 <span>{itemCart.nameProduct}</span>
                 <span onClick={()=> alert()} className="deleteProductCarrito">Delete</span>

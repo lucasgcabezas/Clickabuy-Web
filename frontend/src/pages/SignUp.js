@@ -116,7 +116,7 @@ const SignUp = (props) => {
           <h1>clickabuy</h1>
           <span className="fraseClickabuy">YOU NEED IT, YOU WANT IT, WITH CLICKABUY YOU CAN HAVE IT</span>
           <span className="linkLogInText"> Already have an account?</span>
-          <Link to="/SignIn" className="bussinesAccount">Log In</Link>
+          <Link to="/login" className="bussinesAccount">Log In</Link>
         </div>
         <div className="contenedorForm">
           <h2>Register</h2>
