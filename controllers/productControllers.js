@@ -124,10 +124,6 @@ const productControllers = {
         let productImg;
         let user = req.user;
         let response, error;
-
-
-
-
         try {
             await validationStore(storeId, user);
             const product = await Product.findById(idProduct);
@@ -142,9 +138,7 @@ const productControllers = {
                 const image = getPathAndNameFile(product, productImg, "fotosAHostear");
                 await productImg.mv(image.filePath);
                 let productImgHost = await cloudinary.uploader.upload(image.filePath);
-
                 fs.unlink(image.filePath, (err) => err && console.log(err));
-
                 objProductImg.url = productImgHost.url;
                 objProductImg.publicId = productImgHost.public_id;
             }
@@ -162,9 +156,7 @@ const productControllers = {
             error = err.name + " " + err.message;
         }
         console.log(response)
-
         respondFrontend(res, response, error);
-
     },
     deleteProduct: async (req, res) => {
         const idProduct = req.params.id;

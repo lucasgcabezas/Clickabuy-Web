@@ -32,7 +32,8 @@ const userControllers = {
             userImg = req.files.userImg;
             extensionImg = userImg.name.split(".")[userImg.name.split(".").length - 1];
         }
-
+        console.log(req.files)
+        console.log(req.body)
         try {
             let objImage = { url: "", publicId: "" }
 

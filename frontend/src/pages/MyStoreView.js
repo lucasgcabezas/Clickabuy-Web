@@ -92,7 +92,7 @@ const MyStoreView = (props) => {
                         <input type="text" name="nameStore" placeholder={thisStore && thisStore.nameStore} onChange={(e) => getInput(e)}></input>
 
                         <div className="buttonFileEditModal">
-                            <input type="file" name="logoStore" ></input>
+                            <input type="file" name="logoStore" onChange={(e) => getInput(e) }></input>
                         </div>
 
                         <div className="buttonFileEditModal">
