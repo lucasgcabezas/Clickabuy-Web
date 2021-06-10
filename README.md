@@ -5,7 +5,7 @@ Clickabuy es una aplicación web desarrollada como una E-commerce Multi Vendor.
 # Trabajo realizado
 
 Aplicación web desarrollada de forma grupal en dos semanas, como parte del programa de programación web Full Stack MERN realizado en MindHub, siguiendo buenas prácticas y metodologias ágiles para la elaboración de la misma.
-Para poder ver el trabajo final realizado puedes ingresar a: https://mytinerary-parra.herokuapp.com/
+Para poder ver el trabajo final realizado puedes ingresar a: https://clickabuyapp.herokuapp.com/
 # Comenzando  🚀
 
 # Instalar dependencias para el cliente
@@ -28,7 +28,7 @@ npm start
 
 # Autores ✒️
 * **Lucas Cabezas** - [Lucas](https://github.com/lucasgcabezas)
+* **Sofía Parra** - [Sofía](https://github.com/parradiana)
 * **Julio Forni** - [Julio](https://github.com/jforni)
 * **Jonathan Huata** - [Jonathan](https://github.com/Jonathan-Huata-Vasquez)
 * **Valentin Gracia** - [Valentin](https://github.com/valentingracia)
-* **Sofía Parra** - [Sofía](https://github.com/parradiana)
